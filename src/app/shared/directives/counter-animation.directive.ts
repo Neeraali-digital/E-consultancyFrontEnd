@@ -1,4 +1,5 @@
-import { Directive, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { CounterAnimationService } from '../services/counter-animation.service';
 import { Subscription } from 'rxjs';
 
@@ -17,27 +18,40 @@ export class CounterAnimationDirective implements OnInit, OnDestroy {
 
   constructor(
     private el: ElementRef,
-    private counterService: CounterAnimationService
+    private counterService: CounterAnimationService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit() {
     // Set initial value to 0
-    this.el.nativeElement.textContent = '0';
-    
-    // Create intersection observer to trigger animation when element comes into view
-    this.observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !this.hasAnimated) {
-            this.startAnimation();
-            this.hasAnimated = true;
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+    if (this.el && this.el.nativeElement) {
+      this.el.nativeElement.textContent = '0';
+    }
 
-    this.observer.observe(this.el.nativeElement);
+    // Only run in browser environment
+    if (isPlatformBrowser(this.platformId)) {
+      // Create intersection observer to trigger animation when element comes into view
+      if (typeof IntersectionObserver !== 'undefined') {
+        this.observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && !this.hasAnimated) {
+                this.startAnimation();
+                this.hasAnimated = true;
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        if (this.el && this.el.nativeElement) {
+          this.observer.observe(this.el.nativeElement);
+        }
+      } else {
+        // Fallback for environments without IntersectionObserver
+        setTimeout(() => this.startAnimation(), 500);
+      }
+    }
   }
 
   ngOnDestroy() {

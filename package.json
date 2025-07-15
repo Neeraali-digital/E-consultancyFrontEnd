@@ -5,9 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:E-consultancyFrontend": "node dist/E-consultancyFrontend/server/server.mjs"
+    "serve:ssr:E-consultancyFrontend": "node dist/E-consultancyFrontend/server/server.mjs",
+    "vercel-build": "node vercel-build.js"
   },
   "prettier": {
     "overrides": [
