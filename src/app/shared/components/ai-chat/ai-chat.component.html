@@ -1,0 +1,220 @@
+<!-- AI Chat Bot -->
+<div class="fixed bottom-6 right-6 z-50 scroll-hidden">
+  
+  <!-- Enhanced Chat Button (when closed) -->
+  <div *ngIf="!isOpen"
+       (click)="toggleChat()"
+       class="w-20 h-20 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700
+              rounded-full shadow-2xl cursor-pointer transform hover:scale-110
+              transition-all duration-300 flex items-center justify-center group
+              animate-bounce hover:animate-none relative overflow-hidden border-4 border-white">
+    
+    <!-- Animated background -->
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+                transform -skew-x-12 -translate-x-full group-hover:translate-x-full 
+                transition-transform duration-1000"></div>
+    
+    <!-- Chat Icon -->
+    <span class="material-icons text-white text-3xl relative z-10 group-hover:rotate-12 transition-transform duration-300">
+      chat
+    </span>
+    
+    <!-- Notification Badge -->
+    <div class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full 
+                flex items-center justify-center text-white text-xs font-bold 
+                animate-pulse border-2 border-white">
+      AI
+    </div>
+    
+    <!-- Floating Message -->
+    <div class="absolute -top-12 -left-20 bg-white rounded-lg shadow-lg px-3 py-2 
+                text-sm text-gray-700 whitespace-nowrap opacity-0 group-hover:opacity-100 
+                transition-opacity duration-300 pointer-events-none">
+      <div class="relative">
+        Need help? Chat with me! 💬
+        <div class="absolute top-full left-1/2 transform -translate-x-1/2 
+                    w-0 h-0 border-l-4 border-r-4 border-t-4 
+                    border-transparent border-t-white"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Advanced Chat Window -->
+  <div *ngIf="isOpen"
+       class="w-[22rem] bg-white rounded-3xl shadow-2xl border border-gray-200
+              transform transition-all duration-500 ease-out animate-slide-up overflow-hidden
+              backdrop-blur-xl relative"
+       [class.h-16]="isMinimized">
+    
+    <!-- Advanced Chat Header -->
+    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200 text-gray-800
+                p-5 rounded-t-3xl flex items-center justify-between relative overflow-hidden">
+      <!-- Subtle animated background -->
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-100/20 to-purple-100/20
+                  animate-pulse opacity-50"></div>
+      <div class="flex items-center gap-4 relative z-10">
+        <!-- Advanced AI Avatar -->
+        <div class="relative">
+          <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full
+                      flex items-center justify-center shadow-lg border-2 border-white">
+            <span class="material-icons text-white text-xl">smart_toy</span>
+          </div>
+          <!-- Online Status Indicator -->
+          <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full
+                      border-2 border-white animate-pulse"></div>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+            WAYZON AI
+            <span class="material-icons text-green-500 text-sm">verified</span>
+          </h3>
+          <p class="text-xs text-gray-500 flex items-center gap-1">
+            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            Online • Educational Assistant
+          </p>
+        </div>
+      </div>
+      
+      <!-- Advanced Header Controls -->
+      <div class="flex items-center gap-2 relative z-10">
+        <!-- Minimize Button -->
+        <button (click)="minimizeChat()"
+                class="w-9 h-9 hover:bg-white/80 rounded-xl flex items-center justify-center
+                       transition-all duration-200 text-gray-600 hover:text-blue-600
+                       shadow-sm hover:shadow-md border border-gray-200 hover:border-blue-300">
+          <span class="material-icons text-sm">
+            {{ isMinimized ? 'expand_more' : 'expand_less' }}
+          </span>
+        </button>
+        <!-- Settings Button -->
+        <button class="w-9 h-9 hover:bg-white/80 rounded-xl flex items-center justify-center
+                       transition-all duration-200 text-gray-600 hover:text-gray-800
+                       shadow-sm hover:shadow-md border border-gray-200 hover:border-gray-300">
+          <span class="material-icons text-sm">settings</span>
+        </button>
+        <!-- Close Button -->
+        <button (click)="closeChat()"
+                class="w-9 h-9 hover:bg-red-50 rounded-xl flex items-center justify-center
+                       transition-all duration-200 text-gray-600 hover:text-red-500
+                       shadow-sm hover:shadow-md border border-gray-200 hover:border-red-300">
+          <span class="material-icons text-sm">close</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chat Messages (hidden when minimized) -->
+    <div *ngIf="!isMinimized" class="flex flex-col h-full">
+      
+      <!-- Messages Container -->
+      <div class="flex-1 p-4 overflow-y-auto chat-messages bg-white">
+        <div *ngFor="let message of messages" 
+             class="mb-4 animate-fade-in"
+             [class.flex-row-reverse]="message.isUser">
+          <div class="flex gap-2"
+               [class.justify-end]="message.isUser">
+            
+            <!-- Avatar -->
+            <div *ngIf="!message.isUser"
+                 class="w-8 h-8 bg-blue-100 border-2 border-blue-200
+                        rounded-full flex items-center justify-center text-blue-600 text-sm font-bold
+                        flex-shrink-0">
+              AI
+            </div>
+            
+            <!-- Message Bubble -->
+            <div class="max-w-xs px-4 py-3 rounded-2xl shadow-sm"
+                 [class.bg-blue-500]="message.isUser"
+                 [class.text-white]="message.isUser"
+                 [class.bg-gray-100]="!message.isUser"
+                 [class.text-gray-800]="!message.isUser"
+                 [class.border]="!message.isUser"
+                 [class.border-gray-200]="!message.isUser">
+              
+              <p class="text-sm leading-relaxed">{{ message.text }}</p>
+              <p class="text-xs opacity-70 mt-1">
+                {{ message.timestamp | date:'HH:mm' }}
+              </p>
+            </div>
+            
+            <!-- User Avatar -->
+            <div *ngIf="message.isUser" 
+                 class="w-8 h-8 bg-gradient-to-br from-green-500 to-blue-600 
+                        rounded-full flex items-center justify-center text-white text-sm font-bold 
+                        flex-shrink-0">
+              U
+            </div>
+          </div>
+        </div>
+        
+        <!-- Typing Indicator -->
+        <div *ngIf="isTyping" class="flex gap-2 mb-4 animate-fade-in">
+          <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 
+                      rounded-full flex items-center justify-center text-white text-sm font-bold">
+            AI
+          </div>
+          <div class="bg-white border border-gray-200 px-4 py-2 rounded-2xl shadow-sm">
+            <div class="flex gap-1">
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Input Area -->
+      <div class="p-5 border-t border-gray-200 bg-gradient-to-r from-gray-50 to-blue-50 rounded-b-3xl">
+        <!-- Input Container -->
+        <div class="flex gap-3 items-end">
+          <!-- Message Input -->
+          <div class="flex-1 relative">
+            <textarea [(ngModel)]="currentMessage"
+                     (keypress)="onKeyPress($event)"
+                     placeholder="Type your message here..."
+                     rows="1"
+                     class="w-full px-4 py-3 pr-12 border-2 border-gray-200 rounded-2xl
+                            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                            text-sm transition-all duration-200 resize-none bg-white shadow-sm
+                            placeholder-gray-400"
+                     style="min-height: 44px; max-height: 120px;"></textarea>
+
+            <!-- Emoji Button -->
+            <button class="absolute right-3 top-1/2 transform -translate-y-1/2
+                           text-gray-400 hover:text-gray-600 transition-colors duration-200">
+              <span class="material-icons text-lg">sentiment_satisfied</span>
+            </button>
+          </div>
+
+          <!-- Send Button -->
+          <button (click)="sendMessage()"
+                  [disabled]="!currentMessage.trim()"
+                  class="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl
+                         flex items-center justify-center transition-all duration-200
+                         transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed
+                         disabled:hover:scale-100 shadow-lg hover:shadow-xl">
+            <span class="material-icons">send</span>
+          </button>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="flex gap-2 mt-3 flex-wrap">
+          <button (click)="currentMessage = 'Tell me about engineering courses'; sendMessage()"
+                  class="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 
+                         rounded-full text-xs font-medium transition-colors duration-200">
+            Engineering
+          </button>
+          <button (click)="currentMessage = 'I want to know about medical colleges'; sendMessage()"
+                  class="px-3 py-1 bg-red-100 hover:bg-red-200 text-red-700 
+                         rounded-full text-xs font-medium transition-colors duration-200">
+            Medical
+          </button>
+          <button (click)="currentMessage = 'What about MBA programs?'; sendMessage()"
+                  class="px-3 py-1 bg-green-100 hover:bg-green-200 text-green-700 
+                         rounded-full text-xs font-medium transition-colors duration-200">
+            MBA
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

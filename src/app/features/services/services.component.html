@@ -1,0 +1,200 @@
+<!-- Services Page -->
+<div class="min-h-screen bg-gray-50">
+  <!-- Header Section -->
+  <section class="bg-gradient-to-br from-green-600 via-blue-700 to-purple-800 text-white py-20">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        Our <span class="text-yellow-400">Services</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+        Comprehensive educational services to guide you from admission to graduation
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          Complete Educational Solutions
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          From admission guidance to career counseling, we provide end-to-end support for your educational journey
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let service of services" 
+             class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 
+                    transform hover:-translate-y-2 overflow-hidden group border border-gray-100 relative">
+          
+          <!-- Popular Badge -->
+          <div *ngIf="service.popular" 
+               class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-3 py-1 
+                      rounded-full text-xs font-bold z-10">
+            POPULAR
+          </div>
+
+          <!-- Service Header -->
+          <div class="bg-gradient-to-r {{ getColorClasses(service.color) }} p-8 text-white relative overflow-hidden">
+            <div class="absolute top-4 right-4 opacity-20">
+              <span class="material-icons text-6xl">{{ service.icon }}</span>
+            </div>
+            <div class="relative z-10">
+              <span class="material-icons text-4xl mb-4 block">{{ service.icon }}</span>
+              <h3 class="text-2xl font-bold mb-2">{{ service.title }}</h3>
+              <p class="text-sm opacity-90">{{ service.description }}</p>
+            </div>
+          </div>
+
+          <!-- Service Features -->
+          <div class="p-8">
+            <h4 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <span class="material-icons text-blue-600">check_circle</span>
+              What's Included
+            </h4>
+            <ul class="space-y-3 mb-6">
+              <li *ngFor="let feature of service.features" 
+                  class="flex items-center gap-3 text-gray-700">
+                <span class="material-icons text-green-500 text-sm">check</span>
+                {{ feature }}
+              </li>
+            </ul>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-3">
+              <button class="flex-1 bg-gradient-to-r {{ getColorClasses(service.color) }} 
+                             text-white py-3 px-4 rounded-xl font-semibold 
+                             hover:shadow-lg transform hover:scale-105 transition-all duration-300
+                             flex items-center justify-center gap-2">
+                <span class="material-icons text-sm">info</span>
+                Learn More
+              </button>
+              <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-4 rounded-xl 
+                             font-semibold transition-all duration-300 flex items-center justify-center">
+                <span class="material-icons">call</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="bg-white py-20">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          Our Simple Process
+        </h2>
+        <p class="text-xl text-gray-600">
+          Get started with just 4 easy steps
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="text-center group">
+          <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4
+                      group-hover:scale-110 transition-transform duration-300">
+            <span class="material-icons text-blue-600 text-2xl">person_add</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">1. Register</h3>
+          <p class="text-gray-600">Sign up and tell us about your goals</p>
+        </div>
+
+        <div class="text-center group">
+          <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4
+                      group-hover:scale-110 transition-transform duration-300">
+            <span class="material-icons text-green-600 text-2xl">psychology</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">2. Counseling</h3>
+          <p class="text-gray-600">Get personalized guidance from experts</p>
+        </div>
+
+        <div class="text-center group">
+          <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4
+                      group-hover:scale-110 transition-transform duration-300">
+            <span class="material-icons text-purple-600 text-2xl">school</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">3. Apply</h3>
+          <p class="text-gray-600">We handle your college applications</p>
+        </div>
+
+        <div class="text-center group">
+          <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4
+                      group-hover:scale-110 transition-transform duration-300">
+            <span class="material-icons text-orange-600 text-2xl">celebration</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">4. Success</h3>
+          <p class="text-gray-600">Get admission to your dream college</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="bg-gray-50 py-20">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          Success Stories
+        </h2>
+        <p class="text-xl text-gray-600">
+          Hear from students who achieved their dreams with our services
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div *ngFor="let testimonial of testimonials" 
+             class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+          
+          <!-- Rating -->
+          <div class="flex mb-4">
+            <span *ngFor="let star of getStarArray(testimonial.rating)" 
+                  class="material-icons text-yellow-400">star</span>
+          </div>
+
+          <!-- Comment -->
+          <blockquote class="text-gray-700 mb-6 italic">
+            "{{ testimonial.comment }}"
+          </blockquote>
+
+          <!-- Student Info -->
+          <div class="border-t pt-4">
+            <h4 class="font-bold text-gray-800">{{ testimonial.name }}</h4>
+            <p class="text-blue-600 font-semibold">{{ testimonial.course }}</p>
+            <p class="text-gray-600 text-sm">{{ testimonial.college }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-16">
+    <div class="max-w-4xl mx-auto px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">
+        Ready to Get Started?
+      </h2>
+      <p class="text-xl text-blue-100 mb-8">
+        Book a free consultation and let our experts guide you to success
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button class="bg-white text-blue-600 font-bold px-8 py-4 rounded-full 
+                       hover:bg-gray-100 transform hover:scale-105 transition-all duration-300
+                       flex items-center justify-center gap-3">
+          <span class="material-icons">calendar_today</span>
+          Book Free Consultation
+        </button>
+        <button class="border-2 border-white text-white font-semibold px-8 py-4 rounded-full
+                       hover:bg-white hover:text-blue-600 transform hover:scale-105 
+                       transition-all duration-300 flex items-center justify-center gap-3">
+          <span class="material-icons">call</span>
+          Call Now: +91 9916505050
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

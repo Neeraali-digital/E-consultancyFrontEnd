@@ -1,0 +1,221 @@
+<!-- About Page -->
+<div class="min-h-screen bg-gray-50">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 text-white py-20">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-6xl font-bold mb-6">
+            About <span class="text-yellow-400">WAYZON</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-blue-100 leading-relaxed mb-8">
+            Trusted Educational Consultancy Since 2003 - Guiding students to their dream careers with integrity and excellence
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button class="bg-white text-blue-600 font-bold px-8 py-4 rounded-full 
+                           hover:bg-gray-100 transform hover:scale-105 transition-all duration-300
+                           flex items-center justify-center gap-3">
+              <span class="material-icons">download</span>
+              Download Brochure
+            </button>
+            <button class="border-2 border-white text-white font-semibold px-8 py-4 rounded-full
+                           hover:bg-white hover:text-blue-600 transform hover:scale-105 
+                           transition-all duration-300 flex items-center justify-center gap-3">
+              <span class="material-icons">play_arrow</span>
+              Watch Our Story
+            </button>
+          </div>
+        </div>
+        
+        <!-- Stats Grid with Animation -->
+        <div class="grid grid-cols-2 gap-6">
+          <div *ngFor="let stat of stats; let i = index"
+               class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center
+                      hover:bg-white/20 transition-all duration-300">
+            <span class="material-icons text-4xl text-yellow-400 mb-3 block">{{ stat.icon }}</span>
+            <div class="text-3xl font-bold mb-2"
+                 appCounterAnimation="{{ stat.number }}"
+                 [animationDuration]="2000 + (i * 200)"
+                 [animationDelay]="300 + (i * 150)">{{ stat.number }}</div>
+            <div class="text-sm text-blue-100">{{ stat.label }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          Our Mission & Vision
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Empowering students to achieve their educational dreams through expert guidance and innovative solutions
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-3xl p-8">
+          <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6">
+            <span class="material-icons text-white text-2xl">flag</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Mission</h3>
+          <p class="text-gray-700 leading-relaxed">
+            To provide comprehensive educational consulting services that guide students towards making informed 
+            decisions about their academic and career paths, ensuring they achieve their full potential in their 
+            chosen fields.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-purple-50 to-pink-100 rounded-3xl p-8">
+          <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mb-6">
+            <span class="material-icons text-white text-2xl">visibility</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Vision</h3>
+          <p class="text-gray-700 leading-relaxed">
+            To be the leading educational consultancy in India, recognized for our integrity, innovation, and 
+            commitment to student success, while continuously evolving to meet the changing needs of the 
+            education landscape.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Values -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          Our Core Values
+        </h2>
+        <p class="text-xl text-gray-600">
+          The principles that guide everything we do
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div *ngFor="let value of values" 
+             class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300
+                    transform hover:-translate-y-2 text-center group">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6
+                      group-hover:scale-110 transition-transform duration-300">
+            <span class="material-icons text-blue-600 text-2xl">{{ value.icon }}</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-4">{{ value.title }}</h3>
+          <p class="text-gray-600 leading-relaxed">{{ value.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          Our Journey
+        </h2>
+        <p class="text-xl text-gray-600">
+          Two decades of educational excellence and innovation
+        </p>
+      </div>
+
+      <div class="relative">
+        <!-- Timeline Line -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-blue-200"></div>
+        
+        <div class="space-y-12">
+          <div *ngFor="let milestone of milestones; let i = index" 
+               class="relative flex items-center"
+               [class.flex-row-reverse]="i % 2 === 1">
+            
+            <!-- Timeline Dot -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full z-10"></div>
+            
+            <!-- Content -->
+            <div class="w-5/12 bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                 [class.ml-auto]="i % 2 === 0">
+              <div class="text-2xl font-bold text-blue-600 mb-2">{{ milestone.year }}</div>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">{{ milestone.title }}</h3>
+              <p class="text-gray-600">{{ milestone.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          Meet Our Expert Team
+        </h2>
+        <p class="text-xl text-gray-600">
+          Experienced professionals dedicated to your success
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div *ngFor="let member of team" 
+             class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl 
+                    transition-all duration-300 transform hover:-translate-y-2 group">
+          
+          <!-- Team Member Image -->
+          <div class="h-64 bg-gradient-to-br from-blue-400 to-purple-600 relative overflow-hidden">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="absolute bottom-4 left-4 text-white">
+              <div class="text-sm font-semibold">{{ member.experience }}</div>
+              <div class="text-xs opacity-90">Experience</div>
+            </div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <span class="material-icons text-white text-8xl opacity-20">person</span>
+            </div>
+          </div>
+
+          <!-- Team Member Details -->
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-1">{{ member.name }}</h3>
+            <p class="text-blue-600 font-semibold mb-2">{{ member.position }}</p>
+            <p class="text-gray-600 text-sm mb-4">{{ member.description }}</p>
+            
+            <div class="border-t pt-4">
+              <div class="text-sm text-gray-500">Specialization</div>
+              <div class="font-semibold text-gray-800">{{ member.specialization }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-16">
+    <div class="max-w-4xl mx-auto px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">
+        Ready to Start Your Journey?
+      </h2>
+      <p class="text-xl text-blue-100 mb-8">
+        Join thousands of successful students who trusted WAYZON for their educational journey
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button class="bg-white text-blue-600 font-bold px-8 py-4 rounded-full 
+                       hover:bg-gray-100 transform hover:scale-105 transition-all duration-300
+                       flex items-center justify-center gap-3">
+          <span class="material-icons">schedule</span>
+          Book Free Consultation
+        </button>
+        <button class="border-2 border-white text-white font-semibold px-8 py-4 rounded-full
+                       hover:bg-white hover:text-blue-600 transform hover:scale-105 
+                       transition-all duration-300 flex items-center justify-center gap-3">
+          <span class="material-icons">call</span>
+          Call: +91 9916505050
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

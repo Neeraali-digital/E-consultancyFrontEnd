@@ -1,0 +1,379 @@
+/* 🚀 WAYZON - Revolutionary Header Styles */
+
+/* ✨ Brand Logo Animations */
+.wayzon-logo {
+  position: relative;
+  overflow: hidden;
+}
+
+.wayzon-logo::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: rotate-shine 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wayzon-logo:hover::before {
+  opacity: 1;
+}
+
+@keyframes rotate-shine {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 🎯 Modern Navigation Pills */
+.nav-pill {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.nav-pill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.nav-pill:hover::before {
+  left: 100%;
+}
+
+/* 🌟 Floating Elements */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(-4px) rotate(-1deg); }
+}
+
+.float-element {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+/* 💫 Gradient Text Effect */
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🎨 Button Magic */
+.magic-button {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  background-size: 200% 200%;
+  animation: gradient-flow 3s ease infinite;
+}
+
+.magic-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  transition: all 0.6s ease;
+  transform: translate(-50%, -50%);
+}
+
+.magic-button:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 📱 Mobile Menu Slide */
+.mobile-slide {
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.mobile-slide.open {
+  transform: translateX(0);
+}
+
+/* 🌈 Color Morphing */
+.color-morph {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+  background-size: 300% 300%;
+  animation: color-wave 8s ease infinite;
+}
+
+@keyframes color-wave {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ⚡ Lightning Fast Transitions */
+.ultra-smooth {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ultra-smooth:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+/* 🎪 Bounce Effect */
+@keyframes bounce-in {
+  0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+  50% { transform: scale(1.05) rotate(5deg); }
+  70% { transform: scale(0.9) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.bounce-in {
+  animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 🌊 Wave Effect */
+@keyframes wave {
+  0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+  25% { transform: translateX(5px) translateY(-5px) rotate(1deg); }
+  50% { transform: translateX(-5px) translateY(-10px) rotate(-1deg); }
+  75% { transform: translateX(-5px) translateY(-5px) rotate(1deg); }
+}
+
+.wave-effect {
+  animation: wave 4s ease-in-out infinite;
+}
+
+/* 🔥 Glow Effect */
+.glow-effect {
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-effect:hover {
+  box-shadow: 0 0 30px rgba(102, 126, 234, 0.6), 0 0 60px rgba(102, 126, 234, 0.3);
+}
+
+/* 🎭 Mask Reveal */
+.mask-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.mask-reveal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transition: left 0.8s ease;
+}
+
+.mask-reveal:hover::before {
+  left: 100%;
+}
+
+/* 🎨 Responsive Magic */
+@media (max-width: 768px) {
+  .mobile-magic {
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-magic:active {
+    transform: scale(0.95);
+  }
+}
+
+/* 🌟 Accessibility Focus */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.5);
+  border-radius: 8px;
+}
+
+/* 🚀 Performance Optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* 🎪 Special Effects */
+.sparkle::after {
+  content: '✨';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+/* 🔔 Advanced Notification Styles */
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Notification Badge Pulse */
+.notification-badge {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Line Clamp for notification text */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Notification Item Hover */
+.notification-item {
+  transition: all 0.3s ease;
+}
+
+.notification-item:hover {
+  transform: translateX(4px);
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+/* Notification Dropdown Shadow */
+.notification-dropdown {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16px);
+}
+
+/* Active Navigation Link */
+.nav-link-active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Custom Scrollbar for Notifications */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #2563eb, #7c3aed);
+}
+
+/* Notification Item Animation */
+.notification-item {
+  animation: fadeInUp 0.3s ease-out forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced Badge Glow */
+.notification-badge {
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+/* Click Outside Detection */
+.notification-container {
+  position: relative;
+}
+
+/* Navigation Link Styling */
+.no-underline {
+  text-decoration: none !important;
+  pointer-events: auto !important;
+  z-index: 10;
+  position: relative;
+}
+
+.no-underline:hover {
+  text-decoration: none !important;
+}
+
+.no-underline:focus {
+  text-decoration: none !important;
+}
+
+.no-underline:active {
+  text-decoration: none !important;
+}
+
+.no-underline:visited {
+  text-decoration: none !important;
+}
+
+/* Ensure navigation container allows clicks */
+.navigation-container {
+  pointer-events: auto;
+  z-index: 10;
+}
+
+/* Debug navigation clicks */
+.nav-debug {
+  border: 1px solid red !important;
+  background: rgba(255, 0, 0, 0.1) !important;
+}

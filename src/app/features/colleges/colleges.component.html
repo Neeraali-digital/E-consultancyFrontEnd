@@ -1,0 +1,159 @@
+<!-- Colleges Page -->
+<div class="min-h-screen bg-gray-50">
+  <!-- Header Section -->
+  <section class="bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-800 text-white py-20">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        Top <span class="text-yellow-400">Colleges</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-purple-100 max-w-3xl mx-auto leading-relaxed">
+        Discover India's premier educational institutions with guaranteed admission opportunities
+      </p>
+      
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+          <div class="text-3xl font-bold text-yellow-400">500+</div>
+          <div class="text-sm text-purple-100">Partner Colleges</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+          <div class="text-3xl font-bold text-yellow-400">100%</div>
+          <div class="text-sm text-purple-100">Admission Success</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+          <div class="text-3xl font-bold text-yellow-400">50+</div>
+          <div class="text-sm text-purple-100">Cities Covered</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+          <div class="text-3xl font-bold text-yellow-400">20+</div>
+          <div class="text-sm text-purple-100">Years Experience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Colleges -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          Premier Educational Institutions
+        </h2>
+        <p class="text-xl text-gray-600">
+          Top-ranked colleges with guaranteed admission opportunities
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let college of colleges" 
+             class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 
+                    transform hover:-translate-y-2 overflow-hidden group border border-gray-100">
+          
+          <!-- College Header -->
+          <div class="h-48 bg-gradient-to-r {{ getColorClasses(college.color) }} relative overflow-hidden">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="absolute bottom-4 left-4 text-white">
+              <div class="text-sm font-semibold">Ranking #{{ college.ranking }}</div>
+              <div class="text-xs opacity-90">{{ college.type }}</div>
+            </div>
+            <div *ngIf="college.featured" class="absolute top-4 right-4">
+              <span class="bg-yellow-400 text-yellow-900 px-2 py-1 rounded-full text-xs font-bold">
+                FEATURED
+              </span>
+            </div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <span class="material-icons text-white text-6xl opacity-20">account_balance</span>
+            </div>
+          </div>
+
+          <!-- College Details -->
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">{{ college.shortName }}</h3>
+            <p class="text-gray-600 text-sm mb-4">{{ college.name }}</p>
+            
+            <!-- Rating -->
+            <div class="flex items-center gap-2 mb-4">
+              <div class="flex">
+                <span *ngFor="let star of getStarArray(college.rating)" 
+                      class="material-icons text-yellow-400 text-sm">star</span>
+              </div>
+              <span class="text-sm text-gray-600">{{ college.rating }}/5</span>
+            </div>
+
+            <!-- Key Info -->
+            <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+              <div>
+                <div class="text-gray-500">Location</div>
+                <div class="font-semibold">{{ college.location }}</div>
+              </div>
+              <div>
+                <div class="text-gray-500">Established</div>
+                <div class="font-semibold">{{ college.established }}</div>
+              </div>
+              <div>
+                <div class="text-gray-500">Placement</div>
+                <div class="font-semibold text-green-600">{{ college.placement }}</div>
+              </div>
+              <div>
+                <div class="text-gray-500">Avg Package</div>
+                <div class="font-semibold text-blue-600">{{ college.avgPackage }}</div>
+              </div>
+            </div>
+
+            <!-- Courses -->
+            <div class="mb-6">
+              <h4 class="font-semibold text-gray-800 mb-2">Available Courses</h4>
+              <div class="flex flex-wrap gap-2">
+                <span *ngFor="let course of college.courses" 
+                      class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-medium">
+                  {{ course }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-3">
+              <button class="flex-1 bg-gradient-to-r {{ getColorClasses(college.color) }} 
+                             text-white py-3 px-4 rounded-xl font-semibold 
+                             hover:shadow-lg transform hover:scale-105 transition-all duration-300
+                             flex items-center justify-center gap-2">
+                <span class="material-icons text-sm">info</span>
+                View Details
+              </button>
+              <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-4 rounded-xl 
+                             font-semibold transition-all duration-300 flex items-center justify-center">
+                <span class="material-icons">call</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16">
+    <div class="max-w-4xl mx-auto px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">
+        Get Guaranteed Admission
+      </h2>
+      <p class="text-xl text-purple-100 mb-8">
+        Skip the entrance exam hassle and secure your seat in top colleges
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button class="bg-white text-indigo-600 font-bold px-8 py-4 rounded-full 
+                       hover:bg-gray-100 transform hover:scale-105 transition-all duration-300
+                       flex items-center justify-center gap-3">
+          <span class="material-icons">school</span>
+          Apply for Direct Admission
+        </button>
+        <button class="border-2 border-white text-white font-semibold px-8 py-4 rounded-full
+                       hover:bg-white hover:text-indigo-600 transform hover:scale-105 
+                       transition-all duration-300 flex items-center justify-center gap-3">
+          <span class="material-icons">download</span>
+          Download College List
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
