@@ -4,32 +4,35 @@ const path = require('path');
 
 // Run the Angular build
 console.log('🚀 Building Angular application...');
-execSync('npm run build:prod', { stdio: 'inherit' });
+execSync('ng build --configuration production', { stdio: 'inherit' });
 
-// Create a simple server.js file for Vercel
-console.log('📝 Creating server configuration...');
-const vercelServerJs = `
-// Simple Express server for Vercel
-const express = require('express');
-const path = require('path');
-const app = express();
+// Copy files from browser directory to root for Vercel
+console.log('📁 Copying files for Vercel...');
+const browserDir = path.join(__dirname, 'dist/E-consultancyFrontend/browser');
+const rootDir = path.join(__dirname, 'dist/E-consultancyFrontend');
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'dist/E-consultancyFrontend')));
+if (fs.existsSync(browserDir)) {
+  // Copy all files from browser to root
+  const files = fs.readdirSync(browserDir);
+  files.forEach(file => {
+    const srcPath = path.join(browserDir, file);
+    const destPath = path.join(rootDir, file);
 
-// Handle SPA routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/E-consultancyFrontend/index.html'));
-});
+    if (fs.statSync(srcPath).isDirectory()) {
+      // Copy directory recursively
+      if (!fs.existsSync(destPath)) {
+        fs.mkdirSync(destPath, { recursive: true });
+      }
+      execSync(`cp -r "${srcPath}/*" "${destPath}/"`, { stdio: 'inherit' });
+    } else {
+      // Copy file
+      fs.copyFileSync(srcPath, destPath);
+    }
+  });
 
-// Start server
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(\`Server running on port \${port}\`);
-});
-`;
-
-// Write the server.js file
-fs.writeFileSync(path.join(__dirname, 'server.js'), vercelServerJs);
+  console.log('✅ Files copied successfully!');
+} else {
+  console.log('⚠️ Browser directory not found, using default build output');
+}
 
 console.log('✅ Build completed successfully!');
