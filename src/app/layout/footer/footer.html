@@ -1,0 +1,303 @@
+<!-- Professional Footer Component -->
+<footer class="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
+
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute top-10 left-10 w-32 h-32 border border-white/20 rounded-full"></div>
+    <div class="absolute top-32 right-20 w-24 h-24 border border-white/20 rounded-full"></div>
+    <div class="absolute bottom-20 left-1/3 w-40 h-40 border border-white/20 rounded-full"></div>
+    <div class="absolute bottom-10 right-10 w-28 h-28 border border-white/20 rounded-full"></div>
+  </div>
+
+  <!-- Statistics Section -->
+  <div class="relative z-10 bg-gradient-to-r from-blue-800/50 to-indigo-800/50 py-12 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div *ngFor="let stat of stats"
+             class="text-center group hover:transform hover:scale-105 transition-all duration-300 stat-item">
+          <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full
+                      flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg
+                      group-hover:shadow-yellow-400/50 transition-all duration-300">
+            <span class="material-icons text-2xl text-white">{{ stat.icon }}</span>
+          </div>
+          <div class="text-3xl font-bold text-yellow-400 mb-2">{{ stat.number }}</div>
+          <div class="text-sm text-blue-100">{{ stat.label }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Footer Content -->
+  <div class="relative z-10 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+
+        <!-- Company Information -->
+        <div class="lg:col-span-1">
+          <div class="mb-6">
+            <h2 class="text-3xl font-bold text-yellow-400 mb-2">{{ companyInfo.name }}</h2>
+            <p class="text-sm text-blue-200 mb-4">{{ companyInfo.tagline }}</p>
+            <p class="text-gray-300 text-sm leading-relaxed mb-6">{{ companyInfo.description }}</p>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="space-y-4">
+            <div class="flex items-center gap-3 group cursor-pointer" (click)="makeCall(companyInfo.phone)">
+              <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center
+                          group-hover:bg-green-500 transition-colors duration-300">
+                <span class="material-icons text-sm text-white">phone</span>
+              </div>
+              <div>
+                <div class="text-sm text-gray-400">Call Us</div>
+                <div class="text-white font-medium">{{ companyInfo.phone }}</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 group cursor-pointer" (click)="sendEmail(companyInfo.email)">
+              <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center
+                          group-hover:bg-blue-500 transition-colors duration-300">
+                <span class="material-icons text-sm text-white">email</span>
+              </div>
+              <div>
+                <div class="text-sm text-gray-400">Email Us</div>
+                <div class="text-white font-medium">{{ companyInfo.email }}</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 group cursor-pointer" (click)="openWhatsApp(companyInfo.whatsapp)">
+              <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center
+                          group-hover:bg-green-400 transition-colors duration-300">
+                <span class="material-icons text-sm text-white">chat</span>
+              </div>
+              <div>
+                <div class="text-sm text-gray-400">WhatsApp</div>
+                <div class="text-white font-medium">{{ companyInfo.whatsapp }}</div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mt-1">
+                <span class="material-icons text-sm text-white">location_on</span>
+              </div>
+              <div>
+                <div class="text-sm text-gray-400">Address</div>
+                <div class="text-white text-sm leading-relaxed">
+                  {{ companyInfo.address.line1 }}<br>
+                  {{ companyInfo.address.line2 }}<br>
+                  {{ companyInfo.address.city }}, {{ companyInfo.address.state }} {{ companyInfo.address.pincode }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="lg:col-span-1">
+          <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <span class="material-icons text-yellow-400">link</span>
+            Quick Links
+          </h3>
+          <ul class="space-y-3">
+            <li *ngFor="let link of quickLinks">
+              <a [routerLink]="link.route"
+                 class="flex items-center gap-3 text-gray-300 hover:text-yellow-400
+                        transition-colors duration-300 group">
+                <span class="material-icons text-sm group-hover:scale-110 transition-transform duration-300">
+                  {{ link.icon }}
+                </span>
+                <span class="group-hover:translate-x-1 transition-transform duration-300">
+                  {{ link.name }}
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Social Media -->
+          <div class="mt-8">
+            <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
+            <div class="flex gap-3">
+              <button *ngFor="let social of socialMedia"
+                      (click)="openSocialMedia(social.url)"
+                      class="w-10 h-10 rounded-full flex items-center justify-center
+                             transition-all duration-300 transform hover:scale-110 hover:shadow-lg
+                             social-button"
+                      [style.background-color]="social.color">
+                <span class="material-icons text-sm text-white">{{ social.icon }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services & Courses -->
+        <div class="lg:col-span-1">
+          <!-- Services -->
+          <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <span class="material-icons text-yellow-400">support_agent</span>
+            Our Services
+          </h3>
+          <ul class="space-y-3 mb-8">
+            <li *ngFor="let service of services">
+              <a [routerLink]="service.route"
+                 class="flex items-center gap-3 text-gray-300 hover:text-yellow-400
+                        transition-colors duration-300 group">
+                <span class="material-icons text-sm group-hover:scale-110 transition-transform duration-300">
+                  {{ service.icon }}
+                </span>
+                <span class="group-hover:translate-x-1 transition-transform duration-300">
+                  {{ service.name }}
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Popular Courses -->
+          <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <span class="material-icons text-yellow-400">school</span>
+            Popular Courses
+          </h4>
+          <ul class="space-y-2">
+            <li *ngFor="let course of popularCourses">
+              <a [routerLink]="course.route"
+                 class="flex items-center gap-2 text-gray-300 hover:text-yellow-400
+                        transition-colors duration-300 group text-sm">
+                <span class="material-icons text-xs group-hover:scale-110 transition-transform duration-300">
+                  {{ course.icon }}
+                </span>
+                <span class="group-hover:translate-x-1 transition-transform duration-300">
+                  {{ course.name }}
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Newsletter & Office Locations -->
+        <div class="lg:col-span-1">
+          <!-- Newsletter Subscription -->
+          <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <span class="material-icons text-yellow-400">mail</span>
+            Newsletter
+          </h3>
+          <p class="text-gray-300 text-sm mb-4">
+            Stay updated with the latest educational opportunities and admission alerts.
+          </p>
+          <div class="mb-8">
+            <div class="flex gap-2">
+              <input #emailInput
+                     type="email"
+                     placeholder="Enter your email"
+                     class="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg
+                            text-white placeholder-gray-400 focus:outline-none focus:ring-2
+                            focus:ring-yellow-400 focus:border-transparent transition-all duration-300
+                            newsletter-input">
+              <button (click)="subscribeToNewsletter(emailInput.value)"
+                      class="px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500
+                             text-white font-semibold rounded-lg hover:from-yellow-500
+                             hover:to-orange-600 transition-all duration-300 transform
+                             hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <span class="material-icons text-sm">send</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Office Locations -->
+          <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <span class="material-icons text-yellow-400">business</span>
+            Our Offices
+          </h4>
+          <div class="space-y-4">
+            <div *ngFor="let office of offices"
+                 class="bg-white/5 rounded-lg p-4 border border-white/10
+                        hover:bg-white/10 transition-all duration-300 office-card">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-icons text-yellow-400 text-sm">location_city</span>
+                <h5 class="font-semibold text-white">{{ office.city }}</h5>
+                <span class="text-xs bg-blue-600 text-white px-2 py-1 rounded-full">
+                  {{ office.type }}
+                </span>
+              </div>
+              <p class="text-gray-300 text-xs mb-2">{{ office.address }}</p>
+              <div class="flex items-center gap-4 text-xs">
+                <span class="text-gray-400 flex items-center gap-1">
+                  <span class="material-icons text-xs">phone</span>
+                  {{ office.phone }}
+                </span>
+                <span class="text-gray-400 flex items-center gap-1">
+                  <span class="material-icons text-xs">schedule</span>
+                  {{ office.timings }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Footer -->
+  <div class="relative z-10 bg-black/30 border-t border-white/10 py-8">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+
+        <!-- Copyright -->
+        <div class="text-center lg:text-left">
+          <p class="text-gray-300 text-sm">
+            © {{ currentYear }} <span class="text-yellow-400 font-semibold">{{ companyInfo.name }}</span>.
+            All rights reserved.
+          </p>
+          <p class="text-gray-400 text-xs mt-1">
+            {{ companyInfo.tagline }}
+          </p>
+        </div>
+
+        <!-- Legal Links -->
+        <div class="flex flex-wrap items-center justify-center gap-6">
+          <a *ngFor="let legal of legalLinks"
+             [routerLink]="legal.route"
+             class="text-gray-400 hover:text-yellow-400 text-sm transition-colors duration-300">
+            {{ legal.name }}
+          </a>
+        </div>
+
+        <!-- Back to Top Button -->
+        <button (click)="scrollToTop()"
+                class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500
+                       rounded-full flex items-center justify-center text-white
+                       hover:from-yellow-500 hover:to-orange-600 transition-all duration-300
+                       transform hover:scale-110 focus:outline-none focus:ring-2
+                       focus:ring-yellow-400 shadow-lg back-to-top">
+          <span class="material-icons">keyboard_arrow_up</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust Badges -->
+  <div class="relative z-10 bg-gradient-to-r from-blue-900/50 to-indigo-900/50 py-6 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-wrap items-center justify-center gap-8">
+        <div class="flex items-center gap-2 text-gray-300 trust-badge">
+          <span class="material-icons text-green-400">verified</span>
+          <span class="text-sm">ISO Certified</span>
+        </div>
+        <div class="flex items-center gap-2 text-gray-300 trust-badge">
+          <span class="material-icons text-blue-400">security</span>
+          <span class="text-sm">Secure Platform</span>
+        </div>
+        <div class="flex items-center gap-2 text-gray-300 trust-badge">
+          <span class="material-icons text-yellow-400">star</span>
+          <span class="text-sm">4.8/5 Rating</span>
+        </div>
+        <div class="flex items-center gap-2 text-gray-300 trust-badge">
+          <span class="material-icons text-purple-400">support</span>
+          <span class="text-sm">24/7 Support</span>
+        </div>
+        <div class="flex items-center gap-2 text-gray-300 trust-badge">
+          <span class="material-icons text-red-400">favorite</span>
+          <span class="text-sm">Trusted by 10,000+ Students</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</footer>
