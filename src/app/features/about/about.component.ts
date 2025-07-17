@@ -18,6 +18,69 @@ export class AboutComponent implements OnInit {
     { number: '95%', label: 'Success Rate', icon: 'trending_up' }
   ];
 
+  whatWeDoServices = [
+    {
+      title: 'CAREER COUNSELING',
+      icon: 'psychology',
+      bgColor: 'bg-blue-600',
+      description: 'Expert guidance to help you discover your true potential and choose the right career path that aligns with your interests and abilities.',
+      features: [
+        'Personality & Aptitude Assessment',
+        'Career Mapping & Planning',
+        'Industry Insights & Trends',
+        'One-on-One Counseling Sessions'
+      ]
+    },
+    {
+      title: 'ADMISSION GUIDANCE',
+      icon: 'school',
+      bgColor: 'bg-green-600',
+      description: 'Comprehensive support throughout the admission process to secure your place in top educational institutions.',
+      features: [
+        'College Selection & Shortlisting',
+        'Application Process Support',
+        'Document Preparation',
+        'Interview Preparation'
+      ]
+    },
+    {
+      title: 'LOCAL GUARDIAN SERVICE',
+      icon: 'family_restroom',
+      bgColor: 'bg-purple-600',
+      description: 'Reliable local guardian services ensuring your safety and well-being while studying away from home.',
+      features: [
+        '24/7 Emergency Support',
+        'Regular Progress Monitoring',
+        'Parent Communication',
+        'Local Assistance & Guidance'
+      ]
+    },
+    {
+      title: 'CAMPUS VISIT',
+      icon: 'tour',
+      bgColor: 'bg-orange-600',
+      description: 'Organized campus visits to help you experience the college environment and make informed decisions.',
+      features: [
+        'Guided Campus Tours',
+        'Faculty Interactions',
+        'Student Life Experience',
+        'Facility Demonstrations'
+      ]
+    },
+    {
+      title: 'EDUCATION LOANS',
+      icon: 'account_balance',
+      bgColor: 'bg-red-600',
+      description: 'Assistance with education loan applications and financial planning to make quality education affordable.',
+      features: [
+        'Loan Application Support',
+        'Bank Liaison Services',
+        'Documentation Assistance',
+        'Financial Planning Guidance'
+      ]
+    }
+  ];
+
   team = [
     {
       name: 'Dr. Rajesh Kumar',

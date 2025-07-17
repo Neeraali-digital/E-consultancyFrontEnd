@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-colleges',
@@ -27,7 +28,8 @@ export class CollegesComponent implements OnInit {
       rating: 4.8,
       image: 'iit-delhi.jpg',
       featured: true,
-      color: 'blue'
+      color: 'blue',
+      courseTypes: ['Engineering', 'Technology']
     },
     {
       id: 2,
@@ -44,7 +46,8 @@ export class CollegesComponent implements OnInit {
       rating: 4.9,
       image: 'aiims-delhi.jpg',
       featured: true,
-      color: 'red'
+      color: 'red',
+      courseTypes: ['Medical']
     },
     {
       id: 3,
@@ -61,7 +64,8 @@ export class CollegesComponent implements OnInit {
       rating: 4.7,
       image: 'iim-bangalore.jpg',
       featured: true,
-      color: 'green'
+      color: 'green',
+      courseTypes: ['Management']
     },
     {
       id: 4,
@@ -78,7 +82,8 @@ export class CollegesComponent implements OnInit {
       rating: 4.5,
       image: 'nit-trichy.jpg',
       featured: false,
-      color: 'blue'
+      color: 'blue',
+      courseTypes: ['Engineering', 'Technology', 'Management']
     },
     {
       id: 5,
@@ -95,7 +100,8 @@ export class CollegesComponent implements OnInit {
       rating: 4.3,
       image: 'manipal.jpg',
       featured: false,
-      color: 'purple'
+      color: 'purple',
+      courseTypes: ['Engineering', 'Medical', 'Management', 'Technology']
     },
     {
       id: 6,
@@ -112,27 +118,96 @@ export class CollegesComponent implements OnInit {
       rating: 4.2,
       image: 'vit-vellore.jpg',
       featured: false,
-      color: 'orange'
+      color: 'orange',
+      courseTypes: ['Engineering', 'Technology', 'Management']
     }
   ];
 
   filters = {
     type: 'All',
     location: 'All',
-    ranking: 'All'
+    ranking: 'All',
+    course: 'All'
   };
 
   filteredColleges = [...this.colleges];
+  selectedCourseFilter = '';
+  showMobileFilters = false;
+  searchQuery = '';
+
+  // Filter options
+  collegeTypes = ['All', 'Engineering', 'Medical', 'Management', 'Multi-Disciplinary'];
+  locations = ['All', 'New Delhi', 'Bangalore', 'Tiruchirappalli', 'Manipal', 'Vellore'];
+  courseTypes = ['All', 'Engineering', 'Medical', 'Management', 'Technology', 'Arts & Science', 'Commerce'];
+
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.applyFilters();
+    // Check for course filter from query params
+    this.route.queryParams.subscribe(params => {
+      if (params['courseFilter']) {
+        this.selectedCourseFilter = params['courseFilter'];
+        this.filters.course = params['courseFilter'];
+      }
+      this.applyFilters();
+    });
   }
 
   applyFilters(): void {
     this.filteredColleges = this.colleges.filter(college => {
-      return (this.filters.type === 'All' || college.type === this.filters.type) &&
-             (this.filters.location === 'All' || college.location.includes(this.filters.location));
+      // Search filter
+      const searchMatch = !this.searchQuery ||
+                         college.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                         college.shortName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                         college.location.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                         college.type.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                         college.courseTypes.some(course => course.toLowerCase().includes(this.searchQuery.toLowerCase()));
+
+      // Type filter
+      const typeMatch = this.filters.type === 'All' || college.type === this.filters.type;
+
+      // Location filter
+      const locationMatch = this.filters.location === 'All' || college.location.includes(this.filters.location);
+
+      // Course filter (from course page navigation)
+      const courseMatch = this.filters.course === 'All' ||
+                          college.courseTypes?.includes(this.filters.course) ||
+                          college.type === this.filters.course;
+
+      // Ranking filter
+      const rankingMatch = this.filters.ranking === 'All' ||
+                          (this.filters.ranking === 'Top 10' && college.ranking <= 10) ||
+                          (this.filters.ranking === 'Top 20' && college.ranking <= 20);
+
+      return searchMatch && typeMatch && locationMatch && courseMatch && rankingMatch;
     });
+  }
+
+
+
+  clearFilters(): void {
+    this.filters = {
+      type: 'All',
+      location: 'All',
+      ranking: 'All',
+      course: 'All'
+    };
+    this.selectedCourseFilter = '';
+    this.searchQuery = '';
+    this.applyFilters();
+  }
+
+  onSearchChange(): void {
+    this.applyFilters();
+  }
+
+  clearSearch(): void {
+    this.searchQuery = '';
+    this.applyFilters();
+  }
+
+  toggleMobileFilters(): void {
+    this.showMobileFilters = !this.showMobileFilters;
   }
 
   getColorClasses(color: string) {
@@ -148,5 +223,9 @@ export class CollegesComponent implements OnInit {
 
   getStarArray(rating: number): boolean[] {
     return Array(5).fill(false).map((_, index) => index < Math.floor(rating));
+  }
+
+  viewCollegeDetails(collegeId: number): void {
+    this.router.navigate(['/college', collegeId]);
   }
 }

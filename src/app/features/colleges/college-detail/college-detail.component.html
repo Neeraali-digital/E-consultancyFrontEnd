@@ -1,0 +1,452 @@
+<!-- College Detail Page -->
+<div class="min-h-screen bg-white relative overflow-hidden">
+  <!-- Animated Background -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <!-- Stars -->
+    <div class="star star-1"></div>
+    <div class="star star-2"></div>
+    <div class="star star-3"></div>
+    <div class="star star-4"></div>
+    <div class="star star-5"></div>
+    <div class="star star-6"></div>
+    <div class="star star-7"></div>
+    <div class="star star-8"></div>
+    <div class="star star-9"></div>
+    <div class="star star-10"></div>
+    <div class="star star-11"></div>
+    <div class="star star-12"></div>
+
+    <!-- Asteroids -->
+    <div class="asteroid asteroid-1"></div>
+    <div class="asteroid asteroid-2"></div>
+    <div class="asteroid asteroid-3"></div>
+    <div class="asteroid asteroid-4"></div>
+    <div class="asteroid asteroid-5"></div>
+
+    <!-- Floating Particles -->
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+    <div class="particle particle-5"></div>
+    <div class="particle particle-6"></div>
+
+    <!-- Shooting Stars -->
+    <div class="shooting-star shooting-star-1"></div>
+    <div class="shooting-star shooting-star-2"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="relative z-10">
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="flex items-center justify-center min-h-screen bg-white">
+    <div class="text-center">
+      <!-- Modern Loading Spinner -->
+      <div class="relative">
+        <div class="modern-spinner">
+          <div class="spinner-ring-1"></div>
+          <div class="spinner-ring-2"></div>
+          <div class="spinner-ring-3"></div>
+        </div>
+        <div class="spinner-center">
+          <span class="material-icons text-blue-600 text-2xl">school</span>
+        </div>
+      </div>
+
+      <!-- Loading Text -->
+      <div class="mt-8">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Loading College Details</h3>
+        <p class="text-gray-500">Please wait while we fetch the information...</p>
+
+        <!-- Loading Dots -->
+        <div class="flex justify-center items-center mt-4 space-x-1">
+          <div class="loading-dot loading-dot-1"></div>
+          <div class="loading-dot loading-dot-2"></div>
+          <div class="loading-dot loading-dot-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="flex items-center justify-center min-h-screen">
+    <div class="text-center max-w-md mx-auto px-8">
+      <span class="material-icons text-6xl text-gray-300 mb-4 block">error_outline</span>
+      <h2 class="text-2xl font-bold text-gray-600 mb-2">College Not Found</h2>
+      <p class="text-gray-500 mb-6">The college you're looking for doesn't exist or has been removed.</p>
+      <button (click)="navigateToColleges()" 
+              class="bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300">
+        Back to Colleges
+      </button>
+    </div>
+  </div>
+
+  <!-- College Content -->
+  <div *ngIf="college && !loading && !error" class="fade-in">
+    <!-- Enhanced Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-blue-50/80 via-white to-purple-50/60">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full blur-3xl"></div>
+        <div class="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full blur-2xl"></div>
+        <div class="absolute bottom-20 left-1/3 w-40 h-40 bg-gradient-to-r from-indigo-400 to-indigo-600 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 right-1/4 w-20 h-20 bg-gradient-to-r from-pink-300 to-pink-500 rounded-full blur-xl"></div>
+      </div>
+
+      <!-- Subtle Overlay Gradient -->
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-white/20"></div>
+
+      <div class="relative max-w-7xl mx-auto px-8 py-8 z-10">
+        <!-- Breadcrumb Navigation -->
+        <div class="mb-8">
+          <nav class="flex items-center space-x-2 text-gray-600 text-sm">
+            <button (click)="navigateToColleges()"
+                    class="hover:text-gray-800 transition-all duration-300 flex items-center gap-2
+                           bg-white/90 backdrop-blur-sm px-4 py-2 rounded-xl border border-gray-200
+                           hover:bg-white hover:shadow-lg hover:scale-105">
+              <span class="material-icons text-sm">arrow_back</span>
+              Back to Colleges
+            </button>
+            <span class="material-icons text-xs text-gray-400">chevron_right</span>
+            <span class="text-gray-800 font-medium">{{ college.shortName }}</span>
+          </nav>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <!-- College Info -->
+          <div class="text-gray-800 space-y-4">
+            <!-- Badges -->
+            <div class="flex items-center gap-4 mb-4">
+              <span *ngIf="college.featured"
+                    class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                ⭐ FEATURED COLLEGE
+              </span>
+              <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                🏆 Rank #{{ college.ranking }}
+              </span>
+            </div>
+
+            <!-- College Name & Motto -->
+            <div class="space-y-3">
+              <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-800 bg-clip-text text-transparent leading-tight">
+                {{ college.name }}
+              </h1>
+              <p class="text-xl text-gray-600 font-medium">{{ college.shortName }}</p>
+              <p *ngIf="college.motto" class="text-base text-indigo-600 font-medium italic border-l-4 border-indigo-500 pl-4">
+                "{{ college.motto }}"
+              </p>
+            </div>
+            
+            <!-- Enhanced Rating -->
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-gray-200 shadow-lg">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Student Rating</h3>
+                <div class="flex items-center gap-3">
+                  <div class="rating-stars flex items-center gap-1">
+                    <span *ngFor="let filled of getStarArray(college.rating); let i = index"
+                          class="material-icons text-2xl transition-colors duration-200"
+                          [class.text-yellow-500]="filled"
+                          [class.text-gray-300]="!filled"
+                          [class.drop-shadow-sm]="filled">star</span>
+                  </div>
+                  <div class="flex items-baseline gap-1">
+                    <span class="text-3xl font-bold text-gray-800">{{ college.rating }}</span>
+                    <span class="text-gray-500 text-lg">/5</span>
+                  </div>
+                </div>
+              </div>
+              <div class="text-sm text-gray-600">Based on 1,250+ student reviews</div>
+            </div>
+
+            <!-- Enhanced Quick Stats -->
+            <div class="grid grid-cols-2 gap-3 mb-6">
+              <div class="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="material-icons text-blue-600 text-sm">location_on</span>
+                  <div class="text-gray-500 text-sm font-medium">Location</div>
+                </div>
+                <div class="text-lg font-bold text-gray-800">{{ college.location }}</div>
+              </div>
+              <div class="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="material-icons text-purple-600 text-sm">calendar_today</span>
+                  <div class="text-gray-500 text-sm font-medium">Established</div>
+                </div>
+                <div class="text-lg font-bold text-gray-800">{{ college.established }}</div>
+              </div>
+              <div class="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="material-icons text-indigo-600 text-sm">school</span>
+                  <div class="text-gray-500 text-sm font-medium">Type</div>
+                </div>
+                <div class="text-lg font-bold text-gray-800">{{ college.type }}</div>
+              </div>
+              <div class="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="material-icons text-green-600 text-sm">trending_up</span>
+                  <div class="text-gray-500 text-sm font-medium">Placement Rate</div>
+                </div>
+                <div class="text-lg font-bold text-green-600">{{ college.placement }}</div>
+              </div>
+            </div>
+
+            <!-- Enhanced Action Buttons -->
+            <div class="flex flex-wrap gap-3">
+              <button (click)="callCollege()"
+                      class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700
+                             text-white px-5 py-2.5 rounded-xl font-semibold text-sm
+                             transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl
+                             hover:scale-105 transform">
+                <span class="material-icons text-lg">call</span>
+                Call Now
+              </button>
+              <button (click)="emailCollege()"
+                      class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700
+                             text-white px-5 py-2.5 rounded-xl font-semibold text-sm
+                             transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl
+                             hover:scale-105 transform">
+                <span class="material-icons text-lg">email</span>
+                Get Info
+              </button>
+              <button (click)="openWebsite()"
+                      class="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700
+                             text-white px-5 py-2.5 rounded-xl font-semibold text-sm
+                             transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl
+                             hover:scale-105 transform">
+                <span class="material-icons text-lg">language</span>
+                Visit Website
+              </button>
+            </div>
+          </div>
+
+          <!-- Enhanced College Visual -->
+          <div class="relative">
+            <!-- Main College Image -->
+            <div class="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500">
+              <!-- Image Container -->
+              <div class="relative h-80 overflow-hidden">
+                <!-- College Image -->
+                <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                     alt="{{ college.name }} Campus"
+                     class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+                <!-- College Info Overlay -->
+                <div class="absolute bottom-6 left-6 right-6 z-10">
+                  <div class="bg-white/95 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-xl">
+                    <h3 class="text-gray-800 text-xl font-bold mb-1">{{ college.shortName }}</h3>
+                    <p class="text-gray-600 text-sm flex items-center gap-2">
+                      <span class="material-icons text-sm">location_on</span>
+                      {{ college.location }} • {{ college.type }} Institution
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Virtual Tour Button -->
+                <button *ngIf="college.virtualTourUrl"
+                        class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-indigo-600
+                               px-4 py-2 rounded-full text-sm font-semibold hover:bg-white
+                               transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl">
+                  <span class="material-icons text-sm">360</span>
+                  Virtual Tour
+                </button>
+              </div>
+
+              <!-- Image Gallery Preview -->
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <h4 class="text-lg font-semibold text-gray-800">Campus Gallery</h4>
+                  <button class="text-indigo-600 text-sm font-medium hover:text-indigo-700 transition-colors">
+                    View All →
+                  </button>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                  <div *ngFor="let image of college.campusImages?.slice(0, 3)"
+                       class="aspect-square bg-gray-100 rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                      <span class="material-icons text-gray-500 text-xl">image</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <!-- Left Column - Main Info -->
+          <div class="lg:col-span-2 space-y-12">
+            <!-- About Section -->
+            <div class="info-card slide-up">
+              <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-3">
+                <span class="material-icons text-blue-600">info</span>
+                About {{ college.shortName }}
+              </h2>
+              <p class="text-gray-600 leading-relaxed">{{ college.description }}</p>
+            </div>
+
+            <!-- Facilities Section -->
+            <div class="slide-up">
+              <h2 class="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+                <span class="material-icons text-blue-600">business</span>
+                Campus Facilities
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div *ngFor="let facility of college.facilities" class="facility-card bg-white rounded-xl p-6 text-center">
+                  <div class="facility-icon">
+                    <span class="material-icons text-2xl">{{ facility.icon }}</span>
+                  </div>
+                  <h3 class="font-semibold text-gray-800 mb-2">{{ facility.name }}</h3>
+                  <p class="text-sm text-gray-600">{{ facility.description }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Google Maps Location -->
+            <div class="slide-up">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="material-icons text-blue-600">location_on</span>
+                Campus Location
+              </h2>
+              <div class="google-maps-container">
+                <iframe [src]="getSafeUrl(college.googleMapsUrl!)"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+              <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                <p class="text-gray-700 flex items-center gap-2">
+                  <span class="material-icons text-blue-600">place</span>
+                  {{ college.address }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Admission Process -->
+            <div class="slide-up">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="material-icons text-blue-600">how_to_reg</span>
+                Admission Process
+              </h2>
+              <div class="space-y-4">
+                <div *ngFor="let step of college.admissionProcess; let i = index" class="process-step">
+                  <div class="step-number">{{ i + 1 }}</div>
+                  <div class="flex-1">
+                    <p class="text-gray-700 font-medium">{{ step }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column - Sidebar Info -->
+          <div class="space-y-8">
+            <!-- Quick Stats -->
+            <div class="info-card slide-up">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">Quick Stats</h3>
+              <div class="space-y-4">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Campus Size</span>
+                  <span class="font-semibold">{{ college.campusSize }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Total Students</span>
+                  <span class="font-semibold">{{ college.totalStudents }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Faculty Ratio</span>
+                  <span class="font-semibold">{{ college.facultyRatio }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Annual Fees</span>
+                  <span class="font-semibold text-blue-600">{{ college.fees }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Avg Package</span>
+                  <span class="font-semibold text-green-600">{{ college.avgPackage }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Available Courses -->
+            <div class="info-card slide-up">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">Available Courses</h3>
+              <div class="space-y-2">
+                <span *ngFor="let course of college.courses" 
+                      class="inline-block bg-gradient-to-r {{ getColorClasses(college.color) }} 
+                             text-white px-3 py-1 rounded-full text-sm font-medium mr-2 mb-2">
+                  {{ course }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Eligibility Criteria -->
+            <div class="info-card slide-up">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">Eligibility Criteria</h3>
+              <ul class="space-y-2">
+                <li *ngFor="let criteria of college.eligibility" 
+                    class="text-gray-600 flex items-start gap-2">
+                  <span class="material-icons text-green-600 text-sm mt-1">check_circle</span>
+                  <span class="text-sm">{{ criteria }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Key Highlights -->
+            <div class="info-card slide-up">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">Key Highlights</h3>
+              <div class="space-y-2">
+                <div *ngFor="let highlight of college.highlights" class="highlight-item">
+                  <span class="material-icons text-blue-600 text-sm mr-2">star</span>
+                  <span class="text-sm text-gray-700">{{ highlight }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Accreditation -->
+            <div class="info-card slide-up">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">Accreditation</h3>
+              <div class="space-y-2">
+                <span *ngFor="let accred of college.accreditation" 
+                      class="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium mr-2 mb-2">
+                  {{ accred }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="info-card slide-up">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">Contact Information</h3>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <span class="material-icons text-blue-600">call</span>
+                  <span class="text-gray-700">{{ college.phone }}</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="material-icons text-blue-600">email</span>
+                  <span class="text-gray-700">{{ college.email }}</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="material-icons text-blue-600">language</span>
+                  <a [href]="college.website" target="_blank" 
+                     class="text-blue-600 hover:underline">{{ college.website }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </div>
+</div>

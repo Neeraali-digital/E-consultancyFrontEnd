@@ -1,0 +1,93 @@
+/* FAQ Component Styles */
+
+/* Slide down animation for FAQ answers */
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FAQ item hover effects */
+.faq-item {
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Question button effects */
+.faq-question {
+  transition: all 0.3s ease;
+}
+
+.faq-question:hover {
+  background-color: #f8fafc;
+}
+
+/* Icon rotation animation */
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Category header animations */
+.category-header {
+  transition: all 0.3s ease;
+}
+
+.category-header:hover {
+  transform: scale(1.02);
+}
+
+/* Quick links hover effects */
+.quick-link {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quick-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Button animations */
+.btn-animate {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-animate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-animate:hover::before {
+  left: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .faq-item:hover {
+    transform: translateY(-1px);
+  }
+  
+  .quick-link:hover {
+    transform: translateY(-2px);
+  }
+}

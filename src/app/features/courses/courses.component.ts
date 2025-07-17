@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CounterAnimationDirective } from '../../shared/directives/counter-animation.directive';
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule, CounterAnimationDirective],
+  imports: [CommonModule, FormsModule, CounterAnimationDirective],
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
+
+  searchQuery = '';
+  filteredCourses: any[] = [];
+
+  searchSuggestions = ['Engineering', 'Medical', 'Management', 'Technology', 'Arts & Science', 'Commerce'];
 
   courses = [
     {
@@ -86,7 +93,48 @@ export class CoursesComponent implements OnInit {
     }
   ];
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
+    this.filteredCourses = [...this.courses];
+  }
+
+  // Search functionality
+  onSearchChange(): void {
+    if (!this.searchQuery.trim()) {
+      this.filteredCourses = [...this.courses];
+      return;
+    }
+
+    const query = this.searchQuery.toLowerCase();
+    this.filteredCourses = this.courses.filter(course =>
+      course.title.toLowerCase().includes(query) ||
+      course.description.toLowerCase().includes(query) ||
+      course.programs.some((program: string) => program.toLowerCase().includes(query))
+    );
+  }
+
+  // Navigate to colleges with course filter
+  viewColleges(course: any): void {
+    this.router.navigate(['/colleges'], {
+      queryParams: {
+        courseFilter: course.title,
+        courseId: course.id
+      }
+    });
+  }
+
+  // Get icon for search suggestions
+  getSuggestionIcon(suggestion: string): string {
+    const iconMap: { [key: string]: string } = {
+      'Engineering': 'engineering',
+      'Medical': 'medical_services',
+      'Management': 'business',
+      'Technology': 'computer',
+      'Arts & Science': 'science',
+      'Commerce': 'account_balance'
+    };
+    return iconMap[suggestion] || 'school';
   }
 
   getColorClasses(color: string) {

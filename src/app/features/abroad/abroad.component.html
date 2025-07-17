@@ -1,0 +1,189 @@
+<!-- Study Abroad Page -->
+<div class="min-h-screen bg-gray-50">
+  
+  <!-- Country Selection View -->
+  <div *ngIf="!selectedCountry" class="py-20">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+      <div class="max-w-7xl mx-auto px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Study Abroad
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+          Explore world-class education opportunities in top international destinations
+        </p>
+        <div class="flex items-center justify-center gap-4 text-lg">
+          <span class="material-icons text-3xl">public</span>
+          <span>Choose Your Destination</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countries Grid -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Popular Study Destinations
+          </h2>
+          <p class="text-xl text-gray-600">
+            Select a country to explore courses and universities
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div *ngFor="let country of countries; let i = index"
+               (click)="selectCountry(country.code)"
+               class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300
+                      transform hover:-translate-y-4 cursor-pointer border border-gray-100 group">
+            
+            <!-- Country Flag and Name -->
+            <div class="text-center mb-6">
+              <img [src]="country.flag" [alt]="country.name + ' flag'" 
+                   class="w-20 h-14 mx-auto rounded-lg shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">
+              <h3 class="text-2xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+                {{ country.name }}
+              </h3>
+            </div>
+
+            <!-- Highlights -->
+            <div class="space-y-3">
+              <div *ngFor="let highlight of country.highlights" 
+                   class="flex items-center gap-3 text-gray-600">
+                <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+                <span class="text-sm">{{ highlight }}</span>
+              </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="mt-6 text-center">
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl
+                             font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300
+                             transform group-hover:scale-105">
+                Explore {{ country.name }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Country Details View -->
+  <div *ngIf="selectedCountry && getSelectedCountryData() as country" class="py-20">
+    
+    <!-- Country Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="flex items-center gap-4 mb-6">
+          <button (click)="goBackToCountries()" 
+                  class="bg-white/20 hover:bg-white/30 p-3 rounded-full transition-all duration-300">
+            <span class="material-icons">arrow_back</span>
+          </button>
+          <img [src]="country.flag" [alt]="country.name + ' flag'" 
+               class="w-16 h-12 rounded-lg shadow-md">
+          <h1 class="text-4xl md:text-6xl font-bold">
+            Study in {{ country.name }}
+          </h1>
+        </div>
+        
+        <!-- Country Highlights Slide -->
+        <div class="bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
+          <h3 class="text-2xl font-bold mb-6">Why Choose {{ country.name }}?</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div *ngFor="let highlight of country.highlights" 
+                 class="text-center p-4 bg-white/10 rounded-xl">
+              <span class="material-icons text-3xl mb-2">star</span>
+              <p class="font-medium">{{ highlight }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Available Courses
+          </h2>
+          <p class="text-xl text-gray-600">
+            Explore the courses offered in {{ country.name }}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div *ngFor="let course of country.courses" 
+               class="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-all duration-300
+                      transform hover:-translate-y-2">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <span class="material-icons text-white text-2xl">school</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">{{ course.name }}</h3>
+              <p class="text-gray-600 mb-4">Duration: {{ course.duration }}</p>
+              <p class="text-2xl font-bold text-blue-600">{{ course.fees }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Colleges Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Top Universities
+          </h2>
+          <p class="text-xl text-gray-600">
+            Leading educational institutions in {{ country.name }}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div *ngFor="let college of country.colleges" 
+               class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl 
+                      transition-all duration-300 transform hover:-translate-y-2">
+            <img [src]="college.image" [alt]="college.name" 
+                 class="w-full h-48 object-cover">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-800 mb-2">{{ college.name }}</h3>
+              <p class="text-blue-600 font-semibold mb-2">{{ college.ranking }}</p>
+              <p class="text-gray-600 mb-4">Established: {{ college.established }}</p>
+              <button class="bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold
+                             hover:bg-blue-700 transition-all duration-300 w-full">
+                Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 bg-blue-600 text-white">
+      <div class="max-w-4xl mx-auto px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          Ready to Start Your Journey?
+        </h2>
+        <p class="text-xl mb-8">
+          Get personalized guidance for studying in {{ country.name }}
+        </p>
+        <div class="flex flex-col md:flex-row gap-4 justify-center">
+          <button class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold
+                         hover:bg-gray-100 transition-all duration-300">
+            <span class="material-icons mr-2">phone</span>
+            Call +91 94498 44444
+          </button>
+          <button class="bg-green-600 text-white px-8 py-4 rounded-xl font-bold
+                         hover:bg-green-700 transition-all duration-300">
+            <span class="material-icons mr-2">chat</span>
+            WhatsApp Consultation
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

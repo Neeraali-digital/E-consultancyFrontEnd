@@ -1,0 +1,17 @@
+<!-- Scroll to Top Button -->
+<button 
+  *ngIf="isVisible"
+  (click)="scrollToTop()"
+  class="scroll-to-top-btn"
+  aria-label="Scroll to top"
+  title="Scroll to top">
+  
+  <!-- Button Background with Gradient -->
+  <div class="btn-background"></div>
+  
+  <!-- Icon -->
+  <span class="material-icons btn-icon">keyboard_arrow_up</span>
+  
+  <!-- Ripple Effect -->
+  <div class="ripple-effect"></div>
+</button>

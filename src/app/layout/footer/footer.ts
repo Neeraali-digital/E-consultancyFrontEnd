@@ -18,8 +18,8 @@ export class Footer {
     tagline: 'TRUSTED EDUCATIONAL CONSULTANCY SINCE 2003',
     description: 'Your trusted partner in educational excellence. We provide comprehensive guidance for admissions, career counseling, and educational planning.',
     email: 'info@wayzon.com',
-    phone: '+91 98765 43210',
-    whatsapp: '+91 98765 43210',
+    phone: '+91 94498 44444',
+    whatsapp: '+91 94498 44444',
     address: {
       line1: '123 Education Hub',
       line2: 'MG Road, Bangalore',
@@ -67,7 +67,7 @@ export class Footer {
     { name: 'Instagram', url: 'https://instagram.com/wayzon', icon: 'instagram', color: '#E4405F' },
     { name: 'LinkedIn', url: 'https://linkedin.com/company/wayzon', icon: 'linkedin', color: '#0A66C2' },
     { name: 'YouTube', url: 'https://youtube.com/wayzon', icon: 'youtube', color: '#FF0000' },
-    { name: 'WhatsApp', url: 'https://wa.me/919876543210', icon: 'whatsapp', color: '#25D366' }
+    { name: 'WhatsApp', url: 'https://wa.me/919449844444', icon: 'whatsapp', color: '#25D366' }
   ];
 
   // Office Locations
@@ -76,7 +76,7 @@ export class Footer {
       city: 'Bangalore',
       type: 'Head Office',
       address: '123 Education Hub, MG Road',
-      phone: '+91 98765 43210',
+      phone: '+91 94498 44444',
       email: 'bangalore@wayzon.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM'
     },
@@ -84,7 +84,7 @@ export class Footer {
       city: 'Delhi',
       type: 'Branch Office',
       address: '456 Knowledge Center, CP',
-      phone: '+91 98765 43211',
+      phone: '+91 94498 44444',
       email: 'delhi@wayzon.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM'
     },
@@ -92,7 +92,7 @@ export class Footer {
       city: 'Mumbai',
       type: 'Branch Office',
       address: '789 Learning Plaza, Andheri',
-      phone: '+91 98765 43212',
+      phone: '+91 94498 44444',
       email: 'mumbai@wayzon.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM'
     },
@@ -100,7 +100,7 @@ export class Footer {
       city: 'Chennai',
       type: 'Branch Office',
       address: '321 Education Square, T.Nagar',
-      phone: '+91 98765 43213',
+      phone: '+91 94498 44444',
       email: 'chennai@wayzon.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM'
     }

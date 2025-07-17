@@ -377,3 +377,839 @@
   border: 1px solid red !important;
   background: rgba(255, 0, 0, 0.1) !important;
 }
+
+/* 🌟 Special More Dropdown Animations */
+.animate-gradient-x {
+  background-size: 400% 400%;
+  animation: gradient-x 3s ease infinite;
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in-special 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounce-in-special {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-20px) rotate(-10deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05) translateY(-5px) rotate(5deg);
+  }
+  70% {
+    opacity: 0.9;
+    transform: scale(0.95) translateY(2px) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* More dropdown special effects */
+.more-dropdown-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.more-dropdown-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.more-dropdown-item:hover::before {
+  left: 100%;
+}
+
+/* Floating particles effect */
+.floating-particles {
+  position: relative;
+}
+
+.floating-particles::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: float-particle 4s ease-in-out infinite;
+}
+
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px) scale(1.2);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-20px) translateX(-5px) scale(0.8);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-15px) translateX(8px) scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+/* Enhanced hover effects for more options */
+.more-option-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.more-option-hover:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon rotation and scaling */
+.more-icon-animate {
+  transition: all 0.3s ease;
+}
+
+.more-icon-animate:hover {
+  transform: rotate(360deg) scale(1.1);
+}
+
+/* 📱 Enhanced Responsive Navigation */
+.navigation-container {
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  white-space: nowrap;
+}
+
+.navigation-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Keep navigation in single row for laptop and desktop */
+@media (min-width: 1024px) {
+  .navigation-container {
+    flex-wrap: nowrap;
+    justify-content: center;
+    max-width: fit-content;
+    margin: 0 auto;
+  }
+
+  .navigation-container button {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
+/* Responsive breakpoints for navigation */
+@media (max-width: 1200px) {
+  .navigation-container {
+    padding: 0.375rem;
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .navigation-container {
+    padding: 0.25rem;
+    gap: 0.125rem;
+    justify-content: flex-start;
+  }
+
+  .navigation-container button {
+    min-width: auto;
+    flex-shrink: 0;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation-container {
+    background: rgba(249, 250, 251, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.125rem;
+  }
+
+  .navigation-container button {
+    padding: 0.25rem 0.375rem;
+    font-size: 0.625rem;
+  }
+
+  .navigation-container .material-icons {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .navigation-container {
+    padding: 0.125rem;
+    gap: 0.0625rem;
+  }
+
+  .navigation-container button {
+    padding: 0.1875rem 0.25rem;
+    min-width: 2rem;
+  }
+}
+
+/* Header container responsive adjustments */
+@media (max-width: 1024px) {
+  .header-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+/* Logo responsive sizing */
+@media (max-width: 768px) {
+  .logo-container {
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-size: 1.125rem;
+  }
+
+  .logo-tagline {
+    font-size: 0.5rem;
+  }
+}
+
+/* Dropdown responsive positioning */
+@media (max-width: 1024px) {
+  .dropdown-menu {
+    left: auto;
+    right: 0;
+    width: 16rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .dropdown-menu {
+    width: 14rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Navigation text responsive visibility */
+@media (max-width: 640px) {
+  .nav-text {
+    display: none;
+  }
+
+  .nav-icon-only {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+/* Standard fade-in animation for dropdowns */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🎨 Modern Navigation Button Hover Effects */
+.nav-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+  z-index: 1;
+}
+
+.nav-button:hover::before {
+  left: 100%;
+}
+
+.nav-button:hover {
+  transform: translateY(-1px);
+  backdrop-filter: blur(10px);
+}
+
+/* Enhanced shadow effects */
+.nav-button:hover {
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Smooth gradient transitions */
+.nav-button {
+  background: linear-gradient(135deg, transparent, transparent);
+  background-size: 200% 200%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-button:hover {
+  background-size: 100% 100%;
+  animation: shimmer 0.6s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* 📞 Call Now & Apply Now Button Styles */
+.call-now-btn, .apply-now-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.call-now-btn::before, .apply-now-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.call-now-btn:hover::before, .apply-now-btn:hover::before {
+  left: 100%;
+}
+
+.call-now-btn:hover, .apply-now-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Responsive action buttons */
+@media (max-width: 1280px) {
+  .call-now-btn span:not(.material-icons),
+  .apply-now-btn span:not(.material-icons) {
+    display: none;
+  }
+
+  .call-now-btn, .apply-now-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+/* Enhanced responsive navigation for better button handling */
+@media (max-width: 1024px) {
+  .navigation-container {
+    max-width: calc(100vw - 200px); /* Leave space for action buttons */
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation-container {
+    max-width: calc(100vw - 150px); /* Adjust for smaller action buttons */
+  }
+
+  .call-now-btn, .apply-now-btn {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+  }
+
+  .call-now-btn .material-icons,
+  .apply-now-btn .material-icons {
+    font-size: 1rem;
+  }
+}
+
+/* 🎯 Compact Navigation Styles */
+.nav-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.nav-button:hover::before {
+  left: 100%;
+}
+
+/* 📱 Enhanced Dropdown Animations */
+.animate-slide-down {
+  animation: slideDown 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform-origin: top center;
+  opacity: 0;
+  transform: translateY(-12px) scale(0.95);
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.95);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-4px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 🎯 Dropdown Container Styles */
+.dropdown-container {
+  position: absolute;
+  z-index: 9999 !important;
+  pointer-events: auto;
+}
+
+/* Ensure dropdowns are visible */
+.dropdown-visible {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* 🎨 Compact Navigation Container */
+.navigation-container {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 📱 Responsive Compact Navigation */
+@media (max-width: 1280px) {
+  .navigation-container {
+    max-width: calc(100vw - 200px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .navigation-container {
+    max-width: calc(100vw - 180px);
+  }
+
+  /* Hide text labels on smaller screens, keep icons and dropdown arrows */
+  .nav-button span:not(.material-icons) {
+    display: none;
+  }
+
+  .nav-button {
+    padding: 0.375rem 0.5rem;
+    min-width: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation-container {
+    max-width: calc(100vw - 160px);
+  }
+}
+
+/* ✨ Enhanced Tab Switching Effects */
+.nav-button {
+  /* Smooth color transitions */
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              color 0.3s ease,
+              background-color 0.4s ease,
+              transform 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Elegant hover state with light blue theme */
+.nav-button:hover {
+  background-color: rgb(239, 246, 255) !important;
+  color: rgb(29, 78, 216) !important;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.12);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Smooth icon scaling on hover */
+.nav-button:hover .material-icons {
+  transform: scale(1.15) rotate(5deg);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Active/pressed state */
+.nav-button:active {
+  transform: translateY(0) scale(1.02);
+  transition: transform 0.1s ease;
+}
+
+/* Enhanced dropdown arrow rotation */
+.nav-button .material-icons[class*="expand_more"] {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Smooth text transitions */
+.nav-button span:not(.material-icons) {
+  transition: all 0.3s ease;
+}
+
+/* Focus ring enhancement */
+.nav-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  background-color: rgb(239, 246, 255);
+}
+
+/* Prevent layout shift during animations */
+.nav-button * {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 🎯 Enhanced Dropdown Visibility */
+.dropdown-container {
+  position: absolute !important;
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+  display: block !important;
+  visibility: visible !important;
+  overflow: visible !important;
+  max-height: none !important;
+  white-space: nowrap;
+}
+
+/* Force dropdown visibility */
+[class*="dropdown"] {
+  z-index: 9999 !important;
+}
+
+/* Navigation container overflow fix */
+.navigation-container {
+  overflow: visible !important;
+  position: relative;
+}
+
+/* Header overflow fix */
+header {
+  overflow: visible !important;
+}
+
+header > div {
+  overflow: visible !important;
+}
+
+nav {
+  overflow: visible !important;
+}
+
+/* Ensure dropdown content is visible */
+.dropdown-container > div {
+  min-height: 100px;
+  padding: 12px;
+}
+
+/* Debug styles for dropdown visibility */
+.debug-dropdown {
+  background-color: red !important;
+  border: 2px solid yellow !important;
+  min-height: 100px !important;
+  min-width: 200px !important;
+}
+
+/* 🔒 Force dropdowns to be hidden by default */
+.dropdown-container {
+  display: none;
+  visibility: hidden;
+}
+
+/* Only show when parent has the dropdown open state */
+.dropdown-container[data-dropdown-state="true"] {
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* ✨ Enhanced More Dropdown Animations */
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px) scale(0.95);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateX(-2px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 🎨 More Dropdown Enhancements */
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Enhanced hover effects for more options */
+.more-option-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.more-option-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.more-option-item:hover::before {
+  left: 100%;
+}
+
+/* Icon container glow effect */
+.icon-glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.icon-glow:hover {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+}
+
+/* Staggered animation for dropdown items */
+.dropdown-item-1 { animation-delay: 0ms; }
+.dropdown-item-2 { animation-delay: 100ms; }
+.dropdown-item-3 { animation-delay: 200ms; }
+.dropdown-item-4 { animation-delay: 300ms; }
+
+/* 🔽 Enhanced Dropdown Arrow Animations */
+.nav-button .material-icons[class*="keyboard_arrow_down"] {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center;
+}
+
+/* Arrow rotation when dropdown is open */
+.nav-button .material-icons.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Enhanced arrow hover effects */
+.nav-button:hover .material-icons[class*="keyboard_arrow_down"] {
+  transform: scale(1.2);
+}
+
+.nav-button:hover .material-icons.rotate-180 {
+  transform: rotate(180deg) scale(1.2);
+}
+
+/* Subtle bounce effect for arrows */
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.nav-button:hover .material-icons[class*="keyboard_arrow_down"] {
+  animation: arrowBounce 0.6s ease-in-out;
+}
+
+/* Arrow color transitions */
+.nav-button .material-icons[class*="keyboard_arrow_down"] {
+  color: inherit;
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-button:hover .material-icons[class*="keyboard_arrow_down"] {
+  opacity: 1;
+}
+
+/* 💬 Enhanced Message Center Animations */
+@keyframes messagePopup {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(0.95);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes iconJump {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) scale(1.1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.05);
+  }
+  75% {
+    transform: translateY(-2px) scale(1.02);
+  }
+}
+
+@keyframes messageBadgePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+  }
+}
+
+/* Message popup animation */
+.animate-message-popup {
+  animation: messagePopup 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Message icon jump animation */
+.animate-jump {
+  animation: iconJump 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Enhanced message badge */
+.message-icon .animate-bounce {
+  animation: messageBadgePulse 2s infinite;
+}
+
+/* Message popup enhancements */
+.animate-message-popup {
+  backdrop-filter: blur(10px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Message content animations */
+.animate-message-popup .p-4 > div {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+.animate-message-popup .grid > button {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+/* Hover effects for message buttons */
+.message-action-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.message-action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.message-action-btn:hover::before {
+  left: 100%;
+}
+
+/* Quick action buttons hover effects */
+.quick-action-btn {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.quick-action-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Active Tab Styling */
+.active-tab {
+  background: linear-gradient(135deg, rgb(219, 234, 254) 0%, rgb(191, 219, 254) 100%) !important;
+  color: rgb(29, 78, 216) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25) !important;
+  transform: translateY(-1px) !important;
+}

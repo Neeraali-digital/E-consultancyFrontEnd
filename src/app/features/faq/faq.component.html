@@ -1,0 +1,148 @@
+<!-- FAQ Page -->
+<div class="min-h-screen bg-gray-50">
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <div class="flex items-center justify-center gap-4 mb-6">
+        <span class="material-icons text-5xl">help_outline</span>
+      </div>
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        Frequently Asked Questions
+      </h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        Find answers to common questions about our services and educational guidance
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ Categories -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-8">
+      
+      <div *ngFor="let category of faqCategories; let categoryIndex = index" 
+           class="mb-12">
+        
+        <!-- Category Header -->
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center gap-3 bg-white rounded-2xl px-6 py-4 shadow-lg">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center"
+                 [ngClass]="'bg-' + category.color + '-600'">
+              <span class="material-icons text-white text-xl">{{ category.icon }}</span>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800">{{ category.title }}</h2>
+          </div>
+        </div>
+
+        <!-- FAQ Items -->
+        <div class="space-y-4">
+          <div *ngFor="let faq of category.faqs; let faqIndex = index"
+               class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100
+                      hover:shadow-xl transition-all duration-300">
+            
+            <!-- Question -->
+            <button (click)="toggleFaq(categoryIndex, faqIndex)"
+                    class="w-full text-left p-6 flex items-center justify-between
+                           hover:bg-gray-50 transition-all duration-300 group">
+              <h3 class="text-lg font-semibold text-gray-800 pr-4 group-hover:text-blue-600">
+                {{ faq.question }}
+              </h3>
+              <span class="material-icons text-gray-400 transition-transform duration-300 flex-shrink-0"
+                    [class.rotate-180]="isFaqExpanded(categoryIndex, faqIndex)">
+                expand_more
+              </span>
+            </button>
+
+            <!-- Answer -->
+            <div *ngIf="isFaqExpanded(categoryIndex, faqIndex)"
+                 class="px-6 pb-6 border-t border-gray-100 animate-slide-down">
+              <div class="pt-4">
+                <p class="text-gray-600 leading-relaxed">
+                  {{ faq.answer }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="py-20 bg-blue-600 text-white">
+    <div class="max-w-4xl mx-auto px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">
+        Still Have Questions?
+      </h2>
+      <p class="text-xl mb-8">
+        Our expert counselors are here to help you with personalized guidance
+      </p>
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+        <button class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold
+                       hover:bg-gray-100 transition-all duration-300 flex items-center justify-center gap-2">
+          <span class="material-icons">phone</span>
+          Call +91 94498 44444
+        </button>
+        <button class="bg-green-600 text-white px-8 py-4 rounded-xl font-bold
+                       hover:bg-green-700 transition-all duration-300 flex items-center justify-center gap-2">
+          <span class="material-icons">chat</span>
+          WhatsApp Chat
+        </button>
+        <button class="bg-purple-600 text-white px-8 py-4 rounded-xl font-bold
+                       hover:bg-purple-700 transition-all duration-300 flex items-center justify-center gap-2">
+          <span class="material-icons">email</span>
+          Email Us
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section class="py-16 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-8">
+      <div class="text-center mb-12">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">
+          Explore More
+        </h3>
+        <p class="text-gray-600">
+          Discover our other services and resources
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a href="/about" 
+           class="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300
+                  transform hover:-translate-y-2 group">
+          <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4
+                      group-hover:scale-110 transition-transform duration-300">
+            <span class="material-icons text-white text-2xl">people</span>
+          </div>
+          <h4 class="text-lg font-bold text-gray-800 mb-2">About Us</h4>
+          <p class="text-gray-600 text-sm">Learn more about our mission and values</p>
+        </a>
+        
+        <a href="/courses" 
+           class="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300
+                  transform hover:-translate-y-2 group">
+          <div class="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4
+                      group-hover:scale-110 transition-transform duration-300">
+            <span class="material-icons text-white text-2xl">school</span>
+          </div>
+          <h4 class="text-lg font-bold text-gray-800 mb-2">Courses</h4>
+          <p class="text-gray-600 text-sm">Explore available courses and programs</p>
+        </a>
+        
+        <a href="/contact" 
+           class="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300
+                  transform hover:-translate-y-2 group">
+          <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4
+                      group-hover:scale-110 transition-transform duration-300">
+            <span class="material-icons text-white text-2xl">contact_mail</span>
+          </div>
+          <h4 class="text-lg font-bold text-gray-800 mb-2">Contact</h4>
+          <p class="text-gray-600 text-sm">Get in touch with our counselors</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>

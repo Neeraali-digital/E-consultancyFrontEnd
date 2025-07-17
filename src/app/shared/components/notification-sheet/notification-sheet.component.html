@@ -1,0 +1,137 @@
+<!-- Material Bottom Sheet for Notifications -->
+<div *ngIf="isOpen" 
+     class="fixed inset-0 z-50 flex items-end justify-center"
+     (click)="onBackdropClick($event)">
+  
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
+  
+  <!-- Bottom Sheet -->
+  <div [@slideUp]="isOpen ? 'open' : 'closed'"
+       class="relative w-full max-w-md bg-white rounded-t-3xl shadow-2xl max-h-[80vh] overflow-hidden">
+    
+    <!-- Handle -->
+    <div class="flex justify-center py-3">
+      <div class="w-12 h-1 bg-gray-300 rounded-full"></div>
+    </div>
+    
+    <!-- Header -->
+    <div class="px-6 pb-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full 
+                      flex items-center justify-center">
+            <span class="material-icons text-white text-lg">notifications_active</span>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-gray-800">Notifications</h2>
+            <p class="text-sm text-gray-500">{{ getUnreadCount() }} unread messages</p>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <!-- Mark All Read -->
+          <button *ngIf="getUnreadCount() > 0"
+                  (click)="markAllAsRead()"
+                  class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-medium
+                         hover:bg-blue-200 transition-colors duration-200">
+            Mark all read
+          </button>
+          
+          <!-- Close Button -->
+          <button (click)="onClose()"
+                  class="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full 
+                         flex items-center justify-center transition-colors duration-200">
+            <span class="material-icons text-gray-600 text-sm">close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Notifications List -->
+    <div class="flex-1 overflow-y-auto px-6 pb-6 space-y-4 max-h-96">
+      
+      <!-- No Notifications -->
+      <div *ngIf="notifications.length === 0" 
+           class="text-center py-12">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="material-icons text-gray-400 text-2xl">notifications_none</span>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-600 mb-2">No notifications yet</h3>
+        <p class="text-gray-500 text-sm">We'll notify you when something important happens</p>
+      </div>
+      
+      <!-- Notification Items -->
+      <div *ngFor="let notification of notifications; let i = index"
+           [@fadeIn]
+           class="notification-item bg-white border border-gray-200 rounded-2xl p-4 
+                  hover:shadow-md transition-all duration-300 cursor-pointer"
+           [class.border-blue-200]="!notification.read"
+           [class.bg-blue-50]="!notification.read"
+           (click)="onMarkAsRead(notification.id)">
+        
+        <div class="flex items-start gap-3">
+          <!-- Notification Icon -->
+          <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+               [ngClass]="'bg-gradient-to-r ' + getNotificationColor(notification.type)">
+            <span class="material-icons text-white text-lg">
+              {{ getNotificationIcon(notification.type) }}
+            </span>
+          </div>
+          
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between">
+              <h3 class="font-semibold text-gray-800 text-sm mb-1">
+                {{ notification.title }}
+              </h3>
+              <div class="flex items-center gap-2 flex-shrink-0 ml-2">
+                <!-- Unread Indicator -->
+                <div *ngIf="!notification.read" 
+                     class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <!-- Time -->
+                <span class="text-xs text-gray-500">
+                  {{ formatTime(notification.timestamp) }}
+                </span>
+              </div>
+            </div>
+            
+            <p class="text-gray-600 text-sm mb-3 leading-relaxed">
+              {{ notification.message }}
+            </p>
+            
+            <!-- Action Buttons -->
+            <div *ngIf="notification.actions && notification.actions.length > 0" 
+                 class="flex gap-2 flex-wrap">
+              <button *ngFor="let action of notification.actions"
+                      (click)="onActionClick(action, notification.id); $event.stopPropagation()"
+                      class="flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-sm
+                             transition-all duration-300 transform hover:scale-105"
+                      [ngClass]="{
+                        'bg-blue-600 text-white hover:bg-blue-700': action.color === 'blue',
+                        'bg-purple-600 text-white hover:bg-purple-700': action.color === 'purple',
+                        'bg-green-600 text-white hover:bg-green-700': action.color === 'green',
+                        'bg-orange-600 text-white hover:bg-orange-700': action.color === 'orange'
+                      }">
+                <span class="material-icons text-sm">{{ action.icon }}</span>
+                {{ action.label }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+      <div class="flex items-center justify-between">
+        <p class="text-xs text-gray-500">
+          Powered by Wayzon AI
+        </p>
+        <button class="text-xs text-blue-600 hover:text-blue-700 font-medium">
+          Settings
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
