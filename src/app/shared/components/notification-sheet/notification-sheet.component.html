@@ -7,7 +7,7 @@
   <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
   
   <!-- Bottom Sheet -->
-  <div [@slideUp]="isOpen ? 'open' : 'closed'"
+  <div [class]="isOpen ? 'slide-up-open' : 'slide-up-closed'"
        class="relative w-full max-w-md bg-white rounded-t-3xl shadow-2xl max-h-[80vh] overflow-hidden">
     
     <!-- Handle -->
@@ -63,9 +63,8 @@
       
       <!-- Notification Items -->
       <div *ngFor="let notification of notifications; let i = index"
-           [@fadeIn]
-           class="notification-item bg-white border border-gray-200 rounded-2xl p-4 
-                  hover:shadow-md transition-all duration-300 cursor-pointer"
+           class="notification-item bg-white border border-gray-200 rounded-2xl p-4
+                  hover:shadow-md transition-all duration-300 cursor-pointer fade-in"
            [class.border-blue-200]="!notification.read"
            [class.bg-blue-50]="!notification.read"
            (click)="onMarkAsRead(notification.id)">
