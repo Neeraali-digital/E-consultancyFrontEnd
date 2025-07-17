@@ -1,15 +1,25 @@
 {
-  "name": "e-consultancy-frontend",
-  "version": "0.0.0",
+  "name": "wayzon-consultancy-frontend",
+  "version": "1.0.0",
+  "description": "Wayzon Educational Consultancy - Premium Frontend Application",
+  "author": "Wayzon Educational Consultancy",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "dev": "ng serve --open",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
+    "build:staging": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "lint": "ng lint",
     "serve:ssr:E-consultancyFrontend": "node dist/E-consultancyFrontend/server/server.mjs",
-    "vercel-build": "node vercel-build.js"
+    "vercel-build": "node vercel-build.js",
+    "deploy": "npm run build:prod && npm run vercel-build",
+    "clean": "rm -rf dist node_modules/.cache .angular/cache",
+    "reinstall": "npm run clean && npm install"
   },
   "prettier": {
     "overrides": [

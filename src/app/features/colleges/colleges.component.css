@@ -310,11 +310,22 @@
 }
 .college-card {
   transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .college-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px); /* Reduced from -8px */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.06);
+}
+
+/* Premium college card styles - reduced height */
+.college-card {
+  min-height: auto; /* Remove fixed height */
+  backdrop-filter: blur(10px);
+}
+
+.college-card .bg-gradient-to-r {
+  background-attachment: fixed;
 }
 
 .college-header {
@@ -359,18 +370,38 @@
   background: rgba(255, 255, 255, 0.9);
 }
 
-/* Enhanced Filter Styles */
+/* Premium Filter Styles - Reduced height by 50% and enhanced theme */
 .filter-group {
   transition: all 0.3s ease;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem; /* Reduced from 1rem */
 }
 
 .filter-group:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .filter-group select:focus {
-  transform: scale(1.01);
+  transform: scale(1.02);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.filter-group label {
+  margin-bottom: 0.375rem; /* Reduced spacing */
+}
+
+.filter-group select {
+  padding: 0.5rem; /* Reduced padding */
+  backdrop-filter: blur(10px);
+}
+
+/* Premium hover effects for filter icons */
+.filter-group .w-5.h-5 {
+  transition: all 0.3s ease;
+}
+
+.filter-group:hover .w-5.h-5 {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Custom Scrollbar for Fixed Sidebar */

@@ -232,11 +232,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Navigation debugging method
   onNavigate(route: string): void {
-    console.log('Navigating to:', route);
     this.router.navigate([`/${route}`]).then(success => {
-      console.log('Navigation success:', success);
+      // Navigation successful
     }).catch(error => {
-      console.error('Navigation error:', error);
+      // Handle navigation error
     });
   }
 
@@ -247,13 +246,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       event.stopPropagation();
     }
 
-    console.log('🚀 Navigation clicked! Route:', route);
     this.isNavigating = true;
 
     try {
       // Method 1: Try router.navigate
       this.router.navigate([route]).then(success => {
-        console.log('✅ Router.navigate success:', success);
         this.isNavigating = false;
         this.currentRoute = route; // Update current route for active state
         // Ensure scroll to top after navigation
@@ -261,40 +258,32 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.scrollService.scrollToTop();
         }, 100);
       }).catch(error => {
-        console.error('❌ Router.navigate failed:', error);
         this.fallbackNavigation(route);
       });
     } catch (error) {
-      console.error('❌ Navigation error:', error);
       this.fallbackNavigation(route);
     }
   }
 
   private fallbackNavigation(route: string): void {
-    console.log('🔄 Trying fallback navigation to:', route);
-
     try {
       // Method 2: Try navigateByUrl
       this.router.navigateByUrl(route).then(success => {
-        console.log('✅ NavigateByUrl success:', success);
         this.isNavigating = false;
         // Ensure scroll to top after navigation
         setTimeout(() => {
           this.scrollService.scrollToTop();
         }, 100);
       }).catch(error => {
-        console.error('❌ NavigateByUrl failed:', error);
         this.windowNavigation(route);
       });
     } catch (error) {
-      console.error('❌ NavigateByUrl error:', error);
       this.windowNavigation(route);
     }
   }
 
   private windowNavigation(route: string): void {
     if (isPlatformBrowser(this.platformId) && typeof window !== 'undefined') {
-      console.log('🌐 Using window.location for:', route);
       this.isNavigating = false;
       window.location.href = route;
     }
@@ -376,13 +365,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Message system methods
   toggleMessages(): void {
-    console.log('💬 Message icon clicked! Current state:', this.showMessages);
     this.showMessages = !this.showMessages;
-    console.log('💬 New message state:', this.showMessages);
     if (this.showMessages) {
       // Mark messages as read when opened
       this.unreadMessages = 0;
-      console.log('💬 Messages marked as read');
     }
   }
 
