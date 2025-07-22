@@ -1,7 +1,7 @@
 {
   "buildCommand": "npm run vercel-build",
   "installCommand": "npm install --legacy-peer-deps --force",
-  "outputDirectory": "dist/E-consultancyFrontend",
+  "outputDirectory": "dist/E-consultancyFrontend/browser",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
