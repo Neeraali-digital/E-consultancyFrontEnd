@@ -49,6 +49,25 @@
   filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
 }
 
+/* Mobile Logo Adjustments */
+@media (max-width: 1023px) {
+  .wayzon-main-logo {
+    height: 32px !important;
+    max-height: 32px !important;
+  }
+
+  .logo-container {
+    padding: 4px 6px;
+  }
+
+  /* Mobile notification popup adjustments */
+  .message-popup-container {
+    width: 90vw !important;
+    max-width: 320px !important;
+    right: 1rem !important;
+  }
+}
+
 .wayzon-main-logo:hover {
   filter: drop-shadow(0 5px 12px rgba(59, 130, 246, 0.25)) brightness(1.08);
   transform: scale(1.02);
