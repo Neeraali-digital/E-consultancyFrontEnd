@@ -1,18 +1,39 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { ScrollService } from '../../shared/services/scroll.service';
 import { NotificationService } from '../../shared/services/notification.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 
-import { ClickOutsideDirective } from '../../shared/directives/click-outside.directive';
 import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, ClickOutsideDirective],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  animations: [
+    trigger('slideDown', [
+      transition(':enter', [
+        style({ transform: 'translateY(-100%)', opacity: 0 }),
+        animate('300ms ease-out', style({ transform: 'translateY(0)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ transform: 'translateY(-100%)', opacity: 0 }))
+      ])
+    ]),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('200ms ease-out', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('150ms ease-in', style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
@@ -131,6 +152,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       hoverClass: 'hover:from-orange-50 hover:to-orange-100'
     }
   ];
+
   constructor(
     private router: Router,
     private scrollService: ScrollService,
@@ -141,6 +163,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Ensure all dropdowns are closed on initialization
     this.closeAllDropdowns();
+
+
 
     this.startUpdateCarousel();
     if (isPlatformBrowser(this.platformId)) {
@@ -169,11 +193,34 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.notificationSubscription) {
       this.notificationSubscription.unsubscribe();
     }
+
+    // Restore body scroll on component destroy
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = '';
+    }
   }
 
   // Mobile menu toggle
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    this.updateBodyScroll();
+  }
+
+  // Close mobile menu
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+    this.updateBodyScroll();
+  }
+
+  // Update body scroll based on mobile menu state
+  private updateBodyScroll() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (this.isMobileMenuOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
   }
 
   // Dropdown toggles
@@ -248,6 +295,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.isNavigating = true;
 
+    // Close mobile menu when navigating
+    this.closeMobileMenu();
+    this.closeAllDropdowns();
+
     try {
       // Method 1: Try router.navigate
       this.router.navigate([route]).then(success => {
@@ -295,11 +346,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
       event.preventDefault();
       event.stopPropagation();
     }
-    this.isAbroadDropdownOpen = !this.isAbroadDropdownOpen;
+
+    console.log('Toggling abroad dropdown, current state:', this.isAbroadDropdownOpen);
+
+    // Close other dropdowns first
     this.isAboutDropdownOpen = false;
     this.isServicesDropdownOpen = false;
     this.isCoursesDropdownOpen = false;
     this.isMoreDropdownOpen = false;
+
+    // Toggle the abroad dropdown
+    this.isAbroadDropdownOpen = !this.isAbroadDropdownOpen;
+
+    console.log('New abroad dropdown state:', this.isAbroadDropdownOpen);
   }
 
   closeAbroadDropdown() {
@@ -332,11 +391,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
       event.preventDefault();
       event.stopPropagation();
     }
-    this.isMoreDropdownOpen = !this.isMoreDropdownOpen;
+
+    console.log('Toggling more dropdown, current state:', this.isMoreDropdownOpen);
+
+    // Close other dropdowns first
     this.isAboutDropdownOpen = false;
     this.isServicesDropdownOpen = false;
     this.isCoursesDropdownOpen = false;
     this.isAbroadDropdownOpen = false;
+
+    // Toggle the more dropdown
+    this.isMoreDropdownOpen = !this.isMoreDropdownOpen;
+
+    console.log('New more dropdown state:', this.isMoreDropdownOpen);
   }
 
   closeMoreDropdown() {
@@ -352,15 +419,42 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isMoreDropdownOpen = false;
   }
 
+  // Enhanced document click handler for better dropdown management
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    const target = event.target as HTMLElement;
+
+    // Check if click is on abroad dropdown elements
+    const isAbroadClick = target.closest('[data-dropdown="abroad"]') ||
+                         target.closest('.dropdown-container[data-dropdown-state="true"]');
+
+    // Check if click is on more dropdown elements
+    const isMoreClick = target.closest('[data-dropdown="more"]') ||
+                       target.closest('.dropdown-container[data-dropdown-state="true"]');
+
+    // Close abroad dropdown if clicking outside
+    if (!isAbroadClick && this.isAbroadDropdownOpen) {
+      this.isAbroadDropdownOpen = false;
+    }
+
+    // Close more dropdown if clicking outside
+    if (!isMoreClick && this.isMoreDropdownOpen) {
+      this.isMoreDropdownOpen = false;
+    }
+  }
+
   // Navigation method for more options
   navigateToMoreOption(route: string): void {
+    // Close mobile menu and all dropdowns
+    this.closeMobileMenu();
+    this.closeAllDropdowns();
+
     this.router.navigate([route]).then(() => {
       // Ensure scroll to top after navigation
       setTimeout(() => {
         this.scrollService.scrollToTop();
       }, 100);
     });
-    this.closeMoreDropdown();
   }
 
   // Message system methods
@@ -428,6 +522,38 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.currentRoute === route || this.currentRoute.startsWith(route + '/');
   }
 
+  // Simple logo click navigation
+  onLogoClick(): void {
+    // Navigate to home
+    this.router.navigate(['/']);
+  }
 
+  // Simple logo click for navigation
+  // (3D effects removed for clean brand appearance)
+
+  // Dropdown positioning method
+  private positionDropdown(type: 'abroad' | 'more'): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const dropdown = document.querySelector(`[data-dropdown-state="true"]`) as HTMLElement;
+    if (!dropdown) return;
+
+    const button = type === 'abroad'
+      ? document.querySelector('button[class*="nav-button"]:has(span:contains("Abroad"))') as HTMLElement
+      : document.querySelector('button[class*="nav-button"]:has(span:contains("More"))') as HTMLElement;
+
+    if (!button) return;
+
+    const buttonRect = button.getBoundingClientRect();
+    const headerHeight = 80; // Approximate header height
+
+    if (type === 'abroad') {
+      dropdown.style.left = `${buttonRect.left}px`;
+      dropdown.style.top = `${headerHeight}px`;
+    } else {
+      dropdown.style.right = `${window.innerWidth - buttonRect.right}px`;
+      dropdown.style.top = `${headerHeight}px`;
+    }
+  }
 
 }

@@ -27,5 +27,10 @@ export const routes: Routes = [
   { path: 'updates', component: UpdatesComponent },
   { path: 'blogs', component: BlogsComponent },
   { path: 'franchise', component: FranchiseComponent },
+  // Admin routes with lazy loading
+  {
+    path: 'admin',
+    loadChildren: () => import('./features/admin/admin.routes').then(m => m.adminRoutes)
+  },
   { path: '**', redirectTo: 'home' } // Wildcard route for 404 pages
 ];

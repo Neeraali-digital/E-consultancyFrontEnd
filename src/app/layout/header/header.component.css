@@ -1,5 +1,270 @@
 /* 🚀 WAYZON - Revolutionary Header Styles */
 
+/* ===== BRAND LOGO STYLING ===== */
+.logo-container {
+  position: relative;
+  overflow: visible;
+  /* Enhanced brand visibility */
+  padding: 6px 8px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  /* Optimized for grid layout */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Enhanced professional hover effect */
+.logo-container:hover {
+  background: rgba(59, 130, 246, 0.08);
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.logo-container:hover img {
+  opacity: 0.95;
+  transition: opacity 0.3s ease;
+}
+
+/* Enhanced logo styling for better brand visibility */
+.logo-container img {
+  object-fit: contain;
+  /* Enhanced brand logo appearance */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Main Wayzon Logo - Responsive and Grid-Optimized */
+.wayzon-main-logo {
+  /* Desktop sizes - Optimized for 2/12 grid space */
+  height: 50px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+
+  /* Enhanced brand enhancement */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+}
+
+.wayzon-main-logo:hover {
+  filter: drop-shadow(0 5px 12px rgba(59, 130, 246, 0.25)) brightness(1.08);
+  transform: scale(1.02);
+}
+
+/* ===== HEADER LAYOUT ADJUSTMENTS FOR LARGER LOGO ===== */
+
+/* Ensure header has enough height for the larger logo */
+header {
+  min-height: 80px;
+  transition: all 0.3s ease;
+}
+
+/* Header container adjustments */
+.header-container {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+/* Ensure proper spacing and alignment */
+.max-w-7xl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 70px;
+}
+
+/* Logo section flex adjustments */
+.flex.items-center.group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 70px;
+}
+
+/* ===== RESPONSIVE ACTION BUTTONS ===== */
+
+/* Call Now Button Responsive Styling */
+.call-now-btn {
+  /* Base mobile styles */
+  min-width: 40px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+
+  /* Enhanced hover effects */
+  position: relative;
+  overflow: hidden;
+}
+
+.call-now-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.call-now-btn:hover::before {
+  left: 100%;
+}
+
+/* Apply Now Button Responsive Styling */
+.apply-now-btn {
+  /* Base mobile styles */
+  min-width: 40px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+
+  /* Enhanced hover effects */
+  position: relative;
+  overflow: hidden;
+}
+
+.apply-now-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.apply-now-btn:hover::before {
+  left: 100%;
+}
+
+/* Actions Section Responsive Layout */
+.col-span-3.lg\\:col-span-2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0; /* Allow shrinking */
+}
+
+.col-span-3.lg\\:col-span-2 > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+/* Removed complex particle animations for clean design */
+
+/* Clean brand logo - no complex animations */
+
+/* ===== DROPDOWN FIXES ===== */
+.dropdown-container {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(10px);
+  z-index: 99999 !important;
+  /* Enhanced dropdown stability */
+  pointer-events: auto !important;
+  user-select: none;
+  /* Force visibility */
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* Dropdown wrapper for better event handling */
+.dropdown-wrapper {
+  position: relative;
+  z-index: 50;
+}
+
+/* Enhanced dropdown menu stability */
+.dropdown-menu-stable {
+  /* Prevent dropdown from disappearing */
+  pointer-events: auto !important;
+  user-select: none;
+  /* Ensure proper positioning */
+  position: absolute !important;
+  z-index: 99999 !important;
+  /* Prevent interference with other elements */
+  isolation: isolate;
+  /* Additional stability measures */
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Prevent dropdown from closing on internal clicks */
+.dropdown-menu-stable * {
+  pointer-events: auto;
+}
+
+/* Ensure dropdown wrapper maintains proper stacking */
+.dropdown-wrapper {
+  position: relative;
+  z-index: 50;
+  /* Prevent event bubbling issues */
+  isolation: isolate;
+}
+
+/* Fix for dropdown button states */
+.dropdown-wrapper button[aria-expanded="true"] {
+  z-index: 51;
+  position: relative;
+}
+
+/* Dropdown Animation - Simplified to prevent vanishing */
+.animate-slide-down {
+  animation: slideDown 0.2s ease-out forwards;
+  animation-fill-mode: forwards;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1 !important;
+    transform: translateY(0);
+    visibility: visible !important;
+  }
+}
+
+/* Ensure dropdown stays visible after animation */
+.dropdown-container.animate-slide-down {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Navigation container should allow overflow for dropdowns */
+.navigation-container {
+  overflow: visible !important;
+  position: relative;
+}
+
+/* Dropdown parent containers */
+.relative {
+  position: relative;
+}
+
+/* Ensure header has proper stacking context */
+header {
+  z-index: 50;
+  position: relative;
+}
+
 /* ✨ Brand Logo Animations */
 .wayzon-logo {
   position: relative;
@@ -272,6 +537,7 @@
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -608,18 +874,156 @@
   }
 }
 
-/* Logo responsive sizing */
-@media (max-width: 768px) {
-  .logo-container {
-    flex-shrink: 0;
+/* ===== RESPONSIVE LOGO SIZING FOR GRID LAYOUT ===== */
+
+/* Extra Large Screens (1440px+) - Maximum within grid constraints */
+@media (min-width: 1440px) {
+  .wayzon-main-logo {
+    height: 55px !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Large Screens (1200px - 1439px) - Optimized for grid */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .wayzon-main-logo {
+    height: 52px !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Medium-Large Screens (1024px - 1199px) - Standard grid size */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .wayzon-main-logo {
+    height: 50px !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Medium Screens (768px - 1023px) - Tablet optimized */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .wayzon-main-logo {
+    height: 48px !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Small Screens (640px - 767px) - Mobile landscape */
+@media (min-width: 640px) and (max-width: 767px) {
+  .wayzon-main-logo {
+    height: 44px !important;
+    max-width: 100% !important;
   }
 
-  .logo-text {
-    font-size: 1.125rem;
+  /* Adjust grid for smaller screens */
+  .grid.grid-cols-12 {
+    grid-template-columns: 4fr 6fr 2fr;
+  }
+}
+
+/* Extra Small Screens (480px - 639px) - Mobile portrait */
+@media (min-width: 480px) and (max-width: 639px) {
+  .wayzon-main-logo {
+    height: 40px !important;
+    max-width: 100% !important;
   }
 
-  .logo-tagline {
-    font-size: 0.5rem;
+  /* Adjust grid for mobile */
+  .grid.grid-cols-12 {
+    grid-template-columns: 1fr auto;
+  }
+
+  /* Hide navigation on small screens */
+  .col-span-6.lg\\:col-span-8 {
+    display: none;
+  }
+}
+
+/* Very Small Screens (below 480px) - Minimal mobile */
+@media (max-width: 479px) {
+  .wayzon-main-logo {
+    height: 36px !important;
+    max-width: 100% !important;
+  }
+
+  /* Simplified grid for very small screens */
+  .grid.grid-cols-12 {
+    grid-template-columns: 1fr auto;
+  }
+
+  /* Hide navigation and some actions */
+  .col-span-6.lg\\:col-span-8 {
+    display: none;
+  }
+}
+
+/* ===== ACTION BUTTONS RESPONSIVE BREAKPOINTS ===== */
+
+/* Small screens (640px+) - Show text */
+@media (min-width: 640px) {
+  .call-now-btn, .apply-now-btn {
+    min-width: 80px;
+    height: 38px;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Medium screens (768px+) - Better spacing */
+@media (min-width: 768px) {
+  .call-now-btn, .apply-now-btn {
+    min-width: 90px;
+    height: 40px;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Large screens (1024px+) - Full size */
+@media (min-width: 1024px) {
+  .call-now-btn, .apply-now-btn {
+    min-width: 100px;
+    height: 42px;
+    padding: 0.5rem 1.25rem;
+  }
+}
+
+/* Extra small screens (below 480px) - Icon only with tooltip */
+@media (max-width: 479px) {
+  .call-now-btn, .apply-now-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0.375rem;
+    position: relative;
+  }
+
+  /* Add tooltip on hover for very small screens */
+  .call-now-btn:hover::after {
+    content: 'Call Now';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    white-space: nowrap;
+    z-index: 1000;
+  }
+
+  .apply-now-btn:hover::after {
+    content: 'Apply Now';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    white-space: nowrap;
+    z-index: 1000;
   }
 }
 
@@ -1212,4 +1616,33 @@ nav {
   color: rgb(29, 78, 216) !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25) !important;
   transform: translateY(-1px) !important;
+}
+
+/* Mobile Menu Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
 }

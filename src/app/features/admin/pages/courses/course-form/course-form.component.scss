@@ -1,0 +1,230 @@
+.course-form {
+  // Form animations
+  .animate-slideDown {
+    animation: slideDown 0.3s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Form section hover effects
+  .bg-white {
+    transition: all 0.3s ease-in-out;
+    
+    &:hover {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Input focus effects
+  input, select, textarea {
+    transition: all 0.2s ease-in-out;
+    
+    &:focus {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    }
+  }
+
+  // Button hover effects
+  button {
+    transition: all 0.2s ease-in-out;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  // Section headers with gradient icons
+  .w-10.h-10 {
+    transition: all 0.3s ease-in-out;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  // Error state styling
+  .border-red-500 {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+  }
+
+  // Success message styling
+  .bg-green-50 {
+    animation: slideDown 0.3s ease-out;
+  }
+
+  // Loading spinner
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  // Form validation styling
+  .text-red-500 {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .grid-cols-1.md\\:grid-cols-2 {
+      grid-template-columns: 1fr;
+    }
+    
+    .space-x-4 {
+      flex-direction: column;
+      space-x: 0;
+      
+      > * + * {
+        margin-top: 1rem;
+        margin-left: 0;
+      }
+    }
+  }
+
+  // Custom scrollbar for textareas
+  textarea {
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 2px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 2px;
+      
+      &:hover {
+        background: #94a3b8;
+      }
+    }
+  }
+
+  // Form section spacing
+  .space-y-8 > * + * {
+    margin-top: 2rem;
+  }
+
+  .space-y-6 > * + * {
+    margin-top: 1.5rem;
+  }
+
+  // Enhanced focus states
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  // Disabled state styling
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  // Form labels
+  label {
+    font-weight: 500;
+    color: #374151;
+  }
+
+  // Required field indicator
+  .text-red-500 {
+    color: #ef4444;
+  }
+
+  // Placeholder styling
+  input::placeholder,
+  textarea::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+  }
+
+  // Form section headers
+  h2 {
+    color: #111827;
+    font-weight: 700;
+  }
+
+  // Form section descriptions
+  .text-sm.text-gray-600 {
+    color: #6b7280;
+  }
+
+  // Border styling
+  .border-gray-200 {
+    border-color: #e5e7eb;
+  }
+
+  .border-gray-300 {
+    border-color: #d1d5db;
+  }
+
+  // Background colors
+  .bg-gray-50 {
+    background-color: #f9fafb;
+  }
+
+  // Gradient backgrounds for buttons
+  .bg-gradient-to-r {
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  }
+
+  // Shadow effects
+  .shadow-sm {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .hover\\:shadow-md:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}

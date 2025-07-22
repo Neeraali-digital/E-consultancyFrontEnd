@@ -1,0 +1,291 @@
+<!-- Page Header -->
+<div class="mb-6 sm:mb-8">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div class="min-w-0">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">
+        {{ isEditMode ? 'Edit Course' : 'Add New Course' }}
+      </h1>
+      <p class="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">
+        {{ isEditMode ? 'Update course information' : 'Create a new course offering' }}
+      </p>
+    </div>
+    <button
+      (click)="onCancel()"
+      class="inline-flex items-center px-3 sm:px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200 text-sm sm:text-base w-full sm:w-auto justify-center">
+      <span class="material-icons text-sm mr-2">arrow_back</span>
+      Back to List
+    </button>
+  </div>
+</div>
+
+<!-- Loading State -->
+<div *ngIf="isLoading" class="flex items-center justify-center py-12">
+  <div class="flex items-center space-x-2">
+    <svg class="animate-spin h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+    <span class="text-gray-600">Loading course data...</span>
+  </div>
+</div>
+
+<!-- Success Message -->
+<div *ngIf="successMessage" 
+     class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center space-x-2 animate-slideDown">
+  <span class="material-icons text-green-500">check_circle</span>
+  <span class="text-green-700">{{ successMessage }}</span>
+</div>
+
+<!-- Error Message -->
+<div *ngIf="errorMessage" 
+     class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-2 animate-slideDown">
+  <span class="material-icons text-red-500">error</span>
+  <span class="text-red-700">{{ errorMessage }}</span>
+</div>
+
+<!-- Form -->
+<form *ngIf="!isLoading" [formGroup]="courseForm" (ngSubmit)="onSubmit()" class="space-y-6 sm:space-y-8">
+
+  <!-- Basic Information -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow duration-300">
+    <div class="flex items-center space-x-3 mb-4 sm:mb-6">
+      <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0">
+        <span class="material-icons text-white text-lg sm:text-xl">info</span>
+      </div>
+      <div class="min-w-0">
+        <h2 class="text-lg sm:text-xl font-bold text-gray-900">Basic Information</h2>
+        <p class="text-sm text-gray-600">Essential course details</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+      <!-- Course Name -->
+      <div class="md:col-span-2">
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+          Course Name <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="e.g., Bachelor of Technology in Computer Science"
+          class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+          [class.border-red-500]="f['name'].invalid && f['name'].touched">
+        <div *ngIf="f['name'].invalid && f['name'].touched" class="text-red-500 text-sm mt-1">
+          <span *ngIf="f['name'].errors?.['required']">Course name is required</span>
+          <span *ngIf="f['name'].errors?.['minlength']">Course name must be at least 3 characters</span>
+        </div>
+      </div>
+
+      <!-- Course Code -->
+      <div>
+        <label for="code" class="block text-sm font-medium text-gray-700 mb-2">
+          Course Code <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="code"
+          type="text"
+          formControlName="code"
+          placeholder="e.g., CSE101"
+          class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+          [class.border-red-500]="f['code'].invalid && f['code'].touched">
+        <div *ngIf="f['code'].invalid && f['code'].touched" class="text-red-500 text-sm mt-1">
+          <span *ngIf="f['code'].errors?.['required']">Course code is required</span>
+        </div>
+      </div>
+
+      <!-- Category -->
+      <div>
+        <label for="category" class="block text-sm font-medium text-gray-700 mb-2">
+          Category <span class="text-red-500">*</span>
+        </label>
+        <select
+          id="category"
+          formControlName="category"
+          class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+          [class.border-red-500]="f['category'].invalid && f['category'].touched">
+          <option value="">Select Category</option>
+          <option value="engineering">Engineering</option>
+          <option value="medical">Medical</option>
+          <option value="management">Management</option>
+          <option value="arts">Arts & Science</option>
+          <option value="law">Law</option>
+          <option value="pharmacy">Pharmacy</option>
+          <option value="agriculture">Agriculture</option>
+          <option value="architecture">Architecture</option>
+        </select>
+        <div *ngIf="f['category'].invalid && f['category'].touched" class="text-red-500 text-sm mt-1">
+          <span *ngIf="f['category'].errors?.['required']">Category is required</span>
+        </div>
+      </div>
+
+      <!-- Duration -->
+      <div>
+        <label for="duration" class="block text-sm font-medium text-gray-700 mb-2">
+          Duration <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="duration"
+          type="text"
+          formControlName="duration"
+          placeholder="e.g., 4 Years"
+          class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+          [class.border-red-500]="f['duration'].invalid && f['duration'].touched">
+        <div *ngIf="f['duration'].invalid && f['duration'].touched" class="text-red-500 text-sm mt-1">
+          <span *ngIf="f['duration'].errors?.['required']">Duration is required</span>
+        </div>
+      </div>
+
+      <!-- Degree Type -->
+      <div>
+        <label for="degreeType" class="block text-sm font-medium text-gray-700 mb-2">
+          Degree Type <span class="text-red-500">*</span>
+        </label>
+        <select
+          id="degreeType"
+          formControlName="degreeType"
+          class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+          [class.border-red-500]="f['degreeType'].invalid && f['degreeType'].touched">
+          <option value="">Select Degree Type</option>
+          <option value="undergraduate">Undergraduate</option>
+          <option value="postgraduate">Postgraduate</option>
+          <option value="diploma">Diploma</option>
+          <option value="certificate">Certificate</option>
+          <option value="doctorate">Doctorate</option>
+        </select>
+        <div *ngIf="f['degreeType'].invalid && f['degreeType'].touched" class="text-red-500 text-sm mt-1">
+          <span *ngIf="f['degreeType'].errors?.['required']">Degree type is required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Course Details -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-300">
+    <div class="flex items-center space-x-3 mb-6">
+      <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+        <span class="material-icons text-white">description</span>
+      </div>
+      <div>
+        <h2 class="text-xl font-bold text-gray-900">Course Details</h2>
+        <p class="text-sm text-gray-600">Detailed course information</p>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <!-- Description -->
+      <div>
+        <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+          Description <span class="text-red-500">*</span>
+        </label>
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="4"
+          placeholder="Provide a detailed description of the course..."
+          class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
+          [class.border-red-500]="f['description'].invalid && f['description'].touched"></textarea>
+        <div *ngIf="f['description'].invalid && f['description'].touched" class="text-red-500 text-sm mt-1">
+          <span *ngIf="f['description'].errors?.['required']">Description is required</span>
+          <span *ngIf="f['description'].errors?.['minlength']">Description must be at least 50 characters</span>
+        </div>
+      </div>
+
+      <!-- Eligibility -->
+      <div>
+        <label for="eligibility" class="block text-sm font-medium text-gray-700 mb-2">
+          Eligibility Criteria <span class="text-red-500">*</span>
+        </label>
+        <textarea
+          id="eligibility"
+          formControlName="eligibility"
+          rows="3"
+          placeholder="e.g., 10+2 with Physics, Chemistry, Mathematics with minimum 60% marks"
+          class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
+          [class.border-red-500]="f['eligibility'].invalid && f['eligibility'].touched"></textarea>
+        <div *ngIf="f['eligibility'].invalid && f['eligibility'].touched" class="text-red-500 text-sm mt-1">
+          <span *ngIf="f['eligibility'].errors?.['required']">Eligibility criteria is required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fee Structure -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-300">
+    <div class="flex items-center space-x-3 mb-6">
+      <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center">
+        <span class="material-icons text-white">payments</span>
+      </div>
+      <div>
+        <h2 class="text-xl font-bold text-gray-900">Fee Structure</h2>
+        <p class="text-sm text-gray-600">Course fee information</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Annual Fee -->
+      <div>
+        <label for="annualFee" class="block text-sm font-medium text-gray-700 mb-2">
+          Annual Fee (₹) <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="annualFee"
+          type="number"
+          formControlName="annualFee"
+          placeholder="e.g., 150000"
+          class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+          [class.border-red-500]="f['annualFee'].invalid && f['annualFee'].touched">
+        <div *ngIf="f['annualFee'].invalid && f['annualFee'].touched" class="text-red-500 text-sm mt-1">
+          <span *ngIf="f['annualFee'].errors?.['required']">Annual fee is required</span>
+          <span *ngIf="f['annualFee'].errors?.['min']">Fee must be greater than 0</span>
+        </div>
+      </div>
+
+      <!-- Total Fee -->
+      <div>
+        <label for="totalFee" class="block text-sm font-medium text-gray-700 mb-2">
+          Total Fee (₹) <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="totalFee"
+          type="number"
+          formControlName="totalFee"
+          placeholder="e.g., 600000"
+          class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+          [class.border-red-500]="f['totalFee'].invalid && f['totalFee'].touched">
+        <div *ngIf="f['totalFee'].invalid && f['totalFee'].touched" class="text-red-500 text-sm mt-1">
+          <span *ngIf="f['totalFee'].errors?.['required']">Total fee is required</span>
+          <span *ngIf="f['totalFee'].errors?.['min']">Fee must be greater than 0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+    <button
+      type="button"
+      (click)="onCancel()"
+      class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium">
+      Cancel
+    </button>
+    <button
+      type="submit"
+      [disabled]="courseForm.invalid || isSubmitting"
+      class="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium transform hover:scale-105 disabled:transform-none">
+      
+      <span *ngIf="!isSubmitting" class="flex items-center space-x-2">
+        <span class="material-icons text-sm">{{ isEditMode ? 'save' : 'add' }}</span>
+        <span>{{ isEditMode ? 'Update Course' : 'Create Course' }}</span>
+      </span>
+      
+      <span *ngIf="isSubmitting" class="flex items-center space-x-2">
+        <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>{{ isEditMode ? 'Updating...' : 'Creating...' }}</span>
+      </span>
+    </button>
+  </div>
+</form>

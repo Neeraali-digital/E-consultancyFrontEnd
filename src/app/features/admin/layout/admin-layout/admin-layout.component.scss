@@ -1,0 +1,165 @@
+.admin-layout {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+
+  // Ensure sidebar is always visible
+  app-admin-sidebar {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    height: 100vh !important;
+    z-index: 50 !important;
+  }
+
+  // Background grid pattern
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  // Smooth transitions for layout changes
+  * {
+    transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+  }
+
+  // Custom scrollbar for better aesthetics
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(241, 245, 249, 0.5);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(203, 213, 225, 0.8);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(148, 163, 184, 0.9);
+    }
+  }
+
+  // Page content animations
+  .page-content {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Animate fade in up
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  // Slide up animation for quick actions
+  .animate-slideUp {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  // Floating Action Button styles
+  .fixed.bottom-6.right-6 {
+    .group {
+      &:hover {
+        .w-14.h-14 {
+          box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+      }
+    }
+  }
+
+  // Quick actions menu styling
+  .absolute.bottom-16.right-0 {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    main {
+      padding: 1rem;
+    }
+
+    .fixed.bottom-6.right-6 {
+      display: none; // Hide floating action button on mobile
+    }
+  }
+
+  // Animation for mobile overlay
+  .mobile-overlay {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  // Loading overlay styles
+  .fixed.inset-0.bg-white.bg-opacity-90 {
+    backdrop-filter: blur(8px);
+
+    .text-center {
+      animation: pulse 2s infinite;
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  // Enhanced backdrop blur for header
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  // Glassmorphism effect for content background
+  .bg-gradient-to-b.from-transparent {
+    backdrop-filter: blur(1px);
+  }
+}

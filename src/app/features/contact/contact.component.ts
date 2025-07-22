@@ -24,32 +24,32 @@ export class ContactComponent implements OnInit {
     {
       city: 'Bangalore',
       address: '123 MG Road, Bangalore - 560001',
-      phone: '+91 94498 44444',
-      email: 'bangalore@wayzon.edu',
+      phone: '+91 99804 87777',
+      email: 'Info@wayzoneducation.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM',
       isMain: true
     },
     {
       city: 'Delhi',
       address: '456 Connaught Place, New Delhi - 110001',
-      phone: '+91 94498 44444',
-      email: 'delhi@wayzon.edu',
+      phone: '+91 97405 68888',
+      email: 'Info@wayzoneducation.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM',
       isMain: false
     },
     {
       city: 'Mumbai',
       address: '789 Bandra West, Mumbai - 400050',
-      phone: '+91 94498 44444',
-      email: 'mumbai@wayzon.edu',
+      phone: '+91 99804 87777',
+      email: 'Info@wayzoneducation.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM',
       isMain: false
     },
     {
       city: 'Chennai',
       address: '321 T. Nagar, Chennai - 600017',
-      phone: '+91 94498 44444',
-      email: 'chennai@wayzon.edu',
+      phone: '+91 97405 68888',
+      email: 'Info@wayzoneducation.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM',
       isMain: false
     }

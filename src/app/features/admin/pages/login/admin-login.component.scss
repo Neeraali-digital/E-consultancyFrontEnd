@@ -1,0 +1,222 @@
+.login-form {
+  // Shake animation for form errors
+  &.shake {
+    animation: shake 0.6s ease-in-out;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+
+  // Fade in animation for error messages
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Input field focus effects
+  input {
+    transition: all 0.2s ease-in-out;
+    
+    &:focus {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    }
+    
+    &.border-red-500 {
+      animation: inputError 0.3s ease-in-out;
+    }
+  }
+
+  @keyframes inputError {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+  }
+
+  // Button hover effects
+  button[type="submit"] {
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    &:hover::before {
+      left: 100%;
+    }
+    
+    &:disabled {
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  // Logo animation
+  .logo-container {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      z-index: -1;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+      animation: rotate 2s linear infinite;
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  // Checkbox styling
+  input[type="checkbox"] {
+    &:checked {
+      background-color: #3b82f6;
+      border-color: #3b82f6;
+    }
+    
+    &:focus {
+      ring-color: #3b82f6;
+      ring-opacity: 0.5;
+    }
+  }
+
+  // Demo credentials section
+  .demo-section {
+    background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+    border: 1px solid #bfdbfe;
+    
+    &:hover {
+      background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+    }
+  }
+
+  // Loading spinner
+  .loading-spinner {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  // Form field animations
+  .form-field {
+    position: relative;
+    
+    &:focus-within {
+      .field-icon {
+        color: #3b82f6;
+        transform: scale(1.1);
+      }
+      
+      label {
+        color: #3b82f6;
+      }
+    }
+  }
+
+  .field-icon {
+    transition: all 0.2s ease-in-out;
+  }
+
+  // Error message styling
+  .error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    
+    .material-icons {
+      font-size: 14px;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+    margin: 1rem;
+    
+    h1 {
+      font-size: 1.5rem;
+    }
+    
+    .logo-container {
+      width: 3rem;
+      height: 3rem;
+      
+      .material-icons {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  // Dark mode support (future enhancement)
+  @media (prefers-color-scheme: dark) {
+    &.dark-mode {
+      background: #1f2937;
+      border-color: #374151;
+      color: #f9fafb;
+      
+      input {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+        
+        &::placeholder {
+          color: #9ca3af;
+        }
+        
+        &:focus {
+          border-color: #3b82f6;
+          background: #4b5563;
+        }
+      }
+      
+      label {
+        color: #d1d5db;
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+// Global styles for the app
+
+// Admin layout styling
+.admin-app {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  // Reset any inherited styles from main app
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  // Ensure admin layout is completely isolated
+  * {
+    box-sizing: border-box;
+  }
+
+  // Ensure full height and no scrolling issues
+  router-outlet + * {
+    height: 100vh;
+    overflow: auto;
+  }
+}
+
+// Main website layout
+.main-app {
+  // Ensure main layout styles don't affect admin
+  &.admin-hidden {
+    display: none !important;
+  }
+}

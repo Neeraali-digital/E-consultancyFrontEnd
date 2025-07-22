@@ -7,7 +7,7 @@
     <div class="hidden md:flex items-center gap-6 text-xs">
       <div class="flex items-center gap-1.5">
         <span class="material-icons text-xs">email</span>
-        <span>info&#64;wayzon.edu</span>
+        <span>Info&#64;wayzoneducation.com</span>
       </div>
       <div class="flex items-center gap-1.5">
         <span class="material-icons text-xs">location_on</span>
@@ -48,7 +48,7 @@
           </svg>
         </a>
       </div>
-      <div class="text-xs font-medium">📞 +91 94498 44444</div>
+      <div class="text-xs font-medium">📞 +91 99804 87777</div>
     </div>
   </div>
 </div>
@@ -59,41 +59,29 @@
         [class.shadow-2xl]="isScrolled"
         [class.py-2]="isScrolled"
         [class.py-4]="!isScrolled">
-  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 relative overflow-visible">
+  <div class="max-w-7xl mx-auto px-6 relative overflow-visible">
+    <!-- Header Grid Layout: Logo (2/12) | Navigation (8/12) | Actions (2/12) -->
+    <div class="grid grid-cols-12 items-center gap-4 lg:gap-6">
 
-    <!-- Professional WAYZON Logo -->
-    <div class="flex items-center group cursor-pointer">
-      <!-- Natural Logo Design -->
-      <div class="relative mr-3">
-        <!-- Main Logo Container -->
-        <div class="w-12 h-12 bg-white border-2 border-blue-200 rounded-xl
-                    flex items-center justify-center shadow-md transform
-                    group-hover:scale-105 transition-all duration-300">
-          <!-- W Letter -->
-          <span class="text-blue-600 font-bold text-xl">W</span>
+      <!-- Logo Section - 2/12 on large screens -->
+      <div class="col-span-3 lg:col-span-2">
+        <div class="flex items-center group cursor-pointer" (click)="onLogoClick()">
+          <!-- Brand Logo -->
+          <div class="relative logo-container">
+            <img id="wayzonLogo" src="assets/images/logo.png" alt="Wayzon Educational Consultancy"
+                 class="brand-logo-enhanced wayzon-main-logo"
+                 style="display: block !important;"
+                 onload="console.log('✅ Logo loaded successfully')"
+                 onerror="console.log('❌ Logo failed to load');">
+          </div>
         </div>
-        <!-- Natural Accent -->
-        <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border border-white"></div>
       </div>
-
-      <!-- Brand Text -->
-      <div class="flex flex-col">
-        <div class="flex items-center gap-1">
-          <!-- WAYZON Text with Clean Styling -->
-          <span class="text-2xl font-bold text-gray-800 tracking-tight">
-            <span class="text-blue-600">WAY</span><span class="text-red-500">Z</span><span class="text-blue-600">ON</span>
-          </span>
-        </div>
-        <span class="text-[8px] text-gray-500 font-normal -mt-0.5">
-          TRUSTED EDUCATIONAL CONSULTANCY SINCE 2003
-        </span>
-      </div>
-    </div>
-    <!-- Compact Modern Navigation -->
-    <nav class="hidden lg:flex items-center flex-1 justify-center relative overflow-visible">
-      <!-- Compact Navigation Pills -->
-      <div class="flex items-center bg-white/80 backdrop-blur-sm rounded-2xl px-2 py-1 shadow-md border border-gray-100 navigation-container
-                  gap-1 max-w-none overflow-visible relative">
+      <!-- Navigation Section - 8/12 on large screens -->
+      <div class="col-span-6 lg:col-span-8">
+        <nav class="hidden lg:flex items-center justify-center relative overflow-visible">
+          <!-- Compact Navigation Pills -->
+          <div class="flex items-center bg-white/80 backdrop-blur-sm rounded-2xl px-2 py-1 shadow-md border border-gray-100 navigation-container
+                      gap-1 overflow-visible relative w-full max-w-4xl justify-center">
         <!-- 1. Home -->
         <button (click)="navigateToRoute('/home')"
                 [disabled]="isNavigating"
@@ -170,8 +158,12 @@
         </button>
 
         <!-- 5. Abroad (with dropdown) -->
-        <div class="relative" clickOutside (clickOutside)="closeAbroadDropdown()">
+        <div class="relative dropdown-wrapper"
+             [attr.data-dropdown]="'abroad'">
           <button (click)="toggleAbroadDropdown($event)"
+                  type="button"
+                  [attr.aria-expanded]="isAbroadDropdownOpen"
+                  [attr.aria-haspopup]="true"
                   class="nav-button px-3 py-1.5 text-xs font-medium text-gray-600
                          rounded-xl transition-all duration-500 ease-out flex items-center gap-1.5
                          cursor-pointer border-none bg-transparent outline-none
@@ -189,10 +181,12 @@
 
           <!-- Abroad Dropdown -->
           <div *ngIf="isAbroadDropdownOpen"
-               class="absolute top-full left-0 mt-3 w-56 bg-white rounded-xl shadow-2xl
-                      border border-gray-200 z-[9999] overflow-visible animate-slide-down dropdown-container"
-               style="position: absolute; z-index: 9999;"
-               [attr.data-dropdown-state]="isAbroadDropdownOpen">
+               class="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-2xl
+                      border border-gray-200 z-[99999] overflow-visible animate-slide-down dropdown-container
+                      dropdown-menu-stable"
+               style="position: absolute; z-index: 99999 !important;"
+               [attr.data-dropdown-state]="isAbroadDropdownOpen"
+               (click)="$event.stopPropagation()">
             <div class="p-3">
               <h3 class="text-xs font-bold text-gray-800 mb-2 flex items-center gap-2">
                 <span class="material-icons text-xs text-blue-600">public</span>
@@ -240,8 +234,12 @@
         </button>
 
         <!-- 7. More (with dropdown) -->
-        <div class="relative" clickOutside (clickOutside)="closeMoreDropdown()">
+        <div class="relative dropdown-wrapper"
+             [attr.data-dropdown]="'more'">
           <button (click)="toggleMoreDropdown($event)"
+                  type="button"
+                  [attr.aria-expanded]="isMoreDropdownOpen"
+                  [attr.aria-haspopup]="true"
                   class="nav-button px-3 py-1.5 text-xs font-medium text-gray-600
                          rounded-xl transition-all duration-500 ease-out flex items-center gap-1.5
                          cursor-pointer border-none bg-transparent outline-none
@@ -259,11 +257,12 @@
 
           <!-- More Dropdown -->
           <div *ngIf="isMoreDropdownOpen"
-               class="absolute top-full right-0 mt-3 w-52 bg-white rounded-2xl shadow-2xl
-                      border border-gray-100 z-[9999] overflow-hidden animate-slide-down dropdown-container
-                      backdrop-blur-sm bg-white/95"
-               style="position: absolute; z-index: 9999;"
-               [attr.data-dropdown-state]="isMoreDropdownOpen">
+               class="absolute top-full right-0 mt-2 w-52 bg-white rounded-2xl shadow-2xl
+                      border border-gray-100 z-[99999] overflow-hidden animate-slide-down dropdown-container
+                      backdrop-blur-sm bg-white/95 dropdown-menu-stable"
+               style="position: absolute; z-index: 99999 !important;"
+               [attr.data-dropdown-state]="isMoreDropdownOpen"
+               (click)="$event.stopPropagation()">
 
             <!-- Enhanced Header with Animation -->
             <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-4 relative overflow-hidden">
@@ -327,26 +326,33 @@
             </div>
           </div>
         </div>
+        </div>
+        </nav>
       </div>
 
-      <!-- Advanced Action Area -->
-      <div class="flex items-center gap-3">
-        <!-- Call Now Button -->
-        <a href="tel:+919449844444"
-           class="call-now-btn flex items-center gap-1 px-3 py-1.5 bg-green-600 text-white
-                  rounded-full font-semibold text-xs hover:bg-green-700 transition-all duration-300
-                  hover:shadow-lg hover:shadow-green-500/25 transform hover:-translate-y-0.5">
-          <span class="material-icons text-xs">phone</span>
-          <span class="hidden lg:inline">Call Now</span>
+      <!-- Actions Section - Responsive -->
+      <div class="col-span-3 lg:col-span-2">
+        <div class="flex items-center justify-end gap-1 sm:gap-2 lg:gap-3">
+        <!-- Call Now Button - Responsive -->
+        <a href="tel:+919980487777"
+           class="call-now-btn flex items-center gap-1 bg-green-600 text-white
+                  rounded-full font-semibold hover:bg-green-700 transition-all duration-300
+                  hover:shadow-lg hover:shadow-green-500/25 transform hover:-translate-y-0.5
+                  px-2 py-1.5 text-xs sm:px-3 sm:py-2 sm:text-sm
+                  lg:px-4 lg:py-2 lg:text-sm">
+          <span class="material-icons text-xs sm:text-sm">phone</span>
+          <span class="hidden sm:inline">Call Now</span>
         </a>
 
-        <!-- Apply Now Button -->
+        <!-- Apply Now Button - Responsive -->
         <button (click)="navigateToRoute('/contact')"
-                class="apply-now-btn flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white
-                       rounded-full font-semibold text-xs hover:bg-blue-700 transition-all duration-300
-                       hover:shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-0.5">
-          <span class="material-icons text-xs">send</span>
-          <span class="hidden lg:inline">Apply Now</span>
+                class="apply-now-btn flex items-center gap-1 bg-blue-600 text-white
+                       rounded-full font-semibold hover:bg-blue-700 transition-all duration-300
+                       hover:shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-0.5
+                       px-2 py-1.5 text-xs sm:px-3 sm:py-2 sm:text-sm
+                       lg:px-4 lg:py-2 lg:text-sm">
+          <span class="material-icons text-xs sm:text-sm">send</span>
+          <span class="hidden sm:inline">Apply Now</span>
         </button>
 
         <!-- Enhanced Message Center -->
@@ -445,15 +451,15 @@
               </div>
             </div>
           </div>
+          </div>
         </div>
-
-
       </div>
-    </nav>
-    <!-- Sleek Mobile Menu Button -->
+    </div>
+
+    <!-- Mobile Menu Button - Outside grid, positioned absolutely -->
     <button (click)="toggleMobileMenu()"
-            class="lg:hidden p-2 rounded-xl hover:bg-gray-100 transition-all duration-300
-                   transform hover:scale-110 active:scale-95">
+            class="lg:hidden absolute right-6 top-1/2 transform -translate-y-1/2 p-2 rounded-xl hover:bg-gray-100 transition-all duration-300
+                   hover:scale-110 active:scale-95 z-50">
       <div class="w-6 h-6 flex flex-col justify-center items-center">
         <span class="block w-5 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600
                      transition-all duration-300 rounded-full"
@@ -470,69 +476,88 @@
     </button>
   </div>
 
+  <!-- Mobile Menu Overlay -->
+  <div *ngIf="isMobileMenuOpen"
+       class="lg:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40 animate-fade-in"
+       (click)="closeMobileMenu()"></div>
+
   <!-- Sleek Mobile Menu -->
-  <div class="lg:hidden overflow-hidden transition-all duration-500 ease-out"
-       [class.max-h-96]="isMobileMenuOpen"
-       [class.max-h-0]="!isMobileMenuOpen">
-    <div class="bg-white/98 backdrop-blur-xl border-t border-gray-100/50 px-6 py-4">
+  <div *ngIf="isMobileMenuOpen"
+       class="lg:hidden fixed top-14 sm:top-16 left-0 right-0 z-50 bg-white/98 backdrop-blur-xl border-t border-gray-100/50 shadow-2xl animate-slide-down">
+    <div class="px-4 sm:px-6 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
       <div class="space-y-3">
+        <!-- Close Button -->
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-bold text-gray-800">Navigation</h3>
+          <button (click)="closeMobileMenu()"
+                  class="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200">
+            <span class="material-icons text-gray-600">close</span>
+          </button>
+        </div>
+
         <!-- Mobile Navigation Pills -->
-        <div class="grid grid-cols-2 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button (click)="navigateToRoute('/home')"
                   class="bg-gradient-to-r from-orange-50 to-orange-100 hover:from-orange-100
-                         hover:to-orange-200 text-orange-700 px-4 py-3 rounded-xl font-medium
-                         text-center transition-all duration-300 transform hover:scale-105">
+                         hover:to-orange-200 text-orange-700 px-4 py-4 rounded-xl font-medium
+                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation">
+            <span class="material-icons text-sm mr-2">home</span>
             Home
           </button>
           <button (click)="navigateToRoute('/about')"
                   class="bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100
-                         hover:to-blue-200 text-blue-700 px-4 py-3 rounded-xl font-medium
-                         text-center transition-all duration-300 transform hover:scale-105">
+                         hover:to-blue-200 text-blue-700 px-4 py-4 rounded-xl font-medium
+                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation">
+            <span class="material-icons text-sm mr-2">info</span>
             Who We Are
           </button>
           <button (click)="navigateToRoute('/courses')"
                   class="bg-gradient-to-r from-purple-50 to-purple-100 hover:from-purple-100
-                         hover:to-purple-200 text-purple-700 px-4 py-3 rounded-xl font-medium
-                         text-center transition-all duration-300 transform hover:scale-105">
+                         hover:to-purple-200 text-purple-700 px-4 py-4 rounded-xl font-medium
+                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation">
+            <span class="material-icons text-sm mr-2">school</span>
             Courses
           </button>
           <button (click)="navigateToRoute('/colleges')"
                   class="bg-gradient-to-r from-indigo-50 to-indigo-100 hover:from-indigo-100
-                         hover:to-indigo-200 text-indigo-700 px-4 py-3 rounded-xl font-medium
-                         text-center transition-all duration-300 transform hover:scale-105">
+                         hover:to-indigo-200 text-indigo-700 px-4 py-4 rounded-xl font-medium
+                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation">
+            <span class="material-icons text-sm mr-2">account_balance</span>
             Colleges
           </button>
           <button (click)="navigateToRoute('/abroad')"
                   class="bg-gradient-to-r from-green-50 to-green-100 hover:from-green-100
-                         hover:to-green-200 text-green-700 px-4 py-3 rounded-xl font-medium
-                         text-center transition-all duration-300 transform hover:scale-105 col-span-2">
+                         hover:to-green-200 text-green-700 px-4 py-4 rounded-xl font-medium
+                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation sm:col-span-2">
+            <span class="material-icons text-sm mr-2">flight_takeoff</span>
             Study Abroad
           </button>
           <button (click)="navigateToRoute('/contact')"
                   class="bg-gradient-to-r from-orange-50 to-orange-100 hover:from-orange-100
-                         hover:to-orange-200 text-orange-700 px-4 py-3 rounded-xl font-medium
-                         text-center transition-all duration-300 transform hover:scale-105">
+                         hover:to-orange-200 text-orange-700 px-4 py-4 rounded-xl font-medium
+                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation">
+            <span class="material-icons text-sm mr-2">contact_mail</span>
             Contact Us
           </button>
         </div>
 
         <!-- Mobile More Options -->
-        <div class="mt-4">
+        <div class="mt-6 pt-4 border-t border-gray-200">
           <h4 class="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
             <span class="material-icons text-sm text-purple-600">auto_awesome</span>
             More Options
           </h4>
-          <div class="grid grid-cols-2 gap-2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button *ngFor="let option of moreOptions"
                     (click)="navigateToMoreOption(option.route)"
-                    class="flex items-center gap-2 p-3 rounded-lg text-left transition-all duration-300
-                           transform hover:scale-105 text-sm"
+                    class="flex items-center gap-3 p-3 rounded-lg text-left transition-all duration-300
+                           transform active:scale-95 text-sm touch-manipulation bg-gray-50 hover:bg-gray-100"
                     [class]="option.hoverClass">
-              <div class="w-8 h-8 rounded-lg flex items-center justify-center"
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                    [ngClass]="option.iconBg">
                 <span class="material-icons text-white text-sm">{{ option.icon }}</span>
               </div>
-              <span class="font-medium text-gray-700">{{ option.title }}</span>
+              <span class="font-medium text-gray-700 truncate">{{ option.title }}</span>
             </button>
           </div>
         </div>

@@ -28,7 +28,6 @@ export class CoursesComponent implements OnInit {
       colleges: ['IIT', 'NIT', 'Top Private Colleges'],
       duration: '4 Years',
       eligibility: '12th with PCM',
-      fees: '₹2-15 Lakhs',
       color: 'blue'
     },
     {
@@ -40,7 +39,6 @@ export class CoursesComponent implements OnInit {
       colleges: ['AIIMS', 'JIPMER', 'Top Medical Colleges'],
       duration: '5.5 Years',
       eligibility: '12th with PCB',
-      fees: '₹5-25 Lakhs',
       color: 'red'
     },
     {
@@ -52,7 +50,6 @@ export class CoursesComponent implements OnInit {
       colleges: ['IIM', 'ISB', 'Top B-Schools'],
       duration: '2 Years',
       eligibility: 'Graduation',
-      fees: '₹8-30 Lakhs',
       color: 'green'
     },
     {
@@ -64,7 +61,6 @@ export class CoursesComponent implements OnInit {
       colleges: ['Top IT Colleges', 'Universities'],
       duration: '3-4 Years',
       eligibility: '12th with Maths',
-      fees: '₹1-8 Lakhs',
       color: 'purple'
     },
     {
