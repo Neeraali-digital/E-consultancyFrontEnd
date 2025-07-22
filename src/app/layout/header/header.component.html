@@ -60,120 +60,51 @@
         [class.py-2]="isScrolled"
         [class.py-4]="!isScrolled">
   <div class="max-w-7xl mx-auto px-6 relative overflow-visible">
-    <!-- Advanced Mobile Header Layout: Logo (3/4) | Actions (1/4) -->
-    <div class="lg:hidden relative overflow-hidden">
-      <!-- Animated Background Gradient -->
-      <div class="absolute inset-0 bg-gradient-to-r from-blue-50/30 via-purple-50/20 to-pink-50/30
-                  animate-gradient-x opacity-60"></div>
-
-      <!-- Floating Particles Animation -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-2 left-1/4 w-1 h-1 bg-blue-400 rounded-full animate-float-slow opacity-40"></div>
-        <div class="absolute top-4 right-1/3 w-0.5 h-0.5 bg-purple-400 rounded-full animate-float-medium opacity-50"></div>
-        <div class="absolute bottom-3 left-1/2 w-1.5 h-1.5 bg-pink-400 rounded-full animate-float-fast opacity-30"></div>
-      </div>
-
-      <div class="relative z-10 flex items-center py-4 px-1">
+    <!-- Clean Mobile Header Layout: Logo (3/4) | Actions (1/4) -->
+    <div class="lg:hidden bg-white border-b border-gray-100">
+      <div class="flex items-center justify-between py-3 px-4">
         <!-- Logo Section - Mobile (75% width) -->
-        <div class="flex-1 flex items-center pr-3" style="flex: 0 0 75%;">
-          <div class="flex items-center group cursor-pointer w-full transform transition-all duration-500 hover:scale-105"
-               (click)="onLogoClick()">
-            <!-- Enhanced Brand Logo Container -->
-            <div class="relative logo-container-mobile w-full">
-              <!-- Glow Effect Behind Logo -->
-              <div class="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20
-                          rounded-2xl blur-xl scale-110 opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-
-              <!-- Logo with Advanced Effects -->
-              <div class="relative bg-white/80 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-white/50
-                          group-hover:shadow-2xl group-hover:shadow-blue-500/25 transition-all duration-500
-                          group-hover:bg-white/90">
-                <img id="wayzonLogo" src="assets/images/logo.png" alt="Wayzon Educational Consultancy"
-                     class="brand-logo-enhanced wayzon-main-logo-mobile h-12 w-auto max-w-full
-                            transition-all duration-500 group-hover:brightness-110 group-hover:contrast-110"
-                     style="display: block !important;"
-                     onload="console.log('✅ Logo loaded successfully')"
-                     onerror="console.log('❌ Logo failed to load');">
-
-                <!-- Shine Effect -->
-                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent
-                            transform -skew-x-12 -translate-x-full group-hover:translate-x-full
-                            transition-transform duration-1000 rounded-2xl"></div>
-              </div>
-            </div>
+        <div class="flex-1 max-w-[75%]">
+          <div class="flex items-center cursor-pointer" (click)="onLogoClick()">
+            <img id="wayzonLogo" src="assets/images/logo.png" alt="Wayzon Educational Consultancy"
+                 class="h-10 w-auto max-w-full object-contain"
+                 style="display: block !important;"
+                 onload="console.log('✅ Logo loaded successfully')"
+                 onerror="console.log('❌ Logo failed to load');">
           </div>
         </div>
 
-        <!-- Advanced Mobile Actions: Notification + Menu (25% width) -->
-        <div class="flex items-center justify-end gap-2" style="flex: 0 0 25%;">
-          <!-- Enhanced Mobile Notification -->
-          <div class="relative !outline-none" (clickOutside)="showMessages = false">
+        <!-- Mobile Actions: Notification + Menu (25% width) -->
+        <div class="flex items-center gap-3">
+          <!-- Mobile Notification -->
+          <div class="relative" (clickOutside)="showMessages = false">
             <button (click)="toggleMessages(); $event.stopPropagation()"
-                    class="relative p-3 text-gray-600 hover:text-blue-600 !outline-none
-                           rounded-2xl transition-all duration-500 transform hover:scale-110
-                           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50
-                           message-icon bg-white/70 backdrop-blur-sm border border-white/50
-                           hover:bg-blue-50/80 hover:shadow-lg hover:shadow-blue-500/25
-                           active:scale-95"
-                    [class.animate-jump]="shouldAnimateIcon"
-                    style="cursor: pointer; z-index: 10000;">
-
-              <!-- Notification Icon with Pulse Effect -->
-              <span class="material-icons text-xl relative z-10 transition-all duration-300">notifications</span>
-
-              <!-- Enhanced Message Badge with Animation -->
+                    class="relative p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50
+                           rounded-lg transition-all duration-200"
+                    [class.animate-jump]="shouldAnimateIcon">
+              <span class="material-icons text-xl">notifications</span>
+              <!-- Message Badge -->
               <span *ngIf="unreadMessages > 0"
-                    class="absolute -top-1 -right-1 bg-gradient-to-r from-orange-500 to-red-500
-                           text-white text-xs rounded-full h-5 w-5 flex items-center justify-center
-                           animate-bounce font-bold shadow-lg border-2 border-white
-                           before:absolute before:inset-0 before:rounded-full before:bg-red-400
-                           before:animate-ping before:opacity-75">
+                    class="absolute -top-1 -right-1 bg-red-500 text-white text-xs
+                           rounded-full h-4 w-4 flex items-center justify-center font-bold">
                 {{ unreadMessages > 9 ? '9+' : unreadMessages }}
               </span>
-
-              <!-- Ripple Effect -->
-              <div class="absolute inset-0 rounded-2xl bg-blue-400/20 scale-0
-                          group-hover:scale-100 transition-transform duration-500"></div>
             </button>
           </div>
 
-          <!-- Advanced Mobile Menu Button -->
+          <!-- Mobile Menu Button -->
           <button (click)="toggleMobileMenu()"
-                  class="p-3 rounded-2xl transition-all duration-500 transform hover:scale-110
-                         hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50
-                         active:scale-95 z-50 bg-white/70 backdrop-blur-sm border border-white/50
-                         hover:shadow-lg hover:shadow-purple-500/25 group">
-
-            <!-- Animated Hamburger with Enhanced Effects -->
-            <div class="w-6 h-6 flex flex-col justify-center items-center relative">
-              <!-- Background Glow -->
-              <div class="absolute inset-0 bg-gradient-to-r from-blue-400/30 to-purple-400/30
-                          rounded-full scale-0 group-hover:scale-150 transition-transform duration-500 blur-sm"></div>
-
-              <!-- Hamburger Lines with Advanced Animation -->
-              <span class="block w-6 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600
-                           transition-all duration-500 rounded-full relative z-10
-                           group-hover:shadow-lg group-hover:shadow-blue-500/50"
+                  class="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50
+                         rounded-lg transition-all duration-200">
+            <div class="w-6 h-6 flex flex-col justify-center items-center">
+              <span class="block w-5 h-0.5 bg-gray-600 transition-all duration-300 rounded-full"
                     [class.rotate-45]="isMobileMenuOpen"
-                    [class.translate-y-1.5]="isMobileMenuOpen"
-                    [class.bg-gradient-to-r]="!isMobileMenuOpen"
-                    [class.from-blue-600]="!isMobileMenuOpen"
-                    [class.to-purple-600]="!isMobileMenuOpen"
-                    [class.bg-red-500]="isMobileMenuOpen"></span>
-              <span class="block w-6 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600
-                           mt-1.5 transition-all duration-500 rounded-full relative z-10
-                           group-hover:shadow-lg group-hover:shadow-purple-500/50"
-                    [class.opacity-0]="isMobileMenuOpen"
-                    [class.scale-0]="isMobileMenuOpen"></span>
-              <span class="block w-6 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600
-                           mt-1.5 transition-all duration-500 rounded-full relative z-10
-                           group-hover:shadow-lg group-hover:shadow-blue-500/50"
+                    [class.translate-y-1.5]="isMobileMenuOpen"></span>
+              <span class="block w-5 h-0.5 bg-gray-600 mt-1 transition-all duration-300 rounded-full"
+                    [class.opacity-0]="isMobileMenuOpen"></span>
+              <span class="block w-5 h-0.5 bg-gray-600 mt-1 transition-all duration-300 rounded-full"
                     [class.-rotate-45]="isMobileMenuOpen"
-                    [class.-translate-y-1.5]="isMobileMenuOpen"
-                    [class.bg-gradient-to-r]="!isMobileMenuOpen"
-                    [class.from-blue-600]="!isMobileMenuOpen"
-                    [class.to-purple-600]="!isMobileMenuOpen"
-                    [class.bg-red-500]="isMobileMenuOpen"></span>
+                    [class.-translate-y-1.5]="isMobileMenuOpen"></span>
             </div>
           </button>
         </div>

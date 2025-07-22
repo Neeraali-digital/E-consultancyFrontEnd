@@ -49,13 +49,13 @@
   filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
 }
 
-/* ===== ADVANCED MOBILE HEADER STYLES ===== */
+/* ===== CLEAN MOBILE HEADER STYLES ===== */
 
 /* Mobile Logo Adjustments */
 @media (max-width: 1023px) {
   .wayzon-main-logo {
-    height: 32px !important;
-    max-height: 32px !important;
+    height: 40px !important;
+    max-height: 40px !important;
   }
 
   .logo-container {
@@ -68,216 +68,45 @@
     max-width: 320px !important;
     right: 1rem !important;
   }
-}
 
-/* Enhanced Mobile Logo Container */
-.logo-container-mobile {
-  position: relative;
-  overflow: visible;
-  padding: 0;
-  border-radius: 16px;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-}
-
-/* Mobile Logo Specific Styling */
-.wayzon-main-logo-mobile {
-  object-fit: contain !important;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* ===== ADVANCED ANIMATIONS ===== */
-
-/* Gradient Animation */
-@keyframes gradient-x {
-  0%, 100% {
-    transform: translateX(-100%);
-  }
-  50% {
-    transform: translateX(100%);
+  /* Clean mobile header styling */
+  .mobile-header {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   }
 }
 
-.animate-gradient-x {
-  animation: gradient-x 8s ease-in-out infinite;
-}
+/* ===== SIMPLE ANIMATIONS ===== */
 
-/* Floating Particles */
-@keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translateY(-20px) rotate(180deg);
-    opacity: 0.8;
-  }
-}
-
-@keyframes float-medium {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg) scale(1);
-    opacity: 0.5;
-  }
-  33% {
-    transform: translateY(-15px) rotate(120deg) scale(1.2);
-    opacity: 0.8;
-  }
-  66% {
-    transform: translateY(-10px) rotate(240deg) scale(0.8);
-    opacity: 0.6;
-  }
-}
-
-@keyframes float-fast {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg) scale(1);
-    opacity: 0.3;
-  }
-  25% {
-    transform: translateY(-25px) rotate(90deg) scale(1.3);
-    opacity: 0.7;
-  }
-  50% {
-    transform: translateY(-15px) rotate(180deg) scale(0.9);
-    opacity: 0.5;
-  }
-  75% {
-    transform: translateY(-30px) rotate(270deg) scale(1.1);
-    opacity: 0.8;
-  }
-}
-
-.animate-float-slow {
-  animation: float-slow 6s ease-in-out infinite;
-}
-
-.animate-float-medium {
-  animation: float-medium 4s ease-in-out infinite;
-}
-
-.animate-float-fast {
-  animation: float-fast 3s ease-in-out infinite;
-}
-
-/* ===== MOBILE BUTTON ENHANCEMENTS ===== */
-
-/* Ripple Effect Animation */
-@keyframes ripple {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(4);
+/* Fade in animation for mobile menu */
+@keyframes fade-in {
+  from {
     opacity: 0;
   }
-}
-
-.animate-ripple {
-  animation: ripple 0.6s linear;
-}
-
-/* Pulse Glow Effect */
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6), 0 0 30px rgba(59, 130, 246, 0.4);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Bounce In Animation */
-@keyframes bounce-in {
-  0% {
-    transform: scale(0.3);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  70% {
-    transform: scale(0.9);
-  }
-  100% {
-    transform: scale(1);
+  to {
     opacity: 1;
   }
 }
 
-.animate-bounce-in {
-  animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
 }
 
-/* Shake Animation for Notifications */
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
+/* Slide down animation for mobile menu */
+@keyframes slide-down {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
   }
-  10%, 30%, 50%, 70%, 90% {
-    transform: translateX(-2px);
-  }
-  20%, 40%, 60%, 80% {
-    transform: translateX(2px);
-  }
-}
-
-.animate-shake {
-  animation: shake 0.5s ease-in-out;
-}
-
-/* Glow Border Animation */
-@keyframes glow-border {
-  0%, 100% {
-    border-color: rgba(59, 130, 246, 0.3);
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0.2);
-  }
-  50% {
-    border-color: rgba(59, 130, 246, 0.8);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
-.animate-glow-border {
-  animation: glow-border 2s ease-in-out infinite;
-}
-
-/* ===== MOBILE RESPONSIVE ENHANCEMENTS ===== */
-
-/* Extra small screens */
-@media (max-width: 480px) {
-  .wayzon-main-logo-mobile {
-    height: 40px !important;
-    max-height: 40px !important;
-  }
-
-  .logo-container-mobile {
-    padding: 0;
-  }
-
-  /* Adjust floating particles for smaller screens */
-  .animate-float-slow,
-  .animate-float-medium,
-  .animate-float-fast {
-    display: none; /* Hide particles on very small screens for performance */
-  }
-}
-
-/* Small screens */
-@media (min-width: 481px) and (max-width: 768px) {
-  .wayzon-main-logo-mobile {
-    height: 48px !important;
-    max-height: 48px !important;
-  }
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
 }
 
 .wayzon-main-logo:hover {
