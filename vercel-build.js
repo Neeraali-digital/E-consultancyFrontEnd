@@ -26,6 +26,15 @@ function copyFolderRecursiveSync(source, target) {
 // Simple build approach for deployment
 console.log('🚀 Building Angular application for deployment...');
 
+// Ensure dependencies are installed with legacy peer deps
+console.log('📦 Installing dependencies...');
+try {
+  execSync('npm install --legacy-peer-deps --force', { stdio: 'inherit' });
+  console.log('✅ Dependencies installed successfully!');
+} catch (error) {
+  console.log('⚠️ Dependency installation failed, continuing with build...');
+}
+
 // Use a simple build command that works with the current setup
 try {
   execSync('npx ng build --configuration production --output-path=dist/E-consultancyFrontend', { stdio: 'inherit' });

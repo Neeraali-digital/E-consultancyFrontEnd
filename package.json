@@ -5,6 +5,7 @@
   "author": "Wayzon Educational Consultancy",
   "license": "MIT",
   "scripts": {
+    "preinstall": "npm config set legacy-peer-deps true",
     "ng": "ng",
     "start": "ng serve",
     "dev": "ng serve --open",
