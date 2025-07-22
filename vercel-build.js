@@ -2,6 +2,44 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+// Cross-platform recursive copy function
+function copyFolderRecursiveSync(source, target) {
+  if (!fs.existsSync(target)) {
+    fs.mkdirSync(target, { recursive: true });
+  }
+
+  if (fs.lstatSync(source).isDirectory()) {
+    const files = fs.readdirSync(source);
+    files.forEach(file => {
+      const curSource = path.join(source, file);
+      const curTarget = path.join(target, file);
+
+      if (fs.lstatSync(curSource).isDirectory()) {
+        copyFolderRecursiveSync(curSource, curTarget);
+      } else {
+        fs.copyFileSync(curSource, curTarget);
+      }
+    });
+  }
+}
+
+// Ensure dependencies are installed with legacy peer deps
+console.log('📦 Installing dependencies with legacy peer deps...');
+try {
+  execSync('npm install --legacy-peer-deps', { stdio: 'inherit' });
+  console.log('✅ Dependencies installed successfully!');
+} catch (error) {
+  console.log('⚠️ Dependency installation had warnings, continuing...');
+}
+
+// Run cache busting
+console.log('🔄 Running cache busting...');
+try {
+  execSync('node cache-bust.js', { stdio: 'inherit' });
+} catch (error) {
+  console.log('⚠️ Cache busting failed, continuing without it...');
+}
+
 // Run the Angular build
 console.log('🚀 Building Angular application...');
 execSync('ng build --configuration production', { stdio: 'inherit' });
@@ -19,11 +57,13 @@ if (fs.existsSync(browserDir)) {
     const destPath = path.join(rootDir, file);
 
     if (fs.statSync(srcPath).isDirectory()) {
-      // Copy directory recursively
+      // Copy directory recursively (cross-platform)
       if (!fs.existsSync(destPath)) {
         fs.mkdirSync(destPath, { recursive: true });
       }
-      execSync(`cp -r "${srcPath}/*" "${destPath}/"`, { stdio: 'inherit' });
+
+      // Use fs methods instead of cp for cross-platform compatibility
+      copyFolderRecursiveSync(srcPath, destPath);
     } else {
       // Copy file
       fs.copyFileSync(srcPath, destPath);
