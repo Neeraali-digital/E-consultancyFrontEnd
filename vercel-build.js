@@ -23,26 +23,25 @@ function copyFolderRecursiveSync(source, target) {
   }
 }
 
-// Ensure dependencies are installed with legacy peer deps
-console.log('📦 Installing dependencies with legacy peer deps...');
-try {
-  execSync('npm install --legacy-peer-deps', { stdio: 'inherit' });
-  console.log('✅ Dependencies installed successfully!');
-} catch (error) {
-  console.log('⚠️ Dependency installation had warnings, continuing...');
-}
+// Simple build approach for deployment
+console.log('🚀 Building Angular application for deployment...');
 
-// Run cache busting
-console.log('🔄 Running cache busting...');
+// Use a simple build command that works with the current setup
 try {
-  execSync('node cache-bust.js', { stdio: 'inherit' });
+  execSync('npx ng build --configuration production --output-path=dist/E-consultancyFrontend', { stdio: 'inherit' });
+  console.log('✅ Build completed successfully!');
 } catch (error) {
-  console.log('⚠️ Cache busting failed, continuing without it...');
-}
+  console.log('⚠️ Build failed, trying alternative approach...');
 
-// Run the Angular build
-console.log('🚀 Building Angular application...');
-execSync('ng build --configuration production', { stdio: 'inherit' });
+  // Fallback: try without configuration
+  try {
+    execSync('npx ng build --output-path=dist/E-consultancyFrontend', { stdio: 'inherit' });
+    console.log('✅ Fallback build completed!');
+  } catch (fallbackError) {
+    console.error('❌ Both build attempts failed');
+    process.exit(1);
+  }
+}
 
 // Copy files from browser directory to root for Vercel
 console.log('📁 Copying files for Vercel...');
