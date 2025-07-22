@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderComponent, Footer, AiChatComponent, ScrollToTopComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'

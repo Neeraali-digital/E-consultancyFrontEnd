@@ -126,7 +126,6 @@ export class Footer {
   // Newsletter subscription
   subscribeToNewsletter(email: string): void {
     if (email && email.includes('@')) {
-      console.log('Newsletter subscription for:', email);
       // Implement newsletter subscription logic here
       alert('Thank you for subscribing to our newsletter!');
     } else {

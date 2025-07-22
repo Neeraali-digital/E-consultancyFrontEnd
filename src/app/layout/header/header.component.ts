@@ -279,9 +279,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Navigation debugging method
   onNavigate(route: string): void {
-    this.router.navigate([`/${route}`]).then(success => {
+    this.router.navigate([`/${route}`]).then((success: boolean) => {
       // Navigation successful
-    }).catch(error => {
+    }).catch((error: any) => {
       // Handle navigation error
     });
   }
@@ -301,14 +301,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     try {
       // Method 1: Try router.navigate
-      this.router.navigate([route]).then(success => {
+      this.router.navigate([route]).then((success: boolean) => {
         this.isNavigating = false;
         this.currentRoute = route; // Update current route for active state
         // Ensure scroll to top after navigation
         setTimeout(() => {
           this.scrollService.scrollToTop();
         }, 100);
-      }).catch(error => {
+      }).catch((error: any) => {
         this.fallbackNavigation(route);
       });
     } catch (error) {
@@ -319,13 +319,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private fallbackNavigation(route: string): void {
     try {
       // Method 2: Try navigateByUrl
-      this.router.navigateByUrl(route).then(success => {
+      this.router.navigateByUrl(route).then((success: boolean) => {
         this.isNavigating = false;
         // Ensure scroll to top after navigation
         setTimeout(() => {
           this.scrollService.scrollToTop();
         }, 100);
-      }).catch(error => {
+      }).catch((error: any) => {
         this.windowNavigation(route);
       });
     } catch (error) {
@@ -347,8 +347,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       event.stopPropagation();
     }
 
-    console.log('Toggling abroad dropdown, current state:', this.isAbroadDropdownOpen);
-
     // Close other dropdowns first
     this.isAboutDropdownOpen = false;
     this.isServicesDropdownOpen = false;
@@ -357,8 +355,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     // Toggle the abroad dropdown
     this.isAbroadDropdownOpen = !this.isAbroadDropdownOpen;
-
-    console.log('New abroad dropdown state:', this.isAbroadDropdownOpen);
   }
 
   closeAbroadDropdown() {
@@ -392,8 +388,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       event.stopPropagation();
     }
 
-    console.log('Toggling more dropdown, current state:', this.isMoreDropdownOpen);
-
     // Close other dropdowns first
     this.isAboutDropdownOpen = false;
     this.isServicesDropdownOpen = false;
@@ -402,8 +396,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     // Toggle the more dropdown
     this.isMoreDropdownOpen = !this.isMoreDropdownOpen;
-
-    console.log('New more dropdown state:', this.isMoreDropdownOpen);
   }
 
   closeMoreDropdown() {

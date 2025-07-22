@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -33,7 +33,7 @@ export class NotificationSheetComponent implements OnInit, OnDestroy {
 
   notifications: NotificationMessage[] = [];
   
-  constructor(private router: Router) {}
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.loadNotifications();

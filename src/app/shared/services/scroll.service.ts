@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -6,8 +6,9 @@ import { filter } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ScrollService {
+  private router = inject(Router);
 
-  constructor(private router: Router) {
+  constructor() {
     // Listen to route changes and scroll to top
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))

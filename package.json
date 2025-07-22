@@ -21,7 +21,7 @@
     "deploy:prod": "npm run build:prod && vercel --prod",
     "deploy:staging": "npm run build:staging && vercel",
     "preview": "ng serve --configuration production --port 4200",
-    "clean": "rm -rf dist node_modules/.cache .angular/cache",
+    "clean": "rimraf dist node_modules/.cache .angular/cache",
     "reinstall": "npm run clean && npm install",
     "favicon": "node generate-favicons.js"
   },
@@ -52,7 +52,8 @@
     "express": "^5.1.0",
     "ng2-charts": "^8.0.0",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zone.js": "^0.15.1"
   },
   "devDependencies": {
     "@angular/build": "^18.2.13",
@@ -69,6 +70,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "postcss": "^8.5.6",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.5.4"
   }
