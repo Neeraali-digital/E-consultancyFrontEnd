@@ -60,52 +60,118 @@
         [class.py-2]="isScrolled"
         [class.py-4]="!isScrolled">
   <div class="max-w-7xl mx-auto px-6 relative overflow-visible">
-    <!-- Clean Mobile Header Layout: Logo (3/4) | Actions (1/4) -->
-    <div class="lg:hidden bg-white border-b border-gray-100">
-      <div class="flex items-center justify-between py-3 px-4">
-        <!-- Logo Section - Mobile (75% width) -->
-        <div class="flex-1 max-w-[75%]">
-          <div class="flex items-center cursor-pointer" (click)="onLogoClick()">
-            <img id="wayzonLogo" src="assets/images/logo.png" alt="Wayzon Educational Consultancy"
-                 class="h-10 w-auto max-w-full object-contain"
-                 style="display: block !important;"
-                 onload="console.log('✅ Logo loaded successfully')"
-                 onerror="console.log('❌ Logo failed to load');">
+    <!-- Modern Mobile App Header - Full Width -->
+    <div class="lg:hidden w-full bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 relative overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 left-0 w-32 h-32 bg-white rounded-full -translate-x-16 -translate-y-16"></div>
+        <div class="absolute top-0 right-0 w-24 h-24 bg-white rounded-full translate-x-12 -translate-y-12"></div>
+        <div class="absolute bottom-0 left-1/2 w-20 h-20 bg-white rounded-full -translate-x-10 translate-y-10"></div>
+      </div>
+
+      <!-- Main Header Content -->
+      <div class="relative z-10 px-4 py-6">
+        <div class="flex items-center justify-between">
+          <!-- App Logo & Title Section (75% width) -->
+          <div class="flex-1 max-w-[75%]">
+            <div class="flex items-center cursor-pointer group" (click)="onLogoClick()">
+              <!-- App Icon Container -->
+              <div class="relative">
+                <div class="w-14 h-14 bg-white rounded-2xl shadow-lg flex items-center justify-center
+                           group-hover:scale-105 transition-transform duration-300">
+                  <img id="wayzonLogo" src="assets/images/logo.png" alt="Wayzon"
+                       class="h-10 w-10 object-contain"
+                       style="display: block !important;"
+                       onload="console.log('✅ Logo loaded successfully')"
+                       onerror="console.log('❌ Logo failed to load');">
+                </div>
+                <!-- App Badge -->
+                <div class="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white
+                           flex items-center justify-center">
+                  <span class="text-white text-xs font-bold">✓</span>
+                </div>
+              </div>
+
+              <!-- App Title & Subtitle -->
+              <div class="ml-4 flex-1">
+                <h1 class="text-white font-bold text-xl leading-tight">Wayzon</h1>
+                <p class="text-blue-100 text-sm font-medium">Education Consultancy</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons (25% width) -->
+          <div class="flex items-center gap-3">
+            <!-- Search Button -->
+            <button class="w-11 h-11 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center
+                           text-white hover:bg-white/30 transition-all duration-300 active:scale-95">
+              <span class="material-icons text-xl">search</span>
+            </button>
+
+            <!-- Notification Button -->
+            <div class="relative" (clickOutside)="showMessages = false">
+              <button (click)="toggleMessages(); $event.stopPropagation()"
+                      class="w-11 h-11 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center
+                             text-white hover:bg-white/30 transition-all duration-300 active:scale-95 relative"
+                      [class.animate-jump]="shouldAnimateIcon">
+                <span class="material-icons text-xl">notifications</span>
+                <!-- Notification Badge -->
+                <span *ngIf="unreadMessages > 0"
+                      class="absolute -top-1 -right-1 bg-red-500 text-white text-xs
+                             rounded-full h-5 w-5 flex items-center justify-center font-bold
+                             animate-pulse border-2 border-white">
+                  {{ unreadMessages > 9 ? '9+' : unreadMessages }}
+                </span>
+              </button>
+            </div>
+
+            <!-- Menu Button -->
+            <button (click)="toggleMobileMenu()"
+                    class="w-11 h-11 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center
+                           text-white hover:bg-white/30 transition-all duration-300 active:scale-95">
+              <div class="w-6 h-6 flex flex-col justify-center items-center">
+                <span class="block w-5 h-0.5 bg-white transition-all duration-300 rounded-full"
+                      [class.rotate-45]="isMobileMenuOpen"
+                      [class.translate-y-1.5]="isMobileMenuOpen"></span>
+                <span class="block w-5 h-0.5 bg-white mt-1 transition-all duration-300 rounded-full"
+                      [class.opacity-0]="isMobileMenuOpen"></span>
+                <span class="block w-5 h-0.5 bg-white mt-1 transition-all duration-300 rounded-full"
+                      [class.-rotate-45]="isMobileMenuOpen"
+                      [class.-translate-y-1.5]="isMobileMenuOpen"></span>
+              </div>
+            </button>
           </div>
         </div>
 
-        <!-- Mobile Actions: Notification + Menu (25% width) -->
-        <div class="flex items-center gap-3">
-          <!-- Mobile Notification -->
-          <div class="relative" (clickOutside)="showMessages = false">
-            <button (click)="toggleMessages(); $event.stopPropagation()"
-                    class="relative p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50
-                           rounded-lg transition-all duration-200"
-                    [class.animate-jump]="shouldAnimateIcon">
-              <span class="material-icons text-xl">notifications</span>
-              <!-- Message Badge -->
-              <span *ngIf="unreadMessages > 0"
-                    class="absolute -top-1 -right-1 bg-red-500 text-white text-xs
-                           rounded-full h-4 w-4 flex items-center justify-center font-bold">
-                {{ unreadMessages > 9 ? '9+' : unreadMessages }}
-              </span>
-            </button>
-          </div>
-
-          <!-- Mobile Menu Button -->
-          <button (click)="toggleMobileMenu()"
-                  class="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50
-                         rounded-lg transition-all duration-200">
-            <div class="w-6 h-6 flex flex-col justify-center items-center">
-              <span class="block w-5 h-0.5 bg-gray-600 transition-all duration-300 rounded-full"
-                    [class.rotate-45]="isMobileMenuOpen"
-                    [class.translate-y-1.5]="isMobileMenuOpen"></span>
-              <span class="block w-5 h-0.5 bg-gray-600 mt-1 transition-all duration-300 rounded-full"
-                    [class.opacity-0]="isMobileMenuOpen"></span>
-              <span class="block w-5 h-0.5 bg-gray-600 mt-1 transition-all duration-300 rounded-full"
-                    [class.-rotate-45]="isMobileMenuOpen"
-                    [class.-translate-y-1.5]="isMobileMenuOpen"></span>
-            </div>
+        <!-- Quick Actions Bar -->
+        <div class="mt-5 flex gap-3 overflow-x-auto scrollbar-hide">
+          <button (click)="navigateToRoute('/courses')"
+                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3
+                         text-white text-sm font-medium hover:bg-white/30 transition-all duration-300
+                         flex items-center gap-2">
+            <span class="material-icons text-lg">school</span>
+            Courses
+          </button>
+          <button (click)="navigateToRoute('/colleges')"
+                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3
+                         text-white text-sm font-medium hover:bg-white/30 transition-all duration-300
+                         flex items-center gap-2">
+            <span class="material-icons text-lg">account_balance</span>
+            Colleges
+          </button>
+          <button (click)="navigateToRoute('/abroad')"
+                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3
+                         text-white text-sm font-medium hover:bg-white/30 transition-all duration-300
+                         flex items-center gap-2">
+            <span class="material-icons text-lg">flight_takeoff</span>
+            Study Abroad
+          </button>
+          <button (click)="navigateToRoute('/contact')"
+                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3
+                         text-white text-sm font-medium hover:bg-white/30 transition-all duration-300
+                         flex items-center gap-2">
+            <span class="material-icons text-lg">contact_support</span>
+            Contact
           </button>
         </div>
       </div>
@@ -508,68 +574,132 @@
 
   </div>
 
-  <!-- Mobile Menu Overlay -->
+  <!-- Mobile App Menu Overlay -->
   <div *ngIf="isMobileMenuOpen"
-       class="lg:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40 animate-fade-in"
+       class="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 animate-fade-in"
        (click)="closeMobileMenu()"></div>
 
-  <!-- Sleek Mobile Menu -->
+  <!-- Modern Mobile App Menu -->
   <div *ngIf="isMobileMenuOpen"
-       class="lg:hidden fixed top-14 sm:top-16 left-0 right-0 z-50 bg-white/98 backdrop-blur-xl border-t border-gray-100/50 shadow-2xl animate-slide-down">
-    <div class="px-4 sm:px-6 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
-      <div class="space-y-3">
-        <!-- Close Button -->
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="text-lg font-bold text-gray-800">Navigation</h3>
-          <button (click)="closeMobileMenu()"
-                  class="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200">
-            <span class="material-icons text-gray-600">close</span>
+       class="lg:hidden fixed top-0 left-0 right-0 bottom-0 z-50 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 animate-slide-down">
+
+    <!-- Menu Header -->
+    <div class="bg-white/10 backdrop-blur-sm border-b border-white/20 px-4 py-6">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-white rounded-2xl shadow-lg flex items-center justify-center">
+            <img src="assets/images/logo.png" alt="Wayzon" class="h-8 w-8 object-contain">
+          </div>
+          <div>
+            <h2 class="text-white font-bold text-lg">Wayzon</h2>
+            <p class="text-blue-100 text-sm">Education Consultancy</p>
+          </div>
+        </div>
+        <button (click)="closeMobileMenu()"
+                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center
+                       text-white hover:bg-white/30 transition-all duration-300">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menu Content -->
+    <div class="px-4 py-6 max-h-[calc(100vh-8rem)] overflow-y-auto">
+      <!-- App-Style Navigation Cards -->
+      <div class="space-y-4">
+        <!-- Main Navigation -->
+        <div class="grid grid-cols-2 gap-3">
+          <!-- Home Card -->
+          <button (click)="navigateToRoute('/home')"
+                  class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-white
+                         hover:bg-white/30 transition-all duration-300 active:scale-95
+                         border border-white/10 group">
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center
+                          group-hover:scale-110 transition-transform duration-300">
+                <span class="material-icons text-white text-xl">home</span>
+              </div>
+              <span class="text-sm font-medium">Home</span>
+            </div>
+          </button>
+
+          <!-- About Card -->
+          <button (click)="navigateToRoute('/about')"
+                  class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-white
+                         hover:bg-white/30 transition-all duration-300 active:scale-95
+                         border border-white/10 group">
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center
+                          group-hover:scale-110 transition-transform duration-300">
+                <span class="material-icons text-white text-xl">info</span>
+              </div>
+              <span class="text-sm font-medium">About</span>
+            </div>
+          </button>
+
+          <!-- Courses Card -->
+          <button (click)="navigateToRoute('/courses')"
+                  class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-white
+                         hover:bg-white/30 transition-all duration-300 active:scale-95
+                         border border-white/10 group">
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-12 h-12 bg-purple-500 rounded-2xl flex items-center justify-center
+                          group-hover:scale-110 transition-transform duration-300">
+                <span class="material-icons text-white text-xl">school</span>
+              </div>
+              <span class="text-sm font-medium">Courses</span>
+            </div>
+          </button>
+
+          <!-- Colleges Card -->
+          <button (click)="navigateToRoute('/colleges')"
+                  class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-white
+                         hover:bg-white/30 transition-all duration-300 active:scale-95
+                         border border-white/10 group">
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-12 h-12 bg-indigo-500 rounded-2xl flex items-center justify-center
+                          group-hover:scale-110 transition-transform duration-300">
+                <span class="material-icons text-white text-xl">account_balance</span>
+              </div>
+              <span class="text-sm font-medium">Colleges</span>
+            </div>
           </button>
         </div>
 
-        <!-- Mobile Navigation Pills -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <button (click)="navigateToRoute('/home')"
-                  class="bg-gradient-to-r from-orange-50 to-orange-100 hover:from-orange-100
-                         hover:to-orange-200 text-orange-700 px-4 py-4 rounded-xl font-medium
-                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation">
-            <span class="material-icons text-sm mr-2">home</span>
-            Home
-          </button>
-          <button (click)="navigateToRoute('/about')"
-                  class="bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100
-                         hover:to-blue-200 text-blue-700 px-4 py-4 rounded-xl font-medium
-                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation">
-            <span class="material-icons text-sm mr-2">info</span>
-            Who We Are
-          </button>
-          <button (click)="navigateToRoute('/courses')"
-                  class="bg-gradient-to-r from-purple-50 to-purple-100 hover:from-purple-100
-                         hover:to-purple-200 text-purple-700 px-4 py-4 rounded-xl font-medium
-                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation">
-            <span class="material-icons text-sm mr-2">school</span>
-            Courses
-          </button>
-          <button (click)="navigateToRoute('/colleges')"
-                  class="bg-gradient-to-r from-indigo-50 to-indigo-100 hover:from-indigo-100
-                         hover:to-indigo-200 text-indigo-700 px-4 py-4 rounded-xl font-medium
-                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation">
-            <span class="material-icons text-sm mr-2">account_balance</span>
-            Colleges
-          </button>
+        <!-- Featured Actions -->
+        <div class="space-y-3">
+          <!-- Study Abroad - Featured -->
           <button (click)="navigateToRoute('/abroad')"
-                  class="bg-gradient-to-r from-green-50 to-green-100 hover:from-green-100
-                         hover:to-green-200 text-green-700 px-4 py-4 rounded-xl font-medium
-                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation sm:col-span-2">
-            <span class="material-icons text-sm mr-2">flight_takeoff</span>
-            Study Abroad
+                  class="w-full bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-4 text-white
+                         hover:from-green-600 hover:to-emerald-700 transition-all duration-300 active:scale-95
+                         shadow-lg group">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center
+                          group-hover:scale-110 transition-transform duration-300">
+                <span class="material-icons text-white text-2xl">flight_takeoff</span>
+              </div>
+              <div class="text-left">
+                <h3 class="font-bold text-lg">Study Abroad</h3>
+                <p class="text-green-100 text-sm">Explore global opportunities</p>
+              </div>
+            </div>
           </button>
+
+          <!-- Contact - Featured -->
           <button (click)="navigateToRoute('/contact')"
-                  class="bg-gradient-to-r from-orange-50 to-orange-100 hover:from-orange-100
-                         hover:to-orange-200 text-orange-700 px-4 py-4 rounded-xl font-medium
-                         text-center transition-all duration-300 transform active:scale-95 touch-manipulation">
-            <span class="material-icons text-sm mr-2">contact_mail</span>
-            Contact Us
+                  class="w-full bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl p-4 text-white
+                         hover:from-orange-600 hover:to-red-700 transition-all duration-300 active:scale-95
+                         shadow-lg group">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center
+                          group-hover:scale-110 transition-transform duration-300">
+                <span class="material-icons text-white text-2xl">contact_support</span>
+              </div>
+              <div class="text-left">
+                <h3 class="font-bold text-lg">Contact Us</h3>
+                <p class="text-orange-100 text-sm">Get expert guidance</p>
+              </div>
+            </div>
           </button>
         </div>
 
