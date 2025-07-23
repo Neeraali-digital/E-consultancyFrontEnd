@@ -143,5 +143,5 @@ This project is licensed under the MIT License.
 
 For support, contact Wayzon Educational Consultancy:
 - Email: info@wayzon.edu
-- Phone: +91 94498 44444
+- Phone: +91 974056 8888
 - Website: https://wayzon.edu

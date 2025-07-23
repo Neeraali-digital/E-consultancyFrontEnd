@@ -127,7 +127,7 @@ export class AiChatComponent implements OnInit {
     }
     
     if (lowerMessage.includes('contact') || lowerMessage.includes('call') || lowerMessage.includes('phone')) {
-      return "You can reach us at +91 94498 44444 or email info@wayzon.edu. Our counselors are available 9 AM to 7 PM. Would you like me to schedule a callback for you?";
+      return "You can reach us at +91 974056 8888 or email info@wayzon.edu. Our counselors are available 9 AM to 7 PM. Would you like me to schedule a callback for you?";
     }
     
     // Return random response if no specific match
