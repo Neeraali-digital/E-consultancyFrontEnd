@@ -72,7 +72,7 @@ export class CoursesComponent implements OnInit {
       colleges: ['Top Universities', 'Liberal Arts Colleges'],
       duration: '3-4 Years',
       eligibility: '12th in relevant stream',
-      fees: '₹50K-5 Lakhs',
+
       color: 'indigo'
     },
     {
@@ -84,7 +84,7 @@ export class CoursesComponent implements OnInit {
       colleges: ['Top Commerce Colleges', 'Universities'],
       duration: '3-4 Years',
       eligibility: '12th with Commerce',
-      fees: '₹30K-3 Lakhs',
+
       color: 'orange'
     }
   ];

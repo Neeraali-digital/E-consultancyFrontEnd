@@ -210,56 +210,7 @@
     </div>
   </div>
 
-  <!-- Fee Structure -->
-  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-300">
-    <div class="flex items-center space-x-3 mb-6">
-      <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center">
-        <span class="material-icons text-white">payments</span>
-      </div>
-      <div>
-        <h2 class="text-xl font-bold text-gray-900">Fee Structure</h2>
-        <p class="text-sm text-gray-600">Course fee information</p>
-      </div>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Annual Fee -->
-      <div>
-        <label for="annualFee" class="block text-sm font-medium text-gray-700 mb-2">
-          Annual Fee (₹) <span class="text-red-500">*</span>
-        </label>
-        <input
-          id="annualFee"
-          type="number"
-          formControlName="annualFee"
-          placeholder="e.g., 150000"
-          class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-          [class.border-red-500]="f['annualFee'].invalid && f['annualFee'].touched">
-        <div *ngIf="f['annualFee'].invalid && f['annualFee'].touched" class="text-red-500 text-sm mt-1">
-          <span *ngIf="f['annualFee'].errors?.['required']">Annual fee is required</span>
-          <span *ngIf="f['annualFee'].errors?.['min']">Fee must be greater than 0</span>
-        </div>
-      </div>
-
-      <!-- Total Fee -->
-      <div>
-        <label for="totalFee" class="block text-sm font-medium text-gray-700 mb-2">
-          Total Fee (₹) <span class="text-red-500">*</span>
-        </label>
-        <input
-          id="totalFee"
-          type="number"
-          formControlName="totalFee"
-          placeholder="e.g., 600000"
-          class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-          [class.border-red-500]="f['totalFee'].invalid && f['totalFee'].touched">
-        <div *ngIf="f['totalFee'].invalid && f['totalFee'].touched" class="text-red-500 text-sm mt-1">
-          <span *ngIf="f['totalFee'].errors?.['required']">Total fee is required</span>
-          <span *ngIf="f['totalFee'].errors?.['min']">Fee must be greater than 0</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Form Actions -->
   <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">

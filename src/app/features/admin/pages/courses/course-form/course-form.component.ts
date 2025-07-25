@@ -13,8 +13,7 @@ export interface Course {
   degreeType: string;
   description: string;
   eligibility: string;
-  annualFee: number;
-  totalFee: number;
+
   status: 'active' | 'inactive';
   createdAt?: Date;
   updatedAt?: Date;
@@ -68,8 +67,7 @@ export class CourseFormComponent implements OnInit, OnDestroy {
       degreeType: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(50)]],
       eligibility: ['', [Validators.required]],
-      annualFee: [0, [Validators.required, Validators.min(1)]],
-      totalFee: [0, [Validators.required, Validators.min(1)]],
+
       status: ['active']
     });
   }
@@ -92,8 +90,7 @@ export class CourseFormComponent implements OnInit, OnDestroy {
         degreeType: 'undergraduate',
         description: 'A comprehensive program covering computer science fundamentals, programming, algorithms, and software development.',
         eligibility: '10+2 with Physics, Chemistry, Mathematics with minimum 60% marks',
-        annualFee: 150000,
-        totalFee: 600000,
+
         status: 'active'
       };
 

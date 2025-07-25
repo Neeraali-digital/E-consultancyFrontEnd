@@ -16,7 +16,7 @@ export class CollegeService {
       established: 1961,
       courses: ['B.Tech', 'M.Tech', 'PhD'],
       rating: 4.8,
-      fees: { min: 200000, max: 300000 },
+
       status: 'active',
       description: 'Premier engineering institute known for excellence in technology and research.',
       website: 'https://www.iitd.ac.in',
@@ -31,7 +31,7 @@ export class CollegeService {
       established: 1956,
       courses: ['MBBS', 'MD', 'MS', 'PhD'],
       rating: 4.9,
-      fees: { min: 50000, max: 100000 },
+
       status: 'active',
       description: 'Leading medical institute providing quality healthcare education.',
       website: 'https://www.aiims.edu',
@@ -46,7 +46,7 @@ export class CollegeService {
       established: 1961,
       courses: ['MBA', 'PGDM', 'PhD'],
       rating: 4.7,
-      fees: { min: 2500000, max: 2800000 },
+
       status: 'active',
       description: 'Top business school offering world-class management education.',
       website: 'https://www.iima.ac.in',
@@ -61,7 +61,7 @@ export class CollegeService {
       established: 1922,
       courses: ['B.A', 'M.A', 'B.Sc', 'M.Sc', 'B.Com', 'M.Com'],
       rating: 4.5,
-      fees: { min: 15000, max: 50000 },
+
       status: 'active',
       description: 'One of the largest universities in India offering diverse academic programs.',
       website: 'https://www.du.ac.in',
@@ -76,7 +76,7 @@ export class CollegeService {
       established: 1987,
       courses: ['LLB', 'LLM', 'PhD'],
       rating: 4.6,
-      fees: { min: 150000, max: 200000 },
+
       status: 'active',
       description: 'Premier law school known for academic excellence and legal research.',
       website: 'https://www.nls.ac.in',
@@ -91,7 +91,7 @@ export class CollegeService {
       established: 1989,
       courses: ['B.Pharm', 'M.Pharm', 'PhD'],
       rating: 4.3,
-      fees: { min: 80000, max: 120000 },
+
       status: 'inactive',
       description: 'Leading pharmacy college with focus on pharmaceutical sciences.',
       website: 'https://www.jamiahamdard.edu',
@@ -124,7 +124,7 @@ export class CollegeService {
       established: collegeData.established || new Date().getFullYear(),
       courses: collegeData.courses || [],
       rating: collegeData.rating || 0,
-      fees: collegeData.fees || { min: 0, max: 0 },
+
       status: collegeData.status || 'active',
       description: collegeData.description,
       website: collegeData.website,

@@ -43,7 +43,6 @@ interface College {
   established: number;
   ranking: number;
   courses: string[];
-  fees: string;
   placement: string;
   avgPackage: string;
   rating: number;
@@ -98,7 +97,7 @@ export class CollegeDetailComponent implements OnInit {
       established: 1961,
       ranking: 1,
       courses: ['B.Tech', 'M.Tech', 'PhD'],
-      fees: '₹2.5 Lakhs/year',
+
       placement: '95%',
       avgPackage: '₹18 LPA',
       rating: 5.0,
@@ -235,7 +234,7 @@ export class CollegeDetailComponent implements OnInit {
       established: 1956,
       ranking: 1,
       courses: ['MBBS', 'MD', 'MS'],
-      fees: '₹1.5 Lakhs/year',
+
       placement: '100%',
       avgPackage: '₹25 LPA',
       rating: 5.0,
@@ -293,7 +292,7 @@ export class CollegeDetailComponent implements OnInit {
       established: 1973,
       ranking: 1,
       courses: ['MBA', 'PGDM', 'Executive MBA'],
-      fees: '₹24 Lakhs/year',
+
       placement: '100%',
       avgPackage: '₹35 LPA',
       rating: 4.7,
@@ -351,7 +350,7 @@ export class CollegeDetailComponent implements OnInit {
       established: 1964,
       ranking: 8,
       courses: ['B.Tech', 'M.Tech', 'MBA'],
-      fees: '₹1.8 Lakhs/year',
+
       placement: '92%',
       avgPackage: '₹12 LPA',
       rating: 4.5,

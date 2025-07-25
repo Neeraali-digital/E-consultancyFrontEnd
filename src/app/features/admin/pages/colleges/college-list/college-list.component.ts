@@ -14,10 +14,7 @@ export interface College {
   established: number;
   courses: string[];
   rating: number;
-  fees: {
-    min: number;
-    max: number;
-  };
+
   status: 'active' | 'inactive';
   image?: string;
   description?: string;

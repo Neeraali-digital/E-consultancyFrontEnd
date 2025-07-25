@@ -75,10 +75,7 @@ export class CollegeFormComponent implements OnInit, OnDestroy {
       website: ['', [Validators.pattern(/^https?:\/\/.+/)]],
       email: ['', [Validators.email]],
       phone: ['', [Validators.pattern(/^[0-9]{10}$/)]],
-      fees: this.formBuilder.group({
-        min: ['', [Validators.required, Validators.min(0)]],
-        max: ['', [Validators.required, Validators.min(0)]]
-      }),
+
       rating: ['', [Validators.min(0), Validators.max(5)]],
       status: ['active', [Validators.required]],
       courses: this.formBuilder.array([]),
@@ -134,10 +131,7 @@ export class CollegeFormComponent implements OnInit, OnDestroy {
       website: college.website || '',
       email: college.email || '',
       phone: college.phone || '',
-      fees: {
-        min: college.fees.min,
-        max: college.fees.max
-      },
+
       rating: college.rating,
       status: college.status,
       image: college.image || ''
@@ -168,12 +162,7 @@ export class CollegeFormComponent implements OnInit, OnDestroy {
 
     const formData = this.collegeForm.value;
     
-    // Validate fees
-    if (formData.fees.min > formData.fees.max) {
-      this.errorMessage = 'Minimum fees cannot be greater than maximum fees';
-      this.isSaving = false;
-      return;
-    }
+
 
     const collegeData: Partial<College> = {
       ...formData,
