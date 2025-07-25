@@ -206,81 +206,61 @@
       <div class="col-span-6 lg:col-span-8">
         <nav class="flex items-center justify-center relative overflow-visible">
           <!-- Enhanced Compact Navigation Pills - Responsive -->
-          <div class="flex items-center bg-white/80 backdrop-blur-sm rounded-2xl px-1 sm:px-1.5 lg:px-2 py-1 shadow-md border border-gray-100 navigation-container
-                      gap-0.5 sm:gap-1 overflow-x-auto scrollbar-hide relative w-full max-w-4xl justify-start sm:justify-center">
+          <div class="flex items-center bg-white rounded-2xl px-2 py-1 shadow-md border border-gray-100 navigation-container
+                      gap-1 overflow-x-auto relative w-full max-w-4xl"
+               style="scrollbar-width: none; -ms-overflow-style: none;"
+               onscroll="this.style.webkitScrollbar = 'none'">
         <!-- 1. Home - Enhanced Responsive -->
         <button (click)="navigateToRoute('/home')"
                 [disabled]="isNavigating"
-                class="nav-button px-1.5 sm:px-2 lg:px-3 py-1.5 text-xs font-medium
-                       rounded-lg lg:rounded-xl transition-all duration-500 ease-out flex items-center gap-1 lg:gap-1.5
-                       cursor-pointer border-none outline-none flex-shrink-0
-                       focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50
-                       disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap
-                       hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105
-                       relative overflow-hidden"
-                [class.active-tab]="isRouteActive('/home')"
+                class="nav-button px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
+                       flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
+                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700"
                 [class.text-gray-600]="!isRouteActive('/home')"
                 [class.bg-transparent]="!isRouteActive('/home')"
                 [class.text-blue-700]="isRouteActive('/home')"
-                [class.bg-blue-100]="isRouteActive('/home')"
-                [class.shadow-md]="isRouteActive('/home')">
-          <span class="material-icons text-sm relative z-10 transition-transform duration-300">home</span>
-          <span class="relative z-10 text-xs transition-all duration-300 hidden sm:inline xl:inline">Home</span>
-          <span *ngIf="isNavigating" class="material-icons text-xs animate-spin ml-1 relative z-10">refresh</span>
+                [class.bg-blue-100]="isRouteActive('/home')">
+          <span class="material-icons text-sm">home</span>
+          <span class="text-xs hidden sm:inline">Home</span>
         </button>
 
         <!-- 2. About - Enhanced Responsive -->
         <button (click)="navigateToRoute('/about')"
-                class="nav-button px-1.5 sm:px-2 lg:px-3 py-1.5 text-xs font-medium
-                       rounded-lg lg:rounded-xl transition-all duration-500 ease-out flex items-center gap-1 lg:gap-1.5
-                       cursor-pointer border-none outline-none flex-shrink-0
-                       focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 whitespace-nowrap
-                       hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105
-                       relative overflow-hidden"
-                [class.active-tab]="isRouteActive('/about')"
+                class="nav-button px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
+                       flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
+                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700"
                 [class.text-gray-600]="!isRouteActive('/about')"
                 [class.bg-transparent]="!isRouteActive('/about')"
                 [class.text-blue-700]="isRouteActive('/about')"
-                [class.bg-blue-100]="isRouteActive('/about')"
-                [class.shadow-md]="isRouteActive('/about')">
-          <span class="material-icons text-sm relative z-10 transition-transform duration-300">people</span>
-          <span class="relative z-10 text-xs transition-all duration-300 hidden sm:inline xl:inline">About</span>
+                [class.bg-blue-100]="isRouteActive('/about')">
+          <span class="material-icons text-sm">people</span>
+          <span class="text-xs hidden sm:inline">About</span>
         </button>
 
         <!-- 3. Courses - Enhanced Responsive -->
         <button (click)="navigateToRoute('/courses')"
-                class="nav-button px-1.5 sm:px-2 lg:px-3 py-1.5 text-xs font-medium
-                       rounded-lg lg:rounded-xl transition-all duration-500 ease-out flex items-center gap-1 lg:gap-1.5
-                       cursor-pointer border-none outline-none flex-shrink-0
-                       focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 whitespace-nowrap
-                       hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105
-                       relative overflow-hidden"
-                [class.active-tab]="isRouteActive('/courses')"
+                class="nav-button px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
+                       flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
+                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700"
                 [class.text-gray-600]="!isRouteActive('/courses')"
                 [class.bg-transparent]="!isRouteActive('/courses')"
                 [class.text-blue-700]="isRouteActive('/courses')"
-                [class.bg-blue-100]="isRouteActive('/courses')"
-                [class.shadow-md]="isRouteActive('/courses')">
-          <span class="material-icons text-sm relative z-10 transition-transform duration-300">school</span>
-          <span class="relative z-10 text-xs transition-all duration-300 hidden sm:inline xl:inline">Courses</span>
+                [class.bg-blue-100]="isRouteActive('/courses')">
+          <span class="material-icons text-sm">school</span>
+          <span class="text-xs hidden sm:inline">Courses</span>
         </button>
 
         <!-- 4. Colleges - Enhanced Responsive -->
         <button (click)="navigateToRoute('/colleges')"
-                class="nav-button px-1.5 sm:px-2 lg:px-3 py-1.5 text-xs font-medium
-                       rounded-lg lg:rounded-xl transition-all duration-500 ease-out flex items-center gap-1 lg:gap-1.5
-                       cursor-pointer border-none outline-none flex-shrink-0
-                       focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 whitespace-nowrap
-                       hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105
-                       relative overflow-hidden"
-                [class.active-tab]="isRouteActive('/colleges')"
+                class="nav-button px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
+                       flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
+                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700"
                 [class.text-gray-600]="!isRouteActive('/colleges')"
                 [class.bg-transparent]="!isRouteActive('/colleges')"
                 [class.text-blue-700]="isRouteActive('/colleges')"
-                [class.bg-blue-100]="isRouteActive('/colleges')"
-                [class.shadow-md]="isRouteActive('/colleges')">
-          <span class="material-icons text-sm relative z-10 transition-transform duration-300">account_balance</span>
-          <span class="relative z-10 text-xs transition-all duration-300 hidden sm:inline xl:inline">Colleges</span>
+                [class.bg-blue-100]="isRouteActive('/colleges')">
+          <span class="material-icons text-sm">account_balance</span>
+          <span class="text-xs hidden sm:inline">Colleges</span>
         </button>
 
         <!-- 5. Abroad (with dropdown) -->
@@ -343,20 +323,15 @@
 
         <!-- 6. Contact Us -->
         <button (click)="navigateToRoute('/contact')"
-                class="nav-button px-1.5 sm:px-2 lg:px-3 py-1.5 text-xs font-medium
-                       rounded-xl transition-all duration-500 ease-out flex items-center gap-1 lg:gap-1.5
-                       cursor-pointer border-none outline-none flex-shrink-0
-                       focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 whitespace-nowrap
-                       hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105
-                       relative overflow-hidden"
-                [class.active-tab]="isRouteActive('/contact')"
+                class="nav-button px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
+                       flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
+                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700"
                 [class.text-gray-600]="!isRouteActive('/contact')"
                 [class.bg-transparent]="!isRouteActive('/contact')"
                 [class.text-blue-700]="isRouteActive('/contact')"
-                [class.bg-blue-100]="isRouteActive('/contact')"
-                [class.shadow-md]="isRouteActive('/contact')">
-          <span class="material-icons text-sm relative z-10 transition-transform duration-300">contact_mail</span>
-          <span class="relative z-10 text-xs transition-all duration-300 hidden sm:inline">Contact</span>
+                [class.bg-blue-100]="isRouteActive('/contact')">
+          <span class="material-icons text-sm">contact_mail</span>
+          <span class="text-xs hidden sm:inline">Contact</span>
         </button>
 
         <!-- 7. More (with dropdown) -->

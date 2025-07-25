@@ -1878,3 +1878,13 @@ nav {
   animation: marquee 30s linear infinite;
   display: inline-block;
 }
+
+/* Navigation Container Scrollbar Hide */
+.navigation-container::-webkit-scrollbar {
+  display: none;
+}
+
+.navigation-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
