@@ -21,11 +21,11 @@ export class Footer {
     phone: '+91 99804 87777',
     whatsapp: '+91 99804 87777',
     address: {
-      line1: '123 Education Hub',
-      line2: 'MG Road, Bangalore',
-      city: 'Bangalore',
+      line1: 'Wayzon Education',
+      line2: 'Manyata Tech Park, MFAR, 4th Floor, Nagawara, Hebbal',
+      city: 'Bengaluru',
       state: 'Karnataka',
-      pincode: '560001',
+      pincode: '560045',
       country: 'India'
     }
   };
@@ -75,7 +75,7 @@ export class Footer {
     {
       city: 'Bangalore',
       type: 'Head Office',
-      address: '123 Education Hub, MG Road',
+      address: 'Wayzon Education, Manyata Tech Park, MFAR, 4th Floor, Nagawara, Hebbal, Bengaluru - 560045',
       phone: '+91 99804 87777',
       email: 'Info@wayzoneducation.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM'
@@ -93,14 +93,6 @@ export class Footer {
       type: 'Branch Office',
       address: '789 Learning Plaza, Andheri',
       phone: '+91 99804 87777',
-      email: 'Info@wayzoneducation.com',
-      timings: 'Mon-Sat: 9:00 AM - 7:00 PM'
-    },
-    {
-      city: 'Chennai',
-      type: 'Branch Office',
-      address: '321 Education Square, T.Nagar',
-      phone: '+91 97405 68888',
       email: 'Info@wayzoneducation.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM'
     }

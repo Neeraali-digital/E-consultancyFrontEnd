@@ -23,7 +23,7 @@ export class ContactComponent implements OnInit {
   offices = [
     {
       city: 'Bangalore',
-      address: '123 MG Road, Bangalore - 560001',
+      address: 'Wayzon Education, Manyata Tech Park, MFAR, 4th Floor, Nagawara, Hebbal, Bengaluru - 560045',
       phone: '+91 99804 87777',
       email: 'Info@wayzoneducation.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM',
@@ -41,14 +41,6 @@ export class ContactComponent implements OnInit {
       city: 'Mumbai',
       address: '789 Bandra West, Mumbai - 400050',
       phone: '+91 99804 87777',
-      email: 'Info@wayzoneducation.com',
-      timings: 'Mon-Sat: 9:00 AM - 7:00 PM',
-      isMain: false
-    },
-    {
-      city: 'Chennai',
-      address: '321 T. Nagar, Chennai - 600017',
-      phone: '+91 97405 68888',
       email: 'Info@wayzoneducation.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM',
       isMain: false

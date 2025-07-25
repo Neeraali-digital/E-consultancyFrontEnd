@@ -112,6 +112,44 @@ export class AdminSidebarComponent implements OnInit, AfterViewInit {
       ]
     },
     {
+      id: 'updates',
+      label: 'Latest Updates',
+      icon: 'campaign',
+      children: [
+        {
+          id: 'updates-list',
+          label: 'All Updates',
+          icon: 'list',
+          route: '/admin/updates'
+        },
+        {
+          id: 'updates-add',
+          label: 'Add Update',
+          icon: 'add',
+          route: '/admin/updates/add'
+        }
+      ]
+    },
+    {
+      id: 'reviews',
+      label: 'Reviews',
+      icon: 'star',
+      children: [
+        {
+          id: 'reviews-list',
+          label: 'All Reviews',
+          icon: 'list',
+          route: '/admin/reviews'
+        },
+        {
+          id: 'reviews-add',
+          label: 'Add Review',
+          icon: 'add',
+          route: '/admin/reviews/add'
+        }
+      ]
+    },
+    {
       id: 'inquiries',
       label: 'Inquiries',
       icon: 'contact_support',

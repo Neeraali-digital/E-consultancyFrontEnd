@@ -11,6 +11,10 @@ import { BlogFormComponent } from './pages/blogs/blog-form/blog-form.component';
 import { UserListComponent } from './pages/users/user-list/user-list.component';
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
 import { InquiryListComponent } from './pages/inquiries/inquiry-list/inquiry-list.component';
+import { UpdateListComponent } from './pages/updates/update-list/update-list.component';
+import { UpdateFormComponent } from './pages/updates/update-form/update-form.component';
+import { ReviewListComponent } from './pages/reviews/review-list/review-list.component';
+import { ReviewFormComponent } from './pages/reviews/review-form/review-form.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 // import { AdminAuthGuard } from './guards/admin-auth.guard'; // Temporarily disabled
 
@@ -98,6 +102,40 @@ export const adminRoutes: Routes = [
           {
             path: 'edit/:id',
             component: UserFormComponent
+          }
+        ]
+      },
+      {
+        path: 'updates',
+        children: [
+          {
+            path: '',
+            component: UpdateListComponent
+          },
+          {
+            path: 'add',
+            component: UpdateFormComponent
+          },
+          {
+            path: 'edit/:id',
+            component: UpdateFormComponent
+          }
+        ]
+      },
+      {
+        path: 'reviews',
+        children: [
+          {
+            path: '',
+            component: ReviewListComponent
+          },
+          {
+            path: 'add',
+            component: ReviewFormComponent
+          },
+          {
+            path: 'edit/:id',
+            component: ReviewFormComponent
           }
         ]
       },
