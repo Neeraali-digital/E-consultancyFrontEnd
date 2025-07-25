@@ -1879,12 +1879,28 @@ nav {
   display: inline-block;
 }
 
-/* Navigation Container Scrollbar Hide */
+/* Navigation Container Scrollbar Hide - Production Safe */
 .navigation-container::-webkit-scrollbar {
-  display: none;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .navigation-container {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  overflow-x: auto !important;
+}
+
+/* Force responsive classes for production */
+@media (max-width: 639px) {
+  .navigation-container .hidden.sm\:inline {
+    display: none !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .navigation-container .hidden.sm\:inline {
+    display: inline !important;
+  }
 }

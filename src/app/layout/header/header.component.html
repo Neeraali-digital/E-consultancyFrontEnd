@@ -208,8 +208,7 @@
           <!-- Enhanced Compact Navigation Pills - Responsive -->
           <div class="flex items-center bg-white rounded-2xl px-2 py-1 shadow-md border border-gray-100 navigation-container
                       gap-1 overflow-x-auto relative w-full max-w-4xl"
-               style="scrollbar-width: none; -ms-overflow-style: none;"
-               onscroll="this.style.webkitScrollbar = 'none'">
+               style="scrollbar-width: none !important; -ms-overflow-style: none !important; overflow-x: auto !important;">
         <!-- 1. Home - Enhanced Responsive -->
         <button (click)="navigateToRoute('/home')"
                 [disabled]="isNavigating"
