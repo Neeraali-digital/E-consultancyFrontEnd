@@ -65,7 +65,7 @@
         [class.shadow-2xl]="isScrolled"
         [class.py-2]="isScrolled"
         [class.py-4]="!isScrolled">
-  <div class="max-w-7xl mx-auto px-6 relative overflow-visible">
+  <div class="max-w-7xl mx-auto px-0 lg:px-6 relative overflow-visible">
     <!-- Enhanced Mobile App Header - Fully Responsive -->
     <div class="lg:hidden w-full bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 relative overflow-hidden">
       <!-- Background Pattern - Responsive -->
@@ -764,5 +764,24 @@
     </div>
   </div>
 </header>
+
+<!-- Flowing Updates Ticker - Mobile Only -->
+<div class="lg:hidden bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-2 overflow-hidden relative">
+  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
+  <div class="flex items-center gap-4 relative z-10">
+    <div class="flex-shrink-0 px-4 flex items-center gap-2">
+      <span class="material-icons text-yellow-400 animate-bounce">campaign</span>
+      <span class="font-bold text-sm">LATEST UPDATES</span>
+    </div>
+    <div class="flex-1 overflow-hidden">
+      <div class="animate-marquee whitespace-nowrap">
+        <span *ngFor="let update of latestUpdates; let i = index" class="inline-block mx-8">
+          <span class="font-medium">🎓 {{ update.text }}</span>
+          <span class="text-yellow-300 ml-2 text-sm">{{ update.date }}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Message system is now integrated in the header -->

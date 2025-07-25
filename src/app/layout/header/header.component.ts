@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { ScrollService } from '../../shared/services/scroll.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -54,6 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   showNotifications = false;
   unreadCount = 0;
   private notificationSubscription?: Subscription;
+  private routerSubscription?: Subscription;
 
   // Message system
   showMessages = false;
@@ -164,8 +166,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // Ensure all dropdowns are closed on initialization
     this.closeAllDropdowns();
 
-
-
     this.startUpdateCarousel();
     if (isPlatformBrowser(this.platformId)) {
       this.setupScrollListener();
@@ -175,6 +175,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.notificationSubscription = this.notificationService.getUnreadCount().subscribe(
       count => this.unreadCount = count
     );
+
+    // Subscribe to router events to track route changes
+    this.routerSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentRoute = event.url;
+      });
 
     // Animate message icon on page load
     this.animateMessageIcon();
@@ -192,6 +199,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // Unsubscribe from notifications
     if (this.notificationSubscription) {
       this.notificationSubscription.unsubscribe();
+    }
+
+    // Unsubscribe from router events
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
     }
 
     // Restore body scroll on component destroy
@@ -303,7 +315,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       // Method 1: Try router.navigate
       this.router.navigate([route]).then((success: boolean) => {
         this.isNavigating = false;
-        this.currentRoute = route; // Update current route for active state
+        // Route will be updated automatically via router subscription
         // Ensure scroll to top after navigation
         setTimeout(() => {
           this.scrollService.scrollToTop();
@@ -511,7 +523,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   isRouteActive(route: string): boolean {
-    return this.currentRoute === route || this.currentRoute.startsWith(route + '/');
+    const currentUrl = this.router.url;
+    // Handle root route
+    if (route === '/home' && (currentUrl === '/' || currentUrl === '/home')) {
+      return true;
+    }
+    // Handle other routes
+    return currentUrl === route || currentUrl.startsWith(route + '/');
   }
 
   // Simple logo click navigation
