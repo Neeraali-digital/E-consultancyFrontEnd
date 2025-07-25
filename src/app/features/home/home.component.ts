@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CounterAnimationDirective } from '../../shared/directives/counter-animation.directive';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,8 @@ import { CounterAnimationDirective } from '../../shared/directives/counter-anima
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
+  router = inject(Router)
+
   // Carousel data for consultancy ads
   consultancyAds = [
     {
@@ -19,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       subtitle: 'Top Engineering Colleges',
       description: 'Get direct admission to premier engineering institutions with 100% placement guarantee.',
       image: '',
-      buttonText: 'Explore Engineering',
+      buttonText: 'Explore institutions',
       bgGradient: 'from-blue-600 to-purple-600'
     },
     {
@@ -28,7 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       subtitle: 'MBBS & Medical Courses',
       description: 'Secure your seat in top medical colleges with our expert guidance and support.',
       image: '',
-      buttonText: 'Explore Medical',
+      buttonText: 'Explore institutions',
       bgGradient: 'from-red-500 to-pink-600'
     },
     {
@@ -37,7 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       subtitle: 'MBA & Management Programs',
       description: 'Join prestigious business schools and accelerate your career in management.',
       image: '',
-      buttonText: 'Explore MBA',
+      buttonText: 'Explore institutions',
       bgGradient: 'from-green-500 to-teal-600'
     },
     {
@@ -46,7 +49,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       subtitle: 'IT & Computer Science',
       description: 'Shape the future with cutting-edge technology programs and industry partnerships.',
       image: '',
-      buttonText: 'Explore Tech',
+      buttonText: 'Explore institutions',
       bgGradient: 'from-indigo-500 to-blue-600'
     }
   ];
@@ -184,6 +187,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   goToReview(index: number) {
     this.currentReviewIndex = index;
+  }
+
+  navigateToCOllages(){
+    console.log('clickccccccccccccccccc')
+    this.router.navigate(['/colleges']);
   }
 
 }

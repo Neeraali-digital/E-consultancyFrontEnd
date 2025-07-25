@@ -177,6 +177,16 @@ export class CollegesComponent implements OnInit {
     });
   }
 
+  getActiveFiltersCount(): number {
+    let count = 0;
+    if (this.filters.type !== 'All') count++;
+    if (this.filters.location !== 'All') count++;
+    if (this.filters.ranking !== 'All') count++;
+    if (this.filters.course !== 'All') count++;
+    if (this.searchQuery.trim()) count++;
+    return count;
+  }
+
 
 
   clearFilters(): void {

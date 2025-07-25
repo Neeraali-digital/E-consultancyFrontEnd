@@ -119,13 +119,16 @@
   }
 }
 
-/* Responsive Design */
+/* Enhanced Mobile-First Responsive Design */
 @media (max-width: 768px) {
   .scroll-to-top-btn {
     bottom: 6rem;
     right: 1.5rem;
     width: 3rem;
     height: 3rem;
+    /* Enhanced touch targets */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .btn-icon {
@@ -133,16 +136,51 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .scroll-to-top-btn {
     bottom: 5.5rem;
+    right: 1.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    /* Ensure minimum touch target size */
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .btn-icon {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-to-top-btn {
+    bottom: 5rem;
     right: 1rem;
     width: 2.5rem;
     height: 2.5rem;
+    /* Maintain accessibility standards */
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .btn-icon {
     font-size: 1rem;
+  }
+}
+
+/* Enhanced touch interaction for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .scroll-to-top-btn {
+    /* Larger touch targets on touch devices */
+    width: 3.5rem;
+    height: 3.5rem;
+    min-width: 56px;
+    min-height: 56px;
+  }
+
+  .scroll-to-top-btn:active {
+    transform: translateY(-1px) scale(0.95);
+    transition: transform 0.1s ease;
   }
 }
 

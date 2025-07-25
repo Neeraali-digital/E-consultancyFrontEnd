@@ -1,21 +1,23 @@
-<!-- Professional Top Bar - Hidden on Mobile -->
-<div class="hidden md:block w-full bg-gray-100 text-gray-500 text-xs shadow-xl shadow-gray-300">
-  <div class="flex items-center justify-between px-6 p-1">
+<!-- Professional Top Bar - Enhanced Responsive Design -->
+<div class="hidden sm:block w-full bg-gray-100 text-gray-500 text-xs shadow-xl shadow-gray-300">
+  <div class="flex items-center justify-between px-3 sm:px-6 p-1">
     <div class="relative z-10 flex items-center justify-between w-full">
-      <!-- Quick Info -->
-      <div class="flex items-center gap-6 text-xs">
+      <!-- Quick Info - Responsive -->
+      <div class="flex items-center gap-3 sm:gap-6 text-xs">
         <div class="flex items-center gap-1.5">
           <span class="material-icons text-xs">email</span>
-          <span>Info&#64;wayzoneducation.com</span>
+          <span class="hidden md:inline">Info&#64;wayzoneducation.com</span>
+          <span class="md:hidden">Email</span>
         </div>
         <div class="flex items-center gap-1.5">
           <span class="material-icons text-xs">location_on</span>
-          <span>Bangalore, India</span>
+          <span class="hidden lg:inline">Bangalore, India</span>
+          <span class="lg:hidden">Bangalore</span>
         </div>
       </div>
 
-      <!-- Scrolling Updates -->
-      <div class="flex-1 mx-4 overflow-hidden">
+      <!-- Scrolling Updates - Hidden on smaller screens -->
+      <div class="hidden lg:flex flex-1 mx-4 overflow-hidden">
         <div class="transition-transform duration-700 ease-in-out"
              [style.transform]="'translateX(-' + (currentUpdateIndex * 100) + '%)'">
           <div class="flex">
@@ -28,26 +30,30 @@
         </div>
       </div>
 
-      <!-- Social & Contact -->
-      <div class="flex items-center gap-3">
-        <div class="flex items-center gap-2">
-          <a href="#" class="hover:text-blue-300 transition-colors">
+      <!-- Social & Contact - Responsive -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="hidden md:flex items-center gap-2">
+          <a href="#" class="hover:text-blue-300 transition-colors" aria-label="Twitter">
             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
               <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
             </svg>
           </a>
-          <a href="#" class="hover:text-blue-300 transition-colors">
+          <a href="#" class="hover:text-blue-300 transition-colors" aria-label="Facebook">
             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
               <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
             </svg>
           </a>
-          <a href="#" class="hover:text-blue-300 transition-colors">
+          <a href="#" class="hover:text-blue-300 transition-colors" aria-label="LinkedIn">
             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
             </svg>
           </a>
         </div>
-        <div class="text-xs font-medium">📞 +91 99804 87777</div>
+        <div class="text-xs font-medium flex items-center gap-1">
+          <span class="material-icons text-xs">phone</span>
+          <span class="hidden sm:inline">+91 99804 87777</span>
+          <span class="sm:hidden">Call</span>
+        </div>
       </div>
     </div>
   </div>
@@ -60,82 +66,85 @@
         [class.py-2]="isScrolled"
         [class.py-4]="!isScrolled">
   <div class="max-w-7xl mx-auto px-6 relative overflow-visible">
-    <!-- Modern Mobile App Header - Full Width -->
+    <!-- Enhanced Mobile App Header - Fully Responsive -->
     <div class="lg:hidden w-full bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 relative overflow-hidden">
-      <!-- Background Pattern -->
+      <!-- Background Pattern - Responsive -->
       <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-0 left-0 w-32 h-32 bg-white rounded-full -translate-x-16 -translate-y-16"></div>
-        <div class="absolute top-0 right-0 w-24 h-24 bg-white rounded-full translate-x-12 -translate-y-12"></div>
-        <div class="absolute bottom-0 left-1/2 w-20 h-20 bg-white rounded-full -translate-x-10 translate-y-10"></div>
+        <div class="absolute top-0 left-0 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 bg-white rounded-full -translate-x-8 sm:-translate-x-12 md:-translate-x-16 -translate-y-8 sm:-translate-y-12 md:-translate-y-16"></div>
+        <div class="absolute top-0 right-0 w-12 sm:w-18 md:w-24 h-12 sm:h-18 md:h-24 bg-white rounded-full translate-x-6 sm:translate-x-9 md:translate-x-12 -translate-y-6 sm:-translate-y-9 md:-translate-y-12"></div>
+        <div class="absolute bottom-0 left-1/2 w-10 sm:w-16 md:w-20 h-10 sm:h-16 md:h-20 bg-white rounded-full -translate-x-5 sm:-translate-x-8 md:-translate-x-10 translate-y-5 sm:translate-y-8 md:translate-y-10"></div>
       </div>
 
-      <!-- Main Header Content -->
-      <div class="relative z-10 px-4 py-6">
+      <!-- Main Header Content - Enhanced Responsive -->
+      <div class="relative z-10 px-3 sm:px-4 py-4 sm:py-6">
         <div class="flex items-center justify-between">
-          <!-- App Logo & Title Section (75% width) -->
-          <div class="flex-1 max-w-[75%]">
+          <!-- App Logo & Title Section - Responsive -->
+          <div class="flex-1 max-w-[70%] sm:max-w-[75%]">
             <div class="flex items-center cursor-pointer group" (click)="onLogoClick()">
-              <!-- App Icon Container -->
+              <!-- App Icon Container - Responsive -->
               <div class="relative">
-                <div class="w-14 h-14 bg-white rounded-2xl shadow-lg flex items-center justify-center
+                <div class="w-12 sm:w-14 h-12 sm:h-14 bg-white rounded-xl sm:rounded-2xl shadow-lg flex items-center justify-center
                            group-hover:scale-105 transition-transform duration-300">
                   <img id="wayzonLogo" src="assets/images/logo.png" alt="Wayzon"
-                       class="h-10 w-10 object-contain"
+                       class="h-8 sm:h-10 w-8 sm:w-10 object-contain"
                        style="display: block !important;"
                        onload="console.log('✅ Logo loaded successfully')"
                        onerror="console.log('❌ Logo failed to load');">
                 </div>
-                <!-- App Badge -->
-                <div class="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white
+                <!-- App Badge - Responsive -->
+                <div class="absolute -top-1 -right-1 w-4 sm:w-5 h-4 sm:h-5 bg-green-500 rounded-full border-2 border-white
                            flex items-center justify-center">
                   <span class="text-white text-xs font-bold">✓</span>
                 </div>
               </div>
 
-              <!-- App Title & Subtitle -->
-              <div class="ml-4 flex-1">
-                <h1 class="text-white font-bold text-xl leading-tight">Wayzon</h1>
-                <p class="text-blue-100 text-sm font-medium">Education Consultancy</p>
+              <!-- App Title & Subtitle - Responsive -->
+              <div class="ml-3 sm:ml-4 flex-1 min-w-0">
+                <h1 class="text-white font-bold text-lg sm:text-xl leading-tight truncate">Wayzon</h1>
+                <p class="text-blue-100 text-xs sm:text-sm font-medium truncate">Education Consultancy</p>
               </div>
             </div>
           </div>
 
-          <!-- Action Buttons (25% width) -->
-          <div class="flex items-center gap-3">
-            <!-- Search Button -->
-            <button class="w-11 h-11 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center
-                           text-white hover:bg-white/30 transition-all duration-300 active:scale-95">
-              <span class="material-icons text-xl">search</span>
+          <!-- Action Buttons - Enhanced Responsive -->
+          <div class="flex items-center gap-2 sm:gap-3">
+            <!-- Search Button - Responsive -->
+            <button class="w-10 sm:w-11 h-10 sm:h-11 bg-white/20 backdrop-blur-sm rounded-lg sm:rounded-xl flex items-center justify-center
+                           text-white hover:bg-white/30 transition-all duration-300 active:scale-95"
+                    aria-label="Search">
+              <span class="material-icons text-lg sm:text-xl">search</span>
             </button>
 
-            <!-- Notification Button -->
+            <!-- Notification Button - Responsive -->
             <div class="relative" (clickOutside)="showMessages = false">
               <button (click)="toggleMessages(); $event.stopPropagation()"
-                      class="w-11 h-11 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center
+                      class="w-10 sm:w-11 h-10 sm:h-11 bg-white/20 backdrop-blur-sm rounded-lg sm:rounded-xl flex items-center justify-center
                              text-white hover:bg-white/30 transition-all duration-300 active:scale-95 relative"
-                      [class.animate-jump]="shouldAnimateIcon">
-                <span class="material-icons text-xl">notifications</span>
-                <!-- Notification Badge -->
+                      [class.animate-jump]="shouldAnimateIcon"
+                      aria-label="Notifications">
+                <span class="material-icons text-lg sm:text-xl">notifications</span>
+                <!-- Notification Badge - Responsive -->
                 <span *ngIf="unreadMessages > 0"
                       class="absolute -top-1 -right-1 bg-red-500 text-white text-xs
-                             rounded-full h-5 w-5 flex items-center justify-center font-bold
+                             rounded-full h-4 sm:h-5 w-4 sm:w-5 flex items-center justify-center font-bold
                              animate-pulse border-2 border-white">
                   {{ unreadMessages > 9 ? '9+' : unreadMessages }}
                 </span>
               </button>
             </div>
 
-            <!-- Menu Button -->
+            <!-- Menu Button - Responsive -->
             <button (click)="toggleMobileMenu()"
-                    class="w-11 h-11 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center
-                           text-white hover:bg-white/30 transition-all duration-300 active:scale-95">
-              <div class="w-6 h-6 flex flex-col justify-center items-center">
-                <span class="block w-5 h-0.5 bg-white transition-all duration-300 rounded-full"
+                    class="w-10 sm:w-11 h-10 sm:h-11 bg-white/20 backdrop-blur-sm rounded-lg sm:rounded-xl flex items-center justify-center
+                           text-white hover:bg-white/30 transition-all duration-300 active:scale-95"
+                    aria-label="Menu">
+              <div class="w-5 sm:w-6 h-5 sm:h-6 flex flex-col justify-center items-center">
+                <span class="block w-4 sm:w-5 h-0.5 bg-white transition-all duration-300 rounded-full"
                       [class.rotate-45]="isMobileMenuOpen"
                       [class.translate-y-1.5]="isMobileMenuOpen"></span>
-                <span class="block w-5 h-0.5 bg-white mt-1 transition-all duration-300 rounded-full"
+                <span class="block w-4 sm:w-5 h-0.5 bg-white mt-1 transition-all duration-300 rounded-full"
                       [class.opacity-0]="isMobileMenuOpen"></span>
-                <span class="block w-5 h-0.5 bg-white mt-1 transition-all duration-300 rounded-full"
+                <span class="block w-4 sm:w-5 h-0.5 bg-white mt-1 transition-all duration-300 rounded-full"
                       [class.-rotate-45]="isMobileMenuOpen"
                       [class.-translate-y-1.5]="isMobileMenuOpen"></span>
               </div>
@@ -143,67 +152,67 @@
           </div>
         </div>
 
-        <!-- Quick Actions Bar -->
-        <div class="mt-5 flex gap-3 overflow-x-auto scrollbar-hide">
+        <!-- Quick Actions Bar - Enhanced Responsive -->
+        <div class="mt-4 sm:mt-5 flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide pb-1">
           <button (click)="navigateToRoute('/courses')"
-                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3
-                         text-white text-sm font-medium hover:bg-white/30 transition-all duration-300
-                         flex items-center gap-2">
-            <span class="material-icons text-lg">school</span>
-            Courses
+                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3
+                         text-white text-xs sm:text-sm font-medium hover:bg-white/30 transition-all duration-300
+                         flex items-center gap-1.5 sm:gap-2 min-w-max">
+            <span class="material-icons text-base sm:text-lg">school</span>
+            <span class="whitespace-nowrap">Courses</span>
           </button>
           <button (click)="navigateToRoute('/colleges')"
-                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3
-                         text-white text-sm font-medium hover:bg-white/30 transition-all duration-300
-                         flex items-center gap-2">
-            <span class="material-icons text-lg">account_balance</span>
-            Colleges
+                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3
+                         text-white text-xs sm:text-sm font-medium hover:bg-white/30 transition-all duration-300
+                         flex items-center gap-1.5 sm:gap-2 min-w-max">
+            <span class="material-icons text-base sm:text-lg">account_balance</span>
+            <span class="whitespace-nowrap">Colleges</span>
           </button>
           <button (click)="navigateToRoute('/abroad')"
-                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3
-                         text-white text-sm font-medium hover:bg-white/30 transition-all duration-300
-                         flex items-center gap-2">
-            <span class="material-icons text-lg">flight_takeoff</span>
-            Study Abroad
+                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3
+                         text-white text-xs sm:text-sm font-medium hover:bg-white/30 transition-all duration-300
+                         flex items-center gap-1.5 sm:gap-2 min-w-max">
+            <span class="material-icons text-base sm:text-lg">flight_takeoff</span>
+            <span class="whitespace-nowrap">Study Abroad</span>
           </button>
           <button (click)="navigateToRoute('/contact')"
-                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3
-                         text-white text-sm font-medium hover:bg-white/30 transition-all duration-300
-                         flex items-center gap-2">
-            <span class="material-icons text-lg">contact_support</span>
-            Contact
+                  class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3
+                         text-white text-xs sm:text-sm font-medium hover:bg-white/30 transition-all duration-300
+                         flex items-center gap-1.5 sm:gap-2 min-w-max">
+            <span class="material-icons text-base sm:text-lg">contact_support</span>
+            <span class="whitespace-nowrap">Contact</span>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Desktop Header Layout: Logo (2/12) | Navigation (8/12) | Actions (2/12) -->
-    <div class="hidden lg:grid grid-cols-12 items-center gap-4 lg:gap-6">
+    <!-- Enhanced Desktop Header Layout: Logo (2/12) | Navigation (8/12) | Actions (2/12) -->
+    <div class="hidden lg:grid grid-cols-12 items-center gap-3 lg:gap-4 xl:gap-6">
 
-      <!-- Logo Section - Desktop -->
+      <!-- Logo Section - Enhanced Responsive Desktop -->
       <div class="col-span-3 lg:col-span-2">
         <div class="flex items-center group cursor-pointer" (click)="onLogoClick()">
-          <!-- Brand Logo -->
+          <!-- Brand Logo - Enhanced Responsive -->
           <div class="relative logo-container">
             <img id="wayzonLogo" src="assets/images/logo.png" alt="Wayzon Educational Consultancy"
-                 class="brand-logo-enhanced wayzon-main-logo"
+                 class="brand-logo-enhanced wayzon-main-logo transition-all duration-300 hover:scale-105"
                  style="display: block !important;"
                  onload="console.log('✅ Logo loaded successfully')"
                  onerror="console.log('❌ Logo failed to load');">
           </div>
         </div>
       </div>
-      <!-- Navigation Section - Desktop Only -->
+      <!-- Enhanced Navigation Section - Desktop Only -->
       <div class="col-span-6 lg:col-span-8">
         <nav class="flex items-center justify-center relative overflow-visible">
-          <!-- Compact Navigation Pills -->
-          <div class="flex items-center bg-white/80 backdrop-blur-sm rounded-2xl px-2 py-1 shadow-md border border-gray-100 navigation-container
-                      gap-1 overflow-visible relative w-full max-w-4xl justify-center">
-        <!-- 1. Home -->
+          <!-- Enhanced Compact Navigation Pills - Responsive -->
+          <div class="flex items-center bg-white/80 backdrop-blur-sm rounded-2xl px-1.5 lg:px-2 py-1 shadow-md border border-gray-100 navigation-container
+                      gap-0.5 lg:gap-1 overflow-visible relative w-full max-w-4xl justify-center">
+        <!-- 1. Home - Enhanced Responsive -->
         <button (click)="navigateToRoute('/home')"
                 [disabled]="isNavigating"
-                class="nav-button px-3 py-1.5 text-xs font-medium
-                       rounded-xl transition-all duration-500 ease-out flex items-center gap-1.5
+                class="nav-button px-2 lg:px-3 py-1.5 text-xs font-medium
+                       rounded-lg lg:rounded-xl transition-all duration-500 ease-out flex items-center gap-1 lg:gap-1.5
                        cursor-pointer border-none outline-none
                        focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50
                        disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap
@@ -216,14 +225,14 @@
                 [class.bg-blue-100]="isRouteActive('/home')"
                 [class.shadow-md]="isRouteActive('/home')">
           <span class="material-icons text-sm relative z-10 transition-transform duration-300">home</span>
-          <span class="relative z-10 text-xs transition-all duration-300">Home</span>
+          <span class="relative z-10 text-xs transition-all duration-300 hidden xl:inline">Home</span>
           <span *ngIf="isNavigating" class="material-icons text-xs animate-spin ml-1 relative z-10">refresh</span>
         </button>
 
-        <!-- 2. About -->
+        <!-- 2. About - Enhanced Responsive -->
         <button (click)="navigateToRoute('/about')"
-                class="nav-button px-3 py-1.5 text-xs font-medium
-                       rounded-xl transition-all duration-500 ease-out flex items-center gap-1.5
+                class="nav-button px-2 lg:px-3 py-1.5 text-xs font-medium
+                       rounded-lg lg:rounded-xl transition-all duration-500 ease-out flex items-center gap-1 lg:gap-1.5
                        cursor-pointer border-none outline-none
                        focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 whitespace-nowrap
                        hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105
@@ -235,13 +244,13 @@
                 [class.bg-blue-100]="isRouteActive('/about')"
                 [class.shadow-md]="isRouteActive('/about')">
           <span class="material-icons text-sm relative z-10 transition-transform duration-300">people</span>
-          <span class="relative z-10 text-xs transition-all duration-300">About Us</span>
+          <span class="relative z-10 text-xs transition-all duration-300 hidden xl:inline">About</span>
         </button>
 
-        <!-- 3. Courses -->
+        <!-- 3. Courses - Enhanced Responsive -->
         <button (click)="navigateToRoute('/courses')"
-                class="nav-button px-3 py-1.5 text-xs font-medium
-                       rounded-xl transition-all duration-500 ease-out flex items-center gap-1.5
+                class="nav-button px-2 lg:px-3 py-1.5 text-xs font-medium
+                       rounded-lg lg:rounded-xl transition-all duration-500 ease-out flex items-center gap-1 lg:gap-1.5
                        cursor-pointer border-none outline-none
                        focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 whitespace-nowrap
                        hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105
@@ -253,13 +262,13 @@
                 [class.bg-blue-100]="isRouteActive('/courses')"
                 [class.shadow-md]="isRouteActive('/courses')">
           <span class="material-icons text-sm relative z-10 transition-transform duration-300">school</span>
-          <span class="relative z-10 text-xs transition-all duration-300">Courses</span>
+          <span class="relative z-10 text-xs transition-all duration-300 hidden xl:inline">Courses</span>
         </button>
 
-        <!-- 4. Colleges -->
+        <!-- 4. Colleges - Enhanced Responsive -->
         <button (click)="navigateToRoute('/colleges')"
-                class="nav-button px-3 py-1.5 text-xs font-medium
-                       rounded-xl transition-all duration-500 ease-out flex items-center gap-1.5
+                class="nav-button px-2 lg:px-3 py-1.5 text-xs font-medium
+                       rounded-lg lg:rounded-xl transition-all duration-500 ease-out flex items-center gap-1 lg:gap-1.5
                        cursor-pointer border-none outline-none
                        focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 whitespace-nowrap
                        hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105
@@ -271,7 +280,7 @@
                 [class.bg-blue-100]="isRouteActive('/colleges')"
                 [class.shadow-md]="isRouteActive('/colleges')">
           <span class="material-icons text-sm relative z-10 transition-transform duration-300">account_balance</span>
-          <span class="relative z-10 text-xs transition-all duration-300">Colleges</span>
+          <span class="relative z-10 text-xs transition-all duration-300 hidden xl:inline">Colleges</span>
         </button>
 
         <!-- 5. Abroad (with dropdown) -->
