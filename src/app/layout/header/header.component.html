@@ -186,11 +186,11 @@
       </div>
     </div>
 
-    <!-- Enhanced Desktop Header Layout: Logo (2/12) | Navigation (8/12) | Actions (2/12) -->
-    <div class="hidden lg:grid grid-cols-12 items-center gap-3 lg:gap-4 xl:gap-6">
+    <!-- Enhanced Desktop Header Layout: Logo (2/12) | Navigation (7/12) | Actions (3/12) -->
+    <div class="hidden lg:grid grid-cols-12 items-center gap-2 lg:gap-3 xl:gap-4">
 
       <!-- Logo Section - Enhanced Responsive Desktop -->
-      <div class="col-span-3 lg:col-span-2">
+      <div class="col-span-2">
         <div class="flex items-center group cursor-pointer" (click)="onLogoClick()">
           <!-- Brand Logo - Enhanced Responsive -->
           <div class="relative logo-container">
@@ -203,64 +203,64 @@
         </div>
       </div>
       <!-- Enhanced Navigation Section - Desktop Only -->
-      <div class="col-span-6 lg:col-span-8">
+      <div class="col-span-7">
         <nav class="flex items-center justify-center relative overflow-visible">
           <!-- Enhanced Compact Navigation Pills - Responsive -->
           <div class="flex items-center bg-white rounded-2xl px-2 py-1 shadow-md border border-gray-100 navigation-container
-                      gap-1 overflow-x-auto relative w-full max-w-4xl"
+                      gap-1 overflow-x-auto relative w-full"
                style="scrollbar-width: none; -ms-overflow-style: none;"
                onscroll="this.style.webkitScrollbar = 'none'">
         <!-- 1. Home - Enhanced Responsive -->
         <button (click)="navigateToRoute('/home')"
                 [disabled]="isNavigating"
-                class="nav-button px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
-                       flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
-                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700"
+                class="nav-button px-1.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
+                       flex items-center gap-0.5 cursor-pointer border-none outline-none flex-shrink-0
+                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
                 [class.text-gray-600]="!isRouteActive('/home')"
                 [class.bg-transparent]="!isRouteActive('/home')"
                 [class.text-blue-700]="isRouteActive('/home')"
                 [class.bg-blue-100]="isRouteActive('/home')">
           <span class="material-icons text-sm">home</span>
-          <span class="text-xs hidden sm:inline">Home</span>
+          <span class="text-xs hidden lg:inline">Home</span>
         </button>
 
         <!-- 2. About - Enhanced Responsive -->
         <button (click)="navigateToRoute('/about')"
-                class="nav-button px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
-                       flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
-                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700"
+                class="nav-button px-1.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
+                       flex items-center gap-0.5 cursor-pointer border-none outline-none flex-shrink-0
+                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
                 [class.text-gray-600]="!isRouteActive('/about')"
                 [class.bg-transparent]="!isRouteActive('/about')"
                 [class.text-blue-700]="isRouteActive('/about')"
                 [class.bg-blue-100]="isRouteActive('/about')">
           <span class="material-icons text-sm">people</span>
-          <span class="text-xs hidden sm:inline">About</span>
+          <span class="text-xs hidden lg:inline">About</span>
         </button>
 
         <!-- 3. Courses - Enhanced Responsive -->
         <button (click)="navigateToRoute('/courses')"
-                class="nav-button px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
-                       flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
-                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700"
+                class="nav-button px-1.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
+                       flex items-center gap-0.5 cursor-pointer border-none outline-none flex-shrink-0
+                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
                 [class.text-gray-600]="!isRouteActive('/courses')"
                 [class.bg-transparent]="!isRouteActive('/courses')"
                 [class.text-blue-700]="isRouteActive('/courses')"
                 [class.bg-blue-100]="isRouteActive('/courses')">
           <span class="material-icons text-sm">school</span>
-          <span class="text-xs hidden sm:inline">Courses</span>
+          <span class="text-xs hidden lg:inline">Courses</span>
         </button>
 
         <!-- 4. Colleges - Enhanced Responsive -->
         <button (click)="navigateToRoute('/colleges')"
-                class="nav-button px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
-                       flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
-                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700"
+                class="nav-button px-1.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
+                       flex items-center gap-0.5 cursor-pointer border-none outline-none flex-shrink-0
+                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
                 [class.text-gray-600]="!isRouteActive('/colleges')"
                 [class.bg-transparent]="!isRouteActive('/colleges')"
                 [class.text-blue-700]="isRouteActive('/colleges')"
                 [class.bg-blue-100]="isRouteActive('/colleges')">
           <span class="material-icons text-sm">account_balance</span>
-          <span class="text-xs hidden sm:inline">Colleges</span>
+          <span class="text-xs hidden lg:inline">Colleges</span>
         </button>
 
         <!-- 5. Abroad (with dropdown) -->
@@ -270,18 +270,18 @@
                   type="button"
                   [attr.aria-expanded]="isAbroadDropdownOpen"
                   [attr.aria-haspopup]="true"
-                  class="nav-button px-1.5 sm:px-2 lg:px-3 py-1.5 text-xs font-medium text-gray-600
-                         rounded-xl transition-all duration-500 ease-out flex items-center gap-1 lg:gap-1.5
+                  class="nav-button px-1.5 py-1.5 text-xs font-medium text-gray-600
+                         rounded-lg transition-all duration-500 ease-out flex items-center gap-0.5
                          cursor-pointer border-none bg-transparent outline-none flex-shrink-0
                          focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 whitespace-nowrap
                          hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105
-                         relative overflow-hidden"
+                         relative overflow-hidden min-w-max"
                   [class.bg-blue-100]="isAbroadDropdownOpen"
                   [class.text-blue-700]="isAbroadDropdownOpen"
                   [class.shadow-md]="isAbroadDropdownOpen">
             <span class="material-icons text-sm relative z-10 transition-transform duration-300">public</span>
-            <span class="relative z-10 text-xs transition-all duration-300 hidden sm:inline">Abroad</span>
-            <span class="material-icons text-xs relative z-10 transition-transform duration-500 ml-1"
+            <span class="relative z-10 text-xs transition-all duration-300 hidden lg:inline">Abroad</span>
+            <span class="material-icons text-xs relative z-10 transition-transform duration-500 ml-0.5"
                   [class.rotate-180]="isAbroadDropdownOpen">keyboard_arrow_down</span>
           </button>
 
@@ -323,15 +323,15 @@
 
         <!-- 6. Contact Us -->
         <button (click)="navigateToRoute('/contact')"
-                class="nav-button px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
-                       flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
-                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700"
+                class="nav-button px-1.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
+                       flex items-center gap-0.5 cursor-pointer border-none outline-none flex-shrink-0
+                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
                 [class.text-gray-600]="!isRouteActive('/contact')"
                 [class.bg-transparent]="!isRouteActive('/contact')"
                 [class.text-blue-700]="isRouteActive('/contact')"
                 [class.bg-blue-100]="isRouteActive('/contact')">
           <span class="material-icons text-sm">contact_mail</span>
-          <span class="text-xs hidden sm:inline">Contact</span>
+          <span class="text-xs hidden lg:inline">Contact</span>
         </button>
 
         <!-- 7. More (with dropdown) -->
@@ -341,18 +341,18 @@
                   type="button"
                   [attr.aria-expanded]="isMoreDropdownOpen"
                   [attr.aria-haspopup]="true"
-                  class="nav-button px-1.5 sm:px-2 lg:px-3 py-1.5 text-xs font-medium text-gray-600
-                         rounded-xl transition-all duration-500 ease-out flex items-center gap-1 lg:gap-1.5
+                  class="nav-button px-1.5 py-1.5 text-xs font-medium text-gray-600
+                         rounded-lg transition-all duration-500 ease-out flex items-center gap-0.5
                          cursor-pointer border-none bg-transparent outline-none flex-shrink-0
                          focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50
                          relative overflow-hidden whitespace-nowrap
-                         hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105"
+                         hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105 min-w-max"
                   [class.bg-blue-100]="isMoreDropdownOpen"
                   [class.text-blue-700]="isMoreDropdownOpen"
                   [class.shadow-md]="isMoreDropdownOpen">
             <span class="material-icons text-sm relative z-10 transition-transform duration-300">more_horiz</span>
-            <span class="relative z-10 text-xs transition-all duration-300 hidden sm:inline">More</span>
-            <span class="material-icons text-xs relative z-10 transition-transform duration-500 ml-1"
+            <span class="relative z-10 text-xs transition-all duration-300 hidden lg:inline">More</span>
+            <span class="material-icons text-xs relative z-10 transition-transform duration-500 ml-0.5"
                   [class.rotate-180]="isMoreDropdownOpen">keyboard_arrow_down</span>
           </button>
 
@@ -432,26 +432,26 @@
       </div>
 
       <!-- Actions Section - Desktop Only -->
-      <div class="col-span-3 lg:col-span-2">
-        <div class="flex items-center justify-end gap-1 sm:gap-2 lg:gap-3">
+      <div class="col-span-3">
+        <div class="flex items-center justify-end gap-1 xl:gap-2">
         <!-- Call Now Button -->
         <a href="tel:+919980487777"
            class="call-now-btn flex items-center gap-1 bg-green-600 text-white
-                  rounded-full font-semibold hover:bg-green-700 transition-all duration-300
-                  hover:shadow-lg hover:shadow-green-500/25 transform hover:-translate-y-0.5
-                  px-4 py-2 text-sm">
+                  rounded-full font-semibold hover:bg-green-700 transition-all duration-500
+                  hover:shadow-lg hover:shadow-green-500/25 transform hover:-translate-y-0.5 hover:scale-105
+                  px-2.5 py-1.5 text-xs flex-shrink-0">
           <span class="material-icons text-sm">phone</span>
-          <span>Call Now</span>
+          <span class="transition-all duration-300">Call Now</span>
         </a>
 
         <!-- Apply Now Button -->
         <button (click)="navigateToRoute('/contact')"
                 class="apply-now-btn flex items-center gap-1 bg-blue-600 text-white
-                       rounded-full font-semibold hover:bg-blue-700 transition-all duration-300
-                       hover:shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-0.5
-                       px-4 py-2 text-sm">
+                       rounded-full font-semibold hover:bg-blue-700 transition-all duration-500
+                       hover:shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-0.5 hover:scale-105
+                       px-2.5 py-1.5 text-xs flex-shrink-0">
           <span class="material-icons text-sm">send</span>
-          <span>Apply Now</span>
+          <span class="transition-all duration-300">Apply Now</span>
         </button>
 
         <!-- Enhanced Message Center - Desktop -->
