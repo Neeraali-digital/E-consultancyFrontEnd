@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CounterAnimationDirective } from '../../shared/directives/counter-animation.directive';
 import { Router } from '@angular/router';
+import { ApiService } from '../../shared/services/api.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +15,21 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit, OnDestroy {
 
   router = inject(Router)
+  
+  // Dashboard stats
+  dashboardStats: any = {
+    totalColleges: 0,
+    totalCourses: 0,
+    totalStudents: 0,
+    totalApplications: 0
+  };
+  
+  // Recent colleges and courses
+  featuredColleges: any[] = [];
+  popularCourses: any[] = [];
+  recentBlogs: any[] = [];
+  
+  loading = true;
 
   // Carousel data for consultancy ads
   consultancyAds = [
@@ -118,11 +135,55 @@ export class HomeComponent implements OnInit, OnDestroy {
   private carouselInterval: any;
   private reviewInterval: any;
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.startCarouselAutoScroll();
     this.startReviewAutoScroll();
+    this.loadHomeData();
+  }
+  
+  loadHomeData() {
+    this.loading = true;
+    
+    // Load dashboard stats
+    this.apiService.getDashboardStats().subscribe({
+      next: (stats) => {
+        this.dashboardStats = stats;
+      },
+      error: (error) => console.error('Error loading dashboard stats:', error)
+    });
+    
+    // Load featured colleges
+    this.apiService.getColleges({ limit: 6, status: 'active' }).subscribe({
+      next: (colleges) => {
+        this.featuredColleges = colleges.results || colleges;
+      },
+      error: (error) => console.error('Error loading colleges:', error)
+    });
+    
+    // Load popular courses
+    this.apiService.getCourses({ limit: 8, status: 'active' }).subscribe({
+      next: (courses) => {
+        this.popularCourses = courses.results || courses;
+      },
+      error: (error) => console.error('Error loading courses:', error)
+    });
+    
+    // Load recent blogs
+    this.apiService.getBlogs({ limit: 3, status: 'published' }).subscribe({
+      next: (blogs) => {
+        this.recentBlogs = blogs.results || blogs;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading blogs:', error);
+        this.loading = false;
+      }
+    });
   }
 
   ngOnDestroy() {

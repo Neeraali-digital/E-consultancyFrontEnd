@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
+import { ApiService } from '../../../shared/services/api.service';
 
 export interface Blog {
   id: string;
@@ -77,51 +78,32 @@ export class BlogService {
     }
   ];
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   getBlogs(): Observable<Blog[]> {
-    return of(this.blogs).pipe(delay(500));
+    return this.apiService.getBlogs().pipe(
+      map(response => response.results || response || this.blogs)
+    );
   }
 
   getBlog(id: string): Observable<Blog | undefined> {
-    const blog = this.blogs.find(b => b.id === id);
-    return of(blog).pipe(delay(300));
+    return this.apiService.getBlog(parseInt(id)).pipe(
+      map(response => response || this.blogs.find(b => b.id === id))
+    );
   }
 
   createBlog(blog: Omit<Blog, 'id' | 'createdAt' | 'updatedAt' | 'views' | 'likes'>): Observable<Blog> {
-    const newBlog: Blog = {
-      ...blog,
-      id: Date.now().toString(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      views: 0,
-      likes: 0
-    };
-    
-    this.blogs.push(newBlog);
-    return of(newBlog).pipe(delay(1000));
+    return this.apiService.createBlog(blog);
   }
 
   updateBlog(id: string, blog: Partial<Blog>): Observable<Blog> {
-    const index = this.blogs.findIndex(b => b.id === id);
-    if (index !== -1) {
-      this.blogs[index] = {
-        ...this.blogs[index],
-        ...blog,
-        updatedAt: new Date()
-      };
-      return of(this.blogs[index]).pipe(delay(1000));
-    }
-    throw new Error('Blog not found');
+    return this.apiService.updateBlog(parseInt(id), blog);
   }
 
   deleteBlog(id: string): Observable<boolean> {
-    const index = this.blogs.findIndex(b => b.id === id);
-    if (index !== -1) {
-      this.blogs.splice(index, 1);
-      return of(true).pipe(delay(500));
-    }
-    return of(false).pipe(delay(500));
+    return this.apiService.deleteBlog(parseInt(id)).pipe(
+      map(() => true)
+    );
   }
 
   toggleBlogStatus(id: string): Observable<Blog> {

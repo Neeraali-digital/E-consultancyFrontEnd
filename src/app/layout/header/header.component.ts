@@ -541,29 +541,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // Simple logo click for navigation
   // (3D effects removed for clean brand appearance)
 
-  // Dropdown positioning method
-  private positionDropdown(type: 'abroad' | 'more'): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    const dropdown = document.querySelector(`[data-dropdown-state="true"]`) as HTMLElement;
-    if (!dropdown) return;
-
-    const button = type === 'abroad'
-      ? document.querySelector('button[class*="nav-button"]:has(span:contains("Abroad"))') as HTMLElement
-      : document.querySelector('button[class*="nav-button"]:has(span:contains("More"))') as HTMLElement;
-
-    if (!button) return;
-
-    const buttonRect = button.getBoundingClientRect();
-    const headerHeight = 80; // Approximate header height
-
-    if (type === 'abroad') {
-      dropdown.style.left = `${buttonRect.left}px`;
-      dropdown.style.top = `${headerHeight}px`;
-    } else {
-      dropdown.style.right = `${window.innerWidth - buttonRect.right}px`;
-      dropdown.style.top = `${headerHeight}px`;
-    }
+  getDropdownPosition() {
+    return {
+      top: 70, // Position below header
+      left: 200, // Adjust as needed for abroad dropdown
+      right: 50  // Adjust as needed for more dropdown
+    };
   }
 
 }

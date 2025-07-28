@@ -86,89 +86,89 @@
 <!-- Courses Grid -->
 <div *ngIf="!isLoading" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
   <div *ngFor="let course of getPaginatedCourses(); let i = index"
-       class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+       class="group bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
        [style.animation-delay]="i * 100 + 'ms'"
        style="animation: slideInUp 0.6s ease-out forwards;">
 
     <!-- Course Header -->
-    <div class="p-4 sm:p-6 border-b border-gray-100">
-      <div class="flex items-start justify-between mb-3">
-        <div class="flex-1 min-w-0">
-          <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-1 line-clamp-2">{{ course.name }}</h3>
-          <p class="text-sm text-gray-600 font-medium">{{ course.code }}</p>
-        </div>
-        <div class="ml-3 sm:ml-4 flex-shrink-0">
-          <span class="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-xs font-medium"
-                [class.bg-green-100]="course.status === 'active'"
-                [class.text-green-800]="course.status === 'active'"
-                [class.bg-red-100]="course.status === 'inactive'"
-                [class.text-red-800]="course.status === 'inactive'">
+    <div class="relative h-28 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 p-4 text-white overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-2 right-2 w-12 h-12 border border-white/30 rounded-full"></div>
+        <div class="absolute bottom-2 left-2 w-6 h-6 bg-white/20 rounded-full"></div>
+      </div>
+      
+      <div class="relative z-10 h-full flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+            <span class="material-icons text-sm">auto_stories</span>
+          </div>
+          <span class="bg-white/25 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold"
+                [ngClass]="{
+                  'bg-green-500/80': course.status === 'active',
+                  'bg-red-500/80': course.status === 'inactive'
+                }">
             {{ course.status | titlecase }}
           </span>
         </div>
-      </div>
-
-      <div class="flex items-center space-x-4 text-sm text-gray-600">
-        <div class="flex items-center space-x-1">
-          <span class="material-icons text-xs">category</span>
-          <span>{{ getCategoryLabel(course.category) }}</span>
-        </div>
-        <div class="flex items-center space-x-1">
-          <span class="material-icons text-xs">schedule</span>
-          <span>{{ course.duration }}</span>
+        <div>
+          <h3 class="text-sm font-bold mb-1 line-clamp-1">{{ course.name }}</h3>
+          <p class="text-xs opacity-90">{{ course.code }}</p>
         </div>
       </div>
     </div>
 
     <!-- Course Details -->
-    <div class="p-6">
-      <div class="space-y-3">
-        <div>
-          <p class="text-sm text-gray-600 line-clamp-3">{{ course.description }}</p>
+    <div class="p-4">
+      <!-- Category & Duration -->
+      <div class="flex items-center justify-between mb-3">
+        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-lg text-xs font-semibold">
+          {{ getCategoryLabel(course.category) }}
+        </span>
+        <div class="flex items-center gap-1 text-xs text-gray-600">
+          <span class="material-icons text-xs">schedule</span>
+          <span class="font-medium">{{ course.duration }}</span>
         </div>
+      </div>
 
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-xs text-gray-500">Degree Type</p>
-            <p class="text-sm font-medium text-gray-900">{{ getDegreeTypeLabel(course.degreeType) }}</p>
-          </div>
-          <!-- <div class="text-right">
-            <p class="text-xs text-gray-500">Annual Fee</p>
-            <p class="text-sm font-bold text-green-600">₹{{ course.annualFee | number }}</p>
-          </div> -->
+      <!-- Description -->
+      <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ course.description }}</p>
+
+      <!-- Info Card -->
+      <div class="bg-purple-50 rounded-lg p-2 mb-3">
+        <div class="flex items-center gap-1 mb-1">
+          <span class="material-icons text-purple-600 text-sm">school</span>
+          <span class="text-purple-700 text-xs font-medium">Degree Type</span>
         </div>
+        <p class="text-purple-900 text-xs font-bold">{{ getDegreeTypeLabel(course.degree_type) }}</p>
+      </div>
 
-        <div class="pt-3 border-t border-gray-100">
-          <div class="flex items-center justify-between">
-            <!-- <div>
-              <p class="text-xs text-gray-500">Total Fee</p>
-              <p class="text-lg font-bold text-blue-600">₹{{ course.totalFee | number }}</p>
-            </div> -->
-            <div class="flex items-center space-x-2">
-              <button
-                (click)="onEdit(course)"
-                class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200"
-                title="Edit Course">
-                <span class="material-icons text-sm">edit</span>
-              </button>
-              <button
-                (click)="onToggleStatus(course)"
-                class="p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200"
-                [class.text-green-600]="course.status === 'inactive'"
-                [class.text-orange-600]="course.status === 'active'"
-                [title]="course.status === 'active' ? 'Deactivate Course' : 'Activate Course'">
-                <span class="material-icons text-sm">
-                  {{ course.status === 'active' ? 'visibility_off' : 'visibility' }}
-                </span>
-              </button>
-              <button
-                (click)="onDelete(course)"
-                class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
-                title="Delete Course">
-                <span class="material-icons text-sm">delete</span>
-              </button>
-            </div>
-          </div>
+      <!-- Action Buttons -->
+      <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+        <div class="flex gap-1">
+          <button (click)="onEdit(course)"
+                  class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200"
+                  title="Edit Course">
+            <span class="material-icons text-sm">edit</span>
+          </button>
+          <button (click)="onToggleStatus(course)"
+                  class="p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200"
+                  [class.text-green-600]="course.status === 'inactive'"
+                  [class.text-orange-600]="course.status === 'active'"
+                  [title]="course.status === 'active' ? 'Deactivate' : 'Activate'">
+            <span class="material-icons text-sm">
+              {{ course.status === 'active' ? 'visibility_off' : 'visibility' }}
+            </span>
+          </button>
+          <button (click)="onDelete(course)"
+                  class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
+                  title="Delete Course">
+            <span class="material-icons text-sm">delete</span>
+          </button>
+        </div>
+        
+        <div class="text-xs text-gray-500">
+          ID: {{ course.id }}
         </div>
       </div>
     </div>

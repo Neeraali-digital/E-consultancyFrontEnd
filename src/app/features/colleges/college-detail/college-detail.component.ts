@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+// import { ApiService } from '../../shared/services/api.service';
 
 interface CollegeFacility {
   icon: string;
@@ -72,6 +73,8 @@ interface College {
   virtualTourUrl?: string;
   motto?: string;
   vision?: string;
+  institutionType?: string;
+  affiliated?: string;
 }
 
 @Component({
@@ -82,12 +85,21 @@ interface College {
   styleUrls: ['./college-detail.component.css']
 })
 export class CollegeDetailComponent implements OnInit {
-  college: College | null = null;
-  loading = true;
-  error = false;
+  // Signals for reactive state management
+  colleges = signal<College[]>([]);
+  currentCollegeId = signal<number | null>(null);
+  loading = signal(true);
+  error = signal(false);
+  
+  // Computed signal for current college
+  college = computed(() => {
+    const id = this.currentCollegeId();
+    const collegeList = this.colleges();
+    return id ? collegeList.find(c => c.id === id) || null : null;
+  });
 
-  // Sample college data - in real app this would come from a service
-  private colleges: College[] = [
+  // Static college data with full details
+  private staticColleges: College[] = [
     {
       id: 1,
       name: 'Indian Institute of Technology Delhi',
@@ -405,30 +417,39 @@ export class CollegeDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    // private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const collegeId = +params['id'];
-      this.loadCollegeDetails(collegeId);
+      console.log('College ID from route:', collegeId);
+      this.currentCollegeId.set(collegeId);
+      this.loadAllColleges();
     });
   }
 
-  private loadCollegeDetails(id: number): void {
-    this.loading = true;
-    this.error = false;
+  private loadAllColleges(): void {
+    this.loading.set(true);
+    this.error.set(false);
 
-    // Simulate API call delay
+    // Use static data for now
     setTimeout(() => {
-      const foundCollege = this.colleges.find(c => c.id === id);
-      if (foundCollege) {
-        this.college = foundCollege;
-        this.loading = false;
-      } else {
-        this.error = true;
-        this.loading = false;
+      console.log('Loading colleges:', this.staticColleges);
+      this.colleges.set(this.staticColleges);
+      
+      // Check if current college exists
+      const currentId = this.currentCollegeId();
+      const foundCollege = this.staticColleges.find(c => c.id === currentId);
+      console.log('Looking for college ID:', currentId);
+      console.log('Found college:', foundCollege);
+      
+      if (!foundCollege && currentId) {
+        this.error.set(true);
       }
+      
+      this.loading.set(false);
     }, 500);
   }
 
@@ -465,24 +486,83 @@ export class CollegeDetailComponent implements OnInit {
   }
 
   openWebsite(): void {
-    if (this.college?.website) {
-      window.open(this.college.website, '_blank');
+    const currentCollege = this.college();
+    if (currentCollege?.website) {
+      window.open(currentCollege.website, '_blank');
     }
   }
 
   callCollege(): void {
-    if (this.college?.phone) {
-      window.open(`tel:${this.college.phone}`);
+    const currentCollege = this.college();
+    if (currentCollege?.phone) {
+      window.open(`tel:${currentCollege.phone}`);
     }
   }
 
   emailCollege(): void {
-    if (this.college?.email) {
-      window.open(`mailto:${this.college.email}`);
+    const currentCollege = this.college();
+    if (currentCollege?.email) {
+      window.open(`mailto:${currentCollege.email}`);
     }
   }
 
   getSafeUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  private getCollegeColor(type: string): string {
+    const colorMap: { [key: string]: string } = {
+      'engineering': 'blue',
+      'medical': 'red',
+      'management': 'green',
+      'arts': 'purple',
+      'law': 'orange',
+      'pharmacy': 'indigo'
+    };
+    return colorMap[type?.toLowerCase()] || 'blue';
+  }
+
+  private getDefaultStaticData(): Partial<College> {
+    return {
+      placement: '95%',
+      avgPackage: '₹15 LPA',
+      description: 'A premier educational institution committed to excellence in education.',
+      phone: '+91-XXX-XXX-XXXX',
+      email: 'info@college.edu',
+      website: '#',
+      campusSize: '100 acres',
+      totalStudents: '5,000+',
+      facultyRatio: '1:10',
+      facilities: [
+        { icon: 'library_books', name: 'Central Library', description: 'State-of-the-art library with extensive resources' },
+        { icon: 'science', name: 'Research Labs', description: 'Advanced research laboratories' },
+        { icon: 'sports_soccer', name: 'Sports Complex', description: 'Comprehensive sports facilities' },
+        { icon: 'restaurant', name: 'Dining Halls', description: 'Multiple dining options' },
+        { icon: 'hotel', name: 'Hostels', description: 'Comfortable accommodation' },
+        { icon: 'local_hospital', name: 'Health Center', description: '24/7 medical facilities' }
+      ],
+      admissionProcess: [
+        'Online application submission',
+        'Entrance exam qualification', 
+        'Document verification',
+        'Counseling and seat allocation',
+        'Fee payment and admission confirmation'
+      ],
+      eligibility: [
+        '10+2 with relevant subjects',
+        'Minimum required percentage',
+        'Valid entrance exam score',
+        'Age limit as per norms'
+      ],
+      highlights: [
+        'Top-ranked institution',
+        'Excellent placement record',
+        'World-class faculty',
+        'Modern infrastructure'
+      ],
+      accreditation: ['NAAC A++', 'NBA Accredited'],
+      motto: 'Excellence in Education',
+      vision: 'To be a leading institution fostering innovation and creating future leaders.'
+    };
   }
 }

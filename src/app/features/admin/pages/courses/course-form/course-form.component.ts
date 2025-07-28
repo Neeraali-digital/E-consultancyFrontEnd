@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+// import { AlertService } from '../../../shared/services/alert.service';
+// Using hardcoded API URL
+const API_URL = 'http://127.0.0.1:8000/api';
 
 export interface Course {
   id?: string;
@@ -10,10 +14,9 @@ export interface Course {
   code: string;
   category: string;
   duration: string;
-  degreeType: string;
+  degree_type: string;
   description: string;
   eligibility: string;
-
   status: 'active' | 'inactive';
   createdAt?: Date;
   updatedAt?: Date;
@@ -40,7 +43,10 @@ export class CourseFormComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+
+    private http: HttpClient,
+    // private alertService: AlertService
   ) {
     this.initializeForm();
   }
@@ -64,10 +70,9 @@ export class CourseFormComponent implements OnInit, OnDestroy {
       code: ['', [Validators.required]],
       category: ['', [Validators.required]],
       duration: ['', [Validators.required]],
-      degreeType: ['', [Validators.required]],
+      degree_type: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(50)]],
       eligibility: ['', [Validators.required]],
-
       status: ['active']
     });
   }
@@ -78,61 +83,74 @@ export class CourseFormComponent implements OnInit, OnDestroy {
 
   private loadCourse(): void {
     this.isLoading = true;
-
-    // Mock data loading - replace with actual service call
-    setTimeout(() => {
-      const mockCourse: Course = {
-        id: this.courseId!,
-        name: 'Bachelor of Technology in Computer Science',
-        code: 'CSE101',
-        category: 'engineering',
-        duration: '4 Years',
-        degreeType: 'undergraduate',
-        description: 'A comprehensive program covering computer science fundamentals, programming, algorithms, and software development.',
-        eligibility: '10+2 with Physics, Chemistry, Mathematics with minimum 60% marks',
-
-        status: 'active'
-      };
-
-      this.courseForm.patchValue(mockCourse);
-      this.isLoading = false;
-    }, 1000);
+    
+    const sub = this.http.get(`${API_URL}/courses/${this.courseId}/`).subscribe({
+      next: (course: any) => {
+        if (course) {
+          this.courseForm.patchValue(course);
+        }
+        this.isLoading = false;
+      },
+      error: (error: any) => {
+        console.error('Error loading course:', error);
+        this.errorMessage = 'Failed to load course data';
+        this.isLoading = false;
+      }
+    });
+    
+    this.subscription.add(sub);
   }
 
   onSubmit(): void {
+    console.log('Form submitted');
+    console.log('Form valid:', this.courseForm.valid);
+    console.log('Form value:', this.courseForm.value);
+    console.log('Form errors:', this.getFormErrors());
+    
     if (this.courseForm.valid) {
       this.isSubmitting = true;
       this.errorMessage = '';
+      this.successMessage = '';
 
       const courseData: Course = {
         ...this.courseForm.value,
         id: this.isEditMode ? this.courseId : undefined
       };
+      
+      console.log('Sending course data:', courseData);
 
-      // Mock API call - replace with actual service
-      setTimeout(() => {
-        try {
-          console.log('Course data:', courseData);
+      const apiCall = this.isEditMode 
+        ? this.http.put(`${API_URL}/courses/${this.courseId}/`, courseData)
+        : this.http.post(`${API_URL}/courses/`, courseData);
 
-          this.successMessage = this.isEditMode
-            ? 'Course updated successfully!'
-            : 'Course created successfully!';
-
+      const sub = apiCall.subscribe({
+        next: (response: any) => {
+          console.log(this.isEditMode ? 'Course updated successfully!' : 'Course created successfully!');
           this.isSubmitting = false;
-
-          // Redirect after success
-          setTimeout(() => {
-            this.router.navigate(['/admin/courses']);
-          }, 2000);
-
-        } catch (error) {
-          this.errorMessage = 'An error occurred while saving the course. Please try again.';
+          this.router.navigate(['/admin/courses']);
+        },
+        error: (error: any) => {
+          console.error('Error saving course. Please try again.');
           this.isSubmitting = false;
         }
-      }, 1500);
+      });
+      
+      this.subscription.add(sub);
     } else {
+      console.log('Form is invalid, marking fields as touched');
       this.markFormGroupTouched();
     }
+  }
+  
+  private getFormErrors(): any {
+    const errors: any = {};
+    Object.keys(this.courseForm.controls).forEach(key => {
+      const control = this.courseForm.get(key);
+      if (control && control.errors) {
+        errors[key] = control.errors;
+      }
+    });
+    return errors;
   }
 
   private markFormGroupTouched(): void {

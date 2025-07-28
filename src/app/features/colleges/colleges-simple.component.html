@@ -1,0 +1,166 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="relative z-10">
+    <section class="bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-800 text-white py-20">
+      <div class="max-w-7xl mx-auto px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Top <span class="text-yellow-400">Colleges</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-purple-100 max-w-3xl mx-auto leading-relaxed">
+          Discover India's premier educational institutions with guaranteed admission opportunities
+        </p>
+      </div>
+    </section>
+
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Premier Educational Institutions
+          </h2>
+          <p class="text-xl text-gray-600 mb-8">
+            Top-ranked colleges with guaranteed admission opportunities
+          </p>
+          
+          <!-- Search Bar -->
+          <div class="max-w-2xl mx-auto mb-8">
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <span class="material-icons text-gray-400">search</span>
+              </div>
+              <input [(ngModel)]="searchQuery" (input)="onSearchChange()" 
+                     type="text" placeholder="Search colleges by name, location, or type..." 
+                     class="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg shadow-lg">
+              <button *ngIf="searchQuery" (click)="clearSearch()" 
+                      class="absolute inset-y-0 right-0 pr-4 flex items-center">
+                <span class="material-icons text-gray-400 hover:text-gray-600">close</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div *ngFor="let college of filteredColleges" 
+               class="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+            
+            <!-- Premium College Image -->
+            <div class="relative h-44 overflow-hidden bg-gray-100">
+              <img *ngIf="college.image" [src]="college.image" [alt]="college.name" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                   onerror="this.style.display='none'">
+              <div *ngIf="!college.image" class="flex items-center justify-center h-full bg-gradient-to-br" [ngClass]="getColorClasses(college.color)">
+                <span class="text-white text-5xl font-bold drop-shadow-lg">{{ college.shortName?.charAt(0) || college.name?.charAt(0) }}</span>
+              </div>
+              
+              <!-- Light Overlay for Text Readability -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+              
+              <!-- Top Badges -->
+              <div class="absolute top-4 left-4 right-4 flex justify-between items-start">
+                <div class="flex flex-col gap-2">
+                  <span class="bg-white/95 backdrop-blur-sm text-gray-800 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                    🏆 #{{ college.ranking }}
+                  </span>
+                  <span class="bg-emerald-500/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
+                    {{ college.institutionType || 'Premium' }}
+                  </span>
+                </div>
+                <div class="flex items-center bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg">
+                  <span class="text-yellow-500 mr-1 text-sm">★</span>
+                  <span class="text-gray-800 text-sm font-bold">{{ college.rating }}</span>
+                </div>
+              </div>
+              
+              <!-- Bottom College Name -->
+              <div class="absolute bottom-4 left-4 right-4">
+                <h3 class="text-white text-xl font-bold mb-1 drop-shadow-lg">{{ college.shortName || college.name }}</h3>
+                <p class="text-white/90 text-sm font-medium drop-shadow-md">{{ college.name }}</p>
+              </div>
+            </div>
+            
+            <!-- Premium College Info -->
+            <div class="p-3 space-y-2">
+              <!-- Info Cards Grid -->
+              <div class="grid grid-cols-2 gap-1.5">
+                <!-- Location Card -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-2 border border-blue-200">
+                  <div class="flex items-center gap-2 mb-1">
+                    <div class="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center">
+                      <span class="material-icons text-white text-sm">location_on</span>
+                    </div>
+                    <span class="text-blue-700 text-xs font-semibold">Location</span>
+                  </div>
+                  <p class="text-blue-900 text-sm font-bold truncate">{{ college.location }}</p>
+                </div>
+                
+                <!-- Established Card -->
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-2 border border-purple-200">
+                  <div class="flex items-center gap-2 mb-1">
+                    <div class="w-6 h-6 bg-purple-500 rounded-lg flex items-center justify-center">
+                      <span class="material-icons text-white text-sm">calendar_today</span>
+                    </div>
+                    <span class="text-purple-700 text-xs font-semibold">Est.</span>
+                  </div>
+                  <p class="text-purple-900 text-sm font-bold">{{ college.established }}</p>
+                </div>
+                
+                <!-- Type Card -->
+                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg p-2 border border-indigo-200">
+                  <div class="flex items-center gap-2 mb-1">
+                    <div class="w-6 h-6 bg-indigo-500 rounded-lg flex items-center justify-center">
+                      <span class="material-icons text-white text-sm">school</span>
+                    </div>
+                    <span class="text-indigo-700 text-xs font-semibold">Type</span>
+                  </div>
+                  <p class="text-indigo-900 text-sm font-bold truncate">{{ college.type }}</p>
+                </div>
+                
+                <!-- Affiliated Card -->
+                <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg p-2 border border-emerald-200">
+                  <div class="flex items-center gap-2 mb-1">
+                    <div class="w-6 h-6 bg-emerald-500 rounded-lg flex items-center justify-center">
+                      <span class="material-icons text-white text-sm">verified</span>
+                    </div>
+                    <span class="text-emerald-700 text-xs font-semibold">Affiliated</span>
+                  </div>
+                  <p class="text-emerald-900 text-sm font-bold truncate">{{ college.affiliated || 'UGC' }}</p>
+                </div>
+              </div>
+              
+              <!-- Available Courses -->
+              <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 bg-orange-500 rounded-lg flex items-center justify-center">
+                    <span class="material-icons text-white text-sm">menu_book</span>
+                  </div>
+                  <span class="text-gray-700 text-sm font-bold">Available Courses</span>
+                </div>
+                <div class="flex flex-wrap gap-1">
+                  <span *ngFor="let course of getCoursesToDisplay(college)" 
+                        class="px-2.5 py-1 bg-orange-500 text-white text-xs font-semibold rounded-full">
+                    {{ course }}
+                  </span>
+                  <span *ngIf="college.courses && college.courses.length > 4" 
+                        class="px-2.5 py-1 bg-gray-300 text-gray-700 text-xs font-semibold rounded-full">
+                    +{{ college.courses.length - 4 }}
+                  </span>
+                </div>
+              </div>
+              
+              <!-- Premium Action Button -->
+              <button (click)="viewCollegeDetails(college.id)" 
+                      class="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 
+                             hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700
+                             text-white py-3 px-6 rounded-xl font-bold text-sm
+                             transition-all duration-300 transform hover:scale-105 hover:shadow-xl
+                             flex items-center justify-center gap-2 group">
+                <span class="material-icons text-lg group-hover:rotate-12 transition-transform duration-300">visibility</span>
+                View Details
+                <span class="material-icons text-sm group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

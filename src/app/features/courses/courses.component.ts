@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CounterAnimationDirective } from '../../shared/directives/counter-animation.directive';
+import { ApiService } from '../../shared/services/api.service';
 
 @Component({
   selector: 'app-courses',
@@ -15,10 +16,13 @@ export class CoursesComponent implements OnInit {
 
   searchQuery = '';
   filteredCourses: any[] = [];
+  courses: any[] = [];
+  loading = true;
+  error: string | null = null;
 
   searchSuggestions = ['Engineering', 'Medical', 'Management', 'Technology', 'Arts & Science', 'Commerce'];
 
-  courses = [
+  staticCourses = [
     {
       id: 1,
       title: 'Engineering',
@@ -90,9 +94,34 @@ export class CoursesComponent implements OnInit {
   ];
 
   private router = inject(Router);
+  private apiService = inject(ApiService);
 
   ngOnInit(): void {
-    this.filteredCourses = [...this.courses];
+    this.loadCourses();
+  }
+  
+  loadCourses(): void {
+    this.loading = true;
+    this.error = null;
+    
+    this.apiService.getCourses().subscribe({
+      next: (response) => {
+        this.courses = response.results || response;
+        // If no data from API, use static data
+        if (!this.courses || this.courses.length === 0) {
+          this.courses = this.staticCourses;
+        }
+        this.filteredCourses = [...this.courses];
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading courses:', error);
+        this.error = 'Failed to load courses. Using cached data.';
+        this.courses = this.staticCourses;
+        this.filteredCourses = [...this.courses];
+        this.loading = false;
+      }
+    });
   }
 
   // Search functionality
@@ -104,9 +133,11 @@ export class CoursesComponent implements OnInit {
 
     const query = this.searchQuery.toLowerCase();
     this.filteredCourses = this.courses.filter(course =>
-      course.title.toLowerCase().includes(query) ||
-      course.description.toLowerCase().includes(query) ||
-      course.programs.some((program: string) => program.toLowerCase().includes(query))
+      course.name?.toLowerCase().includes(query) ||
+      course.title?.toLowerCase().includes(query) ||
+      course.description?.toLowerCase().includes(query) ||
+      course.category?.toLowerCase().includes(query) ||
+      course.programs?.some((program: string) => program.toLowerCase().includes(query))
     );
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
+import { ApiService } from '../../../shared/services/api.service';
 
 export interface Course {
   id: string;
@@ -8,11 +9,11 @@ export interface Course {
   code: string;
   category: string;
   duration: string;
-  degreeType: string;
+  degree_type: string;
   description: string;
   eligibility: string;
-  annualFee: number;
-  totalFee: number;
+  annual_fee: number;
+  total_fee: number;
   status: 'active' | 'inactive';
   createdAt: Date;
   updatedAt: Date;
@@ -29,11 +30,11 @@ export class CourseService {
       code: 'CSE101',
       category: 'engineering',
       duration: '4 Years',
-      degreeType: 'undergraduate',
+      degree_type: 'undergraduate',
       description: 'A comprehensive program covering computer science fundamentals, programming, algorithms, and software development.',
       eligibility: '10+2 with Physics, Chemistry, Mathematics with minimum 60% marks',
-      annualFee: 150000,
-      totalFee: 600000,
+      annual_fee: 150000,
+      total_fee: 600000,
       status: 'active',
       createdAt: new Date('2024-01-15'),
       updatedAt: new Date('2024-01-15')
@@ -44,11 +45,11 @@ export class CourseService {
       code: 'MBA101',
       category: 'management',
       duration: '2 Years',
-      degreeType: 'postgraduate',
+      degree_type: 'postgraduate',
       description: 'Advanced business management program focusing on leadership, strategy, and entrepreneurship.',
       eligibility: 'Bachelor\'s degree with minimum 50% marks and valid entrance exam score',
-      annualFee: 200000,
-      totalFee: 400000,
+      annual_fee: 200000,
+      total_fee: 400000,
       status: 'active',
       createdAt: new Date('2024-01-10'),
       updatedAt: new Date('2024-01-10')
@@ -59,69 +60,46 @@ export class CourseService {
       code: 'MBBS101',
       category: 'medical',
       duration: '5.5 Years',
-      degreeType: 'undergraduate',
+      degree_type: 'undergraduate',
       description: 'Comprehensive medical education program preparing students for medical practice.',
       eligibility: '10+2 with Physics, Chemistry, Biology with minimum 70% marks and NEET qualification',
-      annualFee: 500000,
-      totalFee: 2750000,
+      annual_fee: 500000,
+      total_fee: 2750000,
       status: 'active',
       createdAt: new Date('2024-01-05'),
       updatedAt: new Date('2024-01-05')
     }
   ];
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   getCourses(): Observable<Course[]> {
-    return of(this.courses).pipe(delay(500));
+    return this.apiService.getCourses().pipe(
+      map(response => response.results || response || this.courses)
+    );
   }
 
   getCourse(id: string): Observable<Course | undefined> {
-    const course = this.courses.find(c => c.id === id);
-    return of(course).pipe(delay(300));
+    return this.apiService.getCourse(parseInt(id)).pipe(
+      map(response => response || this.courses.find(c => c.id === id))
+    );
   }
 
   createCourse(course: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>): Observable<Course> {
-    const newCourse: Course = {
-      ...course,
-      id: Date.now().toString(),
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-    
-    this.courses.push(newCourse);
-    return of(newCourse).pipe(delay(1000));
+    return this.apiService.createCourse(course);
   }
 
   updateCourse(id: string, course: Partial<Course>): Observable<Course> {
-    const index = this.courses.findIndex(c => c.id === id);
-    if (index !== -1) {
-      this.courses[index] = {
-        ...this.courses[index],
-        ...course,
-        updatedAt: new Date()
-      };
-      return of(this.courses[index]).pipe(delay(1000));
-    }
-    throw new Error('Course not found');
+    return this.apiService.updateCourse(parseInt(id), course);
   }
 
   deleteCourse(id: string): Observable<boolean> {
-    const index = this.courses.findIndex(c => c.id === id);
-    if (index !== -1) {
-      this.courses.splice(index, 1);
-      return of(true).pipe(delay(500));
-    }
-    return of(false).pipe(delay(500));
+    return this.apiService.deleteCourse(parseInt(id)).pipe(
+      map(() => true)
+    );
   }
 
   toggleCourseStatus(id: string): Observable<Course> {
-    const course = this.courses.find(c => c.id === id);
-    if (course) {
-      course.status = course.status === 'active' ? 'inactive' : 'active';
-      course.updatedAt = new Date();
-      return of(course).pipe(delay(500));
-    }
-    throw new Error('Course not found');
+    return this.apiService.toggleCourseStatus(parseInt(id));
   }
 }

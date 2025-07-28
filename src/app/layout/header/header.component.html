@@ -173,7 +173,7 @@
                          text-white text-xs sm:text-sm font-medium hover:bg-white/30 transition-all duration-300
                          flex items-center gap-1.5 sm:gap-2 min-w-max">
             <span class="material-icons text-base sm:text-lg">flight_takeoff</span>
-            <span class="whitespace-nowrap">Study Abroad</span>
+            <span class="whitespace-nowrap">Abroad</span>
           </button>
           <button (click)="navigateToRoute('/contact')"
                   class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3
@@ -204,11 +204,11 @@
       </div>
       <!-- Enhanced Navigation Section - Desktop Only -->
       <div class="col-span-7">
-        <nav class="flex items-center justify-center relative overflow-visible">
+        <nav class="flex items-center justify-center relative">
           <!-- Enhanced Compact Navigation Pills - Responsive -->
           <div class="flex items-center bg-white rounded-2xl px-2 py-1 shadow-md border border-gray-100 navigation-container
-                      gap-1 overflow-x-auto relative w-full"
-               style="scrollbar-width: none; -ms-overflow-style: none;"
+                      gap-1 relative w-full"
+               style="scrollbar-width: none; -ms-overflow-style: none; overflow: visible;"
                onscroll="this.style.webkitScrollbar = 'none'">
         <!-- 1. Home - Enhanced Responsive -->
         <button (click)="navigateToRoute('/home')"
@@ -221,7 +221,7 @@
                 [class.text-blue-700]="isRouteActive('/home')"
                 [class.bg-blue-100]="isRouteActive('/home')">
           <span class="material-icons text-sm">home</span>
-          <span class="text-xs hidden lg:inline">Home</span>
+          <span class="text-xs">Home</span>
         </button>
 
         <!-- 2. About - Enhanced Responsive -->
@@ -234,7 +234,7 @@
                 [class.text-blue-700]="isRouteActive('/about')"
                 [class.bg-blue-100]="isRouteActive('/about')">
           <span class="material-icons text-sm">people</span>
-          <span class="text-xs hidden lg:inline">About</span>
+          <span class="text-xs">About</span>
         </button>
 
         <!-- 3. Courses - Enhanced Responsive -->
@@ -247,7 +247,7 @@
                 [class.text-blue-700]="isRouteActive('/courses')"
                 [class.bg-blue-100]="isRouteActive('/courses')">
           <span class="material-icons text-sm">school</span>
-          <span class="text-xs hidden lg:inline">Courses</span>
+          <span class="text-xs">Courses</span>
         </button>
 
         <!-- 4. Colleges - Enhanced Responsive -->
@@ -260,68 +260,10 @@
                 [class.text-blue-700]="isRouteActive('/colleges')"
                 [class.bg-blue-100]="isRouteActive('/colleges')">
           <span class="material-icons text-sm">account_balance</span>
-          <span class="text-xs hidden lg:inline">Colleges</span>
+          <span class="text-xs">Colleges</span>
         </button>
 
-        <!-- 5. Abroad (with dropdown) -->
-        <div class="relative dropdown-wrapper"
-             [attr.data-dropdown]="'abroad'">
-          <button (click)="toggleAbroadDropdown($event)"
-                  type="button"
-                  [attr.aria-expanded]="isAbroadDropdownOpen"
-                  [attr.aria-haspopup]="true"
-                  class="nav-button px-1.5 py-1.5 text-xs font-medium text-gray-600
-                         rounded-lg transition-all duration-500 ease-out flex items-center gap-0.5
-                         cursor-pointer border-none bg-transparent outline-none flex-shrink-0
-                         focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 whitespace-nowrap
-                         hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105
-                         relative overflow-hidden min-w-max"
-                  [class.bg-blue-100]="isAbroadDropdownOpen"
-                  [class.text-blue-700]="isAbroadDropdownOpen"
-                  [class.shadow-md]="isAbroadDropdownOpen">
-            <span class="material-icons text-sm relative z-10 transition-transform duration-300">public</span>
-            <span class="relative z-10 text-xs transition-all duration-300 hidden lg:inline">Abroad</span>
-            <span class="material-icons text-xs relative z-10 transition-transform duration-500 ml-0.5"
-                  [class.rotate-180]="isAbroadDropdownOpen">keyboard_arrow_down</span>
-          </button>
-
-          <!-- Abroad Dropdown -->
-          <div *ngIf="isAbroadDropdownOpen"
-               class="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-2xl
-                      border border-gray-200 z-[99999] overflow-visible animate-slide-down dropdown-container
-                      dropdown-menu-stable"
-               style="position: absolute; z-index: 99999 !important;"
-               [attr.data-dropdown-state]="isAbroadDropdownOpen"
-               (click)="$event.stopPropagation()">
-            <div class="p-3">
-              <h3 class="text-xs font-bold text-gray-800 mb-2 flex items-center gap-2">
-                <span class="material-icons text-xs text-blue-600">public</span>
-                Study Abroad
-              </h3>
-              <div class="space-y-1">
-                <button *ngFor="let country of abroadCountries"
-                        (click)="navigateToCountry(country.code)"
-                        class="w-full flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50
-                               transition-all duration-300 text-left group">
-                  <img [src]="country.flag" [alt]="country.name + ' flag'"
-                       class="w-5 h-3 rounded object-cover shadow-sm">
-                  <span class="text-xs font-medium text-gray-700 group-hover:text-blue-600">
-                    {{ country.name }}
-                  </span>
-                </button>
-                <button (click)="showMoreCountries()"
-                        class="w-full flex items-center justify-center gap-1 p-2 rounded-lg
-                               bg-blue-50 hover:bg-blue-100 transition-all duration-300
-                               text-blue-600 font-medium text-xs">
-                  <span class="material-icons text-xs">add</span>
-                  More Options
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6. Contact Us -->
+        <!-- 5. Contact Us -->
         <button (click)="navigateToRoute('/contact')"
                 class="nav-button px-1.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
                        flex items-center gap-0.5 cursor-pointer border-none outline-none flex-shrink-0
@@ -331,99 +273,70 @@
                 [class.text-blue-700]="isRouteActive('/contact')"
                 [class.bg-blue-100]="isRouteActive('/contact')">
           <span class="material-icons text-sm">contact_mail</span>
-          <span class="text-xs hidden lg:inline">Contact</span>
+          <span class="text-xs">Contact</span>
         </button>
 
-        <!-- 7. More (with dropdown) -->
-        <div class="relative dropdown-wrapper"
-             [attr.data-dropdown]="'more'">
-          <button (click)="toggleMoreDropdown($event)"
-                  type="button"
-                  [attr.aria-expanded]="isMoreDropdownOpen"
-                  [attr.aria-haspopup]="true"
+        <!-- 6. Abroad (with dropdown) -->
+        <div class="relative dropdown-wrapper">
+          <button (click)="toggleAbroadDropdown($event)"
                   class="nav-button px-1.5 py-1.5 text-xs font-medium text-gray-600
-                         rounded-lg transition-all duration-500 ease-out flex items-center gap-0.5
+                         rounded-lg transition-all duration-300 flex items-center gap-0.5
                          cursor-pointer border-none bg-transparent outline-none flex-shrink-0
-                         focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50
-                         relative overflow-hidden whitespace-nowrap
-                         hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg hover:scale-105 min-w-max"
-                  [class.bg-blue-100]="isMoreDropdownOpen"
-                  [class.text-blue-700]="isMoreDropdownOpen"
-                  [class.shadow-md]="isMoreDropdownOpen">
-            <span class="material-icons text-sm relative z-10 transition-transform duration-300">more_horiz</span>
-            <span class="relative z-10 text-xs transition-all duration-300 hidden lg:inline">More</span>
-            <span class="material-icons text-xs relative z-10 transition-transform duration-500 ml-0.5"
-                  [class.rotate-180]="isMoreDropdownOpen">keyboard_arrow_down</span>
+                         whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
+                  [class.bg-blue-100]="isAbroadDropdownOpen"
+                  [class.text-blue-700]="isAbroadDropdownOpen">
+            <span class="material-icons text-sm">public</span>
+            <span class="text-xs">Abroad</span>
+            <span class="material-icons text-xs ml-0.5" [class.rotate-180]="isAbroadDropdownOpen">keyboard_arrow_down</span>
           </button>
 
-          <!-- More Dropdown -->
-          <div *ngIf="isMoreDropdownOpen"
-               class="absolute top-full right-0 mt-2 w-52 bg-white rounded-2xl shadow-2xl
-                      border border-gray-100 z-[99999] overflow-hidden animate-slide-down dropdown-container
-                      backdrop-blur-sm bg-white/95 dropdown-menu-stable"
-               style="position: absolute; z-index: 99999 !important;"
-               [attr.data-dropdown-state]="isMoreDropdownOpen"
+          <div *ngIf="isAbroadDropdownOpen"
+               class="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-2xl
+                      border border-gray-200 z-[99999] animate-slide-down"
+               style="position: absolute !important; z-index: 99999 !important;"
                (click)="$event.stopPropagation()">
-
-            <!-- Enhanced Header with Animation -->
-            <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-4 relative overflow-hidden">
-              <!-- Animated Background Elements -->
-              <div class="absolute inset-0 opacity-20">
-                <div class="absolute top-2 right-4 w-2 h-2 bg-white rounded-full animate-ping"></div>
-                <div class="absolute bottom-2 left-6 w-1 h-1 bg-yellow-300 rounded-full animate-bounce"></div>
-                <div class="absolute top-3 left-1/2 w-1 h-1 bg-white rounded-full animate-pulse"></div>
-              </div>
-
-              <div class="relative z-10 flex items-center gap-2">
-                <span class="material-icons text-lg animate-spin-slow">auto_awesome</span>
-                <h3 class="font-bold text-sm">Explore More</h3>
+            <div class="p-3">
+              <h3 class="text-xs font-bold text-gray-800 mb-2">Study Abroad</h3>
+              <div class="space-y-1">
+                <button *ngFor="let country of abroadCountries"
+                        (click)="navigateToCountry(country.code)"
+                        class="w-full flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 text-left">
+                  <span class="text-xs font-medium text-gray-700">{{ country.name }}</span>
+                </button>
               </div>
             </div>
+          </div>
+        </div>
 
-            <!-- Enhanced Dropdown Options -->
-            <div class="p-3 space-y-2">
-              <button *ngFor="let option of moreOptions; let i = index"
-                      (click)="navigateToMoreOption(option.route)"
-                      class="w-full flex items-center gap-3 p-3 rounded-xl transition-all duration-500
-                             text-left group relative overflow-hidden transform hover:scale-105
-                             hover:shadow-lg border border-transparent hover:border-gray-100
-                             hover:bg-gradient-to-r"
-                      [class]="option.hoverClass"
-                      [style.animation-delay]="i * 100 + 'ms'"
-                      style="animation: slideInRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;">
+        <!-- 7. More (with dropdown) -->
+        <div class="relative dropdown-wrapper">
+          <button (click)="toggleMoreDropdown($event)"
+                  class="nav-button px-1.5 py-1.5 text-xs font-medium text-gray-600
+                         rounded-lg transition-all duration-300 flex items-center gap-0.5
+                         cursor-pointer border-none bg-transparent outline-none flex-shrink-0
+                         whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
+                  [class.bg-blue-100]="isMoreDropdownOpen"
+                  [class.text-blue-700]="isMoreDropdownOpen">
+            <span class="material-icons text-sm">more_horiz</span>
+            <span class="text-xs">More</span>
+            <span class="material-icons text-xs ml-0.5" [class.rotate-180]="isMoreDropdownOpen">keyboard_arrow_down</span>
+          </button>
 
-                <!-- Icon Container with Enhanced Animation -->
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-500
-                            group-hover:scale-110 group-hover:rotate-6 relative overflow-hidden"
-                     [ngClass]="option.iconBg">
-                  <!-- Shine Effect -->
-                  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
-                              transform -skew-x-12 -translate-x-full group-hover:translate-x-full
-                              transition-transform duration-700"></div>
-                  <span class="material-icons text-white text-sm relative z-10 transition-transform duration-300
-                               group-hover:scale-110">{{ option.icon }}</span>
-                </div>
-
-                <!-- Content -->
-                <div class="flex-1 min-w-0">
-                  <h4 class="font-semibold text-gray-800 text-xs group-hover:text-gray-900 transition-colors duration-300">
-                    {{ option.title }}
-                  </h4>
-                  <p class="text-xs text-gray-500 group-hover:text-gray-600 transition-colors duration-300 truncate">
-                    {{ option.description }}
-                  </p>
-                </div>
-
-                <!-- Arrow with Enhanced Animation -->
-                <span class="material-icons text-gray-400 text-sm group-hover:text-gray-600
-                             transition-all duration-500 transform group-hover:translate-x-1 group-hover:scale-110">
-                  arrow_forward
-                </span>
-
-                <!-- Hover Background Effect -->
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-50 to-indigo-50 opacity-0
-                            group-hover:opacity-100 transition-opacity duration-300 rounded-xl -z-10"></div>
-              </button>
+          <div *ngIf="isMoreDropdownOpen"
+               class="absolute top-full right-0 mt-2 w-52 bg-white rounded-xl shadow-2xl
+                      border border-gray-200 z-[99999] animate-slide-down"
+               style="position: absolute !important; z-index: 99999 !important;"
+               (click)="$event.stopPropagation()">
+            <div class="p-3">
+              <h3 class="text-xs font-bold text-gray-800 mb-2">More Options</h3>
+              <div class="space-y-1">
+                <button *ngFor="let option of moreOptions"
+                        (click)="navigateToMoreOption(option.route)"
+                        class="w-full flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 text-left">
+                  <span class="material-icons text-sm">{{ option.icon }}</span>
+                  <span class="text-xs font-medium text-gray-700">{{ option.title }}</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { delay, map, tap } from 'rxjs/operators';
+import { ApiService } from '../../../shared/services/api.service';
+import { AuthService } from '../../../shared/services/auth.service';
 
 export interface AdminUser {
   id: string;
@@ -34,7 +36,10 @@ export class AdminService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
-  constructor() {
+  constructor(
+    private apiService: ApiService,
+    private authService: AuthService
+  ) {
     // Check if user is already logged in (from localStorage)
     this.checkAuthStatus();
   }
@@ -55,22 +60,21 @@ export class AdminService {
   }
 
   login(email: string, password: string): Observable<{ success: boolean; message: string; user?: AdminUser }> {
-    // Mock authentication - replace with actual API call
-    return of({ email, password }).pipe(
-      delay(1000), // Simulate API delay
-      map(() => {
-        // Mock validation
-        if (email === 'admin@wayzon.edu' && password === 'admin123') {
+    return this.apiService.login({ username: email, password }).pipe(
+      map((response: any) => {
+        if (response.token && response.user) {
           const user: AdminUser = {
-            id: '1',
-            name: 'Admin User',
-            email: 'admin@wayzon.edu',
-            role: 'Super Administrator',
-            permissions: ['read', 'write', 'delete', 'manage_users', 'manage_settings']
+            id: response.user.id.toString(),
+            name: `${response.user.first_name} ${response.user.last_name}`,
+            email: response.user.email,
+            role: response.user.role === 'admin' ? 'Administrator' : response.user.role,
+            permissions: response.user.role === 'admin' ? 
+              ['read', 'write', 'delete', 'manage_users', 'manage_settings'] : 
+              ['read']
           };
 
-          // Store in localStorage
-          localStorage.setItem('admin_token', 'mock_jwt_token_' + Date.now());
+          // Store admin-specific data
+          localStorage.setItem('admin_token', response.token);
           localStorage.setItem('admin_user', JSON.stringify(user));
 
           // Update subjects
@@ -79,7 +83,7 @@ export class AdminService {
 
           return { success: true, message: 'Login successful', user };
         } else {
-          return { success: false, message: 'Invalid email or password' };
+          return { success: false, message: 'Invalid credentials' };
         }
       })
     );
@@ -101,21 +105,20 @@ export class AdminService {
   }
 
   getDashboardStats(): Observable<DashboardStats> {
-    // Mock data - replace with actual API call
-    const stats: DashboardStats = {
-      totalColleges: 245,
-      totalCourses: 1250,
-      totalUsers: 15420,
-      totalInquiries: 89,
-      monthlyGrowth: {
-        colleges: 12,
-        courses: 45,
-        users: 234,
-        inquiries: 23
-      }
-    };
-
-    return of(stats).pipe(delay(500));
+    return this.apiService.getDashboardStats().pipe(
+      map(response => ({
+        totalColleges: response.total_colleges || 0,
+        totalCourses: response.total_courses || 0,
+        totalUsers: response.total_students || 0,
+        totalInquiries: response.total_applications || 0,
+        monthlyGrowth: {
+          colleges: response.monthly_growth?.colleges || 0,
+          courses: response.monthly_growth?.courses || 0,
+          users: response.monthly_growth?.students || 0,
+          inquiries: response.monthly_growth?.applications || 0
+        }
+      }))
+    );
   }
 
   getChartData(): Observable<any> {

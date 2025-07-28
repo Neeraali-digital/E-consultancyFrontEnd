@@ -2,17 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../../shared/services/api.service';
 
 @Component({
   selector: 'app-colleges',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './colleges.component.html',
+  templateUrl: './colleges-simple.component.html',
   styleUrls: ['./colleges.component.css']
 })
 export class CollegesComponent implements OnInit {
 
-  colleges = [
+  colleges: any[] = [];
+  loading = true;
+  error: string | null = null;
+  
+  // Keep static data as fallback
+  staticColleges = [
     {
       id: 1,
       name: 'Indian Institute of Technology Delhi',
@@ -124,7 +130,7 @@ export class CollegesComponent implements OnInit {
     course: 'All'
   };
 
-  filteredColleges = [...this.colleges];
+  filteredColleges: any[] = [];
   selectedCourseFilter = '';
   showMobileFilters = false;
   searchQuery = '';
@@ -134,9 +140,15 @@ export class CollegesComponent implements OnInit {
   locations = ['All', 'New Delhi', 'Bangalore', 'Tiruchirappalli', 'Manipal', 'Vellore'];
   courseTypes = ['All', 'Engineering', 'Medical', 'Management', 'Technology', 'Arts & Science', 'Commerce'];
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {
+    this.loadColleges();
+    
     // Check for course filter from query params
     this.route.queryParams.subscribe(params => {
       if (params['courseFilter']) {
@@ -144,6 +156,50 @@ export class CollegesComponent implements OnInit {
         this.filters.course = params['courseFilter'];
       }
       this.applyFilters();
+    });
+  }
+  
+  loadColleges(): void {
+    this.loading = true;
+    this.error = null;
+    
+    this.apiService.getColleges().subscribe({
+      next: (response) => {
+        let apiColleges = response.results || response;
+        // Map API data to match frontend format
+        if (apiColleges && apiColleges.length > 0) {
+          this.colleges = apiColleges.map((college: any) => ({
+            id: college.id,
+            name: college.name,
+            shortName: college.short_name || college.name,
+            type: college.type,
+            location: college.location,
+            established: college.established,
+            ranking: college.ranking || 999,
+            courses: Array.isArray(college.courses) ? college.courses : [],
+            institutionType: college.institution_type,
+            affiliated: college.affiliated,
+            rating: college.rating || 4.0,
+            image: college.image,
+            featured: college.ranking <= 10,
+            color: this.getCollegeColor(college.type),
+            courseTypes: [college.type]
+          }));
+        } else {
+          this.colleges = this.staticColleges;
+        }
+        this.filteredColleges = [...this.colleges];
+        this.applyFilters();
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading colleges:', error);
+        this.error = 'Failed to load colleges. Using cached data.';
+        this.colleges = this.staticColleges;
+        this.filteredColleges = [...this.colleges];
+        this.applyFilters();
+        this.loading = false;
+      }
     });
   }
 
@@ -155,7 +211,7 @@ export class CollegesComponent implements OnInit {
                          college.shortName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
                          college.location.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
                          college.type.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                         college.courseTypes.some(course => course.toLowerCase().includes(this.searchQuery.toLowerCase()));
+                         college.courseTypes?.some((course: string) => course.toLowerCase().includes(this.searchQuery.toLowerCase()));
 
       // Type filter
       const typeMatch = this.filters.type === 'All' || college.type === this.filters.type;
@@ -231,5 +287,25 @@ export class CollegesComponent implements OnInit {
 
   viewCollegeDetails(collegeId: number): void {
     this.router.navigate(['/college', collegeId]);
+  }
+
+  private getCollegeColor(type: string): string {
+    const colorMap: { [key: string]: string } = {
+      'engineering': 'blue',
+      'medical': 'red',
+      'management': 'green',
+      'arts': 'purple',
+      'law': 'orange',
+      'pharmacy': 'indigo'
+    };
+    return colorMap[type?.toLowerCase()] || 'blue';
+  }
+
+  getCoursesToDisplay(college: any): string[] {
+    console.log('College courses:', college.courses);
+    if (college.courses && college.courses.length > 0) {
+      return college.courses.slice(0, 4);
+    }
+    return ['B.Tech', 'M.Tech'];
   }
 }

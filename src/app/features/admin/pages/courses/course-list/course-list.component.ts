@@ -4,6 +4,13 @@ import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MinimalLoaderComponent } from '../../../../../shared/components/minimal-loader/minimal-loader.component';
+import { HttpClient } from '@angular/common/http';
+// import { AlertService } from '../../../../shared/services/alert.service';
+// import { AuthService } from '../../../../shared/services/auth.service';
+// import { LoginModalComponent } from '../../../../shared/components/login-modal/login-modal.component';
+
+const API_URL = 'http://127.0.0.1:8000/api';
+
 
 export interface Course {
   id: string;
@@ -11,11 +18,9 @@ export interface Course {
   code: string;
   category: string;
   duration: string;
-  degreeType: string;
+  degree_type: string;
   description: string;
   eligibility: string;
-  annualFee: number;
-  totalFee: number;
   status: 'active' | 'inactive';
   createdAt: Date;
   updatedAt: Date;
@@ -62,7 +67,12 @@ export class CourseListComponent implements OnInit, OnDestroy {
     { value: 'doctorate', label: 'Doctorate' }
   ];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    // private alertService: AlertService
+    // private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     // Instant loading - no delays
@@ -75,73 +85,22 @@ export class CourseListComponent implements OnInit, OnDestroy {
 
   loadCourses(): void {
     this.isLoading = true;
-
-    // Instant mock data - no delays
-    this.courses = [
-        {
-          id: '1',
-          name: 'Bachelor of Technology in Computer Science',
-          code: 'CSE101',
-          category: 'engineering',
-          duration: '4 Years',
-          degreeType: 'undergraduate',
-          description: 'A comprehensive program covering computer science fundamentals, programming, algorithms, and software development.',
-          eligibility: '10+2 with Physics, Chemistry, Mathematics with minimum 60% marks',
-          annualFee: 150000,
-          totalFee: 600000,
-          status: 'active',
-          createdAt: new Date('2024-01-15'),
-          updatedAt: new Date('2024-01-15')
-        },
-        {
-          id: '2',
-          name: 'Master of Business Administration',
-          code: 'MBA101',
-          category: 'management',
-          duration: '2 Years',
-          degreeType: 'postgraduate',
-          description: 'Advanced business management program focusing on leadership, strategy, and entrepreneurship.',
-          eligibility: 'Bachelor\'s degree with minimum 50% marks and valid entrance exam score',
-          annualFee: 200000,
-          totalFee: 400000,
-          status: 'active',
-          createdAt: new Date('2024-01-10'),
-          updatedAt: new Date('2024-01-10')
-        },
-        {
-          id: '3',
-          name: 'Bachelor of Medicine and Bachelor of Surgery',
-          code: 'MBBS101',
-          category: 'medical',
-          duration: '5.5 Years',
-          degreeType: 'undergraduate',
-          description: 'Comprehensive medical education program preparing students for medical practice.',
-          eligibility: '10+2 with Physics, Chemistry, Biology with minimum 70% marks and NEET qualification',
-          annualFee: 500000,
-          totalFee: 2750000,
-          status: 'active',
-          createdAt: new Date('2024-01-05'),
-          updatedAt: new Date('2024-01-05')
-        },
-        {
-          id: '4',
-          name: 'Diploma in Computer Applications',
-          code: 'DCA101',
-          category: 'engineering',
-          duration: '1 Year',
-          degreeType: 'diploma',
-          description: 'Short-term program covering basic computer applications and software skills.',
-          eligibility: '10+2 from any stream',
-          annualFee: 25000,
-          totalFee: 25000,
-          status: 'inactive',
-          createdAt: new Date('2024-01-01'),
-          updatedAt: new Date('2024-01-01')
-        }
-      ];
-
-    this.applyFilters();
-    this.isLoading = false;
+    
+    const sub = this.http.get<any>(`${API_URL}/courses/`).subscribe({
+      next: (response: any) => {
+        this.courses = response.results || response || [];
+        this.applyFilters();
+        this.isLoading = false;
+      },
+      error: (error: any) => {
+        console.error('Error loading courses:', error);
+        this.courses = [];
+        this.applyFilters();
+        this.isLoading = false;
+      }
+    });
+    
+    this.subscription.add(sub);
   }
 
   applyFilters(): void {
@@ -152,7 +111,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
         course.category.toLowerCase().includes(this.searchTerm.toLowerCase());
 
       const matchesCategory = !this.selectedCategory || course.category === this.selectedCategory;
-      const matchesDegreeType = !this.selectedDegreeType || course.degreeType === this.selectedDegreeType;
+      const matchesDegreeType = !this.selectedDegreeType || course.degree_type === this.selectedDegreeType;
 
       return matchesSearch && matchesCategory && matchesDegreeType;
     });
@@ -233,17 +192,37 @@ export class CourseListComponent implements OnInit, OnDestroy {
   }
 
   onToggleStatus(course: Course): void {
-    course.status = course.status === 'active' ? 'inactive' : 'active';
-    course.updatedAt = new Date();
-    // In real app, make API call to update status
-    console.log('Toggle status for course:', course.id, 'New status:', course.status);
+    const sub = this.http.post(`${API_URL}/courses/${course.id}/toggle-status/`, {}).subscribe({
+      next: (updatedCourse: any) => {
+        const index = this.courses.findIndex(c => c.id === course.id);
+        if (index !== -1) {
+          this.courses[index] = updatedCourse;
+          this.applyFilters();
+        }
+        console.log('Course status updated successfully');
+      },
+      error: (error: any) => {
+        console.error('Error updating course status');
+      }
+    });
+    
+    this.subscription.add(sub);
   }
 
   onDelete(course: Course): void {
     if (confirm(`Are you sure you want to delete the course "${course.name}"?`)) {
-      this.courses = this.courses.filter(c => c.id !== course.id);
-      this.applyFilters();
-      console.log('Deleted course:', course.id);
+      const sub = this.http.delete(`${API_URL}/courses/${course.id}/`).subscribe({
+        next: () => {
+          this.courses = this.courses.filter(c => c.id !== course.id);
+          this.applyFilters();
+          console.log('Course deleted successfully');
+        },
+        error: (error: any) => {
+          console.error('Error deleting course');
+        }
+      });
+      
+      this.subscription.add(sub);
     }
   }
 }

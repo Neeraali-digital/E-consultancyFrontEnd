@@ -1,7 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { College } from '../pages/colleges/college-list/college-list.component';
+import { ApiService } from '../../../shared/services/api.service';
+
+export interface College {
+  id: string;
+  name: string;
+  location: string;
+  type: string;
+  established: number;
+  courses: string[];
+  rating: number;
+  status: 'active' | 'inactive';
+  description?: string;
+  website?: string;
+  email?: string;
+  phone?: string;
+  image?: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -100,10 +116,12 @@ export class CollegeService {
     }
   ];
 
-  constructor() {}
+  constructor(private apiService: ApiService) {}
 
   getColleges(): Observable<College[]> {
-    return of([...this.colleges]).pipe(delay(500));
+    return this.apiService.getColleges().pipe(
+      map(response => response.results || response || this.colleges)
+    );
   }
 
   getCollege(id: string): Observable<College> {
@@ -116,45 +134,17 @@ export class CollegeService {
   }
 
   createCollege(collegeData: Partial<College>): Observable<College> {
-    const newCollege: College = {
-      id: this.generateId(),
-      name: collegeData.name || '',
-      location: collegeData.location || '',
-      type: collegeData.type || '',
-      established: collegeData.established || new Date().getFullYear(),
-      courses: collegeData.courses || [],
-      rating: collegeData.rating || 0,
-
-      status: collegeData.status || 'active',
-      description: collegeData.description,
-      website: collegeData.website,
-      email: collegeData.email,
-      phone: collegeData.phone,
-      image: collegeData.image
-    };
-
-    this.colleges.push(newCollege);
-    return of({ ...newCollege }).pipe(delay(800));
+    return this.apiService.createCollege(collegeData);
   }
 
   updateCollege(id: string, collegeData: Partial<College>): Observable<College> {
-    const index = this.colleges.findIndex(c => c.id === id);
-    if (index !== -1) {
-      this.colleges[index] = { ...this.colleges[index], ...collegeData };
-      return of({ ...this.colleges[index] }).pipe(delay(800));
-    } else {
-      return throwError(() => new Error('College not found'));
-    }
+    return this.apiService.updateCollege(parseInt(id), collegeData);
   }
 
   deleteCollege(id: string): Observable<boolean> {
-    const index = this.colleges.findIndex(c => c.id === id);
-    if (index !== -1) {
-      this.colleges.splice(index, 1);
-      return of(true).pipe(delay(500));
-    } else {
-      return throwError(() => new Error('College not found'));
-    }
+    return this.apiService.deleteCollege(parseInt(id)).pipe(
+      map(() => true)
+    );
   }
 
   searchColleges(query: string): Observable<College[]> {
