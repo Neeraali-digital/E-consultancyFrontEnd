@@ -117,13 +117,28 @@ export class AboutComponent implements OnInit {
   ];
 
   milestones = [
-    { year: 2003, title: 'Foundation', description: 'WAYZON Educational Consultancy established' },
-    { year: 2008, title: 'Expansion', description: 'Opened branches in 5 major cities' },
-    { year: 2012, title: 'Recognition', description: 'Awarded "Best Educational Consultancy"' },
-    { year: 2015, title: 'Digital Transformation', description: 'Launched online counseling platform' },
-    { year: 2018, title: 'International Reach', description: 'Started international education services' },
-    { year: 2020, title: 'Innovation', description: 'Introduced AI-powered career guidance' },
-    { year: 2023, title: 'Excellence', description: 'Achieved 10,000+ successful placements' }
+    { year: 2003, title: 'Foundation', description: 'Our Journey Started.' },
+    { year: 2004, title: 'Partnerships', description: '20 top institutional partnerships in Karnataka' },
+    { year: 2005, title: 'First Success', description: 'Successfully admitted 500 happy candidates.' },
+    { year: 2006, title: 'ISO Certification', description: 'South India\'s first ISO-certified education consultancy.' },
+    { year: 2007, title: 'Medical Leadership', description: 'Become the leading PG medical education consultants in Bangalore.' },
+    { year: 2008, title: 'Recognition', description: 'Awarded Best Education Consultancy in Karnataka.' },
+    { year: 2009, title: 'National Expansion', description: 'Achieved the milestone of opening 10 offices across the country.' },
+    { year: 2010, title: 'Headquarters', description: 'Our headquarters opened at MG Road, the central hub of Bangalore.' },
+    { year: 2011, title: 'Direct MOUs', description: 'Signed direct MOUs with 50 institutions.' },
+    { year: 2012, title: 'Northeast Expansion', description: 'We opened our first office in Northeast India, located in Agartala.' },
+    { year: 2013, title: '10th Anniversary', description: 'In our 10th anniversary year, we fully sponsored the course fees of 10 needy students.' },
+    { year: 2014, title: 'Major Milestone', description: 'Successfully achieved the milestone of 5,000 admissions.' },
+    { year: 2015, title: 'Excellence Award', description: 'Education Excellence Award Winner' },
+    { year: 2016, title: 'Education Fair', description: 'Our collaboration with the biggest education fair in Northeast India has begun.' },
+    { year: 2017, title: 'Regional Leadership', description: 'Become South India\'s leading education consultancy.' },
+    { year: 2018, title: 'Team Growth', description: 'A team of 200+ in-house staff and more than 1,000 associates.' },
+    { year: 2019, title: 'Global Presence', description: 'Successfully set up 20 offices across India and abroad.' },
+    { year: 2020, title: 'National Leadership', description: 'Became India\'s leading education consultancy for domestic admissions.' },
+    { year: 2021, title: 'Corporate Structure', description: 'Incorporated as a Private Limited Company.' },
+    { year: 2022, title: 'Industry Leadership', description: 'Our MD became the Founder and National President of the Education Consultants Association of India (ECAI).' },
+    { year: 2023, title: 'Excellence Milestone', description: 'Achieved the milestone of 10,000 successful admissions.' },
+    { year: 2024, title: 'International Programs', description: 'Launched MBBS abroad program.' }
   ];
 
   values = [

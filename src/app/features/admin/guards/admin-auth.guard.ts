@@ -19,19 +19,22 @@ export class AdminAuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     
-    return this.adminService.isAuthenticated$.pipe(
-      take(1),
-      map(isAuthenticated => {
-        if (isAuthenticated) {
-          return true;
-        } else {
-          // Redirect to admin login page
-          this.router.navigate(['/admin/login'], {
-            queryParams: { returnUrl: state.url }
-          });
-          return false;
-        }
-      })
-    );
+    // Check if admin token exists and is valid
+    const adminToken = localStorage.getItem('admin_token');
+    const adminUser = localStorage.getItem('admin_user');
+    
+    if (adminToken && adminUser) {
+      return true;
+    } else {
+      // Clear any invalid tokens
+      localStorage.removeItem('admin_token');
+      localStorage.removeItem('admin_user');
+      
+      // Redirect to admin login page
+      this.router.navigate(['/admin/login'], {
+        queryParams: { returnUrl: state.url }
+      });
+      return false;
+    }
   }
 }

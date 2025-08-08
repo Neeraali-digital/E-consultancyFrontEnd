@@ -211,17 +211,27 @@
              class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 
                     transform hover:-translate-y-1 overflow-hidden border border-gray-100">
           
-          <!-- Course Header -->
-          <div class="relative h-32 bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 p-4 text-white overflow-hidden">
-            <!-- Background Pattern -->
-            <div class="absolute inset-0 opacity-20">
-              <div class="absolute top-2 right-2 w-16 h-16 border-2 border-white/30 rounded-full"></div>
-              <div class="absolute bottom-2 left-2 w-8 h-8 bg-white/20 rounded-full"></div>
+          <!-- Course Header with Image -->
+          <div class="relative h-48 overflow-hidden">
+            <!-- Course Image -->
+            <div class="absolute inset-0">
+              <img *ngIf="course.image" 
+                   [src]="course.image" 
+                   [alt]="course.name"
+                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+              <div *ngIf="!course.image" 
+                   class="w-full h-full bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center">
+                <span class="material-icons text-white text-4xl">auto_stories</span>
+              </div>
             </div>
             
-            <div class="relative z-10 h-full flex flex-col justify-between">
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
+            
+            <!-- Content Overlay -->
+            <div class="absolute inset-0 p-4 text-white flex flex-col justify-between">
               <div class="flex items-center justify-between">
-                <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                <div class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
                   <span class="material-icons text-lg">auto_stories</span>
                 </div>
                 <span class="bg-white/25 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-bold">
@@ -229,8 +239,8 @@
                 </span>
               </div>
               <div>
-                <h3 class="text-lg font-bold mb-1 line-clamp-1">{{ course.name }}</h3>
-                <p class="text-xs opacity-90">{{ course.code }}</p>
+                <h3 class="text-lg font-bold mb-1 line-clamp-1 drop-shadow-lg">{{ course.name }}</h3>
+                <p class="text-xs opacity-90 drop-shadow-md">{{ course.code }}</p>
               </div>
             </div>
           </div>

@@ -1,599 +1,250 @@
-<!-- Colleges Page -->
-<div class="min-h-screen bg-gray-50 relative overflow-hidden">
-  <!-- Animated Background -->
-  <div class="fixed inset-0 pointer-events-none z-0">
-    <!-- Stars -->
-    <div class="star star-1"></div>
-    <div class="star star-2"></div>
-    <div class="star star-3"></div>
-    <div class="star star-4"></div>
-    <div class="star star-5"></div>
-    <div class="star star-6"></div>
-    <div class="star star-7"></div>
-    <div class="star star-8"></div>
-    <div class="star star-9"></div>
-    <div class="star star-10"></div>
-    <div class="star star-11"></div>
-    <div class="star star-12"></div>
-
-    <!-- Asteroids -->
-    <div class="asteroid asteroid-1"></div>
-    <div class="asteroid asteroid-2"></div>
-    <div class="asteroid asteroid-3"></div>
-    <div class="asteroid asteroid-4"></div>
-    <div class="asteroid asteroid-5"></div>
-
-    <!-- Floating Particles -->
-    <div class="particle particle-1"></div>
-    <div class="particle particle-2"></div>
-    <div class="particle particle-3"></div>
-    <div class="particle particle-4"></div>
-    <div class="particle particle-5"></div>
-    <div class="particle particle-6"></div>
-
-    <!-- Shooting Stars -->
-    <div class="shooting-star shooting-star-1"></div>
-    <div class="shooting-star shooting-star-2"></div>
-  </div>
-
-  <!-- Main Content -->
+<div class="min-h-screen bg-gray-50">
   <div class="relative z-10">
-  <!-- Header Section -->
-  <section class="bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-800 text-white py-20">
-    <div class="max-w-7xl mx-auto px-8 text-center">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6">
-        Top <span class="text-yellow-400">Colleges</span>
-      </h1>
-      <p class="text-xl md:text-2xl text-purple-100 max-w-3xl mx-auto leading-relaxed">
-        Discover India's premier educational institutions with guaranteed admission opportunities
-      </p>
-      
-      <!-- Quick Stats -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
-        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-          <div class="text-3xl font-bold text-yellow-400">500+</div>
-          <div class="text-sm text-purple-100">Partner Colleges</div>
-        </div>
-        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-          <div class="text-3xl font-bold text-yellow-400">100%</div>
-          <div class="text-sm text-purple-100">Admission Success</div>
-        </div>
-        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-          <div class="text-3xl font-bold text-yellow-400">50+</div>
-          <div class="text-sm text-purple-100">Cities Covered</div>
-        </div>
-        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-          <div class="text-3xl font-bold text-yellow-400">20+</div>
-          <div class="text-sm text-purple-100">Years Experience</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Colleges with Filters -->
-  <section class="py-20">
-    <div class="max-w-7xl mx-auto px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-          Premier Educational Institutions
-        </h2>
-        <p class="text-xl text-gray-600 mb-6">
-          Top-ranked colleges with guaranteed admission opportunities
+    <section class="bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-800 text-white py-20">
+      <div class="max-w-7xl mx-auto px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Top <span class="text-yellow-400">Colleges</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-purple-100 max-w-3xl mx-auto leading-relaxed">
+          Discover India's premier educational institutions with guaranteed admission opportunities
         </p>
+      </div>
+    </section>
 
-        <!-- Enhanced Mobile-First Search Area -->
-        <div class="max-w-2xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0">
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
-              <span class="material-icons text-gray-400 text-lg sm:text-xl">search</span>
-            </div>
-            <input type="text"
-                   [(ngModel)]="searchQuery"
-                   (input)="onSearchChange()"
-                   placeholder="Search colleges..."
-                   class="w-full pl-10 sm:pl-12 pr-10 sm:pr-4 py-3 sm:py-4 text-base sm:text-lg border-2 border-gray-200 rounded-xl sm:rounded-2xl
-                          focus:border-blue-500 focus:ring-4 focus:ring-blue-100 focus:outline-none
-                          bg-white shadow-lg hover:shadow-xl transition-all duration-300
-                          placeholder-gray-400 placeholder:text-sm touch-manipulation"
-                   autocomplete="off"
-                   autocapitalize="off"
-                   spellcheck="false">
-            <div *ngIf="searchQuery"
-                 class="absolute inset-y-0 right-0 pr-3 sm:pr-4 flex items-center">
-              <button (click)="clearSearch()"
-                      class="text-gray-400 hover:text-gray-600 active:text-gray-700 transition-colors
-                             p-1 rounded-full hover:bg-gray-100 touch-manipulation"
-                      aria-label="Clear search">
-                <span class="material-icons text-lg sm:text-xl">close</span>
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Premier Educational Institutions
+          </h2>
+          <p class="text-xl text-gray-600 mb-8">
+            Top-ranked colleges with guaranteed admission opportunities
+          </p>
+          
+          <!-- Search Bar -->
+          <div class="max-w-2xl mx-auto mb-8">
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <span class="material-icons text-gray-400">search</span>
+              </div>
+              <input [(ngModel)]="searchQuery" (input)="onSearchChange()" 
+                     type="text" placeholder="Search colleges by name, location, or type..." 
+                     class="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg shadow-lg">
+              <button *ngIf="searchQuery" (click)="clearSearch()" 
+                      class="absolute inset-y-0 right-0 pr-4 flex items-center">
+                <span class="material-icons text-gray-400 hover:text-gray-600">close</span>
               </button>
             </div>
           </div>
 
-          <!-- Enhanced Mobile-First Search Results Count -->
-          <div *ngIf="searchQuery" class="mt-2 sm:mt-3 text-xs sm:text-sm text-gray-600 text-center">
-            Found {{ filteredColleges.length }} college{{ filteredColleges.length !== 1 ? 's' : '' }}
-            matching "{{ searchQuery }}"
-          </div>
-        </div>
-
-        <!-- Course Filter Indicator -->
-        <div *ngIf="selectedCourseFilter" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50
-                                                                                  px-4 py-2 rounded-full text-sm font-medium border border-purple-200">
-          <span class="material-icons text-sm text-purple-600">filter_list</span>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 font-semibold">
-            Showing colleges for: {{ selectedCourseFilter }}
-          </span>
-          <button (click)="clearFilters()" class="ml-2 text-purple-600 hover:text-purple-800 transition-colors duration-300">
-            <span class="material-icons text-sm">close</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Enhanced Mobile-First Layout -->
-      <div class="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
-        <!-- Enhanced Mobile-First Smart Filters Sidebar -->
-        <div class="lg:w-1/3">
-          <!-- Mobile Filter Toggle Button -->
-          <button (click)="showMobileFilters = !showMobileFilters"
-                  class="lg:hidden w-full mb-4 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 text-white
-                         p-3 rounded-xl flex items-center justify-between shadow-lg hover:shadow-xl
-                         transition-all duration-300 touch-manipulation">
-            <div class="flex items-center gap-2">
-              <span class="material-icons">tune</span>
-              <span class="font-semibold">Filters</span>
-              <span class="text-xs bg-white/20 px-2 py-1 rounded-full">
-                {{ getActiveFiltersCount() }}
-              </span>
-            </div>
-            <span class="material-icons transition-transform duration-300"
-                  [class.rotate-180]="showMobileFilters">
-              expand_more
-            </span>
-          </button>
-
-          <!-- Enhanced Responsive Filter Sidebar -->
-          <div class="bg-white/98 backdrop-blur-xl rounded-xl lg:rounded-2xl shadow-lg border border-gray-100/50
-                      sticky top-4 overflow-hidden transition-all duration-300"
-               [class.hidden]="!showMobileFilters"
-               [class.lg:block]="true">
-
-            <!-- Enhanced Mobile-First Filter Header -->
-            <div class="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 p-2.5 sm:p-3 text-white relative overflow-hidden">
-              <!-- Animated Background Elements -->
-              <div class="absolute inset-0 opacity-20">
-                <div class="absolute top-1 right-4 w-2 h-2 bg-white rounded-full animate-ping"></div>
-                <div class="absolute bottom-1 left-6 w-1 h-1 bg-yellow-300 rounded-full animate-bounce"></div>
-                <div class="absolute top-2 left-1/2 w-1 h-1 bg-white rounded-full animate-pulse"></div>
-              </div>
-
-              <div class="relative z-10 flex items-center justify-between">
-                <div class="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
-                  <div class="w-6 h-6 sm:w-8 sm:h-8 bg-white/20 rounded-lg sm:rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/30 flex-shrink-0">
-                    <span class="material-icons text-white text-xs sm:text-sm">tune</span>
-                  </div>
-                  <div class="min-w-0 flex-1">
-                    <h3 class="text-xs sm:text-sm font-bold truncate">Smart Filters</h3>
-                    <p class="text-xs opacity-90 truncate hidden sm:block">Find your perfect match</p>
-                  </div>
+          <!-- Filters Section -->
+          <div class="max-w-4xl mx-auto mb-8">
+            <div class="bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/50">
+              <!-- Filter Header -->
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <span class="material-icons text-white text-lg">tune</span>
                 </div>
-                <button (click)="clearFilters()"
-                        class="bg-white/20 hover:bg-white/30 active:bg-white/40 text-white px-2 sm:px-3 py-1 sm:py-1.5
-                               rounded-md sm:rounded-lg text-xs font-medium transition-all duration-300
-                               border border-white/20 hover:border-white/40 backdrop-blur-sm
-                               transform hover:scale-105 active:scale-95 flex items-center gap-1 shadow-sm hover:shadow-md
-                               touch-manipulation flex-shrink-0">
-                  <span class="material-icons text-xs">refresh</span>
-                  <span class="hidden sm:inline">Reset</span>
-                </button>
+                <div>
+                  <h3 class="text-lg font-bold text-gray-800">Smart Filters</h3>
+                  <p class="text-sm text-gray-600">Find your perfect college match</p>
+                </div>
               </div>
-            </div>
-
-            <!-- Enhanced Mobile-First Filter Content -->
-            <div class="p-2.5 sm:p-3 space-y-2.5 sm:space-y-3 bg-gradient-to-b from-gray-50/50 to-white">
-
-              <!-- Enhanced Mobile-First Filters Grid -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-                <!-- Enhanced College Type Filter -->
-                <div class="filter-group group">
-                  <label class="flex items-center gap-1 sm:gap-1.5 text-xs font-semibold text-gray-800 mb-1 sm:mb-1.5">
-                    <div class="w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-md sm:rounded-lg flex items-center justify-center shadow-sm
-                                group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+              
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="filter-group">
+                  <label class="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
+                    <div class="w-6 h-6 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
                       <span class="material-icons text-white text-xs">account_balance</span>
                     </div>
-                    <span class="truncate">Type</span>
+                    Type
                   </label>
-                  <div class="relative group">
-                    <select [(ngModel)]="filters.type" (change)="applyFilters()"
-                            class="w-full p-1.5 sm:p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg sm:rounded-xl
-                                   focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100/50
-                                   focus:outline-none text-gray-800 font-medium transition-all duration-300
-                                   hover:border-blue-300 hover:bg-white appearance-none cursor-pointer
-                                   text-xs shadow-sm hover:shadow-md touch-manipulation">
-                      <option *ngFor="let type of collegeTypes" [value]="type">{{ type }}</option>
-                    </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:pr-3 pointer-events-none">
-                      <span class="material-icons text-gray-400 text-sm transition-all duration-300
-                                   group-focus-within:rotate-180 group-focus-within:text-blue-500">expand_more</span>
-                    </div>
-                  </div>
+                  <select [(ngModel)]="filters.type" (change)="applyFilters()" 
+                          class="w-full p-3 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-sm font-medium shadow-sm hover:shadow-md transition-all duration-300">
+                    <option *ngFor="let type of collegeTypes" [value]="type">{{ type }}</option>
+                  </select>
                 </div>
-
-                <!-- Enhanced Location Filter -->
-                <div class="filter-group group">
-                  <label class="flex items-center gap-1 sm:gap-1.5 text-xs font-semibold text-gray-800 mb-1 sm:mb-1.5">
-                    <div class="w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-green-500 to-blue-500 rounded-md sm:rounded-lg flex items-center justify-center shadow-sm
-                                group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                <div class="filter-group">
+                  <label class="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
+                    <div class="w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
                       <span class="material-icons text-white text-xs">location_on</span>
                     </div>
-                    <span class="truncate">Location</span>
+                    Location
                   </label>
-                  <div class="relative group">
-                    <select [(ngModel)]="filters.location" (change)="applyFilters()"
-                            class="w-full p-1.5 sm:p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg sm:rounded-xl
-                                   focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100/50
-                                   focus:outline-none text-gray-800 font-medium transition-all duration-300
-                                   hover:border-blue-300 hover:bg-white appearance-none cursor-pointer
-                                   text-xs shadow-sm hover:shadow-md touch-manipulation">
-                      <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
-                    </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:pr-3 pointer-events-none">
-                      <span class="material-icons text-gray-400 text-sm transition-all duration-300
-                                   group-focus-within:rotate-180 group-focus-within:text-blue-500">expand_more</span>
-                    </div>
-                  </div>
+                  <select [(ngModel)]="filters.location" (change)="applyFilters()" 
+                          class="w-full p-3 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-sm font-medium shadow-sm hover:shadow-md transition-all duration-300">
+                    <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
+                  </select>
                 </div>
-
-                <!-- Course Filter -->
-                <div class="filter-group group">
-                  <label class="flex items-center gap-1.5 text-xs font-semibold text-gray-800 mb-1.5">
-                    <div class="w-5 h-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-sm
-                                group-hover:scale-110 transition-transform duration-300">
+                <div class="filter-group">
+                  <label class="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
+                    <div class="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
                       <span class="material-icons text-white text-xs">school</span>
                     </div>
-                    <span>Course</span>
+                    Course
                   </label>
-                  <div class="relative group">
-                    <select [(ngModel)]="filters.course" (change)="applyFilters()"
-                            class="w-full p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl
-                                   focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100/50
-                                   focus:outline-none text-gray-800 font-medium transition-all duration-300
-                                   hover:border-blue-300 hover:bg-white appearance-none cursor-pointer
-                                   text-xs shadow-sm hover:shadow-md">
-                      <option *ngFor="let course of courseTypes" [value]="course">{{ course }}</option>
-                    </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                      <span class="material-icons text-gray-400 text-sm transition-all duration-300
-                                   group-focus-within:rotate-180 group-focus-within:text-blue-500">expand_more</span>
-                    </div>
-                  </div>
+                  <select [(ngModel)]="filters.course" (change)="applyFilters()" 
+                          class="w-full p-3 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-sm font-medium shadow-sm hover:shadow-md transition-all duration-300">
+                    <option *ngFor="let course of courseTypes" [value]="course">{{ course }}</option>
+                  </select>
                 </div>
-
-                <!-- Ranking Filter -->
-                <div class="filter-group group">
-                  <label class="flex items-center gap-1.5 text-xs font-semibold text-gray-800 mb-1.5">
-                    <div class="w-5 h-5 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center shadow-sm
-                                group-hover:scale-110 transition-transform duration-300">
+                <div class="filter-group">
+                  <label class="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
+                    <div class="w-6 h-6 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
                       <span class="material-icons text-white text-xs">emoji_events</span>
                     </div>
-                    <span>Ranking</span>
+                    Ranking
                   </label>
-                  <div class="relative group">
-                    <select [(ngModel)]="filters.ranking" (change)="applyFilters()"
-                            class="w-full p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl
-                                   focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100/50
-                                   focus:outline-none text-gray-800 font-medium transition-all duration-300
-                                   hover:border-blue-300 hover:bg-white appearance-none cursor-pointer
-                                   text-xs shadow-sm hover:shadow-md">
-                      <option value="All">All Rankings</option>
-                      <option value="Top 10">Top 10</option>
-                      <option value="Top 20">Top 20</option>
-                    </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                      <span class="material-icons text-gray-400 text-sm transition-all duration-300
-                                   group-focus-within:rotate-180 group-focus-within:text-blue-500">expand_more</span>
-                    </div>
-                  </div>
+                  <select [(ngModel)]="filters.ranking" (change)="applyFilters()" 
+                          class="w-full p-3 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none text-sm font-medium shadow-sm hover:shadow-md transition-all duration-300">
+                    <option value="All">All Rankings</option>
+                    <option value="Top 10">Top 10</option>
+                    <option value="Top 20">Top 20</option>
+                  </select>
                 </div>
               </div>
-
-              <!-- Premium Filter Summary Card -->
-              <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-3 border border-blue-100/50 backdrop-blur-sm">
-                <div class="flex items-center gap-2 mb-2">
-                  <div class="w-6 h-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
-                    <span class="material-icons text-white text-xs">analytics</span>
+              
+              <!-- Filter Results & Actions -->
+              <div class="mt-6 pt-4 border-t border-gray-200/50 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
+                    <span class="material-icons text-white text-sm">analytics</span>
                   </div>
-                  <span class="text-sm font-semibold text-gray-800">Search Results</span>
+                  <span class="text-sm font-semibold text-gray-700">{{ filteredColleges.length }} colleges found</span>
                 </div>
-                <div class="space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs text-gray-600">Colleges Found:</span>
-                    <span class="text-sm font-bold text-blue-600">{{ filteredColleges.length }}</span>
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs text-gray-600">Total Available:</span>
-                    <span class="text-xs font-medium text-gray-500">{{ colleges.length }}</span>
-                  </div>
-                  <div class="w-full bg-gray-200 rounded-full h-1.5 mt-2">
-                    <div class="bg-gradient-to-r from-blue-500 to-indigo-600 h-1.5 rounded-full transition-all duration-500"
-                         [style.width.%]="(filteredColleges.length / colleges.length) * 100"></div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Premium Action Buttons -->
-              <div class="space-y-2">
-                <button (click)="clearFilters()"
-                        class="w-full bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 px-3
-                               rounded-xl transition-all duration-300 flex items-center justify-center gap-2
-                               border border-gray-200 hover:border-blue-300 text-xs shadow-sm hover:shadow-md
-                               transform hover:scale-105">
+                <button (click)="clearFilters()" 
+                        class="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-700 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-sm hover:shadow-md flex items-center gap-2">
                   <span class="material-icons text-sm">refresh</span>
-                  Clear All Filters
-                </button>
-                <button class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
-                               hover:from-blue-600 hover:via-purple-600 hover:to-pink-600
-                               text-white font-medium py-2 px-3 rounded-xl transition-all duration-300
-                               flex items-center justify-center gap-2 text-xs shadow-md hover:shadow-lg
-                               transform hover:scale-105">
-                  <span class="material-icons text-sm">bookmark</span>
-                  Save Search
-                </button>
-              </div>
-            </div>
-          </div>
-        </div> <!-- Close lg:w-1/4 filter sidebar -->
-
-        <!-- Mobile Filter Toggle (Hidden on Desktop) -->
-        <div class="lg:hidden mb-6">
-          <button (click)="toggleMobileFilters()"
-                  class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white p-4 rounded-xl
-                         font-semibold flex items-center justify-center gap-3 shadow-lg
-                         hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transition-all duration-300
-                         transform hover:scale-105">
-            <span class="material-icons">tune</span>
-            <span>{{ showMobileFilters ? 'Hide' : 'Show' }} Filters</span>
-            <span class="material-icons transform transition-transform duration-300"
-                  [class.rotate-180]="showMobileFilters">expand_more</span>
-          </button>
-
-          <!-- Mobile Filters Panel -->
-          <div *ngIf="showMobileFilters"
-               class="mt-4 bg-white rounded-xl shadow-lg p-6 border border-gray-200 animate-slide-down">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-
-              <!-- Mobile College Type Filter -->
-              <div class="filter-group">
-                <label class="flex items-center gap-1 text-xs font-semibold text-gray-700 mb-2">
-                  <span class="material-icons text-blue-600 text-sm">account_balance</span>
-                  Type
-                </label>
-                <select [(ngModel)]="filters.type" (change)="applyFilters()"
-                        class="w-full p-2 border border-gray-200 rounded-lg text-xs">
-                  <option *ngFor="let type of collegeTypes" [value]="type">{{ type }}</option>
-                </select>
-              </div>
-
-              <!-- Mobile Course Filter -->
-              <div class="filter-group">
-                <label class="flex items-center gap-1 text-xs font-semibold text-gray-700 mb-2">
-                  <span class="material-icons text-blue-600 text-sm">school</span>
-                  Course
-                </label>
-                <select [(ngModel)]="filters.course" (change)="applyFilters()"
-                        class="w-full p-2 border border-gray-200 rounded-lg text-xs">
-                  <option *ngFor="let course of courseTypes" [value]="course">{{ course }}</option>
-                </select>
-              </div>
-
-              <!-- Mobile Location Filter -->
-              <div class="filter-group">
-                <label class="flex items-center gap-1 text-xs font-semibold text-gray-700 mb-2">
-                  <span class="material-icons text-blue-600 text-sm">location_on</span>
-                  Location
-                </label>
-                <select [(ngModel)]="filters.location" (change)="applyFilters()"
-                        class="w-full p-2 border border-gray-200 rounded-lg text-xs">
-                  <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
-                </select>
-              </div>
-
-            </div>
-
-            <!-- Mobile Clear Filters -->
-            <div class="mt-4 pt-4 border-t border-gray-200">
-              <button (click)="clearFilters()"
-                      class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg
-                             text-sm font-medium transition-all duration-300">
-                Clear All Filters
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Enhanced Mobile-First Colleges Grid -->
-        <div class="lg:w-2/3 w-full">
-          <!-- Loading State -->
-          <div *ngIf="loading" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-            <div *ngFor="let i of [1,2,3,4]" class="bg-white rounded-xl shadow-lg p-4 animate-pulse">
-              <div class="bg-gray-300 h-20 rounded-lg mb-4"></div>
-              <div class="bg-gray-300 h-4 rounded mb-2"></div>
-              <div class="bg-gray-300 h-4 rounded w-3/4 mb-2"></div>
-              <div class="bg-gray-300 h-8 rounded"></div>
-            </div>
-          </div>
-          
-          <!-- Error State -->
-          <div *ngIf="error && !loading" class="col-span-full text-center py-12">
-            <div class="max-w-md mx-auto px-4">
-              <span class="material-icons text-6xl text-red-300 mb-4 block">error_outline</span>
-              <h3 class="text-2xl font-bold text-gray-600 mb-2">{{ error }}</h3>
-              <button (click)="loadColleges()" class="bg-blue-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-600 transition-all duration-300">
-                Try Again
-              </button>
-            </div>
-          </div>
-          
-          <div *ngIf="!loading && !error" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-            <!-- Enhanced Mobile-First No Results Message -->
-            <div *ngIf="filteredColleges.length === 0"
-                 class="col-span-full text-center py-12 sm:py-16">
-              <div class="max-w-md mx-auto px-4">
-                <span class="material-icons text-4xl sm:text-6xl text-gray-300 mb-3 sm:mb-4 block">school_off</span>
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-600 mb-2">No colleges found</h3>
-                <p class="text-sm sm:text-base text-gray-500 mb-4 sm:mb-6">
-                  No colleges match your current filter criteria. Try adjusting your filters.
-                </p>
-                <button (click)="clearFilters()"
-                        class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl font-semibold
-                               hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transition-all duration-300
-                               transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl touch-manipulation
-                               text-sm sm:text-base">
                   Clear Filters
                 </button>
               </div>
             </div>
+          </div>
+        </div>
 
-            <!-- Enhanced Mobile-First Premium College Card -->
-            <div *ngFor="let college of filteredColleges"
-                 class="bg-white/98 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500
-                        transform hover:-translate-y-1 overflow-hidden group border border-gray-100/50 touch-manipulation">
-
-              <!-- Enhanced Mobile-First College Header -->
-              <div class="bg-gradient-to-r {{ getColorClasses(college.color) }} p-3 sm:p-4 text-white relative overflow-hidden">
-                <div class="absolute top-1 sm:top-2 right-1 sm:right-2 opacity-20">
-                  <span class="material-icons text-2xl sm:text-3xl">account_balance</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div *ngFor="let college of filteredColleges" 
+               class="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+            
+            <!-- Premium College Image -->
+            <div class="relative h-44 overflow-hidden bg-gray-100">
+              <img *ngIf="college.image" [src]="college.image" [alt]="college.name" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                   onerror="this.style.display='none'">
+              <div *ngIf="!college.image" class="flex items-center justify-center h-full bg-gradient-to-br" [ngClass]="getColorClasses(college.color)">
+                <span class="text-white text-5xl font-bold drop-shadow-lg">{{ college.shortName?.charAt(0) || college.name?.charAt(0) }}</span>
+              </div>
+              
+              <!-- Light Overlay for Text Readability -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+              
+              <!-- Top Badges -->
+              <div class="absolute top-4 left-4 right-4 flex justify-between items-start">
+                <div class="flex flex-col gap-2">
+                  <span class="bg-white/95 backdrop-blur-sm text-gray-800 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                    🏆 #{{ college.ranking }}
+                  </span>
+                  <span class="bg-emerald-500/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
+                    {{ college.institutionType || 'Premium' }}
+                  </span>
                 </div>
-                <div class="relative z-10">
-                  <div class="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 flex-wrap">
-                    <span class="bg-white/20 px-1.5 sm:px-2 py-0.5 rounded-full text-xs font-medium backdrop-blur-sm border border-white/30 flex-shrink-0">
-                      Rank #{{ college.ranking }}
-                    </span>
-                    <div *ngIf="college.featured" class="bg-gradient-to-r from-yellow-400 to-orange-400 text-yellow-900 px-1.5 sm:px-2 py-0.5 rounded-full text-xs font-bold flex-shrink-0">
-                      FEATURED
-                    </div>
-                  </div>
-                  <span class="material-icons text-xl sm:text-2xl mb-1.5 sm:mb-2 block">account_balance</span>
-                  <h3 class="text-base sm:text-lg font-bold mb-0.5 sm:mb-1 leading-tight">{{ college.shortName }}</h3>
-                  <p class="text-xs opacity-90 truncate">{{ college.name }}</p>
+                <div class="flex items-center bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg">
+                  <span class="text-yellow-500 mr-1 text-sm">★</span>
+                  <span class="text-gray-800 text-sm font-bold">{{ college.rating }}</span>
                 </div>
               </div>
-
-              <!-- Enhanced Mobile-First College Details -->
-              <div class="p-3 sm:p-4">
-                <!-- Enhanced Mobile-First Rating Section -->
-                <div class="mb-2.5 sm:mb-3">
-                  <div class="flex items-center gap-1.5 sm:gap-2 mb-1">
-                    <div class="flex items-center gap-0.5">
-                      <span *ngFor="let star of getStarArray(college.rating)"
-                            class="material-icons text-yellow-400 text-sm">star</span>
+              
+              <!-- Bottom College Name -->
+              <div class="absolute bottom-4 left-4 right-4">
+                <h3 class="text-white text-xl font-bold mb-1 drop-shadow-lg">{{ college.shortName || college.name }}</h3>
+                <p class="text-white/90 text-sm font-medium drop-shadow-md">{{ college.name }}</p>
+              </div>
+            </div>
+            
+            <!-- Premium College Info -->
+            <div class="p-3 space-y-2">
+              <!-- Info Cards Grid -->
+              <div class="grid grid-cols-2 gap-1.5">
+                <!-- Location Card -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-2 border border-blue-200">
+                  <div class="flex items-center gap-2 mb-1">
+                    <div class="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center">
+                      <span class="material-icons text-white text-sm">location_on</span>
                     </div>
-                    <span class="text-xs font-medium text-gray-700">{{ college.rating }}/5</span>
+                    <span class="text-blue-700 text-xs font-semibold">Location</span>
                   </div>
-                  <p class="text-gray-600 text-xs">{{ college.location }} • Est. {{ college.established }}</p>
+                  <p class="text-blue-900 text-sm font-bold truncate">{{ college.location }}</p>
                 </div>
-
-                <!-- Enhanced Mobile-First Key Information Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 mb-2.5 sm:mb-3">
-                  <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-1.5 sm:p-2 border border-blue-100/50">
-                    <div class="flex items-center gap-1 mb-0.5">
-                      <span class="material-icons text-blue-600 text-xs">location_on</span>
-                      <span class="text-xs font-medium text-gray-500 uppercase tracking-wide">Location</span>
+                
+                <!-- Established Card -->
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-2 border border-purple-200">
+                  <div class="flex items-center gap-2 mb-1">
+                    <div class="w-6 h-6 bg-purple-500 rounded-lg flex items-center justify-center">
+                      <span class="material-icons text-white text-sm">calendar_today</span>
                     </div>
-                    <div class="font-semibold text-gray-900 text-xs truncate">{{ college.location }}</div>
+                    <span class="text-purple-700 text-xs font-semibold">Est.</span>
                   </div>
-
-                  <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-2 border border-green-100/50">
-                    <div class="flex items-center gap-1 mb-0.5">
-                      <span class="material-icons text-green-600 text-xs">calendar_today</span>
-                      <span class="text-xs font-medium text-gray-500 uppercase tracking-wide">Est.</span>
-                    </div>
-                    <div class="font-semibold text-gray-900 text-xs">{{ college.established }}</div>
-                  </div>
-
-                  <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-2 border border-purple-100/50">
-                    <div class="flex items-center gap-1 mb-0.5">
-                      <span class="material-icons text-purple-600 text-xs">business</span>
-                      <span class="text-xs font-medium text-gray-500 uppercase tracking-wide">Type</span>
-                    </div>
-                    <div class="font-semibold text-gray-900 text-xs">{{ college.institutionType }}</div>
-                  </div>
-
-                  <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-2 border border-orange-100/50">
-                    <div class="flex items-center gap-1 mb-0.5">
-                      <span class="material-icons text-orange-600 text-xs">verified</span>
-                      <span class="text-xs font-medium text-gray-500 uppercase tracking-wide">Affiliated</span>
-                    </div>
-                    <div class="font-semibold text-gray-900 text-xs">{{ college.affiliated }}</div>
-                  </div>
+                  <p class="text-purple-900 text-sm font-bold">{{ college.established }}</p>
                 </div>
-
-                <!-- Compact Available Courses -->
-                <div class="mb-3">
-                  <h4 class="font-semibold text-gray-800 mb-2 flex items-center gap-1.5 text-xs">
-                    <span class="material-icons text-gray-600 text-sm">school</span>
-                    Available Courses
-                  </h4>
-                  <div class="flex flex-wrap gap-1">
-                    <span *ngFor="let course of college.courses"
-                          class="bg-gradient-to-r from-gray-100 to-gray-50 text-gray-700 px-2 py-0.5 rounded-full text-xs font-medium
-                                 border border-gray-200 hover:from-blue-50 hover:to-indigo-50 hover:border-blue-200
-                                 hover:text-blue-700 transition-all duration-200 transform hover:scale-105">
-                      {{ course }}
-                    </span>
+                
+                <!-- Type Card -->
+                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg p-2 border border-indigo-200">
+                  <div class="flex items-center gap-2 mb-1">
+                    <div class="w-6 h-6 bg-indigo-500 rounded-lg flex items-center justify-center">
+                      <span class="material-icons text-white text-sm">school</span>
+                    </div>
+                    <span class="text-indigo-700 text-xs font-semibold">Type</span>
                   </div>
+                  <p class="text-indigo-900 text-sm font-bold truncate">{{ college.type }}</p>
                 </div>
-
-                <!-- Compact Action Buttons -->
-                <div class="flex gap-2">
-                  <button (click)="viewCollegeDetails(college.id)"
-                          class="flex-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
-                                 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600
-                                 text-white py-2 px-3 rounded-xl font-medium transition-all duration-300
-                                 flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg transform hover:scale-105
-                                 text-xs">
-                    <span class="material-icons text-sm">info</span>
-                    View Details
-                  </button>
-                  <button class="bg-white hover:bg-gray-50 text-gray-700 py-2 px-3 rounded-xl
-                                 font-medium transition-all duration-300 flex items-center justify-center
-                                 border border-gray-200 hover:border-purple-300 shadow-sm hover:shadow-md transform hover:scale-105">
-                    <span class="material-icons text-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">call</span>
-                  </button>
+                
+                <!-- Affiliated Card -->
+                <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg p-2 border border-emerald-200">
+                  <div class="flex items-center gap-2 mb-1">
+                    <div class="w-6 h-6 bg-emerald-500 rounded-lg flex items-center justify-center">
+                      <span class="material-icons text-white text-sm">verified</span>
+                    </div>
+                    <span class="text-emerald-700 text-xs font-semibold">Affiliated</span>
+                  </div>
+                  <p class="text-emerald-900 text-sm font-bold truncate">{{ college.affiliated || 'UGC' }}</p>
                 </div>
               </div>
-            </div> <!-- Close college card -->
-          </div> <!-- Close grid -->
-          </div> <!-- Close conditional div -->
-        </div> <!-- Close lg:w-3/4 -->
-      </div> <!-- Close flex container -->
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16">
-    <div class="max-w-4xl mx-auto px-8 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">
-        Get Guaranteed Admission
-      </h2>
-      <p class="text-xl text-purple-100 mb-8">
-        Skip the entrance exam hassle and secure your seat in top colleges
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button class="bg-white text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600
-                       font-bold px-8 py-4 rounded-full hover:bg-gray-100 transform hover:scale-105 transition-all duration-300
-                       flex items-center justify-center gap-3 shadow-lg hover:shadow-xl border-2 border-white">
-          <span class="material-icons bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">school</span>
-          Apply for Direct Admission
-        </button>
-        <button class="border-2 border-white text-white font-semibold px-8 py-4 rounded-full
-                       hover:bg-white hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r
-                       hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transform hover:scale-105
-                       transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl">
-          <span class="material-icons">download</span>
-          Download College List
-        </button>
+              
+              <!-- Available Courses -->
+              <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 bg-orange-500 rounded-lg flex items-center justify-center">
+                    <span class="material-icons text-white text-sm">menu_book</span>
+                  </div>
+                  <span class="text-gray-700 text-sm font-bold">Available Courses</span>
+                </div>
+                <div class="flex flex-wrap gap-1">
+                  <span *ngFor="let course of getCoursesToDisplay(college)" 
+                        class="px-2.5 py-1 bg-orange-500 text-white text-xs font-semibold rounded-full">
+                    {{ course }}
+                  </span>
+                  <span *ngIf="college.courses && college.courses.length > 4" 
+                        class="px-2.5 py-1 bg-gray-300 text-gray-700 text-xs font-semibold rounded-full">
+                    +{{ college.courses.length - 4 }}
+                  </span>
+                </div>
+              </div>
+              
+              <!-- Premium Action Button -->
+              <button (click)="viewCollegeDetails(college.id)" 
+                      class="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 
+                             hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700
+                             text-white py-3 px-6 rounded-xl font-bold text-sm
+                             transition-all duration-300 transform hover:scale-105 hover:shadow-xl
+                             flex items-center justify-center gap-2 group">
+                <span class="material-icons text-lg group-hover:rotate-12 transition-transform duration-300">visibility</span>
+                View Details
+                <span class="material-icons text-sm group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
   </div>
 </div>

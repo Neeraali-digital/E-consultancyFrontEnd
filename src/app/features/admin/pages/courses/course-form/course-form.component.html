@@ -209,6 +209,34 @@
           <span *ngIf="f['eligibility'].errors?.['required']">Eligibility criteria is required</span>
         </div>
       </div>
+
+      <!-- Course Image -->
+      <div>
+        <label for="image" class="block text-sm font-medium text-gray-700 mb-2">
+          Course Image
+        </label>
+        <div class="flex items-center space-x-4">
+          <div *ngIf="imagePreview" class="flex-shrink-0">
+            <img [src]="imagePreview" alt="Course preview" class="w-20 h-20 object-cover rounded-lg border border-gray-300">
+          </div>
+          <div class="flex-1">
+            <input
+              #fileInput
+              type="file"
+              accept="image/*"
+              (change)="onImageSelected($event)"
+              class="hidden">
+            <button
+              type="button"
+              (click)="fileInput.click()"
+              class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
+              <span class="material-icons text-sm mr-2">upload</span>
+              {{ imagePreview ? 'Change Image' : 'Upload Image' }}
+            </button>
+            <p class="text-xs text-gray-500 mt-1">PNG, JPG up to 5MB</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

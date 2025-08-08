@@ -17,6 +17,7 @@ export interface Course {
   degree_type: string;
   description: string;
   eligibility: string;
+  image?: string;
   status: 'active' | 'inactive';
   createdAt?: Date;
   updatedAt?: Date;
@@ -37,6 +38,8 @@ export class CourseFormComponent implements OnInit, OnDestroy {
   courseId: string | null = null;
   successMessage = '';
   errorMessage = '';
+  imagePreview: string | null = null;
+  selectedImageFile: File | null = null;
 
   private subscription = new Subscription();
 
@@ -88,6 +91,9 @@ export class CourseFormComponent implements OnInit, OnDestroy {
       next: (course: any) => {
         if (course) {
           this.courseForm.patchValue(course);
+          if (course.image) {
+            this.imagePreview = course.image;
+          }
         }
         this.isLoading = false;
       },
@@ -102,42 +108,38 @@ export class CourseFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    console.log('Form submitted');
-    console.log('Form valid:', this.courseForm.valid);
-    console.log('Form value:', this.courseForm.value);
-    console.log('Form errors:', this.getFormErrors());
-    
     if (this.courseForm.valid) {
       this.isSubmitting = true;
       this.errorMessage = '';
       this.successMessage = '';
 
-      const courseData: Course = {
-        ...this.courseForm.value,
-        id: this.isEditMode ? this.courseId : undefined
-      };
+      const formData = new FormData();
+      Object.keys(this.courseForm.value).forEach(key => {
+        formData.append(key, this.courseForm.value[key]);
+      });
       
-      console.log('Sending course data:', courseData);
+      if (this.selectedImageFile) {
+        formData.append('image', this.selectedImageFile);
+      }
 
       const apiCall = this.isEditMode 
-        ? this.http.put(`${API_URL}/courses/${this.courseId}/`, courseData)
-        : this.http.post(`${API_URL}/courses/`, courseData);
+        ? this.http.put(`${API_URL}/courses/${this.courseId}/`, formData)
+        : this.http.post(`${API_URL}/courses/`, formData);
 
       const sub = apiCall.subscribe({
         next: (response: any) => {
-          console.log(this.isEditMode ? 'Course updated successfully!' : 'Course created successfully!');
           this.isSubmitting = false;
           this.router.navigate(['/admin/courses']);
         },
         error: (error: any) => {
-          console.error('Error saving course. Please try again.');
+          console.error('Error saving course:', error);
+          this.errorMessage = 'Error saving course. Please try again.';
           this.isSubmitting = false;
         }
       });
       
       this.subscription.add(sub);
     } else {
-      console.log('Form is invalid, marking fields as touched');
       this.markFormGroupTouched();
     }
   }
@@ -158,6 +160,19 @@ export class CourseFormComponent implements OnInit, OnDestroy {
       const control = this.courseForm.get(key);
       control?.markAsTouched();
     });
+  }
+
+  onImageSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedImageFile = file;
+      
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imagePreview = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   onCancel(): void {

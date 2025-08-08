@@ -30,16 +30,8 @@ export class ContactComponent implements OnInit {
       isMain: true
     },
     {
-      city: 'Delhi',
-      address: '456 Connaught Place, New Delhi - 110001',
-      phone: '+91 97405 68888',
-      email: 'Info@wayzoneducation.com',
-      timings: 'Mon-Sat: 9:00 AM - 7:00 PM',
-      isMain: false
-    },
-    {
-      city: 'Mumbai',
-      address: '789 Bandra West, Mumbai - 400050',
+      city: 'Kochi',
+      address: 'Wayzon Education Consultancy, 8th Floor, Lanarth Elite, MG Road, Near Maharajas Metro, Kochi - 682011',
       phone: '+91 99804 87777',
       email: 'Info@wayzoneducation.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM',

@@ -150,6 +150,25 @@ export class AdminSidebarComponent implements OnInit, AfterViewInit {
       ]
     },
     {
+      id: 'advertisements',
+      label: 'Advertisements',
+      icon: 'campaign',
+      children: [
+        {
+          id: 'advertisements-list',
+          label: 'All Advertisements',
+          icon: 'list',
+          route: '/admin/advertisements'
+        },
+        {
+          id: 'advertisements-add',
+          label: 'Add Advertisement',
+          icon: 'add',
+          route: '/admin/advertisements/add'
+        }
+      ]
+    },
+    {
       id: 'inquiries',
       label: 'Inquiries',
       icon: 'contact_support',

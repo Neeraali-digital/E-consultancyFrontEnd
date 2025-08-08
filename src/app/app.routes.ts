@@ -11,22 +11,23 @@ import { FaqComponent } from './features/faq/faq.component';
 import { UpdatesComponent } from './features/updates/updates.component';
 import { BlogsComponent } from './features/blogs/blogs.component';
 import { FranchiseComponent } from './features/franchise/franchise.component';
+import { UserRouteGuard } from './shared/guards/user-route.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'courses', component: CoursesComponent },
-  { path: 'services', component: ServicesComponent },
-  { path: 'colleges', component: CollegesComponent },
-  { path: 'college/:id', component: CollegeDetailComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'abroad', component: AbroadComponent },
-  { path: 'abroad/:country', component: AbroadComponent },
-  { path: 'faq', component: FaqComponent },
-  { path: 'updates', component: UpdatesComponent },
-  { path: 'blogs', component: BlogsComponent },
-  { path: 'franchise', component: FranchiseComponent },
+  { path: 'home', component: HomeComponent, canActivate: [UserRouteGuard] },
+  { path: 'courses', component: CoursesComponent, canActivate: [UserRouteGuard] },
+  { path: 'services', component: ServicesComponent, canActivate: [UserRouteGuard] },
+  { path: 'colleges', component: CollegesComponent, canActivate: [UserRouteGuard] },
+  { path: 'college/:id', component: CollegeDetailComponent, canActivate: [UserRouteGuard] },
+  { path: 'about', component: AboutComponent, canActivate: [UserRouteGuard] },
+  { path: 'contact', component: ContactComponent, canActivate: [UserRouteGuard] },
+  { path: 'abroad', component: AbroadComponent, canActivate: [UserRouteGuard] },
+  { path: 'abroad/:country', component: AbroadComponent, canActivate: [UserRouteGuard] },
+  { path: 'faq', component: FaqComponent, canActivate: [UserRouteGuard] },
+  { path: 'updates', component: UpdatesComponent, canActivate: [UserRouteGuard] },
+  { path: 'blogs', component: BlogsComponent, canActivate: [UserRouteGuard] },
+  { path: 'franchise', component: FranchiseComponent, canActivate: [UserRouteGuard] },
   // Admin routes with lazy loading
   {
     path: 'admin',

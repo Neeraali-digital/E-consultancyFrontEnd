@@ -2,10 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-
-const API_URL = 'http://127.0.0.1:8000/api';
+import { ApiService } from '../../../../../shared/services/api.service';
 
 @Component({
   selector: 'app-user-form',
@@ -106,7 +104,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private http: HttpClient
+    private apiService: ApiService
   ) {
     this.initializeForm();
   }
@@ -143,7 +141,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
   }
 
   private loadUser(): void {
-    const sub = this.http.get(`${API_URL}/users/${this.userId}/`).subscribe({
+    const sub = this.apiService.getUser(Number(this.userId)).subscribe({
       next: (user: any) => {
         if (user) {
           this.userForm.patchValue({
@@ -193,17 +191,20 @@ export class UserFormComponent implements OnInit, OnDestroy {
     }
 
     const apiCall = this.isEditMode 
-      ? this.http.put(`${API_URL}/users/${this.userId}/`, formData)
-      : this.http.post(`${API_URL}/users/`, formData);
+      ? this.apiService.updateUser(Number(this.userId), formData)
+      : this.apiService.createUser(formData);
 
     const sub = apiCall.subscribe({
       next: (response: any) => {
+        console.log('User saved successfully:', response);
         alert(this.isEditMode ? 'User updated successfully!' : 'User created successfully!');
         this.isSubmitting = false;
         this.router.navigate(['/admin/users']);
       },
       error: (error: any) => {
-        alert('Error saving user: ' + (error.error?.message || 'Unknown error'));
+        console.error('Error saving user:', error);
+        const errorMessage = error.error?.detail || error.error?.message || error.message || 'Unknown error';
+        alert('Error saving user: ' + errorMessage);
         this.isSubmitting = false;
       }
     });

@@ -3,6 +3,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { ScrollService } from '../../shared/services/scroll.service';
 import { NotificationService } from '../../shared/services/notification.service';
+import { ClickOutsideDirective } from '../../shared/directives/click-outside.directive';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 import { Subscription } from 'rxjs';
@@ -12,7 +13,7 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ClickOutsideDirective],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   animations: [
@@ -47,6 +48,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isCoursesDropdownOpen = false;
   isAbroadDropdownOpen = false;
   isMoreDropdownOpen = false;
+
+  isAnyDropdownOpen(): boolean {
+    return this.isAbroadDropdownOpen || this.isMoreDropdownOpen;
+  }
 
   // Scroll state for header styling
   isScrolled = false;
@@ -354,19 +359,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Abroad dropdown methods
   toggleAbroadDropdown(event?: Event) {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    // Close other dropdowns first
-    this.isAboutDropdownOpen = false;
-    this.isServicesDropdownOpen = false;
-    this.isCoursesDropdownOpen = false;
-    this.isMoreDropdownOpen = false;
-
-    // Toggle the abroad dropdown
+    console.log('Abroad dropdown clicked');
     this.isAbroadDropdownOpen = !this.isAbroadDropdownOpen;
+    console.log('Abroad dropdown state:', this.isAbroadDropdownOpen);
   }
 
   closeAbroadDropdown() {
@@ -395,19 +390,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
   // More dropdown methods
   toggleMoreDropdown(event?: Event) {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    // Close other dropdowns first
-    this.isAboutDropdownOpen = false;
-    this.isServicesDropdownOpen = false;
-    this.isCoursesDropdownOpen = false;
-    this.isAbroadDropdownOpen = false;
-
-    // Toggle the more dropdown
+    console.log('More dropdown clicked');
     this.isMoreDropdownOpen = !this.isMoreDropdownOpen;
+    console.log('More dropdown state:', this.isMoreDropdownOpen);
   }
 
   closeMoreDropdown() {
@@ -423,29 +408,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isMoreDropdownOpen = false;
   }
 
-  // Enhanced document click handler for better dropdown management
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event): void {
-    const target = event.target as HTMLElement;
 
-    // Check if click is on abroad dropdown elements
-    const isAbroadClick = target.closest('[data-dropdown="abroad"]') ||
-                         target.closest('.dropdown-container[data-dropdown-state="true"]');
-
-    // Check if click is on more dropdown elements
-    const isMoreClick = target.closest('[data-dropdown="more"]') ||
-                       target.closest('.dropdown-container[data-dropdown-state="true"]');
-
-    // Close abroad dropdown if clicking outside
-    if (!isAbroadClick && this.isAbroadDropdownOpen) {
-      this.isAbroadDropdownOpen = false;
-    }
-
-    // Close more dropdown if clicking outside
-    if (!isMoreClick && this.isMoreDropdownOpen) {
-      this.isMoreDropdownOpen = false;
-    }
-  }
 
   // Navigation method for more options
   navigateToMoreOption(route: string): void {

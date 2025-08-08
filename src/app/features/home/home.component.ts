@@ -144,6 +144,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.startCarouselAutoScroll();
     this.startReviewAutoScroll();
     this.loadHomeData();
+    this.loadAdvertisements();
   }
   
   loadHomeData() {
@@ -183,6 +184,26 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.error('Error loading blogs:', error);
         this.loading = false;
       }
+    });
+  }
+
+  loadAdvertisements() {
+    this.apiService.getAdvertisements({ is_active: true }).subscribe({
+      next: (response) => {
+        const ads = response.results || response || [];
+        if (ads.length > 0) {
+          this.consultancyAds = ads.map((ad: any) => ({
+            id: ad.id,
+            title: ad.title,
+            subtitle: ad.subtitle,
+            description: ad.description,
+            image: ad.image,
+            buttonText: ad.button_text,
+            bgGradient: 'from-blue-600 to-purple-600'
+          }));
+        }
+      },
+      error: (error) => console.error('Error loading advertisements:', error)
     });
   }
 

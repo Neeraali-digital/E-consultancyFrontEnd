@@ -81,17 +81,9 @@ export class Footer {
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM'
     },
     {
-      city: 'Delhi',
+      city: 'Kochi',
       type: 'Branch Office',
-      address: '456 Knowledge Center, CP',
-      phone: '+91 97405 68888',
-      email: 'Info@wayzoneducation.com',
-      timings: 'Mon-Sat: 9:00 AM - 7:00 PM'
-    },
-    {
-      city: 'Mumbai',
-      type: 'Branch Office',
-      address: '789 Learning Plaza, Andheri',
+      address: 'Wayzon Education Consultancy, 8th Floor, Lanarth Elite, MG Road, Near Maharajas Metro, Kochi - 682011',
       phone: '+91 99804 87777',
       email: 'Info@wayzoneducation.com',
       timings: 'Mon-Sat: 9:00 AM - 7:00 PM'

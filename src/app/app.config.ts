@@ -6,6 +6,7 @@ import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@a
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { TokenCleanupService } from './shared/services/token-cleanup.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
       useClass: AuthInterceptor,
       multi: true
     },
+    TokenCleanupService,
     provideClientHydration(withEventReplay())
   ]
 };

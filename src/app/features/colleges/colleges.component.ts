@@ -8,7 +8,7 @@ import { ApiService } from '../../shared/services/api.service';
   selector: 'app-colleges',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './colleges-simple.component.html',
+  templateUrl: './colleges.component.html',
   styleUrls: ['./colleges.component.css']
 })
 export class CollegesComponent implements OnInit {

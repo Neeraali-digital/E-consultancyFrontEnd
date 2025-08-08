@@ -160,24 +160,23 @@
         </p>
       </div>
 
-      <div class="relative">
-        <!-- Timeline Line -->
-        <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-blue-200"></div>
-
-        <div class="space-y-12">
-          <div *ngFor="let milestone of milestones; let i = index"
-               class="relative flex items-center"
-               [class.flex-row-reverse]="i % 2 === 1">
-
-            <!-- Timeline Dot -->
-            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full z-10"></div>
-
-            <!-- Content -->
-            <div class="w-5/12 bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
-                 [class.ml-auto]="i % 2 === 0">
-              <div class="text-2xl font-bold text-blue-600 mb-2">{{ milestone.year }}</div>
-              <h3 class="text-xl font-bold text-gray-800 mb-2">{{ milestone.title }}</h3>
-              <p class="text-gray-600">{{ milestone.description }}</p>
+      <div class="space-y-8">
+        <div *ngFor="let milestone of milestones; let i = index"
+             class="flex items-center gap-4">
+          <!-- Timeline Line -->
+          <div class="flex flex-col items-center">
+            <div class="w-4 h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg"></div>
+            <div *ngIf="i < milestones.length - 1" class="w-0.5 h-8 bg-blue-300 mt-2"></div>
+          </div>
+          
+          <!-- Content Card -->
+          <div class="flex-1 bg-gradient-to-r from-blue-50 to-indigo-100 rounded-lg p-4 hover:shadow-md transition-all duration-300 border border-blue-200">
+            <div class="flex items-center gap-4">
+              <div class="text-xl font-bold text-blue-600 min-w-[60px]">{{ milestone.year }}</div>
+              <div class="flex-1">
+                <h3 class="text-sm font-bold text-gray-800 mb-1">{{ milestone.title }}</h3>
+                <p class="text-xs text-gray-600">{{ milestone.description }}</p>
+              </div>
             </div>
           </div>
         </div>

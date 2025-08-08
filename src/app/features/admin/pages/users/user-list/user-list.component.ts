@@ -2,10 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-
-const API_URL = 'http://127.0.0.1:8000/api';
+import { ApiService } from '../../../../../shared/services/api.service';
 
 export interface User {
   id: string;
@@ -136,7 +134,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private http: HttpClient
+    private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
@@ -150,7 +148,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   loadUsers(): void {
     this.isLoading = true;
     
-    const sub = this.http.get<any>(`${API_URL}/users/`).subscribe({
+    const sub = this.apiService.getUsers().subscribe({
       next: (response: any) => {
         this.users = response.results || response || [];
         this.applyFilters();
@@ -208,7 +206,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   toggleStatus(user: User): void {
     const newStatus = !user.is_active;
     
-    const sub = this.http.patch(`${API_URL}/users/${user.id}/`, { is_active: newStatus }).subscribe({
+    const sub = this.apiService.updateUser(Number(user.id), { is_active: newStatus }).subscribe({
       next: (updatedUser: any) => {
         const index = this.users.findIndex(u => u.id === user.id);
         if (index !== -1) {
@@ -227,7 +225,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   deleteUser(user: User): void {
     if (confirm(`Are you sure you want to delete "${user.first_name} ${user.last_name}"?`)) {
-      const sub = this.http.delete(`${API_URL}/users/${user.id}/`).subscribe({
+      const sub = this.apiService.deleteUser(Number(user.id)).subscribe({
         next: () => {
           this.users = this.users.filter(u => u.id !== user.id);
           this.applyFilters();

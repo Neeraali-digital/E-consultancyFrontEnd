@@ -10,7 +10,7 @@
              class="w-full h-full flex-shrink-0 relative">
           <!-- Banner Image Background - Enhanced Responsive -->
           <div class="absolute inset-0">
-            <img [src]="'assets/banners/banner' + (i + 1) + '.jpg'"
+            <img [src]="ad.image || 'assets/banners/banner' + (i + 1) + '.jpg'"
                  [alt]="ad.title"
                  class="w-full h-full object-cover object-center sm:object-center md:object-center"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">

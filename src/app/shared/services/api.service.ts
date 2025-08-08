@@ -19,12 +19,30 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  private getHeaders(): HttpHeaders {
-    const token = this.tokenSubject.value;
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      ...(token && { 'Authorization': `Token ${token}` })
-    });
+  private getHeaders(endpoint?: string, isFormData?: boolean): HttpHeaders {
+    const headers: any = {};
+    
+    // Don't set Content-Type for FormData - let browser set it with boundary
+    if (!isFormData) {
+      headers['Content-Type'] = 'application/json';
+    }
+    
+    // Define public endpoints that don't need authentication
+    const publicEndpoints = ['/courses', '/colleges', '/blogs', '/reviews', '/search'];
+    const isPublicEndpoint = endpoint && publicEndpoints.some(ep => endpoint.includes(ep) && !endpoint.includes('/admin/'));
+    
+    // Skip auth headers completely for public endpoints
+    if (isPublicEndpoint) {
+      return new HttpHeaders(headers);
+    }
+    
+    // Add admin token for admin routes and user management
+    const adminToken = localStorage.getItem('admin_token');
+    if (adminToken && (endpoint?.includes('/admin/') || endpoint?.includes('/dashboard/') || endpoint?.includes('/users/') || endpoint?.includes('/students/') || endpoint?.includes('/advertisements/'))) {
+      headers['Authorization'] = `Token ${adminToken}`;
+    }
+    
+    return new HttpHeaders(headers);
   }
 
   setToken(token: string): void {
@@ -48,26 +66,28 @@ export class ApiService {
       });
     }
     return this.http.get<T>(`${this.baseUrl}${endpoint}`, {
-      headers: this.getHeaders(),
+      headers: this.getHeaders(endpoint),
       params: httpParams
     });
   }
 
   post<T>(endpoint: string, data: any): Observable<T> {
+    const isFormData = data instanceof FormData;
     return this.http.post<T>(`${this.baseUrl}${endpoint}`, data, {
-      headers: this.getHeaders()
+      headers: this.getHeaders(endpoint, isFormData)
     });
   }
 
   put<T>(endpoint: string, data: any): Observable<T> {
+    const isFormData = data instanceof FormData;
     return this.http.put<T>(`${this.baseUrl}${endpoint}`, data, {
-      headers: this.getHeaders()
+      headers: this.getHeaders(endpoint, isFormData)
     });
   }
 
   delete<T>(endpoint: string): Observable<T> {
     return this.http.delete<T>(`${this.baseUrl}${endpoint}`, {
-      headers: this.getHeaders()
+      headers: this.getHeaders(endpoint)
     });
   }
 
@@ -255,6 +275,27 @@ export class ApiService {
   // Dashboard APIs
   getDashboardStats(): Observable<any> {
     return this.get('/dashboard/stats/');
+  }
+
+  // Advertisements APIs
+  getAdvertisements(params?: any): Observable<any> {
+    return this.get('/advertisements/', params);
+  }
+
+  getAdvertisement(id: number): Observable<any> {
+    return this.get(`/advertisements/${id}/`);
+  }
+
+  createAdvertisement(adData: any): Observable<any> {
+    return this.post('/advertisements/', adData);
+  }
+
+  updateAdvertisement(id: number, adData: any): Observable<any> {
+    return this.put(`/advertisements/${id}/`, adData);
+  }
+
+  deleteAdvertisement(id: number): Observable<any> {
+    return this.delete(`/advertisements/${id}/`);
   }
 
   // Search API

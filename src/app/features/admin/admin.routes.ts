@@ -15,8 +15,10 @@ import { UpdateListComponent } from './pages/updates/update-list/update-list.com
 import { UpdateFormComponent } from './pages/updates/update-form/update-form.component';
 import { ReviewListComponent } from './pages/reviews/review-list/review-list.component';
 import { ReviewFormComponent } from './pages/reviews/review-form/review-form.component';
+import { AdvertisementListComponent } from './pages/advertisements/advertisement-list/advertisement-list.component';
+import { AdvertisementFormComponent } from './pages/advertisements/advertisement-form/advertisement-form.component';
 import { SettingsComponent } from './pages/settings/settings.component';
-// import { AdminAuthGuard } from './guards/admin-auth.guard'; // Temporarily disabled
+import { AdminAuthGuard } from './guards/admin-auth.guard';
 
 export const adminRoutes: Routes = [
   {
@@ -26,7 +28,7 @@ export const adminRoutes: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
-    // canActivate: [AdminAuthGuard], // Temporarily disabled for development
+    canActivate: [AdminAuthGuard],
     children: [
       {
         path: '',
@@ -136,6 +138,23 @@ export const adminRoutes: Routes = [
           {
             path: 'edit/:id',
             component: ReviewFormComponent
+          }
+        ]
+      },
+      {
+        path: 'advertisements',
+        children: [
+          {
+            path: '',
+            component: AdvertisementListComponent
+          },
+          {
+            path: 'add',
+            component: AdvertisementFormComponent
+          },
+          {
+            path: 'edit/:id',
+            component: AdvertisementFormComponent
           }
         ]
       },

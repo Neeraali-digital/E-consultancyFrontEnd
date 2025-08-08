@@ -12,6 +12,7 @@ import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 export class AbroadComponent implements OnInit {
 
   selectedCountry: string | null = null;
+  selectedCountryData: any = null;
   
   countries = [
     {
@@ -153,6 +154,7 @@ export class AbroadComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.selectedCountry = params['country'] || null;
+      this.selectedCountryData = this.countries.find(c => c.code === this.selectedCountry);
     });
   }
 
@@ -160,9 +162,7 @@ export class AbroadComponent implements OnInit {
     this.router.navigate(['/abroad', countryCode]);
   }
 
-  getSelectedCountryData() {
-    return this.countries.find(c => c.code === this.selectedCountry);
-  }
+  
 
   goBackToCountries(): void {
     this.router.navigate(['/abroad']);

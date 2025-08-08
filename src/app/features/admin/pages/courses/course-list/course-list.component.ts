@@ -21,6 +21,7 @@ export interface Course {
   degree_type: string;
   description: string;
   eligibility: string;
+  image?: string;
   status: 'active' | 'inactive';
   createdAt: Date;
   updatedAt: Date;

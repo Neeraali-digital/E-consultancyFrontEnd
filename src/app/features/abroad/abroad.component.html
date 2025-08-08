@@ -70,7 +70,7 @@
   </div>
 
   <!-- Country Details View -->
-  <div *ngIf="selectedCountry && getSelectedCountryData() as country" class="py-20">
+  <div *ngIf="selectedCountryData" class="py-20">
     
     <!-- Country Hero Section -->
     <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-20">
@@ -80,18 +80,18 @@
                   class="bg-white/20 hover:bg-white/30 p-3 rounded-full transition-all duration-300">
             <span class="material-icons">arrow_back</span>
           </button>
-          <img [src]="country.flag" [alt]="country.name + ' flag'" 
+          <img [src]="selectedCountryData.flag" [alt]="selectedCountryData.name + ' flag'" 
                class="w-16 h-12 rounded-lg shadow-md">
           <h1 class="text-4xl md:text-6xl font-bold">
-            Study in {{ country.name }}
+            Study in {{ selectedCountryData.name }}
           </h1>
         </div>
         
         <!-- Country Highlights Slide -->
         <div class="bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
-          <h3 class="text-2xl font-bold mb-6">Why Choose {{ country.name }}?</h3>
+          <h3 class="text-2xl font-bold mb-6">Why Choose {{ selectedCountryData.name }}?</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div *ngFor="let highlight of country.highlights" 
+            <div *ngFor="let highlight of selectedCountryData.highlights" 
                  class="text-center p-4 bg-white/10 rounded-xl">
               <span class="material-icons text-3xl mb-2">star</span>
               <p class="font-medium">{{ highlight }}</p>
@@ -109,12 +109,12 @@
             Available Courses
           </h2>
           <p class="text-xl text-gray-600">
-            Explore the courses offered in {{ country.name }}
+            Explore the courses offered in {{ selectedCountryData.name }}
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div *ngFor="let course of country.courses" 
+          <div *ngFor="let course of selectedCountryData.courses" 
                class="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-all duration-300
                       transform hover:-translate-y-2">
             <div class="text-center">
@@ -138,12 +138,12 @@
             Top Universities
           </h2>
           <p class="text-xl text-gray-600">
-            Leading educational institutions in {{ country.name }}
+            Leading educational institutions in {{ selectedCountryData.name }}
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div *ngFor="let college of country.colleges" 
+          <div *ngFor="let college of selectedCountryData.colleges" 
                class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl 
                       transition-all duration-300 transform hover:-translate-y-2">
             <img [src]="college.image" [alt]="college.name" 
@@ -169,7 +169,7 @@
           Ready to Start Your Journey?
         </h2>
         <p class="text-xl mb-8">
-          Get personalized guidance for studying in {{ country.name }}
+          Get personalized guidance for studying in {{ selectedCountryData.name }}
         </p>
         <div class="flex flex-col md:flex-row gap-4 justify-center">
           <button class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold

@@ -70,7 +70,7 @@ export interface College {
           <img *ngIf="college.image" [src]="college.image" [alt]="college.name" 
                class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
           <div *ngIf="!college.image" class="flex items-center justify-center h-full bg-gradient-to-br from-blue-500 to-indigo-600">
-            <span class="text-white text-3xl font-bold">{{ college.short_name?.charAt(0) || college.name?.charAt(0) }}</span>
+            <span class="text-white text-3xl font-bold">{{ college.short_name.charAt(0) || college.name.charAt(0) }}</span>
           </div>
           
           <!-- Status Badge -->
