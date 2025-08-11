@@ -1,121 +1,45 @@
 .admin-header {
-  backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 40;
+  overflow: visible;
+}
 
-  // Smooth transitions
-  transition: all 0.3s ease-in-out;
-
-  // Shimmer animation for logo
-  .animate-shimmer {
-    animation: shimmer 3s infinite;
-  }
-
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  // Custom button hover effects
-  button {
-    transition: all 0.3s ease-in-out;
-
-    &:hover {
-      transform: translateY(-1px) scale(1.05);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
-    }
-
-    &:active {
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  // Search input styling
-  input {
-    &::placeholder {
-      color: #9ca3af;
-    }
-    
-    &:focus {
-      outline: none;
-    }
-  }
-
-  // Notification badge animation
-  .notification-badge {
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-  }
-
-  // Dropdown animations
-  .notifications-menu > div,
-  .user-menu > div {
-    animation: slideDown 0.2s ease-out;
-    transform-origin: top;
-  }
-
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-10px) scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  // Notification item hover effect
-  .notification-item {
+.user-dropdown {
+  position: relative;
+  z-index: 50;
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 9999;
+    margin-top: 0.5rem;
+    width: 18rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e5e7eb;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
     transition: all 0.2s ease-in-out;
-    
-    &:hover {
-      background-color: #f8fafc;
-      transform: translateX(2px);
-    }
   }
+}
 
-  // User avatar gradient
-  .user-avatar {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-  }
+.notifications-menu {
+  position: relative;
+  z-index: 50;
+}
 
-  // Logo gradient
-  .logo-gradient {
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
   }
+  100% {
+    transform: translateX(100%);
+  }
+}
 
-  // Responsive adjustments
-  @media (max-width: 768px) {
-    .search-bar {
-      display: none;
-    }
-    
-    .user-details {
-      display: none;
-    }
-  }
-
-  // Dark mode support (if needed in future)
-  @media (prefers-color-scheme: dark) {
-    &.dark-mode {
-      background: rgba(17, 24, 39, 0.95);
-      border-color: #374151;
-      color: #f9fafb;
-    }
-  }
+.animate-shimmer {
+  animation: shimmer 2s infinite;
 }

@@ -65,7 +65,8 @@
       <!-- Notifications Dropdown -->
       <div 
         *ngIf="showNotifications"
-        class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 max-h-96 overflow-y-auto">
+        class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-[9999] max-h-96 overflow-y-auto"
+        style="position: absolute; z-index: 9999;">
         <div class="p-4 border-b border-gray-200">
           <h3 class="text-sm font-semibold text-gray-800">Notifications</h3>
           <p class="text-xs text-gray-500">{{ unreadCount }} unread notifications</p>
@@ -116,10 +117,11 @@
     </div>
 
     <!-- User Menu -->
-    <div class="relative user-menu">
+    <div class="user-dropdown">
       <button 
-        (click)="toggleUserMenu()"
-        class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+        (click)="toggleUserMenu(); $event.stopPropagation()"
+        class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+        [class.bg-blue-50]="showUserMenu">
         <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
           <span class="text-white text-sm font-medium">
             {{ currentUser?.name?.charAt(0) || 'A' }}
@@ -129,39 +131,32 @@
           <p class="text-sm font-medium text-gray-800">{{ currentUser?.name || 'Admin User' }}</p>
           <p class="text-xs text-gray-500">{{ currentUser?.role || 'Administrator' }}</p>
         </div>
-        <span class="material-icons text-gray-400 text-sm">keyboard_arrow_down</span>
+        <span class="material-icons text-gray-400 text-sm" [class.rotate-180]="showUserMenu">keyboard_arrow_down</span>
       </button>
+      
 
       <!-- User Dropdown -->
       <div 
         *ngIf="showUserMenu"
-        class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-        <div class="p-4 border-b border-gray-200">
-          <p class="text-sm font-medium text-gray-800">{{ currentUser?.name || 'Admin User' }}</p>
-          <p class="text-xs text-gray-500">{{ currentUser?.email || 'admin@wayzon.edu' }}</p>
-        </div>
-        
-        <div class="py-2">
-          <button 
-            (click)="onProfile()"
-            class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2">
-            <span class="material-icons text-gray-400 text-sm">person</span>
-            <span>Profile</span>
-          </button>
-          <button 
-            (click)="onSettings()"
-            class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2">
-            <span class="material-icons text-gray-400 text-sm">settings</span>
-            <span>Settings</span>
-          </button>
-        </div>
-        
-        <div class="border-t border-gray-200 py-2">
+        class="absolute top-full right-0 mt-2 w-72 bg-white rounded-lg shadow-xl border border-gray-200 z-[99999]"
+        (click)="$event.stopPropagation()">
+        <!-- Simple Admin Menu -->
+        <div class="p-4">
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+              <span class="text-white font-bold">A</span>
+            </div>
+            <div>
+              <p class="font-semibold text-gray-800">Admin User</p>
+              <p class="text-xs text-gray-500">Administrator</p>
+            </div>
+          </div>
+          
           <button 
             (click)="onLogout()"
-            class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center space-x-2">
-            <span class="material-icons text-red-500 text-sm">logout</span>
-            <span>Sign out</span>
+            class="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-2">
+            <span class="material-icons text-sm">logout</span>
+            <span>Logout</span>
           </button>
         </div>
       </div>

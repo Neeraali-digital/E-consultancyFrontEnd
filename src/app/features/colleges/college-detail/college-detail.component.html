@@ -17,11 +17,18 @@
     <div class="text-center max-w-md mx-auto px-8">
       <span class="material-icons text-6xl text-gray-300 mb-4 block">error_outline</span>
       <h2 class="text-2xl font-bold text-gray-600 mb-2">College Not Found</h2>
-      <p class="text-gray-500 mb-6">The college you're looking for doesn't exist.</p>
-      <button (click)="navigateToColleges()" 
-              class="bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300">
-        Back to Colleges
-      </button>
+      <p class="text-gray-500 mb-4">The college you're looking for doesn't exist or couldn't be loaded.</p>
+      <p class="text-sm text-gray-400 mb-6">College ID: {{ currentCollegeId() }}</p>
+      <div class="flex gap-3 justify-center">
+        <button (click)="navigateToColleges()" 
+                class="bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300">
+          Back to Colleges
+        </button>
+        <button (click)="retryLoad()" 
+                class="bg-gray-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-700 transition-all duration-300">
+          Retry
+        </button>
+      </div>
     </div>
   </div>
 

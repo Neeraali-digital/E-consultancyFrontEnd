@@ -166,9 +166,11 @@ export class CollegesComponent implements OnInit {
     this.apiService.getColleges().subscribe({
       next: (response) => {
         let apiColleges = response.results || response;
+        let mappedApiColleges: any[] = [];
+        
         // Map API data to match frontend format
         if (apiColleges && apiColleges.length > 0) {
-          this.colleges = apiColleges.map((college: any) => ({
+          mappedApiColleges = apiColleges.map((college: any) => ({
             id: college.id,
             name: college.name,
             shortName: college.short_name || college.name,
@@ -185,16 +187,23 @@ export class CollegesComponent implements OnInit {
             color: this.getCollegeColor(college.type),
             courseTypes: [college.type]
           }));
-        } else {
-          this.colleges = this.staticColleges;
         }
+        
+        // Combine API data with static data, ensuring unique IDs
+        const maxApiId = mappedApiColleges.length > 0 ? Math.max(...mappedApiColleges.map(c => c.id)) : 0;
+        const adjustedStaticColleges = this.staticColleges.map(college => ({
+          ...college,
+          id: college.id + maxApiId + 1000 // Ensure static IDs don't conflict with API IDs
+        }));
+        
+        this.colleges = [...mappedApiColleges, ...adjustedStaticColleges];
         this.filteredColleges = [...this.colleges];
         this.applyFilters();
         this.loading = false;
       },
       error: (error) => {
         console.error('Error loading colleges:', error);
-        this.error = 'Failed to load colleges. Using cached data.';
+        this.error = 'Failed to load colleges from API. Showing static data only.';
         this.colleges = this.staticColleges;
         this.filteredColleges = [...this.colleges];
         this.applyFilters();
@@ -286,6 +295,7 @@ export class CollegesComponent implements OnInit {
   }
 
   viewCollegeDetails(collegeId: number): void {
+    console.log('Navigating to college detail with ID:', collegeId);
     this.router.navigate(['/college', collegeId]);
   }
 
@@ -307,5 +317,16 @@ export class CollegesComponent implements OnInit {
       return college.courses.slice(0, 4);
     }
     return ['B.Tech', 'M.Tech'];
+  }
+
+  // Add debugging method to log college data
+  logCollegeData(): void {
+    console.log('Current colleges data:', this.colleges.map(c => ({ id: c.id, name: c.name })));
+    console.log('Filtered colleges data:', this.filteredColleges.map(c => ({ id: c.id, name: c.name })));
+  }
+
+  // Helper method to get type of value for debugging
+  typeof(value: any): string {
+    return typeof value;
   }
 }

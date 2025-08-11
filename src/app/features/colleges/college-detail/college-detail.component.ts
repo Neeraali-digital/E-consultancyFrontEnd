@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-// import { ApiService } from '../../shared/services/api.service';
+import { ApiService } from '../../../shared/services/api.service';
 
 interface CollegeFacility {
   icon: string;
@@ -19,20 +19,6 @@ interface StudentTestimonial {
   rating: number;
   testimonial: string;
   achievement?: string;
-}
-
-interface CampusImage {
-  url: string;
-  title: string;
-  description: string;
-}
-
-interface CollegeEvent {
-  title: string;
-  date: string;
-  type: string;
-  description: string;
-  image: string;
 }
 
 interface College {
@@ -64,13 +50,8 @@ interface College {
   totalStudents?: string;
   facultyRatio?: string;
   accreditation?: string[];
-  googleMapsUrl?: string;
   testimonials?: StudentTestimonial[];
-  campusImages?: CampusImage[];
-  upcomingEvents?: CollegeEvent[];
-  studentLife?: string[];
   achievements?: string[];
-  virtualTourUrl?: string;
   motto?: string;
   vision?: string;
   institutionType?: string;
@@ -85,20 +66,17 @@ interface College {
   styleUrls: ['./college-detail.component.css']
 })
 export class CollegeDetailComponent implements OnInit {
-  // Signals for reactive state management
   colleges = signal<College[]>([]);
   currentCollegeId = signal<number | null>(null);
   loading = signal(true);
   error = signal(false);
   
-  // Computed signal for current college
   college = computed(() => {
     const id = this.currentCollegeId();
     const collegeList = this.colleges();
     return id ? collegeList.find(c => c.id === id) || null : null;
   });
 
-  // Static college data with full details
   private staticColleges: College[] = [
     {
       id: 1,
@@ -109,15 +87,14 @@ export class CollegeDetailComponent implements OnInit {
       established: 1961,
       ranking: 1,
       courses: ['B.Tech', 'M.Tech', 'PhD'],
-
       placement: '95%',
       avgPackage: '₹18 LPA',
       rating: 5.0,
-      image: 'https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      image: 'https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
       featured: true,
       color: 'blue',
       courseTypes: ['Engineering', 'Technology'],
-      description: 'Indian Institute of Technology Delhi is one of the premier engineering institutions in India. Established in 1961, IIT Delhi has been a leader in engineering education and research. The institute offers undergraduate, postgraduate, and doctoral programs in various engineering disciplines.',
+      description: 'Indian Institute of Technology Delhi is one of the premier engineering institutions in India.',
       address: 'Hauz Khas, New Delhi, Delhi 110016',
       phone: '+91-11-2659-1000',
       email: 'info@admin.iitd.ac.in',
@@ -125,41 +102,42 @@ export class CollegeDetailComponent implements OnInit {
       campusSize: '325 acres',
       totalStudents: '8,000+',
       facultyRatio: '1:8',
-      googleMapsUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.8267!2d77.1925!3d28.5458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce26d9f7fa2b5%3A0x5b3cf4f8e6b8a8a8!2sIndian%20Institute%20of%20Technology%20Delhi!5e0!3m2!1sen!2sin!4v1234567890',
+      institutionType: 'Government',
+      affiliated: 'UGC',
+      motto: 'Excellence in Action',
+      vision: 'To be a global leader in engineering education and research.',
       facilities: [
-        { icon: 'library_books', name: 'Central Library', description: 'State-of-the-art library with 500,000+ books and digital resources' },
-        { icon: 'science', name: 'Research Labs', description: 'Advanced research laboratories for cutting-edge research' },
-        { icon: 'sports_soccer', name: 'Sports Complex', description: 'Olympic-size swimming pool, gymnasium, and sports facilities' },
-        { icon: 'restaurant', name: 'Dining Halls', description: 'Multiple dining halls serving nutritious meals' },
-        { icon: 'hotel', name: 'Hostels', description: 'Comfortable accommodation for students' },
-        { icon: 'local_hospital', name: 'Health Center', description: '24/7 medical facilities and emergency care' },
-        { icon: 'wifi', name: 'Wi-Fi Campus', description: 'High-speed internet connectivity across campus' },
-        { icon: 'directions_bus', name: 'Transportation', description: 'Campus shuttle and public transport connectivity' }
+        { icon: 'library_books', name: 'Central Library', description: 'State-of-the-art library with 500,000+ books' },
+        { icon: 'science', name: 'Research Labs', description: 'Advanced research laboratories' },
+        { icon: 'sports_soccer', name: 'Sports Complex', description: 'Olympic-size swimming pool and multi-sport facilities' },
+        { icon: 'restaurant', name: 'Food Courts', description: 'Multiple dining options with diverse cuisines' },
+        { icon: 'local_hospital', name: 'Health Center', description: '24/7 medical facility with qualified doctors' },
+        { icon: 'wifi', name: 'Smart Campus', description: 'High-speed Wi-Fi and digital learning infrastructure' }
       ],
       admissionProcess: [
         'JEE Advanced qualification required',
-        'Online application submission',
-        'Document verification',
-        'Seat allocation through JoSAA counseling',
-        'Fee payment and admission confirmation'
+        'Online application submission through official portal',
+        'Document verification and seat allotment',
+        'Fee payment and admission confirmation',
+        'Hostel allocation (if required)',
+        'Orientation program attendance'
       ],
       eligibility: [
         '10+2 with Physics, Chemistry, and Mathematics',
-        'Minimum 75% marks in 12th standard',
-        'JEE Main and JEE Advanced qualification',
-        'Age limit: Maximum 25 years'
+        'Minimum 75% marks in 12th standard (70% for SC/ST)',
+        'Valid JEE Advanced rank',
+        'Age limit: Maximum 25 years (30 for SC/ST)',
+        'Medical fitness certificate'
       ],
       highlights: [
         'Top ranking engineering institute in India',
         'Excellent placement record with top companies',
         'World-class faculty and research facilities',
-        'Strong alumni network globally',
-        'Industry partnerships and collaborations'
+        'Strong industry partnerships and collaborations',
+        'Active alumni network in leading positions globally',
+        'Regular international exchange programs'
       ],
-      accreditation: ['NAAC A++', 'NBA Accredited', 'NIRF Ranking #2'],
-      motto: 'Excellence in Action',
-      vision: 'To be a global leader in engineering education and research, fostering innovation and creating future leaders.',
-      virtualTourUrl: 'https://www.iitd.ac.in/virtual-tour',
+      accreditation: ['NAAC A++', 'NBA Accredited'],
       testimonials: [
         {
           name: 'Arjun Sharma',
@@ -167,74 +145,13 @@ export class CollegeDetailComponent implements OnInit {
           year: '2024',
           image: 'student-1.jpg',
           rating: 5,
-          testimonial: 'IIT Delhi transformed my life completely. The faculty, research opportunities, and peer learning environment here is unmatched. I secured a placement at Google with a 50 LPA package!',
+          testimonial: 'IIT Delhi transformed my life completely.',
           achievement: 'Google Software Engineer'
-        },
-        {
-          name: 'Priya Patel',
-          course: 'M.Tech Mechanical',
-          year: '2023',
-          image: 'student-2.jpg',
-          rating: 5,
-          testimonial: 'The research facilities and mentorship at IIT Delhi are world-class. I published 3 papers during my M.Tech and now I\'m pursuing PhD at MIT.',
-          achievement: 'MIT PhD Scholar'
-        },
-        {
-          name: 'Rahul Kumar',
-          course: 'B.Tech Electrical',
-          year: '2024',
-          image: 'student-3.jpg',
-          rating: 5,
-          testimonial: 'IIT Delhi is not just about academics - the campus life, clubs, and friendships I made here will last a lifetime. Proud to be an IITian!',
-          achievement: 'Tesla Engineer'
         }
-      ],
-      campusImages: [
-        { url: 'iit-delhi-main-gate.jpg', title: 'Main Gate', description: 'Iconic entrance to IIT Delhi campus' },
-        { url: 'iit-delhi-library.jpg', title: 'Central Library', description: 'State-of-the-art library with 500,000+ books' },
-        { url: 'iit-delhi-hostel.jpg', title: 'Student Hostels', description: 'Comfortable accommodation for students' },
-        { url: 'iit-delhi-lab.jpg', title: 'Research Labs', description: 'Advanced research laboratories' },
-        { url: 'iit-delhi-sports.jpg', title: 'Sports Complex', description: 'Olympic-size swimming pool and sports facilities' },
-        { url: 'iit-delhi-auditorium.jpg', title: 'Dogra Hall', description: 'Main auditorium for events and ceremonies' }
-      ],
-      upcomingEvents: [
-        {
-          title: 'Rendezvous 2024',
-          date: '2024-10-15',
-          type: 'Cultural Festival',
-          description: 'Annual cultural festival with performances, competitions, and celebrity shows',
-          image: 'rendezvous-2024.jpg'
-        },
-        {
-          title: 'Tech Symposium',
-          date: '2024-11-20',
-          type: 'Technical Event',
-          description: 'National level technical symposium with industry experts and research presentations',
-          image: 'tech-symposium.jpg'
-        },
-        {
-          title: 'Placement Drive',
-          date: '2024-12-01',
-          type: 'Career Event',
-          description: 'Campus placement drive with top companies like Google, Microsoft, Amazon',
-          image: 'placement-drive.jpg'
-        }
-      ],
-      studentLife: [
-        'Active student clubs and societies covering technology, arts, sports, and social causes',
-        'Annual cultural festival "Rendezvous" with celebrity performances and competitions',
-        'Inter-hostel competitions in sports, debates, and cultural activities',
-        'Student-run startups and entrepreneurship cell with funding support',
-        'Regular guest lectures by industry leaders and Nobel laureates',
-        'International exchange programs with top universities worldwide'
       ],
       achievements: [
         'Ranked #2 in NIRF Engineering Rankings 2024',
-        '95% placement rate with average package of ₹18 LPA',
-        'Over 200 patents filed by faculty and students in last 5 years',
-        'Alumni include CEOs of major tech companies and government officials',
-        'Research funding of ₹500+ crores from government and industry',
-        'International collaborations with MIT, Stanford, and other top universities'
+        'Over 95% placement rate'
       ]
     },
     {
@@ -246,15 +163,14 @@ export class CollegeDetailComponent implements OnInit {
       established: 1956,
       ranking: 1,
       courses: ['MBBS', 'MD', 'MS'],
-
       placement: '100%',
       avgPackage: '₹25 LPA',
-      rating: 5.0,
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      rating: 4.9,
+      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
       featured: true,
       color: 'red',
       courseTypes: ['Medical'],
-      description: 'All India Institute of Medical Sciences (AIIMS) New Delhi is India\'s premier medical institution. Established in 1956, AIIMS has been at the forefront of medical education, research, and patient care. The institute is known for producing some of the finest medical professionals in the country.',
+      description: 'All India Institute of Medical Sciences (AIIMS) Delhi is India\'s premier medical institution.',
       address: 'Ansari Nagar, New Delhi, Delhi 110029',
       phone: '+91-11-2658-8500',
       email: 'info@aiims.edu',
@@ -262,154 +178,48 @@ export class CollegeDetailComponent implements OnInit {
       campusSize: '200 acres',
       totalStudents: '3,000+',
       facultyRatio: '1:5',
-      googleMapsUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.8267!2d77.2085!3d28.5672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce3e45d85d3e3%3A0x691393414902968e!2sAll%20India%20Institute%20of%20Medical%20Sciences!5e0!3m2!1sen!2sin!4v1234567890',
+      institutionType: 'Government',
+      affiliated: 'MCI',
+      motto: 'Sarve santu niramayah',
+      vision: 'To be a global leader in medical education and healthcare.',
       facilities: [
-        { icon: 'local_hospital', name: 'Super Specialty Hospital', description: '1,700+ bed hospital with advanced medical facilities' },
-        { icon: 'biotech', name: 'Research Centers', description: 'State-of-the-art research facilities and laboratories' },
-        { icon: 'library_books', name: 'Medical Library', description: 'Comprehensive medical literature and digital resources' },
-        { icon: 'school', name: 'Simulation Labs', description: 'Advanced medical simulation and training facilities' },
-        { icon: 'emergency', name: 'Trauma Center', description: 'Level 1 trauma center with emergency services' },
-        { icon: 'medication', name: 'Pharmacy', description: 'In-house pharmacy with all essential medicines' },
-        { icon: 'hotel', name: 'Hostels', description: 'Separate hostels for medical students' },
-        { icon: 'restaurant', name: 'Cafeteria', description: 'Multiple dining options for students and staff' }
+        { icon: 'local_hospital', name: 'Super Specialty Hospital', description: '1,700+ bed hospital with all specialties' },
+        { icon: 'science', name: 'Medical Labs', description: 'Advanced diagnostic and research laboratories' },
+        { icon: 'library_books', name: 'Medical Library', description: 'Comprehensive medical literature and journals' },
+        { icon: 'school', name: 'Simulation Labs', description: 'High-tech medical simulation training facilities' },
+        { icon: 'restaurant', name: 'Mess Facilities', description: 'Nutritious meals for students and staff' },
+        { icon: 'home', name: 'Hostel Accommodation', description: 'Comfortable residential facilities' }
       ],
       admissionProcess: [
         'NEET UG qualification required',
-        'AIIMS entrance exam (if applicable)',
-        'Online application submission',
-        'Document verification',
-        'Counseling and seat allocation'
+        'All India counseling participation',
+        'Document verification at reporting center',
+        'Medical examination and fitness certificate',
+        'Fee payment and course registration',
+        'Hostel allotment and orientation program'
       ],
       eligibility: [
-        '10+2 with Physics, Chemistry, Biology',
-        'Minimum 50% marks in 12th standard',
-        'NEET UG qualification mandatory',
-        'Age limit: 17-25 years'
+        '10+2 with Physics, Chemistry, Biology and English',
+        'Minimum 50% marks in PCB (40% for SC/ST/OBC)',
+        'Valid NEET UG score',
+        'Age: Minimum 17 years, Maximum 25 years (30 for reserved)',
+        'Indian citizenship or OCI status'
       ],
       highlights: [
         'India\'s premier medical institution',
         'Excellent clinical exposure and training',
-        'World-renowned faculty and researchers',
-        'State-of-the-art medical facilities',
-        'Strong research and publication record'
+        'Renowned faculty and medical professionals',
+        'State-of-the-art medical equipment and facilities',
+        'Strong research culture and publications',
+        'High success rate in PG medical entrance exams'
       ],
-      accreditation: ['MCI Approved', 'NAAC A++', 'WHO Recognition']
-    },
-    {
-      id: 3,
-      name: 'Indian Institute of Management Bangalore',
-      shortName: 'IIM Bangalore',
-      type: 'Management',
-      location: 'Bangalore',
-      established: 1973,
-      ranking: 1,
-      courses: ['MBA', 'PGDM', 'Executive MBA'],
-
-      placement: '100%',
-      avgPackage: '₹35 LPA',
-      rating: 4.7,
-      image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-      featured: true,
-      color: 'green',
-      courseTypes: ['Management'],
-      description: 'Indian Institute of Management Bangalore is one of India\'s premier business schools. Established in 1973, IIM Bangalore has consistently been ranked among the top management institutes in the country. The institute offers world-class management education and has a strong alumni network in corporate leadership positions.',
-      address: 'Bannerghatta Road, Bangalore, Karnataka 560076',
-      phone: '+91-80-2699-3000',
-      email: 'info@iimb.ac.in',
-      website: 'https://www.iimb.ac.in',
-      campusSize: '100 acres',
-      totalStudents: '1,500+',
-      facultyRatio: '1:6',
-      googleMapsUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8267!2d77.6033!3d12.8456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae6b7c0d5f5f5f%3A0x5b3cf4f8e6b8a8a8!2sIndian%20Institute%20of%20Management%20Bangalore!5e0!3m2!1sen!2sin!4v1234567890',
-      facilities: [
-        { icon: 'business', name: 'Management Labs', description: 'State-of-the-art business simulation and analytics labs' },
-        { icon: 'library_books', name: 'Business Library', description: 'Comprehensive business literature and case study collection' },
-        { icon: 'meeting_room', name: 'Conference Halls', description: 'Modern conference facilities for seminars and events' },
-        { icon: 'computer', name: 'IT Infrastructure', description: 'Advanced computing facilities and high-speed internet' },
-        { icon: 'restaurant', name: 'Dining Complex', description: 'Multiple dining options and cafeterias' },
-        { icon: 'hotel', name: 'Student Housing', description: 'Comfortable accommodation for MBA students' },
-        { icon: 'fitness_center', name: 'Recreation Center', description: 'Gymnasium, sports facilities, and wellness center' },
-        { icon: 'local_parking', name: 'Parking', description: 'Ample parking space for students and visitors' }
-      ],
-      admissionProcess: [
-        'CAT exam qualification required',
-        'Written Ability Test (WAT)',
-        'Personal Interview (PI)',
-        'Academic and work experience evaluation',
-        'Final merit list and admission'
-      ],
-      eligibility: [
-        'Bachelor\'s degree in any discipline',
-        'Minimum 50% marks in graduation',
-        'Valid CAT score',
-        'Work experience preferred but not mandatory'
-      ],
-      highlights: [
-        'Top-ranked business school in India',
-        'Excellent corporate placements',
-        'World-class faculty and curriculum',
-        'Strong industry connections',
-        'Global exchange programs'
-      ],
-      accreditation: ['AACSB', 'EQUIS', 'AMBA Triple Crown']
-    },
-    {
-      id: 4,
-      name: 'National Institute of Technology Trichy',
-      shortName: 'NIT Trichy',
-      type: 'Engineering',
-      location: 'Tiruchirappalli',
-      established: 1964,
-      ranking: 8,
-      courses: ['B.Tech', 'M.Tech', 'MBA'],
-
-      placement: '92%',
-      avgPackage: '₹12 LPA',
-      rating: 4.5,
-      image: 'nit-trichy.jpg',
-      featured: false,
-      color: 'blue',
-      courseTypes: ['Engineering', 'Technology', 'Management'],
-      description: 'National Institute of Technology Tiruchirappalli is one of India\'s premier technical institutions. Established in 1964, NIT Trichy has been consistently ranked among the top engineering colleges in India. The institute is known for its excellent academic programs, research facilities, and strong industry connections.',
-      address: 'NIT Campus, Tiruchirappalli, Tamil Nadu 620015',
-      phone: '+91-431-250-3000',
-      email: 'info@nitt.edu',
-      website: 'https://www.nitt.edu',
-      campusSize: '800 acres',
-      totalStudents: '6,000+',
-      facultyRatio: '1:10',
-      googleMapsUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.8267!2d78.8145!3d10.7590!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf54e94b3c5c5%3A0x5b3cf4f8e6b8a8a8!2sNational%20Institute%20of%20Technology%20Tiruchirappalli!5e0!3m2!1sen!2sin!4v1234567890',
-      facilities: [
-        { icon: 'science', name: 'Engineering Labs', description: 'Well-equipped laboratories for all engineering disciplines' },
-        { icon: 'library_books', name: 'Central Library', description: 'Extensive collection of technical books and journals' },
-        { icon: 'computer', name: 'Computer Center', description: 'High-performance computing facilities' },
-        { icon: 'sports_soccer', name: 'Sports Complex', description: 'Comprehensive sports and recreational facilities' },
-        { icon: 'hotel', name: 'Hostels', description: 'Comfortable accommodation for students' },
-        { icon: 'restaurant', name: 'Mess Facilities', description: 'Hygienic dining facilities with varied menu' },
-        { icon: 'local_hospital', name: 'Health Center', description: 'Medical facilities and health services' },
-        { icon: 'directions_bus', name: 'Transport', description: 'Campus transportation and connectivity' }
-      ],
-      admissionProcess: [
-        'JEE Main qualification required',
-        'JoSAA counseling participation',
-        'Document verification',
-        'Seat allocation and confirmation',
-        'Fee payment and admission'
-      ],
-      eligibility: [
-        '10+2 with Physics, Chemistry, Mathematics',
-        'Minimum 75% marks in 12th standard',
-        'Valid JEE Main score',
-        'Age limit as per JEE norms'
-      ],
-      highlights: [
-        'Premier National Institute of Technology',
-        'Strong placement record with top companies',
-        'Excellent research and innovation culture',
-        'Beautiful campus with modern facilities',
-        'Active student community and clubs'
-      ],
-      accreditation: ['NAAC A++', 'NBA Accredited', 'NIRF Ranking #9']
+      accreditation: ['MCI Approved', 'NAAC A++'],
+      testimonials: [],
+      achievements: [
+        'Ranked #1 in medical education in India',
+        'Leading medical research institution',
+        'Highest number of medical specialties under one roof'
+      ]
     }
   ];
 
@@ -418,53 +228,170 @@ export class CollegeDetailComponent implements OnInit {
     private router: Router,
     private location: Location,
     private sanitizer: DomSanitizer,
-    // private apiService: ApiService
+    private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const collegeId = +params['id'];
-      console.log('College ID from route:', collegeId);
-      this.currentCollegeId.set(collegeId);
-      this.loadAllColleges();
+      const id = +params['id'];
+      console.log('College detail component received ID:', id);
+      if (id) {
+        this.currentCollegeId.set(id);
+        this.loadCollegeData();
+      } else {
+        console.error('No valid college ID found in route params');
+        this.error.set(true);
+        this.loading.set(false);
+      }
     });
   }
 
-  private loadAllColleges(): void {
+  private loadCollegeData(): void {
     this.loading.set(true);
     this.error.set(false);
-
-    // Use static data for now
-    setTimeout(() => {
-      console.log('Loading colleges:', this.staticColleges);
-      this.colleges.set(this.staticColleges);
-      
-      // Check if current college exists
-      const currentId = this.currentCollegeId();
-      const foundCollege = this.staticColleges.find(c => c.id === currentId);
-      console.log('Looking for college ID:', currentId);
-      console.log('Found college:', foundCollege);
-      
-      if (!foundCollege && currentId) {
-        this.error.set(true);
-      }
-      
+    
+    const collegeId = this.currentCollegeId();
+    console.log('Loading college data for ID:', collegeId);
+    
+    if (!collegeId) {
+      console.error('No college ID provided');
+      this.error.set(true);
       this.loading.set(false);
-    }, 500);
+      return;
+    }
+
+    // First try to get individual college from API
+    console.log('Attempting to fetch college from API...');
+    this.apiService.getCollege(collegeId).subscribe({
+      next: (response) => {
+        console.log('API response for college:', response);
+        if (response) {
+          // Map API response to our College interface
+          const apiCollege = this.mapApiCollegeToInterface(response);
+          console.log('Mapped college data:', apiCollege);
+          this.colleges.set([apiCollege]);
+        } else {
+          console.log('No response from API, trying static data...');
+          this.tryStaticData(collegeId);
+        }
+        this.loading.set(false);
+      },
+      error: (error) => {
+        console.error('Error loading college from API:', error);
+        // Fallback to static data or all colleges API
+        this.tryStaticData(collegeId);
+      }
+    });
+  }
+
+  private tryStaticData(collegeId: number): void {
+    console.log('Trying static data for college ID:', collegeId);
+    
+    // Check if ID is in the adjusted range (static data with offset)
+    const adjustedStaticId = collegeId - 1000;
+    const staticCollege = this.staticColleges.find(c => c.id === adjustedStaticId);
+    if (staticCollege) {
+      console.log('Found college in static data:', staticCollege.name);
+      this.colleges.set([{ ...staticCollege, id: collegeId }]);
+      this.loading.set(false);
+      return;
+    }
+
+    console.log('College not found in static data, trying all colleges API...');
+    // Try to get all colleges and find the one
+    this.apiService.getColleges().subscribe({
+      next: (response) => {
+        let apiColleges = response.results || response;
+        if (apiColleges && apiColleges.length > 0) {
+          const mappedColleges = apiColleges.map((college: any) => this.mapApiCollegeToInterface(college));
+          const foundCollege = mappedColleges.find((c: College) => c.id === collegeId);
+          
+          if (foundCollege) {
+            console.log('Found college in API data:', foundCollege.name);
+            this.colleges.set([foundCollege]);
+          } else {
+            console.error('College not found in API data either');
+            this.error.set(true);
+          }
+        } else {
+          console.error('No colleges returned from API');
+          this.error.set(true);
+        }
+        this.loading.set(false);
+      },
+      error: (error) => {
+        console.error('Error loading colleges:', error);
+        this.error.set(true);
+        this.loading.set(false);
+      }
+    });
+  }
+
+  private mapApiCollegeToInterface(apiCollege: any): College {
+    return {
+      id: apiCollege.id,
+      name: apiCollege.name,
+      shortName: apiCollege.short_name || apiCollege.name,
+      type: apiCollege.type,
+      location: apiCollege.location,
+      established: apiCollege.established,
+      ranking: apiCollege.ranking || 999,
+      courses: Array.isArray(apiCollege.courses) ? apiCollege.courses : [],
+      placement: apiCollege.placement || '85%',
+      avgPackage: apiCollege.avg_package || 'N/A',
+      rating: apiCollege.rating || 4.0,
+      image: apiCollege.image || 'https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      featured: apiCollege.ranking <= 10,
+      color: this.getCollegeColor(apiCollege.type),
+      courseTypes: [apiCollege.type],
+      description: apiCollege.description || `${apiCollege.name} is a premier educational institution offering quality education.`,
+      address: apiCollege.address,
+      phone: apiCollege.phone,
+      email: apiCollege.email,
+      website: apiCollege.website,
+      campusSize: apiCollege.campus_size,
+      totalStudents: apiCollege.total_students,
+      facultyRatio: apiCollege.faculty_ratio,
+      institutionType: apiCollege.institution_type,
+      affiliated: apiCollege.affiliated,
+      motto: apiCollege.motto,
+      vision: apiCollege.vision,
+      facilities: apiCollege.facilities || this.getDefaultFacilities(),
+      admissionProcess: apiCollege.admission_process || this.getDefaultAdmissionProcess(),
+      eligibility: apiCollege.eligibility || this.getDefaultEligibility(),
+      highlights: apiCollege.highlights || this.getDefaultHighlights(),
+      accreditation: apiCollege.accreditation || ['UGC Approved', 'NAAC Accredited'],
+      testimonials: apiCollege.testimonials || [],
+      achievements: apiCollege.achievements || this.getDefaultAchievements()
+    };
+  }
+
+  private getCollegeColor(type: string): string {
+    const colorMap: { [key: string]: string } = {
+      'engineering': 'blue',
+      'medical': 'red',
+      'management': 'green',
+      'arts': 'purple',
+      'law': 'orange',
+      'pharmacy': 'indigo'
+    };
+    return colorMap[type?.toLowerCase()] || 'blue';
   }
 
   goBack(): void {
-    console.log('Back button clicked');
-    // Try using router navigation as fallback
-    if (window.history.length > 1) {
-      this.location.back();
-    } else {
-      this.router.navigate(['/colleges']);
-    }
+    this.location.back();
+  }
+
+  getSafeUrl(url: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   navigateToColleges(): void {
     this.router.navigate(['/colleges']);
+  }
+
+  getStarArray(rating: number): boolean[] {
+    return Array(5).fill(false).map((_, index) => index < Math.floor(rating));
   }
 
   getColorClasses(color: string): string {
@@ -476,20 +403,6 @@ export class CollegeDetailComponent implements OnInit {
       orange: 'from-orange-500 to-orange-600'
     };
     return colorMap[color] || 'from-gray-500 to-gray-600';
-  }
-
-  getStarArray(rating: number): boolean[] {
-    // Returns array of 5 booleans: true for filled stars, false for empty stars
-    // Example: rating 4.8 -> [true, true, true, true, false]
-    // Example: rating 5.0 -> [true, true, true, true, true]
-    return Array(5).fill(false).map((_, index) => index < Math.floor(rating));
-  }
-
-  openWebsite(): void {
-    const currentCollege = this.college();
-    if (currentCollege?.website) {
-      window.open(currentCollege.website, '_blank');
-    }
   }
 
   callCollege(): void {
@@ -506,63 +419,67 @@ export class CollegeDetailComponent implements OnInit {
     }
   }
 
-  getSafeUrl(url: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  openWebsite(): void {
+    const currentCollege = this.college();
+    if (currentCollege?.website) {
+      window.open(currentCollege.website, '_blank');
+    }
   }
 
-  private getCollegeColor(type: string): string {
-    const colorMap: { [key: string]: string } = {
-      'engineering': 'blue',
-      'medical': 'red',
-      'management': 'green',
-      'arts': 'purple',
-      'law': 'orange',
-      'pharmacy': 'indigo'
-    };
-    return colorMap[type?.toLowerCase()] || 'blue';
+  retryLoad(): void {
+    console.log('Retrying to load college data...');
+    this.loadCollegeData();
   }
 
-  private getDefaultStaticData(): Partial<College> {
-    return {
-      placement: '95%',
-      avgPackage: '₹15 LPA',
-      description: 'A premier educational institution committed to excellence in education.',
-      phone: '+91-XXX-XXX-XXXX',
-      email: 'info@college.edu',
-      website: '#',
-      campusSize: '100 acres',
-      totalStudents: '5,000+',
-      facultyRatio: '1:10',
-      facilities: [
-        { icon: 'library_books', name: 'Central Library', description: 'State-of-the-art library with extensive resources' },
-        { icon: 'science', name: 'Research Labs', description: 'Advanced research laboratories' },
-        { icon: 'sports_soccer', name: 'Sports Complex', description: 'Comprehensive sports facilities' },
-        { icon: 'restaurant', name: 'Dining Halls', description: 'Multiple dining options' },
-        { icon: 'hotel', name: 'Hostels', description: 'Comfortable accommodation' },
-        { icon: 'local_hospital', name: 'Health Center', description: '24/7 medical facilities' }
-      ],
-      admissionProcess: [
-        'Online application submission',
-        'Entrance exam qualification', 
-        'Document verification',
-        'Counseling and seat allocation',
-        'Fee payment and admission confirmation'
-      ],
-      eligibility: [
-        '10+2 with relevant subjects',
-        'Minimum required percentage',
-        'Valid entrance exam score',
-        'Age limit as per norms'
-      ],
-      highlights: [
-        'Top-ranked institution',
-        'Excellent placement record',
-        'World-class faculty',
-        'Modern infrastructure'
-      ],
-      accreditation: ['NAAC A++', 'NBA Accredited'],
-      motto: 'Excellence in Education',
-      vision: 'To be a leading institution fostering innovation and creating future leaders.'
-    };
+  private getDefaultFacilities(): CollegeFacility[] {
+    return [
+      { icon: 'library_books', name: 'Central Library', description: 'Well-equipped library with extensive collection' },
+      { icon: 'science', name: 'Research Labs', description: 'Modern laboratories for practical learning' },
+      { icon: 'sports_soccer', name: 'Sports Complex', description: 'Complete sports facilities for students' },
+      { icon: 'restaurant', name: 'Cafeteria', description: 'Hygienic food court with variety of options' },
+      { icon: 'local_hospital', name: 'Medical Center', description: '24/7 medical facility for emergencies' },
+      { icon: 'wifi', name: 'Wi-Fi Campus', description: 'High-speed internet connectivity throughout campus' }
+    ];
+  }
+
+  private getDefaultAdmissionProcess(): string[] {
+    return [
+      'Fill the online application form with required details',
+      'Submit necessary documents and certificates',
+      'Appear for entrance examination (if applicable)',
+      'Attend counseling session based on merit/rank',
+      'Complete fee payment and document verification',
+      'Confirm admission and join the program'
+    ];
+  }
+
+  private getDefaultEligibility(): string[] {
+    return [
+      '10+2 or equivalent examination from recognized board',
+      'Minimum 50% marks in qualifying examination',
+      'Valid entrance exam score (if applicable)',
+      'Age limit as per university norms',
+      'Medical fitness certificate'
+    ];
+  }
+
+  private getDefaultHighlights(): string[] {
+    return [
+      'Experienced and qualified faculty members',
+      'Industry-relevant curriculum and training',
+      'Strong placement support and career guidance',
+      'Modern infrastructure and learning facilities',
+      'Active student clubs and extracurricular activities',
+      'Regular industry interactions and guest lectures'
+    ];
+  }
+
+  private getDefaultAchievements(): string[] {
+    return [
+      'Consistently high placement rates',
+      'Recognition for academic excellence',
+      'Active participation in research and innovation',
+      'Strong alumni network in various industries'
+    ];
   }
 }

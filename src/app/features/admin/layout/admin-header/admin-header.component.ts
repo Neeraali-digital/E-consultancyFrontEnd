@@ -70,8 +70,14 @@ export class AdminHeaderComponent implements OnInit {
   }
 
   toggleUserMenu(): void {
+    console.log('Toggle clicked, current state:', this.showUserMenu);
     this.showUserMenu = !this.showUserMenu;
     this.showNotifications = false;
+    console.log('New state:', this.showUserMenu);
+    // Force change detection
+    setTimeout(() => {
+      console.log('After timeout, state:', this.showUserMenu);
+    }, 100);
   }
 
   toggleNotifications(): void {
@@ -85,17 +91,40 @@ export class AdminHeaderComponent implements OnInit {
   }
 
   onLogout(): void {
-    this.adminService.logout();
-    this.router.navigate(['/admin/login']);
+    if (confirm('Are you sure you want to logout?')) {
+      this.adminService.logout();
+      this.showUserMenu = false;
+      this.router.navigate(['/admin/login']);
+    }
   }
 
   onProfile(): void {
-    // Navigate to profile page
     console.log('Navigate to profile');
+    this.showUserMenu = false;
   }
 
   onSettings(): void {
     this.router.navigate(['/admin/settings']);
+    this.showUserMenu = false;
+  }
+
+  onActivityLog(): void {
+    console.log('Navigate to activity log');
+    this.showUserMenu = false;
+  }
+
+  getLastLoginTime(): string {
+    return new Date().toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  getPermissionCount(): string {
+    const user = this.currentUser;
+    return user?.permissions ? `${user.permissions.length} granted` : '0 granted';
   }
 
   getCurrentPageTitle(): string {
@@ -122,7 +151,21 @@ export class AdminHeaderComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event): void {
     const target = event.target as HTMLElement;
-    if (!target.closest('.user-menu') && !target.closest('.notifications-menu')) {
+    const userMenuContainer = target.closest('.user-dropdown');
+    const notificationContainer = target.closest('.notifications-menu');
+    
+    if (!userMenuContainer && this.showUserMenu) {
+      console.log('Closing user menu due to outside click');
+      this.showUserMenu = false;
+    }
+    if (!notificationContainer && this.showNotifications) {
+      this.showNotifications = false;
+    }
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(): void {
+    if (this.showUserMenu || this.showNotifications) {
       this.showUserMenu = false;
       this.showNotifications = false;
     }
