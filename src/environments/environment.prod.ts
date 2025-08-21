@@ -1,7 +1,7 @@
 // Environment configuration for production
 export const environment = {
   production: true,
-  apiUrl: 'https://api.wayzon.edu',
+  apiUrl: 'https://api.wayzoneducation.com/api',
   appName: 'Wayzon Educational Consultancy',
   version: '1.0.0',
   enableDebugMode: false,
