@@ -75,55 +75,65 @@ export class HomeComponent implements OnInit, OnDestroy {
   studentReviews = [
     {
       id: 1,
-      name: 'Priya Sharma',
-      course: 'B.Tech Computer Science',
+      name: 'Priyanka Sharma',
+      course: 'MBA',
       college: 'IIT Delhi',
       image: '',
       rating: 5,
-      review: 'EduConsult made my dream of studying at IIT a reality. Their guidance was exceptional and the process was completely transparent.',
+      review: 'My brother and I got admission through Wayzon Education Consultancy. They gave us clear guidance and great service, helping us choose the right college and course within our budget.',
       year: '2024'
     },
     {
       id: 2,
-      name: 'Rahul Patel',
-      course: 'MBBS',
-      college: 'AIIMS Mumbai',
+      name: 'Arshita Singh',
+      course: 'Engineering',
+      college: 'BGS',
       image: '',
       rating: 5,
-      review: 'Thanks to EduConsult, I got admission in AIIMS. The counselors were very supportive throughout the entire journey.',
-      year: '2024'
+      review: 'I was very selective and aiming for specific colleges in Karnataka, with low chances of admission. I was a bit tense, but the team Wayzon was very confident and handled everything smoothly over the phone and online, without visit their office.',
+      year: '2023'
     },
     {
       id: 3,
-      name: 'Ananya Singh',
-      course: 'MBA Finance',
-      college: 'IIM Bangalore',
+      name: 'Dr.Pankaj',
+      course: 'MS Ortho',
+      college: 'St. Marys Hospital',
       image: '',
       rating: 5,
-      review: 'Professional guidance and excellent support. EduConsult helped me secure admission in my dream college with scholarship.',
-      year: '2023'
+      review: 'Professional guidance and excellent support. EduConsult helped me secure admission in my dream college with scholarship I heard about Wayzon from my batchmate. Reliable medical PG consultancies are rare, but this team is expert in MD/MS admissions. I have referred many doctors, and all were happy with their strong college connections and trustworthy financial dealings.',
+      year: '2025'
     },
     {
       id: 4,
-      name: 'Vikram Kumar',
-      course: 'B.Tech Mechanical',
-      college: 'NIT Trichy',
+      name: 'Sarah John',
+      course: 'BSc Nursing',
+      college: 'St. Johns Medical College',
       image: '',
       rating: 4,
-      review: 'Great experience with EduConsult. They provided clear guidance and helped me choose the right college for my career.',
-      year: '2023'
+      review: 'I completed my nursing graduation 5 years ago and now work in the UK. In 2016, I didn’t know much about nursing colleges in Bangalore, but I wanted to study there. Wayzon helped me and my family with everything—from college selection to campus tours and education loans. I’m very happy. Thanks, Wayzon!',
+      year: '2020'
     },
     {
       id: 5,
-      name: 'Sneha Reddy',
-      course: 'BDS',
+      name: 'Ritu Arora',
+      course: 'MBBS',
       college: 'Manipal University',
       image: '',
       rating: 5,
-      review: 'Excellent service and genuine guidance. EduConsult team is very professional and trustworthy.',
+      review: 'I had a great experience with Wayzon — everything was smooth and stress-free. Being from North India, their support felt like having local guardians. I feel its my duty to share this with anyone looking for admission in Bengaluru. ',
+      year: '2024'
+    },
+    {
+      id: 6,
+      name: 'Ritu Arora',
+      course: 'Russia',
+      college: 'Manipal University',
+      image: '',
+      rating: 5,
+      review: 'I am from Bengaluru and dreamed of studying MBBS abroad. With a low NEET score and a limited budget, a local management seat wasnt possible. I visited Wayzon to explore approved MBBS options abroad and was fully satisfied with their clear guidance. Now, I am a 4th-year student in Russia.',
       year: '2024'
     }
-  ];
+    ];
 
   // Current carousel slide
   currentSlide = 0;
