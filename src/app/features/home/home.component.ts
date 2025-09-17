@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   studentReviews = [
     {
       id: 1,
-      name: 'Priyanka Sharma',
+      name: 'Priyanka Sharma',
       course: 'MBA',
       college: 'IIT Delhi',
       image: '',
@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       id: 4,
       name: 'Sarah John',
       course: 'BSc Nursing',
-      college: 'St. Johns Medical College',
+      college: 'St. Johns',
       image: '',
       rating: 4,
       review: 'I completed my nursing graduation 5 years ago and now work in the UK. In 2016, I didn’t know much about nursing colleges in Bangalore, but I wanted to study there. Wayzon helped me and my family with everything—from college selection to campus tours and education loans. I’m very happy. Thanks, Wayzon!',
@@ -125,13 +125,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     },
     {
       id: 6,
-      name: 'Ritu Arora',
-      course: 'Russia',
-      college: 'Manipal University',
+      name: 'Harshitha Gowda',
+      course: 'MBBS',
+      college: 'Russia',
       image: '',
       rating: 5,
       review: 'I am from Bengaluru and dreamed of studying MBBS abroad. With a low NEET score and a limited budget, a local management seat wasnt possible. I visited Wayzon to explore approved MBBS options abroad and was fully satisfied with their clear guidance. Now, I am a 4th-year student in Russia.',
-      year: '2024'
+      year: '2025'
     }
     ];
 
@@ -140,6 +140,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // Current review index for auto-scroll
   currentReviewIndex = 0;
+
+  // Show more programs toggle
+  showMorePrograms = false;
 
   // Intervals for auto-scroll
   private carouselInterval: any;
@@ -152,7 +155,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.startCarouselAutoScroll();
-    this.startReviewAutoScroll();
+    // this.startReviewAutoScroll();
     this.loadHomeData();
     this.loadAdvertisements();
   }
@@ -246,11 +249,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   // Review auto-scroll methods
-  startReviewAutoScroll() {
-    this.reviewInterval = setInterval(() => {
-      this.currentReviewIndex = (this.currentReviewIndex + 1) % this.studentReviews.length;
-    }, 4000); // Change review every 4 seconds
-  }
+  // startReviewAutoScroll() {
+  //   this.reviewInterval = setInterval(() => {
+  //     this.currentReviewIndex = (this.currentReviewIndex + 1) % this.studentReviews.length;
+  //   }, 10000); // Change review every 4 seconds
+  // }
 
   // Generate star rating array
   getStarArray(rating: number): boolean[] {
@@ -284,6 +287,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   navigateToCOllages(){
     console.log('clickccccccccccccccccc')
     this.router.navigate(['/colleges']);
+  }
+
+  toggleMorePrograms() {
+    this.showMorePrograms = !this.showMorePrograms;
   }
 
 }
