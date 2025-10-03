@@ -31,43 +31,25 @@ export class HomeComponent implements OnInit, OnDestroy {
   
   loading = true;
 
-  // Carousel data for consultancy ads
+  // Carousel data for consultancy ads - updated to use slide1 and slide2 images
   consultancyAds = [
     {
       id: 1,
-      title: 'Engineering Excellence',
-      subtitle: 'Top Engineering Colleges',
-      description: 'Get direct admission to premier engineering institutions with 100% placement guarantee.',
-      image: '',
-      buttonText: 'Explore institutions',
+      title: 'Slide 1',
+      subtitle: '',
+      description: '',
+      image: 'assets/images/slide1.png',
+      buttonText: '',
       bgGradient: 'from-blue-600 to-purple-600'
     },
     {
       id: 2,
-      title: 'Medical Dreams',
-      subtitle: 'MBBS & Medical Courses',
-      description: 'Secure your seat in top medical colleges with our expert guidance and support.',
-      image: '',
-      buttonText: 'Explore institutions',
+      title: 'Slide 2',
+      subtitle: '',
+      description: '',
+      image: 'assets/images/slide2.png',
+      buttonText: '',
       bgGradient: 'from-red-500 to-pink-600'
-    },
-    {
-      id: 3,
-      title: 'Management Masters',
-      subtitle: 'MBA & Management Programs',
-      description: 'Join prestigious business schools and accelerate your career in management.',
-      image: '',
-      buttonText: 'Explore institutions',
-      bgGradient: 'from-green-500 to-teal-600'
-    },
-    {
-      id: 4,
-      title: 'Technology Future',
-      subtitle: 'IT & Computer Science',
-      description: 'Shape the future with cutting-edge technology programs and industry partnerships.',
-      image: '',
-      buttonText: 'Explore institutions',
-      bgGradient: 'from-indigo-500 to-blue-600'
     }
   ];
 
