@@ -20,63 +20,87 @@ export class AboutComponent implements OnInit {
 
   whatWeDoServices = [
     {
-      title: 'CAREER COUNSELING',
+      title: 'Admission Process',
       icon: 'psychology',
       bgColor: 'bg-blue-600',
-      description: 'Expert guidance to help you discover your true potential and choose the right career path that aligns with your interests and abilities.',
+      description: 'We arrange enrollment via legal quotas; private colleges only. An advance payment confirms commitment before final fee payment.',
       features: [
-        'Personality & Aptitude Assessment',
-        'Career Mapping & Planning',
-        'Industry Insights & Trends',
-        'One-on-One Counseling Sessions'
+        'Access legal quotas (NRI/Vacant)',
+        'Advance Payment for Withdrawal Reduction',
+        'Partner with approved private colleges only',
+        'Sign mutual agreement and cancellation policy',
+        'Transparent and secure process',
+        'Final enrollment upon remaining fee payment'
       ]
     },
     {
-      title: 'ADMISSION GUIDANCE',
+      title: 'Career Counselling',
       icon: 'school',
       bgColor: 'bg-green-600',
-      description: 'Comprehensive support throughout the admission process to secure your place in top educational institutions.',
+      description: 'We assess your goals, recommend courses/colleges, and align paths with your budget and ability. Job support included.',
       features: [
-        'College Selection & Shortlisting',
-        'Application Process Support',
-        'Document Preparation',
-        'Interview Preparation'
+        'Assess interests/strengths for decisions',
+        'Align with ability, budget, and goals',
+        'Post-course job support via HR team',
+        'Expert advice on course/stream selection',
+        'Insights on career trends and prospects',
+        'Goal-oriented planning for confidence'
       ]
     },
     {
-      title: 'LOCAL GUARDIAN SERVICE',
+      title: 'Direct Admission',
       icon: 'family_restroom',
       bgColor: 'bg-purple-600',
-      description: 'Reliable local guardian services ensuring your safety and well-being while studying away from home.',
+      description: 'Secure your seat without competitive exams. We handle documentation and deadlines efficiently with our college tie-ups.',
       features: [
-        '24/7 Emergency Support',
-        'Regular Progress Monitoring',
-        'Parent Communication',
-        'Local Assistance & Guidance'
+        'Strong college network',
+        'Simplified and hassle-free process',
+        'Stress-free experience (planned or last-minute)',
+        'Potential for lower fees via bulk tie-ups',
+        'Efficient processing due to official tie-ups',
+        'Handle documentation and deadlines accurately',
       ]
     },
     {
-      title: 'CAMPUS VISIT',
+      title: 'Local Guardian Service',
       icon: 'tour',
-      bgColor: 'bg-orange-600',
-      description: 'Organized campus visits to help you experience the college environment and make informed decisions.',
+      bgColor: 'bg-yellow-600',
+      description: 'We offer reliable support and act as a trusted local contact for safety, health, and housing needs.',
       features: [
-        'Guided Campus Tours',
-        'Faculty Interactions',
-        'Student Life Experience',
-        'Facility Demonstrations'
+        'Trusted point of contact (Student/Parent/Inst.)',
+        'Assist with housing and health needs',
+        'Arrange travel pick-ups',
+        'Ensure student safety and comfort',
+        'Regular parent updates on request',
+        '24/7 emergency helpline available'
       ]
     },
     {
-      title: 'EDUCATION LOANS',
+      title: 'Education Loan Assistance',
       icon: 'account_balance',
       bgColor: 'bg-red-600',
-      description: 'Assistance with education loan applications and financial planning to make quality education affordable.',
+      description: 'We provide full support for education loans, finding collateral-free options and ensuring the lowest interest rate.',
       features: [
-        'Loan Application Support',
-        'Bank Liaison Services',
-        'Documentation Assistance',
-        'Financial Planning Guidance'
+        'Full loan support with eligible banks',
+        'Guidance through documentation/application',
+        'Access collateral-free options (via banking connections)',
+        'Track application from start to finish',
+        'Expertise improves approval chances',
+        'Secure maximum loan at lowest interest rate',
+      ]
+    },
+    {
+      title: 'Right College,Course Selection',
+      icon: 'verified',
+      bgColor: 'bg-blue-600',
+      description: 'We match you to the right college based on rankings, fees, and facilities. Courses align with goals and market demand.',
+      features: [
+        'Assess accreditations, rankings, reputation',
+        'Evaluate faculty, facilities, and fees',
+        'Discuss goals, preferences, and budget',
+        'Course selection based on interests/goals',
+        'Cross-verify course details and conduct research',
+        'Ensure alignment with market demand/job prospects',
       ]
     }
   ];
