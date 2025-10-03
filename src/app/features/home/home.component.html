@@ -431,10 +431,7 @@
               <div class="w-20 h-20 rounded-full overflow-hidden ring-4 shadow-lg"
                    [class.ring-blue-300]="i === 1"
                    [class.ring-gray-200]="i !== 1">
-                <div class="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500
-                          flex items-center justify-center text-white text-xl font-bold">
-                  {{ review.name.charAt(0) }}
-                </div>
+             <img [src]="review.image" alt="image" class="object-fill">
               </div>
               <!-- Success Badge -->
               <div class="absolute -bottom-1 -right-1 bg-green-500 text-white

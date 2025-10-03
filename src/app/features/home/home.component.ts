@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       name: 'Priyanka Sharma',
       course: 'MBA',
       college: 'Christ University',
-      image: '',
+      image: './../../../assets/images/R3.jpeg',
       rating: 5,
       review: 'My brother and I got admission through Wayzon Education Consultancy. They gave us clear guidance and great service, helping us choose the right college and course within our budget.',
       year: '2024'
@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       name: 'Arshita Singh',
       course: 'Engineering',
       college: 'Ramaiha College',
-      image: '',
+      image: '../../../../assets/images/R6.jpeg',
       rating: 5,
       review: 'I was very selective and aiming for specific colleges in Karnataka, with low chances of admission. I was a bit tense, but the team Wayzon was very confident and handled everything smoothly over the phone and online, without visit their office.',
       year: '2023'
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       name: 'Dr.Pankaj',
       course: 'MS Ortho',
       college: 'Vydehi Medical College',
-      image: '',
+      image: '../../../../assets/images/R7.jpeg',
       rating: 5,
       review: 'Professional guidance and excellent support. EduConsult helped me secure admission in my dream college with scholarship I heard about Wayzon from my batchmate. Reliable medical PG consultancies are rare, but this team is expert in MD/MS admissions. I have referred many doctors, and all were happy with their strong college connections and trustworthy financial dealings.',
       year: '2025'
@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       name: 'Sarah John',
       course: 'BSc Nursing',
       college: 'BGS Medical Colege',
-      image: '',
+      image: './../../../assets/images/R2.jpeg',
       rating: 4,
       review: 'I completed my nursing graduation 5 years ago and now work in the UK. In 2016, I didn’t know much about nursing colleges in Bangalore, but I wanted to study there. Wayzon helped me and my family with everything—from college selection to campus tours and education loans. I’m very happy. Thanks, Wayzon!',
       year: '2020'
@@ -118,7 +118,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       name: 'Ritu Arora',
       course: 'MBBS',
       college: 'Akash Medical College',
-      image: '',
+      image: './../../../assets/images/R4.jpeg',
       rating: 5,
       review: 'I had a great experience with Wayzon — everything was smooth and stress-free. Being from North India, their support felt like having local guardians. I feel its my duty to share this with anyone looking for admission in Bengaluru. ',
       year: '2024'
@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       name: 'Harshitha Gowda',
       course: 'MBBS',
       college: 'Altai state medical University',
-      image: '',
+      image: './../../../assets/images/R5.jpeg',
       rating: 5,
       review: 'I am from Bengaluru and dreamed of studying MBBS abroad. With a low NEET score and a limited budget, a local management seat wasnt possible. I visited Wayzon to explore approved MBBS options abroad and was fully satisfied with their clear guidance. Now, I am a 4th-year student in Russia.',
       year: '2025'

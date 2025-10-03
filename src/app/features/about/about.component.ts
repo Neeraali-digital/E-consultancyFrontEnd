@@ -25,7 +25,7 @@ export class AboutComponent implements OnInit {
       bgColor: 'bg-blue-600',
       description: 'We arrange enrollment via legal quotas; private colleges only. An advance payment confirms commitment before final fee payment.',
       features: [
-        'Access legal quotas (NRI/Vacant)',
+        'Access legal quotas (NRI/Management)',
         'Advance Payment for Withdrawal Reduction',
         'Partner with approved private colleges only',
         'Sign mutual agreement and cancellation policy',
@@ -51,7 +51,7 @@ export class AboutComponent implements OnInit {
       title: 'Direct Admission',
       icon: 'family_restroom',
       bgColor: 'bg-purple-600',
-      description: 'Secure your seat without competitive exams. We handle documentation and deadlines efficiently with our college tie-ups.',
+      description: 'We act as delegates for the institution. We handle documentation and deadlines efficiently with our college tie-ups.',
       features: [
         'Strong college network',
         'Simplified and hassle-free process',
