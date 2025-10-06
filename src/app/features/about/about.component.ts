@@ -120,7 +120,7 @@ export class AboutComponent implements OnInit {
       experience: '6+ years',
       specialization: 'College Admissions',
       image: '../../../../assets/images/nidhi.jpeg',
-      description: 'x-air hostess Nidhi guides North Indian students at Wayzon.'
+      description: 'Ex-air hostess Nidhi guides North Indian students at Wayzon.'
     },
     {
       name: 'Anusha',
@@ -131,7 +131,7 @@ export class AboutComponent implements OnInit {
       description: 'Multilingual counsellor bridging South Indian students to education.'
     },
     {
-      name: 'Sanya',
+      name: 'Saniya',
       position: 'Career Counsellor',
       experience: '8+ years',
       specialization: 'Academic Planning',
