@@ -123,7 +123,7 @@ export class AboutComponent implements OnInit {
       description: 'Ex-air hostess Nidhi guides North Indian students at Wayzon.'
     },
     {
-      name: 'Anusha',
+      name: 'Anusha G A',
       position: 'Admission Executive',
       experience: '4+ years',
       specialization: 'Admission Guidance',
