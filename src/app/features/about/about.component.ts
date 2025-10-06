@@ -107,36 +107,36 @@ export class AboutComponent implements OnInit {
 
   team = [
     {
-      name: 'Dr. Rajesh Kumar',
-      position: 'Founder & CEO',
+      name: 'Sunoj V V',
+      position: 'MD',
       experience: '25+ years',
       specialization: 'Educational Leadership',
-      image: 'team-1.jpg',
-      description: 'Visionary leader with extensive experience in educational consulting'
+      image: '../../../../assets/images/sunoj.jpeg',
+      description: 'Two decades guiding students to brighter futures.'
     },
     {
-      name: 'Ms. Priya Sharma',
-      position: 'Head of Admissions',
-      experience: '15+ years',
+      name: 'Nidhi Sharma',
+      position: 'BD & Head of Admission',
+      experience: '6+ years',
       specialization: 'College Admissions',
-      image: 'team-2.jpg',
-      description: 'Expert in college admissions and student counseling'
+      image: '../../../../assets/images/nidhi.jpeg',
+      description: 'x-air hostess Nidhi guides North Indian students at Wayzon.'
     },
     {
-      name: 'Mr. Amit Patel',
-      position: 'Career Counselor',
-      experience: '12+ years',
-      specialization: 'Career Guidance',
-      image: 'team-3.jpg',
-      description: 'Specialized in career counseling and aptitude assessment'
+      name: 'Anusha',
+      position: 'Admission Executive',
+      experience: '4+ years',
+      specialization: 'Admission Guidance',
+      image: '../../../../assets/images/anusha.jpeg',
+      description: 'Multilingual counsellor bridging South Indian students to education.'
     },
     {
-      name: 'Dr. Sunita Reddy',
-      position: 'Academic Director',
-      experience: '18+ years',
+      name: 'Sanya',
+      position: 'Career Counsellor',
+      experience: '8+ years',
       specialization: 'Academic Planning',
-      image: 'team-4.jpg',
-      description: 'Expert in academic planning and curriculum development'
+      image: '../../../../assets/images/sanya.jpeg',
+      description: 'HR background guides students to job-oriented careers.'
     }
   ];
 

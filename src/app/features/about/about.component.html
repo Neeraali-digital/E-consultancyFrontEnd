@@ -199,14 +199,7 @@
 
           <!-- Team Member Image -->
           <div class="h-64 bg-gradient-to-br from-blue-400 to-purple-600 relative overflow-hidden">
-            <div class="absolute inset-0 bg-black/20"></div>
-            <div class="absolute bottom-4 left-4 text-white">
-              <div class="text-sm font-semibold">{{ member.experience }}</div>
-              <div class="text-xs opacity-90">Experience</div>
-            </div>
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <span class="material-icons text-white text-8xl opacity-20">person</span>
-            </div>
+           <img [src]="member.image" alt="" class="object-contain">
           </div>
 
           <!-- Team Member Details -->
