@@ -62,12 +62,8 @@ export class Footer {
 
   // Social Media Links
   socialMedia = [
-    { name: 'Facebook', url: 'https://facebook.com/wayzon', icon: 'public', color: '#1877F2' },
-    { name: 'Twitter', url: 'https://twitter.com/wayzon', icon: 'alternate_email', color: '#1DA1F2' },
-    { name: 'Instagram', url: 'https://instagram.com/wayzon', icon: 'photo_camera', color: '#E4405F' },
-    { name: 'LinkedIn', url: 'https://linkedin.com/company/wayzon', icon: 'business_center', color: '#0A66C2' },
-    { name: 'YouTube', url: 'https://youtube.com/wayzon', icon: 'play_circle_filled', color: '#FF0000' },
-    { name: 'WhatsApp', url: 'https://wa.me/919035511111', icon: 'chat', color: '#25D366' }
+    { name: 'Instagram', url: 'https://www.instagram.com/wayzon_education_pvt.ltd?igsh=ZGg2Z3JwbWZheGVk', isSvg: true, color: '#E4405F' },
+    { name: 'Facebook', url: 'https://www.facebook.com/share/1BpRrZ6Fe8/?mibextid=wwXIfr', icon: 'facebook', color: '#1877F2' }
   ];
 
   // Office Locations
