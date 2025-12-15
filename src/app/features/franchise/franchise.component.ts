@@ -9,57 +9,23 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./franchise.component.css']
 })
 export class FranchiseComponent {
+  selectedModel: any = null;
+  showModal = false;
 
   franchiseModels = [
     {
-      title: 'Standard Franchise',
-      investment: '₹5-10 Lakhs',
-      area: '500-1000 sq ft',
-      support: 'Basic',
-      features: [
-        'Brand licensing rights',
-        'Initial training program',
-        'Marketing materials',
-        'Basic operational support',
-        'Student database access'
-      ],
-      ideal: 'Small cities and towns',
-      roi: '25-30%',
+      title:'Domestic Education Consultancy',
+      description: 'We are offering franchise opportunities for individuals or agencies interested in student admissions to reputed and top institutions across Karnataka. We are also inviting students and consultancy franchises from across India to join us. Our consultancy has direct tie-ups and formal agreements with over 100 institutions offering a wide range of courses. <br><br> As a franchise partner or sub-consultant, marketing becomes easy because our representatives are directly associated with colleges as administrative liaisons. Each franchisee will also receive dedicated full-time support from our team for all activities, including student counseling, payment processing, collections, and payouts.',
       color: 'blue'
     },
     {
-      title: 'Premium Franchise',
-      investment: '₹10-20 Lakhs',
-      area: '1000-2000 sq ft',
-      support: 'Comprehensive',
-      features: [
-        'Exclusive territory rights',
-        'Advanced training program',
-        'Complete marketing support',
-        'Dedicated relationship manager',
-        'Technology platform access',
-        'Regular performance reviews'
-      ],
-      ideal: 'Tier 2 cities',
-      roi: '30-35%',
+      title: 'Abroad Education Consultants',
+      description: 'We have been a strong and trustworthy name in overseas admissions for over two decades, particularly in MBBS programs offering affordable fee structures and placements at highly reputed institutions. Our consultancy holds exclusive agreements with several leading universities, ensuring genuine and direct admissions. <br><br> We already have successful partnerships with many overseas education consultants and are now expanding our franchise network. Our dedicated and experienced team provides complete support for the application process, documentation, and student assistance  making it easy for our partners to deliver smooth and successful admissions. <br><br> As a well-recognized and trusted brand in the education sector, our strong reputation helps franchise partners close deals more easily and achieve higher conversion rates. Additionally, we offer our sub-consultants the exclusive opportunity to visit our partner universities abroad, gaining firsthand experience and confidence in promoting our programs. <br><br> We also ensure better payouts and attractive incentives for our franchise partners.',
       color: 'green'
     },
     {
-      title: 'Master Franchise',
-      investment: '₹20-50 Lakhs',
-      area: '2000+ sq ft',
-      support: 'Full Support',
-      features: [
-        'Regional master rights',
-        'Sub-franchise opportunities',
-        'Complete business setup',
-        'Ongoing operational support',
-        'Advanced technology suite',
-        'Marketing campaign support',
-        'Regular business reviews'
-      ],
-      ideal: 'Metro cities',
-      roi: '35-40%',
+      title: 'India & Overseas Consultancy',
+      description: 'We are offering franchise opportunities for experienced consultants in the education consultancy domain, both in India and abroad. <br><br> For domestic operations, we are Karnataka-based and represent top institutions offering professional courses across various fields. For the overseas segment, we specialize exclusively in MBBS admissions in select countries. <br><br> Each division—domestic and international—will have dedicated support teams from our headquarters to assist franchise partners. We will provide regular training, updates, marketing assistance, and lead generation support to help you grow your business effectively. <br><br> Separate staff will be required from the franchisee’s side for each department to ensure smooth and specialized operations.',
       color: 'purple'
     }
   ];
@@ -145,40 +111,13 @@ export class FranchiseComponent {
     }
   ];
 
-  testimonials = [
-    {
-      name: 'Rajesh Sharma',
-      location: 'Jaipur, Rajasthan',
-      franchise: 'Premium Franchise',
-      testimonial: 'Joining Wayzon was the best business decision I made. The support and guidance helped me build a successful consultancy.',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100',
-      rating: 5
-    },
-    {
-      name: 'Priya Patel',
-      location: 'Ahmedabad, Gujarat',
-      franchise: 'Standard Franchise',
-      testimonial: 'The training and ongoing support from Wayzon team has been exceptional. My business is growing steadily.',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100',
-      rating: 5
-    },
-    {
-      name: 'Vikram Singh',
-      location: 'Lucknow, UP',
-      franchise: 'Master Franchise',
-      testimonial: 'Wayzon\'s proven business model and brand reputation helped me establish a strong presence in my region.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
-      rating: 5
-    }
-  ];
-
-  selectedModel: any = null;
-
-  selectModel(model: any): void {
-    this.selectedModel = this.selectedModel === model ? null : model;
+  openModal(model: any) {
+    this.selectedModel = model;
+    this.showModal = true;
   }
 
-  generateStars(rating: number): number[] {
-    return Array(rating).fill(0);
+  closeModal() {
+    this.showModal = false;
+    this.selectedModel = null;
   }
 }

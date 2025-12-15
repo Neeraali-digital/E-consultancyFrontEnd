@@ -33,7 +33,7 @@
     <div class="max-w-7xl mx-auto px-8">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-          Choose Your Franchise Model
+          Choose Your Franchise Opportunities
         </h2>
         <p class="text-xl text-gray-600">
           Select the franchise option that best fits your investment and business goals
@@ -41,65 +41,128 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div *ngFor="let model of franchiseModels; let i = index"
-             (click)="selectModel(model)"
-             class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300
-                    transform hover:-translate-y-4 cursor-pointer border-2 border-transparent
-                    hover:border-gray-200"
-             [class.border-blue-500]="selectedModel === model"
-             [style.animation-delay]="i * 200 + 'ms'"
-             style="animation: slideInUp 0.6s ease-out forwards;">
-          
-          <!-- Header -->
-          <div class="text-center mb-6">
-            <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                 [ngClass]="'bg-' + model.color + '-600'">
-              <span class="material-icons text-white text-2xl">business_center</span>
-            </div>
-            <h3 class="text-2xl font-bold text-gray-800 mb-2">{{ model.title }}</h3>
-            <!-- <p class="text-3xl font-bold mb-1"
-               [ngClass]="'text-' + model.color + '-600'">{{ model.investment }}</p>
-            <p class="text-gray-600">Investment Range</p> -->
-          </div>
+  <div *ngFor="let model of franchiseModels; let i = index"
+       class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300
+              transform hover:-translate-y-4 border-2 border-transparent
+              hover:border-gray-200 flex flex-col justify-between"
+       [style.animation-delay]="i * 200 + 'ms'"
+       style="animation: slideInUp 0.6s ease-out forwards;">
+    
+    <div>
+      <!-- Header -->
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
+             [ngClass]="'bg-' + model.color + '-600'">
+          <span class="material-icons text-white text-2xl">business_center</span>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-2">{{ model.title }}</h3>
+      </div>
 
-          <!-- Details -->
-          <div class="space-y-4 mb-6">
-            <div class="flex justify-between">
-              <span class="text-gray-600">Area Required:</span>
-              <span class="font-semibold">{{ model.area }}</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-gray-600">Support Level:</span>
-              <span class="font-semibold">{{ model.support }}</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-gray-600">Expected ROI:</span>
-              <span class="font-semibold text-green-600">{{ model.roi }}</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-gray-600">Ideal For:</span>
-              <span class="font-semibold">{{ model.ideal }}</span>
-            </div>
-          </div>
+      <!-- Description -->
+      <div class="space-y-4 mb-6">
+        <div [innerHTML]="(model.description | slice:0:150) + '...'"></div>
+      </div>
+    </div>
 
-          <!-- Features -->
-          <div class="mb-6">
-            <h4 class="font-bold text-gray-800 mb-3">Key Features:</h4>
-            <ul class="space-y-2">
-              <li *ngFor="let feature of model.features" 
-                  class="flex items-center gap-2 text-sm text-gray-600">
-                <span class="w-2 h-2 rounded-full flex-shrink-0"
-                      [ngClass]="'bg-' + model.color + '-500'"></span>
-                {{ feature }}
+    <!-- Action Button -->
+    <button (click)="openModal(model)" 
+            class="w-full py-3 rounded-xl font-semibold transition-all duration-300 mt-auto"
+            [ngClass]="'bg-' + model.color + '-600 text-white hover:bg-' + model.color + '-700'">
+      Read More
+    </button>
+  </div>
+</div>
+    </div>
+  </section>
+
+  <!-- Key Benefits & Who Can Apply -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Who Can Apply Card -->
+        <div class="bg-white rounded-3xl p-8 shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.01] border border-gray-100">
+          <div>
+            <h3 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+              Who Can Apply
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-white text-base">person_add</span>
+                </div>
+                <p class="text-gray-700 text-base flex-grow">
+                  Individuals or organizations with office space of at least <b>700 sq.ft plus</b>
+                </p>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-white text-base">school</span>
+                </div>
+                <p class="text-gray-700 text-base flex-grow">
+                Graduates with a good understanding of the education sector
+                </p>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-white text-base">lightbulb</span>
+                </div>
+                <p class="text-gray-700 text-base flex-grow">
+                  Enthusiastic individuals with a strong passion for education and student success
+                </p>
               </li>
             </ul>
           </div>
+        </div>
 
-          <!-- Action Button -->
-          <button class="w-full py-3 rounded-xl font-semibold transition-all duration-300"
-                  [ngClass]="'bg-' + model.color + '-600 text-white hover:bg-' + model.color + '-700'">
-            Learn More
-          </button>
+        <!-- Key Benefits Card -->
+        <div class="bg-white rounded-3xl p-8 shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.01] border border-gray-100">
+          <div>
+            <h3 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+              Key Benefits
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-white text-base">campaign</span>
+                </div>
+                <p class="text-gray-700 text-base flex-grow">
+                  Comprehensive Marketing Support
+                </p>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-white text-base">verified_user</span>
+                </div>
+                <p class="text-gray-700 text-base flex-grow">
+                  Training and Assistance for the Admission Process
+                </p>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-white text-base">support_agent</span>
+                </div>
+                <p class="text-gray-700 text-base flex-grow">
+                  Dedicated Support Team for Each Franchise Partner
+                </p>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-white text-base">bar_chart</span>
+                </div>
+                <p class="text-gray-700 text-base flex-grow">
+                  CRM, Lead Generation, and Lead Management Assistance
+                </p>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-white text-base">handshake</span>
+                </div>
+                <p class="text-gray-700 text-base flex-grow">
+                  Tie-ups with Reputed Universities and Institutions
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -201,49 +264,6 @@
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="py-20 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-          Success Stories
-        </h2>
-        <p class="text-xl text-gray-600">
-          Hear from our successful franchise partners
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div *ngFor="let testimonial of testimonials; let i = index"
-             class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300
-                    transform hover:-translate-y-2"
-             [style.animation-delay]="i * 200 + 'ms'"
-             style="animation: slideInUp 0.6s ease-out forwards;">
-          
-          <!-- Rating -->
-          <div class="flex justify-center mb-4">
-            <span *ngFor="let star of generateStars(testimonial.rating)"
-                  class="material-icons text-yellow-500">star</span>
-          </div>
-          
-          <!-- Testimonial -->
-          <p class="text-gray-600 mb-6 italic text-center">
-            "{{ testimonial.testimonial }}"
-          </p>
-          
-          <!-- Author -->
-          <div class="text-center">
-            <img [src]="testimonial.image" [alt]="testimonial.name" 
-                 class="w-16 h-16 rounded-full mx-auto mb-4 object-cover">
-            <h4 class="font-bold text-gray-800">{{ testimonial.name }}</h4>
-            <p class="text-gray-600 text-sm">{{ testimonial.location }}</p>
-            <p class="text-orange-600 text-sm font-semibold">{{ testimonial.franchise }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA Section -->
   <section class="py-20 bg-orange-600 text-white">
     <div class="max-w-4xl mx-auto px-8 text-center">
@@ -272,4 +292,16 @@
       </div>
     </div>
   </section>
+</div>
+<!-- Modal -->
+<div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg p-8 max-w-2xl w-full mx-4">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold">{{ selectedModel.title }}</h2>
+      <button (click)="closeModal()" class="text-gray-500 hover:text-gray-800">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    <div [innerHTML]="selectedModel.description"></div>
+  </div>
 </div>
