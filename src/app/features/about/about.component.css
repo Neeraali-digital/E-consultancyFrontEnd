@@ -1,80 +1,68 @@
-.custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #d1d5db;
-    border-radius: 10px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #9ca3af;
-  }
-  
-  
-  .floating-blobs .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(20px);
-    opacity: 0.5;
-  }
-  
-  .floating-blobs .blob:nth-child(1) {
-    width: 200px;
-    height: 200px;
-    top: 10%;
-    left: 10%;
-    background-color: #a7f3d0;
-    animation: float 10s infinite alternate;
-  }
-  
-  .floating-blobs .blob:nth-child(2) {
-    width: 300px;
-    height: 300px;
-    top: 20%;
-    right: 5%;
-    background-color: #bae6fd;
-    animation: float 12s infinite alternate;
-  }
-  
-  .floating-blobs .blob:nth-child(3) {
-    width: 150px;
-    height: 150px;
-    bottom: 10%;
-    left: 20%;
-    background-color: #fecdd3;
-    animation: float 8s infinite alternate;
-  }
+/* About Component Styles */
+.timeline-item {
+  transition: all 0.3s ease;
+}
 
-  .floating-blobs .blob:nth-child(4) {
-    width: 250px;
-    height: 250px;
-    bottom: 20%;
-    right: 15%;
-    background-color: #e9d5ff;
-    animation: float 15s infinite alternate;
-  }
+.timeline-item:hover {
+  transform: scale(1.02);
+}
 
-  .floating-blobs .blob:nth-child(5) {
-    width: 100px;
-    height: 100px;
-    top: 40%;
-    left: 45%;
-    background-color: #fef08a;
-    animation: float 9s infinite alternate;
+.team-card {
+  transition: all 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.value-card {
+  transition: all 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card {
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Timeline specific styles */
+.timeline-line {
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+}
+
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 2rem;
   }
   
-  @keyframes float {
-    0% {
-      transform: translateY(0) translateX(0);
-    }
-    100% {
-      transform: translateY(-50px) translateX(50px);
-    }
+  .timeline-item {
+    padding-left: 4rem;
   }
   
+  .timeline-dot {
+    left: 1.75rem;
+  }
+}
