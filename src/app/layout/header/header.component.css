@@ -5,7 +5,7 @@
   position: relative;
   overflow: visible;
   /* Enhanced brand visibility */
-  padding: 6px 8px;
+  /* padding: 3px 4px; */
   border-radius: 12px;
   transition: all 0.3s ease;
   /* Optimized for grid layout */
@@ -13,8 +13,8 @@
   align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
+  /* width: 100%;
+  max-width: 100%; */
 }
 
 /* Enhanced professional hover effect */

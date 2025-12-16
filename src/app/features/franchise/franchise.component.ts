@@ -14,17 +14,17 @@ export class FranchiseComponent {
 
   franchiseModels = [
     {
-      title:'Domestic Education Consultancy',
+      title:'Domestic Education Franchise',
       description: 'We are offering franchise opportunities for individuals or agencies interested in student admissions to reputed and top institutions across Karnataka. We are also inviting students and consultancy franchises from across India to join us. Our consultancy has direct tie-ups and formal agreements with over 100 institutions offering a wide range of courses. <br><br> As a franchise partner or sub-consultant, marketing becomes easy because our representatives are directly associated with colleges as administrative liaisons. Each franchisee will also receive dedicated full-time support from our team for all activities, including student counseling, payment processing, collections, and payouts.',
       color: 'blue'
     },
     {
-      title: 'Abroad Education Consultants',
+      title: 'Abroad Education Franchise',
       description: 'We have been a strong and trustworthy name in overseas admissions for over two decades, particularly in MBBS programs offering affordable fee structures and placements at highly reputed institutions. Our consultancy holds exclusive agreements with several leading universities, ensuring genuine and direct admissions. <br><br> We already have successful partnerships with many overseas education consultants and are now expanding our franchise network. Our dedicated and experienced team provides complete support for the application process, documentation, and student assistance  making it easy for our partners to deliver smooth and successful admissions. <br><br> As a well-recognized and trusted brand in the education sector, our strong reputation helps franchise partners close deals more easily and achieve higher conversion rates. Additionally, we offer our sub-consultants the exclusive opportunity to visit our partner universities abroad, gaining firsthand experience and confidence in promoting our programs. <br><br> We also ensure better payouts and attractive incentives for our franchise partners.',
       color: 'green'
     },
     {
-      title: 'India & Overseas Consultancy',
+      title: 'India & Overseas Franchise',
       description: 'We are offering franchise opportunities for experienced consultants in the education consultancy domain, both in India and abroad. <br><br> For domestic operations, we are Karnataka-based and represent top institutions offering professional courses across various fields. For the overseas segment, we specialize exclusively in MBBS admissions in select countries. <br><br> Each division—domestic and international—will have dedicated support teams from our headquarters to assist franchise partners. We will provide regular training, updates, marketing assistance, and lead generation support to help you grow your business effectively. <br><br> Separate staff will be required from the franchisee’s side for each department to ensure smooth and specialized operations.',
       color: 'purple'
     }
