@@ -5,7 +5,9 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
-const API_URL = 'http://127.0.0.1:8000/api';
+import { environment } from '../../../../../../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 @Component({
   selector: 'app-update-form',
@@ -132,7 +134,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
         console.error('Failed to load update data');
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -140,8 +142,8 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
     this.isSubmitting = true;
 
     const formData = this.updateForm.value;
-    
-    const apiCall = this.isEditMode 
+
+    const apiCall = this.isEditMode
       ? this.http.put(`${API_URL}/latest-updates/${this.updateId}/`, formData)
       : this.http.post(`${API_URL}/latest-updates/`, formData);
 
@@ -156,7 +158,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
         this.isSubmitting = false;
       }
     });
-    
+
     this.subscription.add(sub);
   }
 

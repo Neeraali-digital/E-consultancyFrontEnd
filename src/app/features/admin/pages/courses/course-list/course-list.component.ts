@@ -9,7 +9,9 @@ import { HttpClient } from '@angular/common/http';
 // import { AuthService } from '../../../../shared/services/auth.service';
 // import { LoginModalComponent } from '../../../../shared/components/login-modal/login-modal.component';
 
-const API_URL = 'http://127.0.0.1:8000/api';
+import { environment } from '../../../../../../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 
 export interface Course {
@@ -73,7 +75,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     // private alertService: AlertService
     // private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Instant loading - no delays
@@ -86,7 +88,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
 
   loadCourses(): void {
     this.isLoading = true;
-    
+
     const sub = this.http.get<any>(`${API_URL}/courses/`).subscribe({
       next: (response: any) => {
         this.courses = response.results || response || [];
@@ -100,7 +102,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -206,7 +208,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
         console.error('Error updating course status');
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -222,7 +224,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
           console.error('Error deleting course');
         }
       });
-      
+
       this.subscription.add(sub);
     }
   }

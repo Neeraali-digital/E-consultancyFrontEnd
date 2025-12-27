@@ -5,7 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
-const API_URL = 'http://127.0.0.1:8000/api';
+import { environment } from '../../../../../../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 export interface Review {
   id: string;
@@ -105,7 +107,7 @@ export class ReviewListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadReviews();
@@ -117,7 +119,7 @@ export class ReviewListComponent implements OnInit, OnDestroy {
 
   loadReviews(): void {
     this.isLoading = true;
-    
+
     const sub = this.http.get<any>(`${API_URL}/reviews/`).subscribe({
       next: (response: any) => {
         this.reviews = response.results || response || [];
@@ -131,7 +133,7 @@ export class ReviewListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -175,7 +177,7 @@ export class ReviewListComponent implements OnInit, OnDestroy {
 
   toggleApproval(review: Review): void {
     const newStatus = !review.is_approved;
-    
+
     const sub = this.http.patch(`${API_URL}/reviews/${review.id}/`, { is_approved: newStatus }).subscribe({
       next: (updatedReview: any) => {
         const index = this.reviews.findIndex(r => r.id === review.id);
@@ -189,7 +191,7 @@ export class ReviewListComponent implements OnInit, OnDestroy {
         console.error('Error updating review approval');
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -205,7 +207,7 @@ export class ReviewListComponent implements OnInit, OnDestroy {
           console.error('Error deleting review');
         }
       });
-      
+
       this.subscription.add(sub);
     }
   }

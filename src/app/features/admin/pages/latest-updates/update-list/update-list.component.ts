@@ -5,7 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
-const API_URL = 'http://127.0.0.1:8000/api';
+import { environment } from '../../../../../../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 export interface LatestUpdate {
   id: string;
@@ -107,7 +109,7 @@ export class UpdateListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadUpdates();
@@ -119,7 +121,7 @@ export class UpdateListComponent implements OnInit, OnDestroy {
 
   loadUpdates(): void {
     this.isLoading = true;
-    
+
     const sub = this.http.get<any>(`${API_URL}/latest-updates/`).subscribe({
       next: (response: any) => {
         this.updates = response.results || response || [];
@@ -133,7 +135,7 @@ export class UpdateListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -176,7 +178,7 @@ export class UpdateListComponent implements OnInit, OnDestroy {
 
   toggleStatus(update: LatestUpdate): void {
     const newStatus = update.status === 'published' ? 'draft' : 'published';
-    
+
     const sub = this.http.patch(`${API_URL}/latest-updates/${update.id}/`, { status: newStatus }).subscribe({
       next: (updatedUpdate: any) => {
         const index = this.updates.findIndex(u => u.id === update.id);
@@ -190,7 +192,7 @@ export class UpdateListComponent implements OnInit, OnDestroy {
         console.error('Error updating status');
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -206,7 +208,7 @@ export class UpdateListComponent implements OnInit, OnDestroy {
           console.error('Error deleting update');
         }
       });
-      
+
       this.subscription.add(sub);
     }
   }

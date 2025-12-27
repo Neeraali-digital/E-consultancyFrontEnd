@@ -5,8 +5,10 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 // import { AlertService } from '../../../shared/services/alert.service';
+import { environment } from '../../../../../../environments/environment';
+
 // Using hardcoded API URL
-const API_URL = 'http://127.0.0.1:8000/api';
+const API_URL = environment.apiUrl;
 
 export interface Course {
   id?: string;

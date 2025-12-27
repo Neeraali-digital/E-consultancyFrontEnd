@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AlertService } from '../../services/alert.service';
 
-const API_URL = 'http://127.0.0.1:8000/api';
+import { environment } from '../../../../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 @Component({
   selector: 'app-login-modal',
@@ -43,7 +45,7 @@ export class LoginModalComponent {
   constructor(
     private http: HttpClient,
     private alertService: AlertService
-  ) {}
+  ) { }
 
   loginWithGoogle() {
     // Mock Google login - replace with actual Google OAuth

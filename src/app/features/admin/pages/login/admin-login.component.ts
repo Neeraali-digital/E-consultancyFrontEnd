@@ -40,12 +40,7 @@ export class AdminLoginComponent implements OnInit {
       this.router.navigate([this.returnUrl]);
     }
 
-    // Pre-fill demo credentials for development
-    // Uncomment the following lines if you want to auto-fill demo credentials
-    // this.loginForm.patchValue({
-    //   email: 'admin@wayzon.edu',
-    //   password: 'admin123'
-    // });
+
   }
 
   get f() {
@@ -103,14 +98,6 @@ export class AdminLoginComponent implements OnInit {
         formElement.classList.remove('shake');
       }, 600);
     }
-  }
-
-  // Demo credentials helper
-  fillDemoCredentials(): void {
-    this.loginForm.patchValue({
-      email: 'admin@wayzon.edu',
-      password: 'admin123'
-    });
   }
 
   // Forgot password (placeholder)

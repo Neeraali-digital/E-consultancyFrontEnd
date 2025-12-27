@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 // Temporarily disabled services
 
-const API_URL = 'http://127.0.0.1:8000/api';
+import { environment } from '../../../../../../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 export interface College {
   id: string;
@@ -193,7 +195,7 @@ export class CollegeListComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     // private alertService: AlertService,
     // private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadColleges();
@@ -205,7 +207,7 @@ export class CollegeListComponent implements OnInit, OnDestroy {
 
   loadColleges(): void {
     this.isLoading = true;
-    
+
     const sub = this.http.get<any>(`${API_URL}/colleges/`).subscribe({
       next: (response: any) => {
         this.colleges = response.results || response || [];
@@ -219,7 +221,7 @@ export class CollegeListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -262,7 +264,7 @@ export class CollegeListComponent implements OnInit, OnDestroy {
 
   toggleStatus(college: College): void {
     const newStatus = college.status === 'active' ? 'inactive' : 'active';
-    
+
     const sub = this.http.patch(`${API_URL}/colleges/${college.id}/`, { status: newStatus }).subscribe({
       next: (updatedCollege: any) => {
         const index = this.colleges.findIndex(c => c.id === college.id);
@@ -276,7 +278,7 @@ export class CollegeListComponent implements OnInit, OnDestroy {
         console.error('Error updating college status:', error);
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -292,7 +294,7 @@ export class CollegeListComponent implements OnInit, OnDestroy {
           console.error('Error deleting college');
         }
       });
-      
+
       this.subscription.add(sub);
     }
   }

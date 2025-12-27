@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 // import { AlertService } from '../../../../shared/services/alert.service';
 
-const API_URL = 'http://127.0.0.1:8000/api';
+import { environment } from '../../../../../../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 @Component({
   selector: 'app-college-form',

@@ -5,7 +5,9 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
-const API_URL = 'http://127.0.0.1:8000/api';
+import { environment } from '../../../../../../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 @Component({
   selector: 'app-blog-form',
@@ -148,7 +150,7 @@ export class BlogFormComponent implements OnInit, OnDestroy {
             tags: Array.isArray(blog.tags) ? blog.tags.join(', ') : blog.tags
           };
           this.blogForm.patchValue(formData);
-          
+
           if (blog.featured_image) {
             this.imagePreview = blog.featured_image;
           }
@@ -158,7 +160,7 @@ export class BlogFormComponent implements OnInit, OnDestroy {
         console.error('Failed to load blog data');
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -166,13 +168,13 @@ export class BlogFormComponent implements OnInit, OnDestroy {
     this.isSubmitting = true;
 
     const formData = new FormData();
-    
+
     // Auto-generate slug from title if empty
     if (!this.blogForm.value.slug) {
       const slug = this.blogForm.value.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       this.blogForm.patchValue({ slug });
     }
-    
+
     Object.keys(this.blogForm.value).forEach(key => {
       if (key === 'tags') {
         const tags = this.blogForm.value[key];
@@ -184,12 +186,12 @@ export class BlogFormComponent implements OnInit, OnDestroy {
         formData.append(key, this.blogForm.value[key]);
       }
     });
-    
+
     if (this.selectedImage) {
       formData.append('featured_image', this.selectedImage);
     }
 
-    const apiCall = this.isEditMode 
+    const apiCall = this.isEditMode
       ? this.http.put(`${API_URL}/blogs/${this.blogId}/`, formData)
       : this.http.post(`${API_URL}/blogs/`, formData);
 
@@ -204,7 +206,7 @@ export class BlogFormComponent implements OnInit, OnDestroy {
         this.isSubmitting = false;
       }
     });
-    
+
     this.subscription.add(sub);
   }
 

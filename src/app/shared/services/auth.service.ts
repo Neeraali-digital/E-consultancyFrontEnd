@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
-const API_URL = 'http://127.0.0.1:8000/api';
+import { environment } from '../../../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class AuthService {
   private tokenSubject = new BehaviorSubject<string | null>(localStorage.getItem('token'));
   public token$ = this.tokenSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');

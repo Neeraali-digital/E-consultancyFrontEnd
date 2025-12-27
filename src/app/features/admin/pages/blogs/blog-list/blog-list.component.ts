@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 // import { AlertService } from '../../../../shared/services/alert.service';
 
-const API_URL = 'http://127.0.0.1:8000/api';
+import { environment } from '../../../../../../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 export interface Blog {
   id: string;
@@ -108,7 +110,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
     private router: Router,
     private http: HttpClient,
     // private alertService: AlertService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadBlogs();
@@ -120,7 +122,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
 
   loadBlogs(): void {
     this.isLoading = true;
-    
+
     const sub = this.http.get<any>(`${API_URL}/blogs/`).subscribe({
       next: (response: any) => {
         this.blogs = response.results || response || [];
@@ -134,7 +136,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -177,7 +179,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
 
   toggleStatus(blog: Blog): void {
     const newStatus = blog.status === 'published' ? 'draft' : 'published';
-    
+
     const sub = this.http.patch(`${API_URL}/blogs/${blog.id}/`, { status: newStatus }).subscribe({
       next: (updatedBlog: any) => {
         const index = this.blogs.findIndex(b => b.id === blog.id);
@@ -191,7 +193,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
         console.error('Error updating blog status');
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -207,7 +209,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
           console.error('Error deleting blog');
         }
       });
-      
+
       this.subscription.add(sub);
     }
   }

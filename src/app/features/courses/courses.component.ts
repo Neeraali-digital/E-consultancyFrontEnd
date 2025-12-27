@@ -107,10 +107,12 @@ export class CoursesComponent implements OnInit {
     this.apiService.getCourses().subscribe({
       next: (response) => {
         this.courses = response.results || response;
+        /*
         // If no data from API, use static data
         if (!this.courses || this.courses.length === 0) {
           this.courses = this.staticCourses;
         }
+        */
         this.filteredCourses = [...this.courses];
         this.loading = false;
       },
