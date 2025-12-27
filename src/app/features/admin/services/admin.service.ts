@@ -63,12 +63,14 @@ export class AdminService {
     return this.apiService.login({ username: email, password }).pipe(
       map((response: any) => {
         if (response.token && response.user) {
+          const roleName = typeof response.user.role === 'object' && response.user.role !== null ? response.user.role.name : response.user.role;
+          
           const user: AdminUser = {
             id: response.user.id.toString(),
             name: `${response.user.first_name} ${response.user.last_name}`,
             email: response.user.email,
-            role: response.user.role === 'admin' ? 'Administrator' : response.user.role,
-            permissions: response.user.role === 'admin' ? 
+            role: roleName === 'admin' ? 'Administrator' : roleName,
+            permissions: roleName === 'admin' ? 
               ['read', 'write', 'delete', 'manage_users', 'manage_settings'] : 
               ['read']
           };

@@ -181,7 +181,7 @@
                 <span class="material-icons text-blue-600">info</span>
                 About {{ college()?.shortName }}
               </h2>
-              <p class="text-gray-600 leading-relaxed">{{ college()?.description }}</p>
+              <p class="text-gray-600 leading-relaxed">{{ college()?.about_text || college()?.description }}</p>
             </div>
 
             <!-- Campus Facilities -->
@@ -266,15 +266,15 @@
               <div class="space-y-4">
                 <div class="flex justify-between">
                   <span class="text-gray-600">Campus Size</span>
-                  <span class="font-semibold">{{ college()?.campusSize || 'N/A' }}</span>
+                  <span class="font-semibold">{{ college()?.quick_stats?.campus_size || 'N/A' }}</span>
                 </div>
                 <div class="flex justify-between">
                   <span class="text-gray-600">Total Students</span>
-                  <span class="font-semibold">{{ college()?.totalStudents || 'N/A' }}</span>
+                  <span class="font-semibold">{{ college()?.quick_stats?.total_students || 'N/A' }}</span>
                 </div>
                 <div class="flex justify-between">
                   <span class="text-gray-600">Faculty Ratio</span>
-                  <span class="font-semibold">{{ college()?.facultyRatio || 'N/A' }}</span>
+                  <span class="font-semibold">{{ college()?.quick_stats?.faculty_ratio || 'N/A' }}</span>
                 </div>
                 <div class="flex justify-between">
                   <span class="text-gray-600">Institution Type</span>
@@ -286,7 +286,7 @@
                 </div>
                 <div class="flex justify-between">
                   <span class="text-gray-600">Average Package</span>
-                  <span class="font-semibold text-green-600">{{ college()?.avgPackage || 'N/A' }}</span>
+                  <span class="font-semibold text-green-600">{{ college()?.quick_stats?.avg_package || 'N/A' }}</span>
                 </div>
               </div>
             </div>

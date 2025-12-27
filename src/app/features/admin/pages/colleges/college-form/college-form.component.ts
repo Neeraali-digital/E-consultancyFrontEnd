@@ -92,6 +92,35 @@ const API_URL = 'http://127.0.0.1:8000/api';
         </div>
         
         <div class="mt-6">
+          <label class="block text-sm font-medium text-gray-700 mb-2">About Section</label>
+          <textarea formControlName="about_text" rows="4" 
+                    placeholder="Enter detailed description about the college"
+                    class="w-full border rounded-lg px-3 py-2"></textarea>
+        </div>
+
+        <div class="mt-6">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">Quick Stats</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Campus Size</label>
+              <input formControlName="campus_size" type="text" placeholder="e.g. 100 acres" class="w-full border rounded-lg px-3 py-2">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Total Students</label>
+              <input formControlName="total_students" type="text" placeholder="e.g. 5000+" class="w-full border rounded-lg px-3 py-2">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Faculty Ratio</label>
+              <input formControlName="faculty_ratio" type="text" placeholder="e.g. 1:15" class="w-full border rounded-lg px-3 py-2">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Avg Package</label>
+              <input formControlName="avg_package" type="text" placeholder="e.g. 12 LPA" class="w-full border rounded-lg px-3 py-2">
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-6">
           <label class="block text-sm font-medium text-gray-700 mb-2">College Image</label>
           <input type="file" (change)="onImageSelect($event)" accept="image/*" 
                  class="w-full border rounded-lg px-3 py-2">
@@ -166,6 +195,11 @@ export class CollegeFormComponent implements OnInit, OnDestroy {
       affiliated: [''],
       rating: [0],
       courses: [''],
+      about_text: [''],
+      campus_size: [''],
+      total_students: [''],
+      faculty_ratio: [''],
+      avg_package: [''],
       status: ['active'],
       image: [null]
     });
@@ -173,17 +207,22 @@ export class CollegeFormComponent implements OnInit, OnDestroy {
 
   private loadCollege(): void {
     this.isLoading = true;
-    
+
     const sub = this.http.get(`${API_URL}/colleges/${this.collegeId}/`).subscribe({
       next: (college: any) => {
         if (college) {
           // Convert courses array to comma-separated string
           const formData = {
             ...college,
-            courses: Array.isArray(college.courses) ? college.courses.join(', ') : college.courses
+            courses: Array.isArray(college.courses) ? college.courses.join(', ') : college.courses,
+            // Unpack quick stats
+            campus_size: college.quick_stats?.campus_size || '',
+            total_students: college.quick_stats?.total_students || '',
+            faculty_ratio: college.quick_stats?.faculty_ratio || '',
+            avg_package: college.quick_stats?.avg_package || ''
           };
           this.collegeForm.patchValue(formData);
-          
+
           // Set image preview if exists
           if (college.image) {
             this.imagePreview = college.image;
@@ -196,66 +235,79 @@ export class CollegeFormComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
   onSubmit(): void {
     console.log('Form submitted');
-    console.log('Form valid:', this.collegeForm.valid);
-    console.log('Form value:', this.collegeForm.value);
-    console.log('Form errors:', this.getFormErrors());
-    
-    // Remove validation check temporarily
-    // if (this.collegeForm.valid) {
-      this.isSubmitting = true;
-
-      const formData = new FormData();
-      
-      // Add form fields
-      Object.keys(this.collegeForm.value).forEach(key => {
-        if (key === 'courses') {
-          const courses = this.collegeForm.value[key];
-          if (courses) {
-            const courseArray = courses.split(',').map((course: string) => course.trim());
-            formData.append('courses', JSON.stringify(courseArray));
-          }
-        } else if (key !== 'image') {
-          formData.append(key, this.collegeForm.value[key]);
-        }
-      });
-      
-      // Add image if selected
-      if (this.selectedImage) {
-        formData.append('image', this.selectedImage);
-      }
-
-      console.log('Sending request to:', this.isEditMode ? `PUT ${API_URL}/colleges/${this.collegeId}/` : `POST ${API_URL}/colleges/`);
-
-      const apiCall = this.isEditMode 
-        ? this.http.put(`${API_URL}/colleges/${this.collegeId}/`, formData)
-        : this.http.post(`${API_URL}/colleges/`, formData);
-
-      const sub = apiCall.subscribe({
-        next: (response: any) => {
-          console.log('API Response:', response);
-          alert(this.isEditMode ? 'College updated successfully!' : 'College created successfully!');
-          this.isSubmitting = false;
-          this.router.navigate(['/admin/colleges']);
-        },
-        error: (error: any) => {
-          console.error('API Error:', error);
-          alert('Error saving college: ' + (error.error?.message || error.message || 'Unknown error'));
-          this.isSubmitting = false;
-        }
-      });
-      
-      this.subscription.add(sub);
-    // } else {
-    //   console.log('Form is invalid');
+    // if (this.collegeForm.invalid) {
     //   this.markFormGroupTouched();
+    //   return;
     // }
+
+    this.isSubmitting = true;
+    const formData = new FormData();
+    const formValue = this.collegeForm.value;
+
+    // Pack quick stats
+    const quickStats = {
+      campus_size: formValue.campus_size,
+      total_students: formValue.total_students,
+      faculty_ratio: formValue.faculty_ratio,
+      avg_package: formValue.avg_package
+    };
+
+    // Add form fields
+    Object.keys(formValue).forEach(key => {
+      // Skip fields that are part of quick_stats or handled separately
+      if (['campus_size', 'total_students', 'faculty_ratio', 'avg_package', 'image', 'courses'].includes(key)) {
+        return;
+      }
+      formData.append(key, formValue[key] || '');
+    });
+
+    // Handle Quick Stats
+    formData.append('quick_stats', JSON.stringify(quickStats));
+
+    // Handle Courses
+    const courses = formValue.courses;
+    if (courses) {
+      const courseArray = courses.split(',').map((course: string) => course.trim()).filter((c: string) => c.length > 0);
+      formData.append('courses', JSON.stringify(courseArray));
+    } else {
+      formData.append('courses', JSON.stringify([]));
+    }
+
+    // Add image if selected
+    if (this.selectedImage) {
+      formData.append('image', this.selectedImage);
+    }
+
+    console.log('Sending request to:', this.isEditMode ? `PUT ${API_URL}/colleges/${this.collegeId}/` : `POST ${API_URL}/colleges/`);
+
+    const apiCall = this.isEditMode
+      ? this.http.put(`${API_URL}/colleges/${this.collegeId}/`, formData)
+      : this.http.post(`${API_URL}/colleges/`, formData);
+
+    const sub = apiCall.subscribe({
+      next: (response: any) => {
+        console.log('API Response:', response);
+        alert(this.isEditMode ? 'College updated successfully!' : 'College created successfully!');
+        this.isSubmitting = false;
+        this.router.navigate(['/admin/colleges']);
+      },
+      error: (error: any) => {
+        console.error('API Error:', error);
+        alert('Error saving college: ' + (error.error?.message || error.message || 'Unknown error'));
+        this.isSubmitting = false;
+      }
+    });
+
+    this.subscription.add(sub);
   }
+  //   this.markFormGroupTouched();
+  // }
 
   private markFormGroupTouched(): void {
     Object.keys(this.collegeForm.controls).forEach(key => {

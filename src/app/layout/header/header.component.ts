@@ -67,6 +67,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   unreadMessages = 1; // Start with 1 to show the help message
   shouldAnimateIcon = false;
 
+  // Apply Now Modal
+  showApplyModal = false;
+  studentApplication = {
+    name: '',
+    email: '',
+    phone: '',
+    course: '',
+    message: ''
+  };
+
   // Navigation state
   isNavigating = false;
   currentRoute = '';

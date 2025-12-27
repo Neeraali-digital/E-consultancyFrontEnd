@@ -16,113 +16,6 @@ export class CollegesComponent implements OnInit {
   colleges: any[] = [];
   loading = true;
   error: string | null = null;
-  
-  // Keep static data as fallback
-  staticColleges = [
-    {
-      id: 1,
-      name: 'Indian Institute of Technology Delhi',
-      shortName: 'IIT Delhi',
-      type: 'Engineering',
-      location: 'New Delhi',
-      established: 1961,
-      ranking: 1,
-      courses: ['B.Tech', 'M.Tech', 'PhD'],
-      institutionType: 'Government',
-      affiliated: 'UGC',
-      rating: 4.8,
-      image: 'iit-delhi.jpg',
-      featured: true,
-      color: 'blue',
-      courseTypes: ['Engineering', 'Technology']
-    },
-    {
-      id: 2,
-      name: 'All India Institute of Medical Sciences',
-      shortName: 'AIIMS Delhi',
-      type: 'Medical',
-      location: 'New Delhi',
-      established: 1956,
-      ranking: 1,
-      courses: ['MBBS', 'MD', 'MS'],
-      institutionType: 'Government',
-      affiliated: 'MCI',
-      rating: 4.9,
-      image: 'aiims-delhi.jpg',
-      featured: true,
-      color: 'red',
-      courseTypes: ['Medical']
-    },
-    {
-      id: 3,
-      name: 'Indian Institute of Management Bangalore',
-      shortName: 'IIM Bangalore',
-      type: 'Management',
-      location: 'Bangalore',
-      established: 1973,
-      ranking: 1,
-      courses: ['MBA', 'PGDM', 'Executive MBA'],
-      institutionType: 'Government',
-      affiliated: 'AICTE',
-      rating: 4.7,
-      image: 'iim-bangalore.jpg',
-      featured: true,
-      color: 'green',
-      courseTypes: ['Management']
-    },
-    {
-      id: 4,
-      name: 'National Institute of Technology Trichy',
-      shortName: 'NIT Trichy',
-      type: 'Engineering',
-      location: 'Tiruchirappalli',
-      established: 1964,
-      ranking: 8,
-      courses: ['B.Tech', 'M.Tech', 'MBA'],
-      institutionType: 'Government',
-      affiliated: 'AICTE',
-      rating: 4.5,
-      image: 'nit-trichy.jpg',
-      featured: false,
-      color: 'blue',
-      courseTypes: ['Engineering', 'Technology', 'Management']
-    },
-    {
-      id: 5,
-      name: 'Manipal Academy of Higher Education',
-      shortName: 'Manipal University',
-      type: 'Multi-Disciplinary',
-      location: 'Manipal',
-      established: 1953,
-      ranking: 15,
-      courses: ['Engineering', 'Medical', 'Management'],
-      institutionType: 'Private',
-      affiliated: 'UGC',
-      rating: 4.3,
-      image: 'manipal.jpg',
-      featured: false,
-      color: 'purple',
-      courseTypes: ['Engineering', 'Medical', 'Management', 'Technology']
-    },
-    {
-      id: 6,
-      name: 'Vellore Institute of Technology',
-      shortName: 'VIT Vellore',
-      type: 'Engineering',
-      location: 'Vellore',
-      established: 1984,
-      ranking: 12,
-      courses: ['B.Tech', 'M.Tech', 'MBA'],
-      institutionType: 'Private',
-      affiliated: 'AICTE',
-      rating: 4.2,
-      image: 'vit-vellore.jpg',
-      featured: false,
-      color: 'orange',
-      courseTypes: ['Engineering', 'Technology', 'Management']
-    }
-  ];
-
   filters = {
     type: 'All',
     location: 'All',
@@ -135,20 +28,20 @@ export class CollegesComponent implements OnInit {
   showMobileFilters = false;
   searchQuery = '';
 
-  // Filter options
-  collegeTypes = ['All', 'Engineering', 'Medical', 'Management', 'Multi-Disciplinary'];
-  locations = ['All', 'New Delhi', 'Bangalore', 'Tiruchirappalli', 'Manipal', 'Vellore'];
-  courseTypes = ['All', 'Engineering', 'Medical', 'Management', 'Technology', 'Arts & Science', 'Commerce'];
+  // Filter options - initialized with 'All'
+  collegeTypes: string[] = ['All'];
+  locations: string[] = ['All'];
+  courseTypes: string[] = ['All'];
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadColleges();
-    
+
     // Check for course filter from query params
     this.route.queryParams.subscribe(params => {
       if (params['courseFilter']) {
@@ -158,19 +51,17 @@ export class CollegesComponent implements OnInit {
       this.applyFilters();
     });
   }
-  
+
   loadColleges(): void {
     this.loading = true;
     this.error = null;
-    
+
     this.apiService.getColleges().subscribe({
       next: (response) => {
         let apiColleges = response.results || response;
-        let mappedApiColleges: any[] = [];
-        
-        // Map API data to match frontend format
+
         if (apiColleges && apiColleges.length > 0) {
-          mappedApiColleges = apiColleges.map((college: any) => ({
+          this.colleges = apiColleges.map((college: any) => ({
             id: college.id,
             name: college.name,
             shortName: college.short_name || college.name,
@@ -185,58 +76,74 @@ export class CollegesComponent implements OnInit {
             image: college.image,
             featured: college.ranking <= 10,
             color: this.getCollegeColor(college.type),
-            courseTypes: [college.type]
+            courseTypes: [college.type] // Simplify for now as type is main category
           }));
+
+          // Extract dynamic filter options from data
+          this.extractFilterOptions();
+
+        } else {
+          this.colleges = [];
         }
-        
-        // Combine API data with static data, ensuring unique IDs
-        const maxApiId = mappedApiColleges.length > 0 ? Math.max(...mappedApiColleges.map(c => c.id)) : 0;
-        const adjustedStaticColleges = this.staticColleges.map(college => ({
-          ...college,
-          id: college.id + maxApiId + 1000 // Ensure static IDs don't conflict with API IDs
-        }));
-        
-        this.colleges = [...mappedApiColleges, ...adjustedStaticColleges];
+
         this.filteredColleges = [...this.colleges];
         this.applyFilters();
         this.loading = false;
       },
       error: (error) => {
         console.error('Error loading colleges:', error);
-        this.error = 'Failed to load colleges from API. Showing static data only.';
-        this.colleges = this.staticColleges;
-        this.filteredColleges = [...this.colleges];
-        this.applyFilters();
+        this.error = 'Failed to load colleges from API.';
+        this.colleges = [];
+        this.filteredColleges = [];
         this.loading = false;
       }
     });
+  }
+
+  extractFilterOptions(): void {
+    // Extract unique types
+    const types = new Set<string>(this.colleges.map(c => c.type).filter(t => t));
+    this.collegeTypes = ['All', ...Array.from(types).sort()];
+
+    // Extract unique locations
+    const locs = new Set<string>(this.colleges.map(c => c.location).filter(l => l));
+    this.locations = ['All', ...Array.from(locs).sort()];
+    
+    // Extract unique specific courses (e.g. B.Tech, MBBS)
+    const allCourses = this.colleges.reduce((acc, college) => {
+      if (Array.isArray(college.courses)) {
+        return [...acc, ...college.courses];
+      }
+      return acc;
+    }, []);
+    const uniqueCourses = new Set<string>(allCourses.filter((c: string) => c));
+    this.courseTypes = ['All', ...Array.from(uniqueCourses).sort()];
   }
 
   applyFilters(): void {
     this.filteredColleges = this.colleges.filter(college => {
       // Search filter
       const searchMatch = !this.searchQuery ||
-                         college.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                         college.shortName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                         college.location.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                         college.type.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                         college.courseTypes?.some((course: string) => course.toLowerCase().includes(this.searchQuery.toLowerCase()));
+        college.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        college.shortName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        college.location.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        college.type.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        college.courses?.some((course: string) => course.toLowerCase().includes(this.searchQuery.toLowerCase()));
 
       // Type filter
       const typeMatch = this.filters.type === 'All' || college.type === this.filters.type;
 
-      // Location filter
-      const locationMatch = this.filters.location === 'All' || college.location.includes(this.filters.location);
+      // Location filter (Exact match since options come from data)
+      const locationMatch = this.filters.location === 'All' || college.location === this.filters.location;
 
-      // Course filter (from course page navigation)
+      // Course filter (Check if the selected course is in the college's course list)
       const courseMatch = this.filters.course === 'All' ||
-                          college.courseTypes?.includes(this.filters.course) ||
-                          college.type === this.filters.course;
+        (Array.isArray(college.courses) && college.courses.includes(this.filters.course));
 
       // Ranking filter
       const rankingMatch = this.filters.ranking === 'All' ||
-                          (this.filters.ranking === 'Top 10' && college.ranking <= 10) ||
-                          (this.filters.ranking === 'Top 20' && college.ranking <= 20);
+        (this.filters.ranking === 'Top 10' && college.ranking <= 10) ||
+        (this.filters.ranking === 'Top 20' && college.ranking <= 20);
 
       return searchMatch && typeMatch && locationMatch && courseMatch && rankingMatch;
     });
@@ -312,11 +219,10 @@ export class CollegesComponent implements OnInit {
   }
 
   getCoursesToDisplay(college: any): string[] {
-    console.log('College courses:', college.courses);
-    if (college.courses && college.courses.length > 0) {
-      return college.courses.slice(0, 4);
+    if (college.courses && Array.isArray(college.courses) && college.courses.length > 0) {
+      return college.courses.slice(0, 5);
     }
-    return ['B.Tech', 'M.Tech'];
+    return [];
   }
 
   // Add debugging method to log college data

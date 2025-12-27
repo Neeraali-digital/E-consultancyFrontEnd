@@ -122,7 +122,28 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Loading State -->
+        <div *ngIf="loading" class="flex flex-col items-center justify-center py-20">
+          <div class="w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mb-4"></div>
+          <p class="text-gray-600 font-medium">Loading premium colleges...</p>
+        </div>
+
+        <!-- No Results State -->
+        <div *ngIf="!loading && filteredColleges.length === 0" class="text-center py-20 px-6">
+          <div class="inline-flex items-center justify-center p-6 bg-purple-50 rounded-full mb-6">
+            <span class="material-icons text-6xl text-purple-200">school</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">No Colleges Found</h3>
+          <p class="text-gray-600 max-w-md mx-auto mb-8">
+            We couldn't find any colleges matching your search criteria. Try adjusting your filters or search term.
+          </p>
+          <button (click)="clearFilters()" 
+                  class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-xl font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            Clear All Filters
+          </button>
+        </div>
+
+        <div *ngIf="filteredColleges.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div *ngFor="let college of filteredColleges" 
                class="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
             
@@ -223,9 +244,9 @@
                         class="px-2.5 py-1 bg-orange-500 text-white text-xs font-semibold rounded-full">
                     {{ course }}
                   </span>
-                  <span *ngIf="college.courses && college.courses.length > 4" 
+                  <span *ngIf="college.courses && college.courses.length > 5" 
                         class="px-2.5 py-1 bg-gray-300 text-gray-700 text-xs font-semibold rounded-full">
-                    +{{ college.courses.length - 4 }}
+                    +{{ college.courses.length - 5 }}
                   </span>
                 </div>
               </div>
