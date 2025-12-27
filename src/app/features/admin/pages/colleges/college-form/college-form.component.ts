@@ -194,7 +194,7 @@ export class CollegeFormComponent implements OnInit, OnDestroy {
       institution_type: ['', [Validators.required]],
       affiliated: [''],
       rating: [0],
-      courses: [''],
+      // courses field removed
       about_text: [''],
       campus_size: [''],
       total_students: [''],
@@ -214,7 +214,7 @@ export class CollegeFormComponent implements OnInit, OnDestroy {
           // Convert courses array to comma-separated string
           const formData = {
             ...college,
-            courses: Array.isArray(college.courses) ? college.courses.join(', ') : college.courses,
+            // courses field removed
             // Unpack quick stats
             campus_size: college.quick_stats?.campus_size || '',
             total_students: college.quick_stats?.total_students || '',
@@ -270,14 +270,10 @@ export class CollegeFormComponent implements OnInit, OnDestroy {
     // Handle Quick Stats
     formData.append('quick_stats', JSON.stringify(quickStats));
 
-    // Handle Courses
-    const courses = formValue.courses;
-    if (courses) {
-      const courseArray = courses.split(',').map((course: string) => course.trim()).filter((c: string) => c.length > 0);
-      formData.append('courses', JSON.stringify(courseArray));
-    } else {
-      formData.append('courses', JSON.stringify([]));
-    }
+    // Handle Quick Stats
+    formData.append('quick_stats', JSON.stringify(quickStats));
+
+    // Courses field removed
 
     // Add image if selected
     if (this.selectedImage) {

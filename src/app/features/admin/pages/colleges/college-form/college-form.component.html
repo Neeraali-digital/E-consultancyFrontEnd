@@ -231,50 +231,7 @@
 
 
 
-  <!-- Courses -->
-  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-xl font-semibold text-gray-900">Courses Offered</h2>
-      <button
-        type="button"
-        (click)="addCourse()"
-        class="inline-flex items-center px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
-        <span class="material-icons text-sm mr-1">add</span>
-        Add Course
-      </button>
-    </div>
 
-    <div formArrayName="courses" class="space-y-4">
-      <div *ngFor="let course of coursesArray.controls; let i = index"
-           class="flex items-center space-x-3">
-        <div class="flex-1">
-          <select
-            [formControlName]="i"
-            class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            [class.border-red-500]="course.invalid && course.touched">
-            <option value="">Select a course</option>
-            <option *ngFor="let availableCourse of availableCourses" [value]="availableCourse">
-              {{ availableCourse }}
-            </option>
-          </select>
-          <div *ngIf="course.invalid && course.touched" class="mt-1 text-sm text-red-600">
-            Course selection is required
-          </div>
-        </div>
-        <button
-          type="button"
-          (click)="removeCourse(i)"
-          class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
-          <span class="material-icons text-sm">delete</span>
-        </button>
-      </div>
-
-      <div *ngIf="coursesArray.length === 0" class="text-center py-8 text-gray-500">
-        <span class="material-icons text-4xl mb-2">school</span>
-        <p>No courses added yet. Click "Add Course" to get started.</p>
-      </div>
-    </div>
-  </div>
 
   <!-- Image Upload -->
   <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">

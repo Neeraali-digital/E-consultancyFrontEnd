@@ -123,10 +123,7 @@
         </div>
 
         <!-- Loading State -->
-        <div *ngIf="loading" class="flex flex-col items-center justify-center py-20">
-          <div class="w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mb-4"></div>
-          <p class="text-gray-600 font-medium">Loading premium colleges...</p>
-        </div>
+        <app-loading *ngIf="loading" message="Loading premium colleges..."></app-loading>
 
         <!-- No Results State -->
         <div *ngIf="!loading && filteredColleges.length === 0" class="text-center py-20 px-6">

@@ -99,11 +99,11 @@ export class CoursesComponent implements OnInit {
   ngOnInit(): void {
     this.loadCourses();
   }
-  
+
   loadCourses(): void {
     this.loading = true;
     this.error = null;
-    
+
     this.apiService.getCourses().subscribe({
       next: (response) => {
         this.courses = response.results || response;
@@ -145,7 +145,7 @@ export class CoursesComponent implements OnInit {
   viewColleges(course: any): void {
     this.router.navigate(['/colleges'], {
       queryParams: {
-        courseFilter: course.title,
+        courseFilter: course.name || course.title,
         courseId: course.id
       }
     });

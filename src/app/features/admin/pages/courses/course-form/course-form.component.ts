@@ -41,6 +41,8 @@ export class CourseFormComponent implements OnInit, OnDestroy {
   imagePreview: string | null = null;
   selectedImageFile: File | null = null;
 
+  availableColleges: any[] = [];
+
   private subscription = new Subscription();
 
   constructor(
@@ -57,6 +59,8 @@ export class CourseFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('id');
     this.isEditMode = !!this.courseId;
+
+    this.loadColleges();
 
     if (this.isEditMode) {
       this.loadCourse();
@@ -76,7 +80,8 @@ export class CourseFormComponent implements OnInit, OnDestroy {
       degree_type: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(50)]],
       eligibility: ['', [Validators.required]],
-      status: ['active']
+      status: ['active'],
+      colleges: [[]] // Multi-select for colleges
     });
   }
 
@@ -84,13 +89,28 @@ export class CourseFormComponent implements OnInit, OnDestroy {
     return this.courseForm.controls;
   }
 
+  private loadColleges(): void {
+    this.http.get<any[]>(`${API_URL}/colleges/`).subscribe({
+      next: (colleges) => {
+        this.availableColleges = colleges;
+      },
+      error: (err) => {
+        console.error('Failed to load colleges', err);
+      }
+    });
+  }
+
   private loadCourse(): void {
     this.isLoading = true;
-    
+
     const sub = this.http.get(`${API_URL}/courses/${this.courseId}/`).subscribe({
       next: (course: any) => {
         if (course) {
-          this.courseForm.patchValue(course);
+          const formData = {
+            ...course,
+            colleges: course.colleges ? course.colleges.map((c: any) => c.id) : []
+          };
+          this.courseForm.patchValue(formData);
           if (course.image) {
             this.imagePreview = course.image;
           }
@@ -103,7 +123,7 @@ export class CourseFormComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     });
-    
+
     this.subscription.add(sub);
   }
 
@@ -115,14 +135,24 @@ export class CourseFormComponent implements OnInit, OnDestroy {
 
       const formData = new FormData();
       Object.keys(this.courseForm.value).forEach(key => {
-        formData.append(key, this.courseForm.value[key]);
+        if (key === 'colleges') {
+          // Send college_ids as separate fields or as a list depending on backend expectation.
+          // Since it's a ManyToMany field and we used PrimaryKeyRelatedField(many=True), 
+          // we usually send multiple values for the same key 'college_ids'.
+          const colleges = this.courseForm.value[key];
+          if (Array.isArray(colleges)) {
+            colleges.forEach(id => formData.append('college_ids', id));
+          }
+        } else {
+          formData.append(key, this.courseForm.value[key]);
+        }
       });
-      
+
       if (this.selectedImageFile) {
         formData.append('image', this.selectedImageFile);
       }
 
-      const apiCall = this.isEditMode 
+      const apiCall = this.isEditMode
         ? this.http.put(`${API_URL}/courses/${this.courseId}/`, formData)
         : this.http.post(`${API_URL}/courses/`, formData);
 
@@ -137,13 +167,13 @@ export class CourseFormComponent implements OnInit, OnDestroy {
           this.isSubmitting = false;
         }
       });
-      
+
       this.subscription.add(sub);
     } else {
       this.markFormGroupTouched();
     }
   }
-  
+
   private getFormErrors(): any {
     const errors: any = {};
     Object.keys(this.courseForm.controls).forEach(key => {
@@ -166,7 +196,7 @@ export class CourseFormComponent implements OnInit, OnDestroy {
     const file = event.target.files[0];
     if (file) {
       this.selectedImageFile = file;
-      
+
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.imagePreview = e.target.result;

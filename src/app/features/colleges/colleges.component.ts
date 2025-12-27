@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../shared/services/api.service';
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-colleges',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LoadingComponent],
   templateUrl: './colleges.component.html',
   styleUrls: ['./colleges.component.css']
 })
@@ -69,7 +70,7 @@ export class CollegesComponent implements OnInit {
             location: college.location,
             established: college.established,
             ranking: college.ranking || 999,
-            courses: Array.isArray(college.courses) ? college.courses : [],
+            courses: Array.isArray(college.courses) ? college.courses.map((c: any) => c.name) : [],
             institutionType: college.institution_type,
             affiliated: college.affiliated,
             rating: college.rating || 4.0,
@@ -108,7 +109,7 @@ export class CollegesComponent implements OnInit {
     // Extract unique locations
     const locs = new Set<string>(this.colleges.map(c => c.location).filter(l => l));
     this.locations = ['All', ...Array.from(locs).sort()];
-    
+
     // Extract unique specific courses (e.g. B.Tech, MBBS)
     const allCourses = this.colleges.reduce((acc, college) => {
       if (Array.isArray(college.courses)) {

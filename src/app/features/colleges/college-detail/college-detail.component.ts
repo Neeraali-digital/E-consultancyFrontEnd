@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ApiService } from '../../../shared/services/api.service';
+import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
 interface CollegeFacility {
   icon: string;
@@ -68,7 +69,7 @@ interface College {
 @Component({
   selector: 'app-college-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, LoadingComponent],
   templateUrl: './college-detail.component.html',
   styleUrls: ['./college-detail.component.css']
 })
@@ -136,7 +137,7 @@ export class CollegeDetailComponent implements OnInit {
       location: apiCollege.location,
       established: apiCollege.established,
       ranking: apiCollege.ranking || 999,
-      courses: Array.isArray(apiCollege.courses) ? apiCollege.courses : [],
+      courses: Array.isArray(apiCollege.courses) ? apiCollege.courses.map((c: any) => c.name) : [],
       placement: apiCollege.placement || '85%',
       avgPackage: apiCollege.avg_package || 'N/A',
       rating: apiCollege.rating || 4.0,
