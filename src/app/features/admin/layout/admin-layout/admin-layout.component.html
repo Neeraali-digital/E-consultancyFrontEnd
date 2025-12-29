@@ -51,16 +51,16 @@
       </div>
 
       <!-- Floating Action Button (for quick actions) -->
-      <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-20" *ngIf="!isMobile">
+      <!-- <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-20" *ngIf="!isMobile">
         <div class="relative group">
           <button
             (click)="toggleQuickActions()"
             class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group-hover:rotate-45">
             <span class="material-icons text-lg sm:text-xl">{{ showQuickActions ? 'close' : 'add' }}</span>
-          </button>
+          </button> -->
 
           <!-- Quick Actions Menu -->
-          <div *ngIf="showQuickActions"
+          <!-- <div *ngIf="showQuickActions"
                class="absolute bottom-14 right-0 sm:bottom-16 bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 w-56 sm:w-64 animate-slideUp">
             <h3 class="text-sm font-semibold text-gray-800 mb-3">Quick Actions</h3>
             <div class="space-y-2">
@@ -88,12 +88,12 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </main>
   </div>
 
   <!-- AI Assistant -->
-  <app-ai-assistant></app-ai-assistant>
+  <!-- <app-ai-assistant></app-ai-assistant> -->
 
   <!-- Fast Loading Overlay -->
   <app-minimal-loader *ngIf="isLoading" message="Loading admin panel..."></app-minimal-loader>

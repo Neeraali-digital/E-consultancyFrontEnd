@@ -18,7 +18,7 @@ export interface College {
   location: string;
   established: number;
   ranking: number;
-  courses: string[];
+  courses: any[];
   institution_type: string;
   affiliated: string;
   rating?: number;
@@ -139,7 +139,7 @@ export interface College {
               <div class="flex flex-wrap gap-1">
                 <span *ngFor="let course of college.courses.slice(0, 3)" 
                       class="px-2 py-1 bg-orange-500 text-white text-xs font-medium rounded-full">
-                  {{ course }}
+                  {{ course.name || course }}
                 </span>
                 <span *ngIf="college.courses.length > 3" 
                       class="px-2 py-1 bg-gray-300 text-gray-700 text-xs font-medium rounded-full">
@@ -171,6 +171,34 @@ export interface College {
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div *ngIf="getTotalPages() > 1" class="mt-6 flex items-center justify-between border-t border-gray-200 pt-4">
+      <div class="text-sm text-gray-700">
+        Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ getEndIndex() }} of {{ totalItems }} results
+      </div>
+      <div class="flex gap-2">
+        <button (click)="goToPage(currentPage - 1)" 
+                [disabled]="currentPage === 1"
+                class="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50">
+          Previous
+        </button>
+        <div class="flex gap-1">
+          <button *ngFor="let page of [].constructor(getTotalPages()); let i = index"
+                  (click)="goToPage(i + 1)"
+                  [class.bg-blue-600]="currentPage === i + 1"
+                  [class.text-white]="currentPage === i + 1"
+                  class="px-3 py-1 border rounded hover:bg-gray-100">
+             {{ i + 1 }}
+          </button>
+        </div>
+        <button (click)="goToPage(currentPage + 1)" 
+                [disabled]="currentPage === getTotalPages()"
+                class="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50">
+          Next
+        </button>
       </div>
     </div>
 
@@ -252,6 +280,25 @@ export class CollegeListComponent implements OnInit, OnDestroy {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     return this.filteredColleges.slice(startIndex, endIndex);
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.filteredColleges.length / this.itemsPerPage);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.getTotalPages()) {
+      this.currentPage = page;
+    }
+  }
+
+  getEndIndex(): number {
+    const endIndex = (this.currentPage - 1) * this.itemsPerPage + this.itemsPerPage;
+    return Math.min(endIndex, this.filteredColleges.length);
+  }
+
+  get totalItems(): number {
+    return this.filteredColleges.length;
   }
 
   addCollege(): void {
