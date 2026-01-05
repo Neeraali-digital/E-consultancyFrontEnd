@@ -1,0 +1,81 @@
+<div class="bg-white rounded-2xl shadow-xl border border-blue-100 overflow-hidden sticky top-24 transform transition-all hover:shadow-2xl duration-300">
+  <!-- Gradient Header -->
+  <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-center relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full opacity-10">
+      <span class="material-icons text-9xl absolute -top-4 -left-4 text-white">school</span>
+      <span class="material-icons text-8xl absolute -bottom-8 -right-8 text-white">edit_note</span>
+    </div>
+    <h3 class="text-2xl font-bold text-white relative z-10">Free Counselling! 🎓</h3>
+    <p class="text-blue-100 mt-2 text-sm relative z-10 font-medium">Get expert guidance for your future.</p>
+  </div>
+
+  <div class="p-6">
+    <form [formGroup]="inquiryForm" (ngSubmit)="onSubmit()" class="space-y-5">
+      <!-- Name -->
+      <div class="group">
+        <label for="name" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Full Name</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <span class="material-icons text-gray-400 group-focus-within:text-blue-500 transition-colors text-lg">person</span>
+          </div>
+          <input type="text" id="name" formControlName="name"
+                 class="block w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all shadow-sm"
+                 placeholder="Your name"
+                 [class.border-red-500]="inquiryForm.get('name')?.invalid && inquiryForm.get('name')?.touched">
+        </div>
+        <div *ngIf="inquiryForm.get('name')?.invalid && inquiryForm.get('name')?.touched" class="text-xs text-red-500 mt-1 font-medium flex items-center gap-1">
+          <span class="material-icons text-xs">error</span> Name is required
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="group">
+        <label for="email" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Email Address</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <span class="material-icons text-gray-400 group-focus-within:text-blue-500 transition-colors text-lg">email</span>
+          </div>
+          <input type="email" id="email" formControlName="email"
+                 class="block w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all shadow-sm"
+                 placeholder="your email"
+                 [class.border-red-500]="inquiryForm.get('email')?.invalid && inquiryForm.get('email')?.touched">
+        </div>
+        <div *ngIf="inquiryForm.get('email')?.invalid && inquiryForm.get('email')?.touched" class="text-xs text-red-500 mt-1 font-medium flex items-center gap-1">
+          <span class="material-icons text-xs">error</span> Valid email is required
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="group">
+        <label for="phone" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Phone Number</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <span class="material-icons text-gray-400 group-focus-within:text-blue-500 transition-colors text-lg">phone</span>
+          </div>
+          <input type="tel" id="phone" formControlName="phone"
+                 class="block w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all shadow-sm"
+                 placeholder="your phone number"
+                 [class.border-red-500]="inquiryForm.get('phone')?.invalid && inquiryForm.get('phone')?.touched">
+        </div>
+        <div *ngIf="inquiryForm.get('phone')?.invalid && inquiryForm.get('phone')?.touched" class="text-xs text-red-500 mt-1 font-medium flex items-center gap-1">
+          <span class="material-icons text-xs">error</span> Valid phone number required
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="inquiryForm.invalid || isSubmitting"
+              class="group w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3.5 px-4 rounded-xl transition-all duration-300 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-0.5">
+        <span *ngIf="isSubmitting" class="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full mr-2"></span>
+        <span *ngIf="!isSubmitting" class="flex items-center gap-2">
+          Get Free Callback <span class="material-icons text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </span>
+        <span *ngIf="isSubmitting">Sending Request...</span>
+      </button>
+
+      <p class="text-center text-xs text-gray-400 mt-4">
+        <span class="material-icons text-[10px] align-middle mr-1">lock</span>
+        Your details are safe with us.
+      </p>
+    </form>
+  </div>
+</div>

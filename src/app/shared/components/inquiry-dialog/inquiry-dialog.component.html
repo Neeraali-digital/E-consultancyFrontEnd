@@ -1,0 +1,111 @@
+<div class="dialog-container-wrapper">
+    <!-- Header -->
+    <div class="dialog-header">
+        <h2>Start Your Journey</h2>
+        <p>Fill in your details and our experts will guide you to your dream career.</p>
+        <button class="close-btn" (click)="onClose()" type="button">
+            <span class="material-icons text-sm">close</span>
+        </button>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="inquiryForm" (ngSubmit)="onSubmit()" class="flex flex-col flex-1 overflow-hidden">
+        <div class="dialog-content custom-scrollbar p-6">
+            
+            <!-- Name -->
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name <span class="text-red-500">*</span></label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="material-icons text-gray-400 text-[20px]">person</span>
+                    </div>
+                    <input type="text" id="name" formControlName="name" 
+                           class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                           placeholder="Enter your full name"
+                           [class.border-red-500]="inquiryForm.get('name')?.invalid && inquiryForm.get('name')?.touched">
+                </div>
+                <div *ngIf="inquiryForm.get('name')?.invalid && inquiryForm.get('name')?.touched" class="mt-1 text-xs text-red-500 flex items-center">
+                    <span class="material-icons text-[14px] mr-1">error_outline</span>
+                    Name is required
+                </div>
+            </div>
+
+            <!-- Email & Phone Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="material-icons text-gray-400 text-[20px]">email</span>
+                        </div>
+                        <input type="email" id="email" formControlName="email" 
+                               class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                               placeholder="example@mail.com"
+                               [class.border-red-500]="inquiryForm.get('email')?.invalid && inquiryForm.get('email')?.touched">
+                    </div>
+                    <div *ngIf="inquiryForm.get('email')?.invalid && inquiryForm.get('email')?.touched" class="mt-1 text-xs text-red-500 flex items-center">
+                        <span class="material-icons text-[14px] mr-1">error_outline</span>
+                        {{ inquiryForm.get('email')?.hasError('required') ? 'Email is required' : 'Invalid email' }}
+                    </div>
+                </div>
+
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="material-icons text-gray-400 text-[20px]">phone</span>
+                        </div>
+                        <input type="tel" id="phone" formControlName="phone" 
+                               class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                               placeholder="(e.g. +91 9980487777)"
+                               [class.border-red-500]="inquiryForm.get('phone')?.invalid && inquiryForm.get('phone')?.touched">
+                    </div>
+                    <div *ngIf="inquiryForm.get('phone')?.invalid && inquiryForm.get('phone')?.touched" class="mt-1 text-xs text-red-500 flex items-center">
+                        <span class="material-icons text-[14px] mr-1">error_outline</span>
+                        {{ inquiryForm.get('phone')?.hasError('required') ? 'Phone is required' : 'Invalid phone number' }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course -->
+            <div class="mb-4">
+                <label for="course" class="block text-sm font-medium text-gray-700 mb-1">Course of Interest</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="material-icons text-gray-400 text-[20px]">school</span>
+                    </div>
+                    <input type="text" id="course" formControlName="course_of_interest" 
+                           class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                           placeholder="e.g. Computer Science">
+                </div>
+            </div>
+
+            <!-- Message -->
+            <div>
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message (Optional)</label>
+                <div class="relative">
+                    <div class="absolute top-3 left-3 pointer-events-none">
+                        <span class="material-icons text-gray-400 text-[20px]">chat</span>
+                    </div>
+                    <textarea id="message" formControlName="message" rows="3" 
+                              class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
+                              placeholder="Any specific requirements?"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Actions -->
+        <div class="dialog-actions">
+            <button type="button" class="cancel-btn" (click)="onClose()" [disabled]="isSubmitting">
+                Cancel
+            </button>
+            <button type="submit" class="submit-btn" [disabled]="isSubmitting">
+                <div class="flex items-center justify-center gap-2">
+                    <span *ngIf="isSubmitting" class="spinner"></span>
+                    <span>{{ isSubmitting ? 'Submitting...' : 'Submit Inquiry' }}</span>
+                </div>
+            </button>
+        </div>
+    </form>
+</div>

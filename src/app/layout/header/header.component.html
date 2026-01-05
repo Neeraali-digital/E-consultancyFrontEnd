@@ -412,17 +412,19 @@
            class="call-now-btn flex items-center gap-1 bg-green-600 text-white
                   rounded-full font-semibold hover:bg-green-700 transition-all duration-500
                   hover:shadow-lg hover:shadow-green-500/25 transform hover:-translate-y-0.5 hover:scale-105
-                  px-2.5 py-1.5 text-xs flex-shrink-0">
+                  px-2.5 py-1.5 text-xs flex-shrink-0 cursor-pointer relative z-20"
+           style="cursor: pointer; z-index: 20;">
           <span class="material-icons text-sm">phone</span>
           <span class="transition-all duration-300">Call Now</span>
         </a>
 
         <!-- Apply Now Button -->
-        <button (click)="navigateToRoute('/contact')"
-                class="apply-now-btn flex items-center gap-1 bg-blue-600 text-white
+        <button (click)="openInquiryDialog()"
+                class="apply-now-btn flex items-center gap-1 bg-blue-600 text-white cursor-pointer
                        rounded-full font-semibold hover:bg-blue-700 transition-all duration-500
                        hover:shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-0.5 hover:scale-105
-                       px-2.5 py-1.5 text-xs flex-shrink-0">
+                       px-2.5 py-1.5 text-xs flex-shrink-0 relative z-20"
+                style="cursor: pointer; z-index: 20;">
           <span class="material-icons text-sm">send</span>
           <span class="transition-all duration-300">Apply Now</span>
         </button>

@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CounterAnimationDirective } from '../../shared/directives/counter-animation.directive';
 import { ApiService } from '../../shared/services/api.service';
+import { QuickInquiryComponent } from '../../shared/components/quick-inquiry/quick-inquiry.component';
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule, FormsModule, CounterAnimationDirective],
+  imports: [CommonModule, FormsModule, CounterAnimationDirective, QuickInquiryComponent],
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css']
 })

@@ -17,31 +17,31 @@ export class ApiService {
   private tokenSubject = new BehaviorSubject<string | null>(localStorage.getItem('token'));
   public token$ = this.tokenSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private getHeaders(endpoint?: string, isFormData?: boolean): HttpHeaders {
     const headers: any = {};
-    
+
     // Don't set Content-Type for FormData - let browser set it with boundary
     if (!isFormData) {
       headers['Content-Type'] = 'application/json';
     }
-    
+
     // Define public endpoints that don't need authentication
     const publicEndpoints = ['/courses', '/colleges', '/blogs', '/reviews', '/search'];
     const isPublicEndpoint = endpoint && publicEndpoints.some(ep => endpoint.includes(ep) && !endpoint.includes('/admin/'));
-    
+
     // Skip auth headers completely for public endpoints
     if (isPublicEndpoint) {
       return new HttpHeaders(headers);
     }
-    
+
     // Add admin token for admin routes and user management
     const adminToken = localStorage.getItem('admin_token');
     if (adminToken && (endpoint?.includes('/admin/') || endpoint?.includes('/dashboard/') || endpoint?.includes('/users/') || endpoint?.includes('/students/') || endpoint?.includes('/advertisements/'))) {
       headers['Authorization'] = `Token ${adminToken}`;
     }
-    
+
     return new HttpHeaders(headers);
   }
 
@@ -296,6 +296,11 @@ export class ApiService {
 
   deleteAdvertisement(id: number): Observable<any> {
     return this.delete(`/advertisements/${id}/`);
+  }
+
+  // Inquiries APIs
+  getInquiries(params?: any): Observable<any> {
+    return this.get('/enquiries/', params);
   }
 
   // Search API

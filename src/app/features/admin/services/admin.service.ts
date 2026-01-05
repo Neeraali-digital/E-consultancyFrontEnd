@@ -47,7 +47,7 @@ export class AdminService {
   private checkAuthStatus(): void {
     const token = localStorage.getItem('admin_token');
     const userData = localStorage.getItem('admin_user');
-    
+
     if (token && userData) {
       try {
         const user = JSON.parse(userData);
@@ -64,14 +64,14 @@ export class AdminService {
       map((response: any) => {
         if (response.token && response.user) {
           const roleName = typeof response.user.role === 'object' && response.user.role !== null ? response.user.role.name : response.user.role;
-          
+
           const user: AdminUser = {
             id: response.user.id.toString(),
             name: `${response.user.first_name} ${response.user.last_name}`,
             email: response.user.email,
             role: roleName === 'admin' ? 'Administrator' : roleName,
-            permissions: roleName === 'admin' ? 
-              ['read', 'write', 'delete', 'manage_users', 'manage_settings'] : 
+            permissions: roleName === 'admin' ?
+              ['read', 'write', 'delete', 'manage_users', 'manage_settings'] :
               ['read']
           };
 
@@ -117,7 +117,7 @@ export class AdminService {
           colleges: response.monthly_growth?.colleges || 0,
           courses: response.monthly_growth?.courses || 0,
           users: response.monthly_growth?.students || 0,
-          inquiries: response.monthly_growth?.applications || 0
+          inquiries: response.monthly_growth?.inquiries || 0
         }
       }))
     );

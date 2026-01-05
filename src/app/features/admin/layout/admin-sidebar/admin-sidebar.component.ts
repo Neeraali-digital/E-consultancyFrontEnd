@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ChangeDetectorRef, AfterViewInit } from '@ang
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { ApiService } from '../../../../shared/services/api.service';
 
 interface MenuItem {
   id: string;
@@ -173,7 +174,7 @@ export class AdminSidebarComponent implements OnInit, AfterViewInit {
       label: 'Inquiries',
       icon: 'contact_support',
       route: '/admin/inquiries',
-      badge: '12',
+      badge: '',
       badgeColor: 'bg-red-500'
     },
     {
@@ -184,10 +185,17 @@ export class AdminSidebarComponent implements OnInit, AfterViewInit {
     }
   ];
 
-  constructor(private router: Router, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    private apiService: ApiService
+  ) { }
 
   ngOnInit(): void {
     console.log('AdminSidebar ngOnInit - isCollapsed:', this.isCollapsed, 'isMobile:', this.isMobile);
+
+    // Fetch stats to update badges
+    this.updateBadges();
 
     // Track active route
     this.router.events
@@ -209,6 +217,20 @@ export class AdminSidebarComponent implements OnInit, AfterViewInit {
     }, 0);
   }
 
+  updateBadges() {
+    this.apiService.getDashboardStats().subscribe({
+      next: (stats: any) => {
+        // Update Inquiry Badge
+        const inquiryItem = this.menuItems.find(item => item.id === 'inquiries');
+        if (inquiryItem) {
+          const count = stats.inquiries?.total || 0;
+          inquiryItem.badge = count > 0 ? count.toString() : '';
+        }
+      },
+      error: (err) => console.error('Failed to load sidebar stats', err)
+    });
+  }
+
   ngAfterViewInit(): void {
     console.log('AdminSidebar ngAfterViewInit - isCollapsed:', this.isCollapsed, 'isMobile:', this.isMobile);
 
@@ -222,7 +244,7 @@ export class AdminSidebarComponent implements OnInit, AfterViewInit {
     // Auto-expand parent menus based on active route
     this.menuItems.forEach(item => {
       if (item.children) {
-        const hasActiveChild = item.children.some(child => 
+        const hasActiveChild = item.children.some(child =>
           child.route && this.activeRoute.startsWith(child.route)
         );
         if (hasActiveChild) {

@@ -2,5 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Angular Material Theme */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import 'ngx-toastr/toastr';
+
+/* Custom Toastr Styles */
+.toast-container .ngx-toastr {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 16px 20px;
+    width: 350px;
+    background-color: white;
+    color: #374151;
+    font-family: inherit;
+    opacity: 1 !important;
+    border-left: 4px solid transparent;
+}
+
+.toast-container .ngx-toastr:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.toast-success {
+    background-image: none !important;
+    border-left-color: #10b981 !important;
+    /* Green */
+}
+
+.toast-success::before {
+    content: 'check_circle';
+    font-family: 'Material Icons';
+    color: #10b981;
+    font-size: 20px;
+    position: absolute;
+    left: 16px;
+    top: 18px;
+}
+
+.toast-error {
+    background-image: none !important;
+    border-left-color: #ef4444 !important;
+    /* Red */
+}
+
+.toast-error::before {
+    content: 'error';
+    font-family: 'Material Icons';
+    color: #ef4444;
+    font-size: 20px;
+    position: absolute;
+    left: 16px;
+    top: 18px;
+}
+
+.toast-warning {
+    background-image: none !important;
+    border-left-color: #f59e0b !important;
+    /* Amber */
+}
+
+.toast-warning::before {
+    content: 'warning';
+    font-family: 'Material Icons';
+    color: #f59e0b;
+    font-size: 20px;
+    position: absolute;
+    left: 16px;
+    top: 18px;
+}
+
+.toast-info {
+    background-image: none !important;
+    border-left-color: #3b82f6 !important;
+    /* Blue */
+}
+
+.toast-info::before {
+    content: 'info';
+    font-family: 'Material Icons';
+    color: #3b82f6;
+    font-size: 20px;
+    position: absolute;
+    left: 16px;
+    top: 18px;
+}
+
+.toast-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    padding-left: 28px;
+    color: #111827;
+}
+
+.toast-message {
+    font-size: 0.875rem;
+    padding-left: 28px;
+    color: #4b5563;
+}
+
 /* Import responsive utilities for enhanced mobile-first design */
 @import './styles/responsive-utilities.css';

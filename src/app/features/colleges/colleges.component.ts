@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../shared/services/api.service';
 import { LoadingComponent } from '../../shared/components/loading/loading.component';
+import { QuickInquiryComponent } from '../../shared/components/quick-inquiry/quick-inquiry.component';
 
 @Component({
   selector: 'app-colleges',
   standalone: true,
-  imports: [CommonModule, FormsModule, LoadingComponent],
+  imports: [CommonModule, FormsModule, LoadingComponent, QuickInquiryComponent],
   templateUrl: './colleges.component.html',
   styleUrls: ['./colleges.component.css']
 })
@@ -202,9 +203,27 @@ export class CollegesComponent implements OnInit {
     return Array(5).fill(false).map((_, index) => index < Math.floor(rating));
   }
 
-  viewCollegeDetails(collegeId: number): void {
-    console.log('Navigating to college detail with ID:', collegeId);
-    this.router.navigate(['/college', collegeId]);
+  viewCollegeDetails(college: any): void {
+    if (college.name) {
+      const slug = this.slugify(college.name);
+      console.log('Navigating to college detail with slug:', slug);
+      this.router.navigate(['/college', slug]);
+    } else {
+      console.log('Navigating to college detail with ID:', college.id);
+      this.router.navigate(['/college', college.id]);
+    }
+  }
+
+  private slugify(text: string): string {
+    return text
+      .toString()
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')        // Replace spaces with -
+      .replace(/[^\w\-]+/g, '')    // Remove all non-word chars
+      .replace(/\-\-+/g, '-')      // Replace multiple - with single -
+      .replace(/^-+/, '')          // Trim - from start of text
+      .replace(/-+$/, '');         // Trim - from end of text
   }
 
   private getCollegeColor(type: string): string {

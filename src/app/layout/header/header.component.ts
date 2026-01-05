@@ -10,10 +10,13 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { InquiryDialogComponent } from '../../shared/components/inquiry-dialog/inquiry-dialog.component';
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, ClickOutsideDirective],
+  imports: [CommonModule, RouterModule, ClickOutsideDirective, MatDialogModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   animations: [
@@ -174,6 +177,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private router: Router,
     private scrollService: ScrollService,
     private notificationService: NotificationService,
+    private dialog: MatDialog,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
@@ -516,10 +520,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   getDropdownPosition() {
     return {
-      top: 70, // Position below header
-      left: 200, // Adjust as needed for abroad dropdown
-      right: 50  // Adjust as needed for more dropdown
+      top: 70,
+      left: 200,
+      right: 50
     };
+  }
+
+  openInquiryDialog() {
+    this.dialog.open(InquiryDialogComponent, {
+      width: '600px',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      panelClass: 'inquiry-dialog-panel',
+      autoFocus: false,
+      disableClose: false,
+      data: { source: 'header_apply_now' }
+    });
   }
 
 }

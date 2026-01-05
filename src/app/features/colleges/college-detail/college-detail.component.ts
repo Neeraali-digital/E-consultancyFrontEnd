@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ApiService } from '../../../shared/services/api.service';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
+import { QuickInquiryComponent } from '../../../shared/components/quick-inquiry/quick-inquiry.component';
 
 interface CollegeFacility {
   icon: string;
@@ -69,13 +70,14 @@ interface College {
 @Component({
   selector: 'app-college-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, LoadingComponent],
+  imports: [CommonModule, RouterModule, LoadingComponent, QuickInquiryComponent],
   templateUrl: './college-detail.component.html',
   styleUrls: ['./college-detail.component.css']
 })
 export class CollegeDetailComponent implements OnInit {
   colleges = signal<College[]>([]);
   currentCollegeId = signal<number | null>(null);
+  currentCollegeSlug = signal<string | null>(null);
   loading = signal(true);
   error = signal(false);
 
@@ -95,18 +97,22 @@ export class CollegeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const id = +params['id'];
-      if (id) {
-        this.currentCollegeId.set(id);
-        this.loadCollegeData();
+      const idOrName = params['idOrName'];
+
+      // Check if it's a number (ID) or string (Slug)
+      if (!isNaN(idOrName)) {
+        this.currentCollegeId.set(+idOrName);
+        this.currentCollegeSlug.set(null);
+        this.loadCollegeDataById();
       } else {
-        this.error.set(true);
-        this.loading.set(false);
+        this.currentCollegeSlug.set(idOrName);
+        this.currentCollegeId.set(null);
+        this.loadCollegeDataBySlug();
       }
     });
   }
 
-  private loadCollegeData(): void {
+  private loadCollegeDataById(): void {
     this.loading.set(true);
     this.error.set(false);
 
@@ -118,10 +124,41 @@ export class CollegeDetailComponent implements OnInit {
         if (response) {
           const apiCollege = this.mapApiCollegeToInterface(response);
           this.colleges.set([apiCollege]);
+          this.currentCollegeId.set(apiCollege.id); // Ensure ID is set
         }
         this.loading.set(false);
       },
       error: (error) => {
+        this.error.set(true);
+        this.loading.set(false);
+      }
+    });
+  }
+
+  private loadCollegeDataBySlug(): void {
+    this.loading.set(true);
+    this.error.set(false);
+
+    const slug = this.currentCollegeSlug();
+    if (!slug) return;
+
+    // Since API doesn't support getBySlug, we fetch all and find match
+    this.apiService.getColleges().subscribe({
+      next: (response) => {
+        const allColleges = response.results || response;
+        const matchedCollege = allColleges.find((c: any) => this.slugify(c.name) === slug);
+
+        if (matchedCollege) {
+          const apiCollege = this.mapApiCollegeToInterface(matchedCollege);
+          this.colleges.set([apiCollege]);
+          this.currentCollegeId.set(apiCollege.id); // Logically set the ID for the view
+        } else {
+          this.error.set(true);
+        }
+        this.loading.set(false);
+      },
+      error: (error) => {
+        console.error('Error resolving college by slug:', error);
         this.error.set(true);
         this.loading.set(false);
       }
@@ -197,6 +234,18 @@ export class CollegeDetailComponent implements OnInit {
     return Array(5).fill(false).map((_, index) => index < Math.floor(rating));
   }
 
+  private slugify(text: string): string {
+    return text
+      .toString()
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')        // Replace spaces with -
+      .replace(/[^\w\-]+/g, '')    // Remove all non-word chars
+      .replace(/\-\-+/g, '-')      // Replace multiple - with single -
+      .replace(/^-+/, '')          // Trim - from start of text
+      .replace(/-+$/, '');         // Trim - from end of text
+  }
+
   getColorClasses(color: string): string {
     const colorMap: { [key: string]: string } = {
       blue: 'from-blue-500 to-blue-600',
@@ -231,7 +280,11 @@ export class CollegeDetailComponent implements OnInit {
 
   retryLoad(): void {
     console.log('Retrying to load college data...');
-    this.loadCollegeData();
+    if (this.currentCollegeId()) {
+      this.loadCollegeDataById();
+    } else if (this.currentCollegeSlug()) {
+      this.loadCollegeDataBySlug();
+    }
   }
 
   private getDefaultFacilities(): CollegeFacility[] {

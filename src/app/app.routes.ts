@@ -19,7 +19,7 @@ export const routes: Routes = [
   { path: 'courses', component: CoursesComponent, canActivate: [UserRouteGuard] },
   { path: 'services', component: ServicesComponent, canActivate: [UserRouteGuard] },
   { path: 'colleges', component: CollegesComponent, canActivate: [UserRouteGuard] },
-  { path: 'college/:id', component: CollegeDetailComponent, canActivate: [UserRouteGuard] },
+  { path: 'college/:idOrName', component: CollegeDetailComponent, canActivate: [UserRouteGuard] },
   { path: 'about', component: AboutComponent, canActivate: [UserRouteGuard] },
   { path: 'contact', component: ContactComponent, canActivate: [UserRouteGuard] },
   { path: 'abroad', component: AbroadComponent, canActivate: [UserRouteGuard] },
