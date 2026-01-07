@@ -200,7 +200,7 @@
 
                   <!-- Degree Badge (Top Right) -->
                   <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-gray-800 shadow-sm border border-gray-100">
-                    {{ (course.programs?.[0] || 'Program') | titlecase }}
+                    {{ course.degree_type | titlecase }}
                   </div>
 
                   <!-- Title & ID Overlay -->
@@ -208,7 +208,7 @@
                     <h3 class="text-xl font-bold text-white mb-0.5 leading-tight" title="{{ course.title || course.name }}">
                       {{ course.title || course.name }}
                     </h3>
-                    <p class="text-gray-300 text-xs font-medium">Ref: {{ course.id }}</p>
+                    <p class="text-gray-300 text-xs font-medium">{{ course.code }}</p>
                   </div>
                 </div>
 
