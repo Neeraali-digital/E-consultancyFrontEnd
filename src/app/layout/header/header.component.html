@@ -33,20 +33,21 @@
       <!-- Social & Contact - Responsive -->
       <div class="flex items-center gap-2 sm:gap-3">
         <div class="hidden md:flex items-center gap-2">
-          <a href="#" class="hover:text-blue-300 transition-colors" aria-label="Twitter">
-            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-            </svg>
-          </a>
-          <a href="#" class="hover:text-blue-300 transition-colors" aria-label="Facebook">
-            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
-            </svg>
-          </a>
-          <a href="#" class="hover:text-blue-300 transition-colors" aria-label="LinkedIn">
-            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
+          <a *ngFor="let social of socialMedia" 
+             [href]="social.url" 
+             target="_blank"
+             class="hover:opacity-80 transition-opacity w-6 h-6 flex items-center justify-center rounded-full text-white shadow-sm"
+             [style.background-color]="social.color"
+             [attr.aria-label]="social.name">
+            
+            <ng-container *ngIf="social.isSvg; else materialIcon">
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                 <path d="M7.818 2H16.182C19.458 2 22 4.542 22 7.818V16.182C22 19.458 19.458 22 16.182 22H7.818C4.542 22 2 19.458 2 16.182V7.818C2 4.542 4.542 2 7.818 2ZM12 7.5C9.514 7.5 7.5 9.514 7.5 12C7.5 14.486 9.514 16.5 12 16.5C14.486 16.5 16.5 14.486 16.5 12C16.5 9.514 14.486 7.5 12 7.5ZM19 7C18.448 7 18 6.552 18 6C18 5.448 18.448 5 19 5C19.552 5 20 5.448 20 6C20 6.552 19.552 7 19 7ZM12 9C13.654 9 15 10.346 15 12C15 13.654 13.654 15 12 15C10.346 15 9 13.654 9 12C9 10.346 10.346 9 12 9Z" />
+              </svg>
+            </ng-container>
+            <ng-template #materialIcon>
+               <span class="material-icons text-[14px]">{{ social.icon }}</span>
+            </ng-template>
           </a>
         </div>
         <div class="text-xs font-medium flex items-center gap-1">
@@ -186,236 +187,245 @@
       </div>
     </div>
 
-    <!-- Enhanced Desktop Header Layout: Logo (2/12) | Navigation (7/12) | Actions (3/12) -->
-    <div class="hidden lg:grid grid-cols-12 items-center gap-2 lg:gap-3 xl:gap-4">
+    <!-- Enhanced Desktop Header Layout: Logo (2/12) | Navigation (8/12) | Actions (2/12) -->
+    <div class="hidden lg:grid grid-cols-12 items-center gap-2 lg:gap-3 xl:gap-4 h-20">
 
       <!-- Logo Section - Enhanced Responsive Desktop -->
-      <div class="col-span-1">
-        <div class="flex items-center group cursor-pointer" (click)="onLogoClick()">
+      <div class="col-span-2 flex items-center h-full">
+        <div class="flex items-center group cursor-pointer h-full py-2" (click)="onLogoClick()">
           <!-- Brand Logo - Enhanced Responsive -->
-          <div class="relative logo-container">
+          <div class="relative logo-container h-full w-full flex items-center justify-start">
             <img id="wayzonLogo" src="assets/images/logo.png" alt="Wayzon Educational Consultancy"
-                 class="brand-logo-enhanced wayzon-main-logo h-full w-full transition-all duration-300 hover:scale-105"
+                 class="brand-logo-enhanced wayzon-main-logo h-12 w-auto object-contain transition-all duration-300 hover:scale-105"
                  style="display: block !important;"
                  onload="console.log('✅ Logo loaded successfully')"
                  onerror="console.log('❌ Logo failed to load');">
           </div>
         </div>
       </div>
-      <!-- Enhanced Navigation Section - Desktop Only -->
-      <div class="col-span-8">
-        <nav class="flex items-center justify-center relative">
-          <!-- Enhanced Compact Navigation Pills - Responsive -->
-          <div [class.dropdown-open]="isAnyDropdownOpen()" class="flex items-center justify-center  px-2 py-1   navigation-container
-                      gap-1 relative w-full"
-               style="scrollbar-width: none; -ms-overflow-style: none; overflow: visible !important;">
-        <!-- 1. Home - Enhanced Responsive -->
-        <button (click)="navigateToRoute('/home')"
-                [disabled]="isNavigating"
-                class="nav-button px-1.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
-                       flex items-center gap-0.5 cursor-pointer border-none outline-none flex-shrink-0
-                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
-                [class.text-gray-600]="!isRouteActive('/home')"
-                [class.bg-transparent]="!isRouteActive('/home')"
-                [class.text-blue-700]="isRouteActive('/home')"
-                [class.bg-blue-100]="isRouteActive('/home')">
-          <span class="material-icons text-sm">home</span>
-          <span class="text-xs">Home</span>
-        </button>
-
-        <!-- 2. About - Enhanced Responsive -->
-        <button (click)="navigateToRoute('/about')"
-                class="nav-button px-1.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
-                       flex items-center gap-0.5 cursor-pointer border-none outline-none flex-shrink-0
-                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
-                [class.text-gray-600]="!isRouteActive('/about')"
-                [class.bg-transparent]="!isRouteActive('/about')"
-                [class.text-blue-700]="isRouteActive('/about')"
-                [class.bg-blue-100]="isRouteActive('/about')">
-          <span class="material-icons text-sm">people</span>
-          <span class="text-xs">About</span>
-        </button>
-
-        <!-- 3. Courses - Enhanced Responsive -->
-        <button (click)="navigateToRoute('/courses')"
-                class="nav-button px-1.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
-                       flex items-center gap-0.5 cursor-pointer border-none outline-none flex-shrink-0
-                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
-                [class.text-gray-600]="!isRouteActive('/courses')"
-                [class.bg-transparent]="!isRouteActive('/courses')"
-                [class.text-blue-700]="isRouteActive('/courses')"
-                [class.bg-blue-100]="isRouteActive('/courses')">
-          <span class="material-icons text-sm">school</span>
-          <span class="text-xs">Courses</span>
-        </button>
-
-        <!-- 4. Colleges - Enhanced Responsive -->
-        <button (click)="navigateToRoute('/colleges')"
-                class="nav-button px-1.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
-                       flex items-center gap-0.5 cursor-pointer border-none outline-none flex-shrink-0
-                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
-                [class.text-gray-600]="!isRouteActive('/colleges')"
-                [class.bg-transparent]="!isRouteActive('/colleges')"
-                [class.text-blue-700]="isRouteActive('/colleges')"
-                [class.bg-blue-100]="isRouteActive('/colleges')">
-          <span class="material-icons text-sm">account_balance</span>
-          <span class="text-xs">Colleges</span>
-        </button>
-
-        <!-- 5. Contact Us -->
-        <button (click)="navigateToRoute('/contact')"
-                class="nav-button px-1.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-300
-                       flex items-center gap-0.5 cursor-pointer border-none outline-none flex-shrink-0
-                       whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
-                [class.text-gray-600]="!isRouteActive('/contact')"
-                [class.bg-transparent]="!isRouteActive('/contact')"
-                [class.text-blue-700]="isRouteActive('/contact')"
-                [class.bg-blue-100]="isRouteActive('/contact')">
-          <span class="material-icons text-sm">contact_mail</span>
-          <span class="text-xs">Contact</span>
-        </button>
-
-        <!-- 6. Abroad (with dropdown) -->
-        <div class="relative" (clickOutside)="isAbroadDropdownOpen = false">
-          <button (click)="isAbroadDropdownOpen = !isAbroadDropdownOpen"
-                  class="nav-button px-1.5 py-1.5 text-xs font-medium text-gray-600
-                         rounded-lg transition-all duration-300 flex items-center gap-0.5
-                         cursor-pointer border-none bg-transparent outline-none flex-shrink-0
-                         whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
-                  [class.bg-blue-100]="isAbroadDropdownOpen"
-                  [class.text-blue-700]="isAbroadDropdownOpen">
-            <span class="material-icons text-sm">public</span>
-            <span class="text-xs">Abroad</span>
-            <span class="material-icons text-xs ml-0.5" [class.rotate-180]="isAbroadDropdownOpen">keyboard_arrow_down</span>
-          </button>
-
-          <div *ngIf="isAbroadDropdownOpen"
-               class="absolute top-full left-0 mt-3 w-72 bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 z-[9999] p-5 animate-slide-down">
-            <!-- Header with gradient background -->
-            <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 -m-5 mb-4 p-4 rounded-t-2xl">
-              <h3 class="text-white font-bold flex items-center gap-2">
-                <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                  <span class="material-icons text-white text-sm">public</span>
-                </div>
-                Study Abroad
-                <div class="ml-auto w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              </h3>
-              <p class="text-blue-100 text-xs mt-1">Explore global education opportunities</p>
-            </div>
-            
-            <div class="space-y-2">
-              <button *ngFor="let country of abroadCountries; let i = index"
-                      (click)="navigateToCountry(country.code); isAbroadDropdownOpen = false"
-                      class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:via-indigo-50 hover:to-purple-50 text-left transition-all duration-500 group border border-transparent hover:border-blue-200 hover:shadow-lg transform hover:-translate-y-1"
-                      [style.animation-delay]="i * 100 + 'ms'">
-                <div class="relative">
-                  <img [src]="country.flag" [alt]="country.name + ' flag'" class="w-8 h-6 rounded-md shadow-md group-hover:scale-110 transition-transform duration-300">
-                  <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <div class="flex-1">
-                  <span class="text-sm font-semibold text-gray-800 group-hover:text-blue-700 transition-colors duration-300">{{ country.name }}</span>
-                  <div class="text-xs text-gray-500 group-hover:text-blue-500">Study destination</div>
-                </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 bg-blue-100 group-hover:bg-blue-200 rounded-full flex items-center justify-center transition-all duration-300">
-                    <span class="material-icons text-blue-600 text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
-                  </div>
-                </div>
-              </button>
-            </div>
-            
-            <!-- Footer -->
-            <div class="mt-4 pt-3 border-t border-gray-200 text-center">
-              <p class="text-xs text-gray-500">✨education consulting since 2003</p>
-            </div>
+      <div class="col-span-8 flex flex-col justify-center h-full">
+        <div class="flex flex-col items-center w-full relative z-20">
+          <!-- Sub Tabs (FAQ, Blogs, Vlogs, Updates)Only -->
+          <div class="flex items-center gap-6 mb-1 py-1 px-6 rounded-full bg-gray-50 border border-gray-100 shadow-sm relative z-50 pointer-events-auto transform scale-90 origin-bottom">
+            <button *ngFor="let tab of headerTabs" 
+                    (click)="navigateToRoute(tab.route)"
+                    class="text-[10px] font-bold text-gray-500 hover:text-blue-600 hover:bg-white hover:shadow-sm px-2 py-0.5 rounded transition-all duration-300 uppercase tracking-wide flex items-center gap-1 leading-none cursor-pointer"
+                    [class.text-blue-600]="isRouteActive(tab.route)"
+                    [class.bg-white]="isRouteActive(tab.route)"
+                    [class.shadow-sm]="isRouteActive(tab.route)">
+               <span class="material-icons text-[12px]">{{tab.icon}}</span>
+               {{tab.title}}
+            </button>
           </div>
-        </div>
 
-        <!-- 7. More (with dropdown) -->
-        <div class="relative" (clickOutside)="isMoreDropdownOpen = false">
-          <button (click)="isMoreDropdownOpen = !isMoreDropdownOpen"
-                  class="nav-button px-1.5 py-1.5 text-xs font-medium text-gray-600
-                         rounded-lg transition-all duration-300 flex items-center gap-0.5
-                         cursor-pointer border-none bg-transparent outline-none flex-shrink-0
-                         whitespace-nowrap hover:bg-blue-50 hover:text-blue-700 min-w-max"
-                  [class.bg-blue-100]="isMoreDropdownOpen"
-                  [class.text-blue-700]="isMoreDropdownOpen">
-            <span class="material-icons text-sm">more_horiz</span>
-            <span class="text-xs">More</span>
-            <span class="material-icons text-xs ml-0.5" [class.rotate-180]="isMoreDropdownOpen">keyboard_arrow_down</span>
+          <nav class="flex items-center justify-center relative w-full h-full">
+            <!-- Enhanced Compact Navigation Pills - Responsive -->
+            <div [class.dropdown-open]="isAnyDropdownOpen()" class="flex items-center justify-center px-0 py-1 navigation-container
+                          gap-0.5 relative w-full"
+                 style="scrollbar-width: none; -ms-overflow-style: none; overflow: visible !important;">
+          <!-- 1. Home -->
+          <button (click)="navigateToRoute('/home')"
+                  [disabled]="isNavigating"
+                  class="nav-button px-1.5 py-1 text-[10px] font-bold rounded-lg transition-all duration-300
+                         flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
+                         whitespace-nowrap hover:bg-blue-50 hover:text-blue-600 min-w-max uppercase tracking-wide"
+                  [class.text-gray-500]="!isRouteActive('/home')"
+                  [class.bg-transparent]="!isRouteActive('/home')"
+                  [class.text-blue-600]="isRouteActive('/home')"
+                  [class.bg-blue-50]="isRouteActive('/home')">
+            <span class="material-icons text-[12px]">home</span>
+            <span>Home</span>
           </button>
-
-          <div *ngIf="isMoreDropdownOpen"
-               class="absolute top-full right-0 mt-3 w-72 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 z-[9999] overflow-hidden animate-slide-down">
-            <!-- Gradient Header -->
-            <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-4 relative">
-              <div class="absolute inset-0 bg-gradient-to-r from-indigo-600/90 via-purple-600/90 to-pink-600/90"></div>
-              <div class="relative z-10">
-                <h3 class="text-white font-bold flex items-center gap-2 mb-1">
+  
+          <!-- 2. About -->
+          <button (click)="navigateToRoute('/about')"
+                  class="nav-button px-1.5 py-1 text-[10px] font-bold rounded-lg transition-all duration-300
+                         flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
+                         whitespace-nowrap hover:bg-blue-50 hover:text-blue-600 min-w-max uppercase tracking-wide"
+                  [class.text-gray-500]="!isRouteActive('/about')"
+                  [class.bg-transparent]="!isRouteActive('/about')"
+                  [class.text-blue-600]="isRouteActive('/about')"
+                  [class.bg-blue-50]="isRouteActive('/about')">
+            <span class="material-icons text-[12px]">people</span>
+            <span>About</span>
+          </button>
+  
+          <!-- 3. Courses -->
+          <button (click)="navigateToRoute('/courses')"
+                  class="nav-button px-1.5 py-1 text-[10px] font-bold rounded-lg transition-all duration-300
+                         flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
+                         whitespace-nowrap hover:bg-blue-50 hover:text-blue-600 min-w-max uppercase tracking-wide"
+                  [class.text-gray-500]="!isRouteActive('/courses')"
+                  [class.bg-transparent]="!isRouteActive('/courses')"
+                  [class.text-blue-600]="isRouteActive('/courses')"
+                  [class.bg-blue-50]="isRouteActive('/courses')">
+            <span class="material-icons text-[12px]">school</span>
+            <span>Courses</span>
+          </button>
+  
+          <!-- 4. Colleges -->
+          <button (click)="navigateToRoute('/colleges')"
+                  class="nav-button px-1.5 py-1 text-[10px] font-bold rounded-lg transition-all duration-300
+                         flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
+                         whitespace-nowrap hover:bg-blue-50 hover:text-blue-600 min-w-max uppercase tracking-wide"
+                  [class.text-gray-500]="!isRouteActive('/colleges')"
+                  [class.bg-transparent]="!isRouteActive('/colleges')"
+                  [class.text-blue-600]="isRouteActive('/colleges')"
+                  [class.bg-blue-50]="isRouteActive('/colleges')">
+            <span class="material-icons text-[12px]">account_balance</span>
+            <span>Colleges</span>
+          </button>
+  
+          <!-- 5. Contact Us -->
+          <button (click)="navigateToRoute('/contact')"
+                  class="nav-button px-1.5 py-1 text-[10px] font-bold rounded-lg transition-all duration-300
+                         flex items-center gap-1 cursor-pointer border-none outline-none flex-shrink-0
+                         whitespace-nowrap hover:bg-blue-50 hover:text-blue-600 min-w-max uppercase tracking-wide"
+                  [class.text-gray-500]="!isRouteActive('/contact')"
+                  [class.bg-transparent]="!isRouteActive('/contact')"
+                  [class.text-blue-600]="isRouteActive('/contact')"
+                  [class.bg-blue-50]="isRouteActive('/contact')">
+            <span class="material-icons text-[12px]">contact_mail</span>
+            <span>Contact</span>
+          </button>
+  
+          <!-- 6. Abroad (with dropdown) -->
+          <div class="relative flex-shrink-0" (clickOutside)="isAbroadDropdownOpen = false">
+            <button (click)="isAbroadDropdownOpen = !isAbroadDropdownOpen"
+                    class="nav-button px-1.5 py-1 text-[10px] font-bold text-gray-500
+                           rounded-lg transition-all duration-300 flex items-center gap-1
+                           cursor-pointer border-none bg-transparent outline-none flex-shrink-0
+                           whitespace-nowrap hover:bg-blue-50 hover:text-blue-600 min-w-max uppercase tracking-wide"
+                    [class.bg-blue-50]="isAbroadDropdownOpen"
+                    [class.text-blue-600]="isAbroadDropdownOpen">
+              <span class="material-icons text-[12px]">public</span>
+              <span>Abroad</span>
+              <span class="material-icons text-[10px] ml-0.5" [class.rotate-180]="isAbroadDropdownOpen">keyboard_arrow_down</span>
+            </button>
+  
+            <div *ngIf="isAbroadDropdownOpen"
+                 class="absolute top-full left-0 mt-3 w-72 bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 z-[9999] p-5 animate-slide-down">
+              <!-- Header with gradient background -->
+              <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 -m-5 mb-4 p-4 rounded-t-2xl">
+                <h3 class="text-white font-bold flex items-center gap-2">
                   <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                    <span class="material-icons text-white text-sm">auto_awesome</span>
+                    <span class="material-icons text-white text-sm">public</span>
                   </div>
-                  More Options
-                  <div class="ml-auto w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  Study Abroad
+                  <div class="ml-auto w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 </h3>
-                <p class="text-indigo-100 text-xs">Discover additional resources & services</p>
+                <p class="text-blue-100 text-xs mt-1">Explore global education opportunities</p>
               </div>
-            </div>
-            
-            <!-- Options Grid -->
-            <div class="p-4 space-y-3">
-              <button *ngFor="let option of moreOptions; let i = index"
-                      (click)="navigateToMoreOption(option.route); isMoreDropdownOpen = false"
-                      class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-gradient-to-r transition-all duration-500 group text-left border border-transparent hover:border-opacity-30 hover:shadow-lg transform hover:-translate-y-1 hover:scale-[1.02]"
-                      [ngClass]="option.hoverClass"
-                      [style.animation-delay]="i * 100 + 'ms'">
-                <div class="relative">
-                  <div class="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:rotate-3" [ngClass]="option.iconBg">
-                    <span class="material-icons text-white text-lg group-hover:scale-110 transition-transform duration-300">{{ option.icon }}</span>
+              
+              <div class="space-y-2">
+                <button *ngFor="let country of abroadCountries; let i = index"
+                        (click)="navigateToCountry(country.code); isAbroadDropdownOpen = false"
+                        class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:via-indigo-50 hover:to-purple-50 text-left transition-all duration-500 group border border-transparent hover:border-blue-200 hover:shadow-lg transform hover:-translate-y-1"
+                        [style.animation-delay]="i * 100 + 'ms'">
+                  <div class="relative">
+                    <img [src]="country.flag" [alt]="country.name + ' flag'" class="w-8 h-6 rounded-md shadow-md group-hover:scale-110 transition-transform duration-300">
+                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <div class="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span class="text-white text-xs font-bold">✨</span>
+                  <div class="flex-1">
+                    <span class="text-sm font-semibold text-gray-800 group-hover:text-blue-700 transition-colors duration-300">{{ country.name }}</span>
+                    <div class="text-xs text-gray-500 group-hover:text-blue-500">Study destination</div>
                   </div>
-                </div>
-                <div class="flex-1">
-                  <div class="text-sm d-bold text-gray-800 group-hover:text-gray-900 transition-colors duration-300 mb-1">{{ option.title }}</div>
-                  <div class="text-xs text-gray-500 group-hover:text-gray-600 leading-relaxed">{{ option.description }}</div>
-                </div>
-                <!-- <div class="flex items-center">
-                  <div class="w-8 h-8 bg-gray-100 group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300 group-hover:shadow-md">
-                    <span class="material-icons text-gray-400 group-hover:text-gray-600 text-sm group-hover:translate-x-0.5 transition-all duration-300">arrow_forward</span>
+                  <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 bg-blue-100 group-hover:bg-blue-200 rounded-full flex items-center justify-center transition-all duration-300">
+                      <span class="material-icons text-blue-600 text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
+                    </div>
                   </div>
-                </div> -->
-              </button>
-            </div>
-            
-            <!-- Footer CTA -->
-            <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-4 border-t border-gray-100">
-              <div class="text-center">
-                <p class="text-xs text-gray-600 mb-2">✨ Need personalized guidance?</p>
-                <button class="text-xs bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-medium">
-                  📞 Contact Expert
                 </button>
               </div>
+              
+              <!-- Footer -->
+              <div class="mt-4 pt-3 border-t border-gray-200 text-center">
+                <p class="text-xs text-gray-500">✨education consulting since 2003</p>
+              </div>
             </div>
           </div>
+  
+          <!-- 7. More (Remaining items like Franchise) -->
+          <div class="relative flex-shrink-0 z-50 overflow-visible" (clickOutside)="isMoreDropdownOpen = false">
+            <button (click)="isMoreDropdownOpen = !isMoreDropdownOpen"
+                    class="nav-button px-1.5 py-1 text-[10px] font-bold text-gray-500
+                           rounded-lg transition-all duration-300 flex items-center gap-1
+                           cursor-pointer border-none bg-transparent outline-none flex-shrink-0
+                           whitespace-nowrap hover:bg-blue-50 hover:text-blue-600 min-w-max uppercase tracking-wide"
+                    [class.bg-blue-50]="isMoreDropdownOpen"
+                    [class.text-blue-600]="isMoreDropdownOpen">
+              <span class="material-icons text-[12px]">more_horiz</span>
+              <span>More</span>
+              <span class="material-icons text-[10px] ml-0.5" [class.rotate-180]="isMoreDropdownOpen">keyboard_arrow_down</span>
+            </button>
+  
+            <div *ngIf="isMoreDropdownOpen"
+                 class="absolute top-full right-0 mt-3 w-72 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 z-[9999] overflow-hidden animate-slide-down">
+              <!-- Gradient Header -->
+              <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-4 relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-indigo-600/90 via-purple-600/90 to-pink-600/90"></div>
+                <div class="relative z-10">
+                  <h3 class="text-white font-bold flex items-center gap-2 mb-1">
+                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                      <span class="material-icons text-white text-sm">auto_awesome</span>
+                    </div>
+                    More Options
+                    <div class="ml-auto w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  </h3>
+                  <p class="text-indigo-100 text-xs">Discover additional resources & services</p>
+                </div>
+              </div>
+              
+              <!-- Options Grid -->
+              <div class="p-4 space-y-3">
+                <button *ngFor="let option of moreOptions; let i = index"
+                        (click)="navigateToMoreOption(option.route); isMoreDropdownOpen = false"
+                        class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-gradient-to-r transition-all duration-500 group text-left border border-transparent hover:border-opacity-30 hover:shadow-lg transform hover:-translate-y-1 hover:scale-[1.02]"
+                        [ngClass]="option.hoverClass"
+                        [style.animation-delay]="i * 100 + 'ms'">
+                  <div class="relative">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:rotate-3" [ngClass]="option.iconBg">
+                      <span class="material-icons text-white text-lg group-hover:scale-110 transition-transform duration-300">{{ option.icon }}</span>
+                    </div>
+                    <div class="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span class="text-white text-xs font-bold">✨</span>
+                    </div>
+                  </div>
+                  <div class="flex-1">
+                    <div class="text-sm d-bold text-gray-800 group-hover:text-gray-900 transition-colors duration-300 mb-1">{{ option.title }}</div>
+                    <div class="text-xs text-gray-500 group-hover:text-gray-600 leading-relaxed">{{ option.description }}</div>
+                  </div>
+                </button>
+              </div>
+              
+              <!-- Footer CTA -->
+              <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-4 border-t border-gray-100">
+                <div class="text-center">
+                  <p class="text-xs text-gray-600 mb-2">✨ Need personalized guidance?</p>
+                  <button class="text-xs bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-medium">
+                    📞 Contact Expert
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          </nav>
         </div>
-        </div>
-        </nav>
       </div>
 
       <!-- Actions Section - Desktop Only -->
-      <div class="col-span-3">
+      <div class="col-span-2">
         <div class="flex items-center justify-end gap-1 xl:gap-2">
         <!-- Call Now Button -->
         <a href="tel:+919980487777"
            class="call-now-btn flex items-center gap-1 bg-green-600 text-white
                   rounded-full font-semibold hover:bg-green-700 transition-all duration-500
                   hover:shadow-lg hover:shadow-green-500/25 transform hover:-translate-y-0.5 hover:scale-105
-                  px-2.5 py-1.5 text-xs flex-shrink-0 cursor-pointer relative z-20"
+                  px-2 py-1.5 xl:px-3 text-xs flex-shrink-0 cursor-pointer relative z-20"
            style="cursor: pointer; z-index: 20;">
           <span class="material-icons text-sm">phone</span>
-          <span class="transition-all duration-300">Call Now</span>
+          <span class="hidden xl:inline transition-all duration-300">Call Now</span>
         </a>
 
         <!-- Apply Now Button -->
@@ -423,10 +433,10 @@
                 class="apply-now-btn flex items-center gap-1 bg-blue-600 text-white cursor-pointer
                        rounded-full font-semibold hover:bg-blue-700 transition-all duration-500
                        hover:shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-0.5 hover:scale-105
-                       px-2.5 py-1.5 text-xs flex-shrink-0 relative z-20"
+                       px-2 py-1.5 xl:px-3 text-xs flex-shrink-0 relative z-20"
                 style="cursor: pointer; z-index: 20;">
           <span class="material-icons text-sm">send</span>
-          <span class="transition-all duration-300">Apply Now</span>
+          <span class="hidden xl:inline transition-all duration-300">Apply Now</span>
         </button>
 
         <!-- Enhanced Message Center - Desktop -->

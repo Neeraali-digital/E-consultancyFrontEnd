@@ -1,0 +1,100 @@
+<div class="min-h-screen bg-gray-50 pt-20 pb-12">
+    <!-- Header Section -->
+    <div class="relative bg-gradient-to-r from-purple-900 to-indigo-900 h-[40vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <!-- Animated Background Elements -->
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-10 left-10 w-32 h-32 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+        <div class="absolute top-10 right-10 w-32 h-32 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-1/2 w-32 h-32 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+      </div>
+      
+      <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+          Experience Campus Life <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-500">Through Our Vlogs</span>
+        </h1>
+        <p class="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+          Take a virtual tour of top universities, listen to student success stories, and get a glimpse of your future campus.
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+            <button class="bg-white text-purple-900 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2">
+              <span class="material-icons">play_circle</span>
+              Watch Latest
+            </button>
+            <button class="bg-white/10 text-white px-8 py-3 rounded-full font-bold hover:bg-white/20 transition-all duration-300 backdrop-blur-md border border-white/30 flex items-center gap-2">
+              <span class="material-icons">subscriptions</span>
+              Subscribe
+            </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Categories Scroll -->
+    <div class="max-w-7xl mx-auto px-4 -mt-8 relative z-20 mb-12">
+        <div class="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-4 flex gap-4 overflow-x-auto scrollbar-hide border border-gray-100">
+            <button *ngFor="let cat of categories" 
+                    class="px-6 py-2 rounded-xl whitespace-nowrap text-sm font-semibold transition-all duration-300"
+                    [ngClass]="activeCategory === cat ? 'bg-purple-600 text-white shadow-lg shadow-purple-200' : 'bg-gray-50 text-gray-600 hover:bg-gray-100'">
+                {{cat}}
+            </button>
+        </div>
+    </div>
+  
+    <!-- Video Grid -->
+    <div class="max-w-7xl mx-auto px-4 mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- VLOG CARD -->
+        <div *ngFor="let vlog of vlogs" class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 border border-gray-100">
+          <!-- Thumbnail -->
+          <div class="relative h-56 overflow-hidden">
+            <img [src]="vlog.thumbnail" [alt]="vlog.title" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
+            
+            <!-- Play Button Overlay -->
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-50 group-hover:scale-100">
+                <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 shadow-xl cursor-pointer hover:bg-white/30 transition-colors">
+                    <span class="material-icons text-white text-4xl ml-1">play_arrow</span>
+                </div>
+            </div>
+  
+            <!-- Duration Badge -->
+            <div class="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md font-medium">
+                {{vlog.duration}}
+            </div>
+             <!-- Category Badge -->
+             <div class="absolute top-4 left-4 bg-purple-600/90 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md font-bold uppercase tracking-wider shadow-sm">
+                {{vlog.category}}
+            </div>
+          </div>
+          
+          <!-- Content -->
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-2 line-clamp-2 leading-tight group-hover:text-purple-600 transition-colors">{{vlog.title}}</h3>
+            <p class="text-gray-500 text-sm line-clamp-2 mb-4">{{vlog.description}}</p>
+            
+            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                <div class="flex items-center gap-3">
+                    <img [src]="vlog.authorImage" class="w-8 h-8 rounded-full border border-gray-200">
+                    <div class="text-xs">
+                        <div class="font-bold text-gray-800">{{vlog.author}}</div>
+                        <div class="text-gray-400">{{vlog.date}}</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-1 text-gray-400 text-xs font-medium">
+                    <span class="material-icons text-sm">visibility</span>
+                    {{vlog.views}}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Load More -->
+    <div class="text-center pb-12">
+        <button class="px-8 py-3 bg-white border border-gray-200 rounded-full text-purple-600 font-bold hover:bg-gray-50 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            Load More Videos
+        </button>
+    </div>
+  </div>

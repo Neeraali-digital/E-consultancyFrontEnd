@@ -23,8 +23,8 @@ export class QuickInquiryComponent {
   ) {
     this.inquiryForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      course_of_interest: ['', Validators.required],
       inquiry_type: ['quick']
     });
   }

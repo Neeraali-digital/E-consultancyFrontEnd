@@ -27,6 +27,7 @@ export const routes: Routes = [
   { path: 'faq', component: FaqComponent, canActivate: [UserRouteGuard] },
   { path: 'updates', component: UpdatesComponent, canActivate: [UserRouteGuard] },
   { path: 'blogs', component: BlogsComponent, canActivate: [UserRouteGuard] },
+  { path: 'vlogs', loadComponent: () => import('./features/vlogs/vlogs.component').then(m => m.VlogsComponent), canActivate: [UserRouteGuard] },
   { path: 'franchise', component: FranchiseComponent, canActivate: [UserRouteGuard] },
   // Admin routes with lazy loading
   {

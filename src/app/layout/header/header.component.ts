@@ -138,31 +138,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   ];
 
+  // Social Media Links
+  socialMedia = [
+    { name: 'Instagram', url: 'https://www.instagram.com/wayzon_education_pvt.ltd?igsh=ZGg2Z3JwbWZheGVk', isSvg: true, color: '#E4405F' },
+    { name: 'Facebook', url: 'https://www.facebook.com/share/1BpRrZ6Fe8/?mibextid=wwXIfr', icon: 'facebook', color: '#1877F2' }
+  ];
+
   moreOptions = [
-    {
-      title: 'FAQ',
-      description: 'Frequently Asked Questions',
-      icon: 'help_outline',
-      iconBg: 'bg-blue-600',
-      route: '/faq',
-      hoverClass: 'hover:from-blue-50 hover:to-blue-100'
-    },
-    {
-      title: 'LATEST UPDATES',
-      description: 'Stay updated with recent news',
-      icon: 'notifications_active',
-      iconBg: 'bg-green-600',
-      route: '/updates',
-      hoverClass: 'hover:from-green-50 hover:to-green-100'
-    },
-    {
-      title: 'BLOGS',
-      description: 'Educational insights & articles',
-      icon: 'article',
-      iconBg: 'bg-purple-600',
-      route: '/blogs',
-      hoverClass: 'hover:from-purple-50 hover:to-purple-100'
-    },
     {
       title: 'FRANCHISE',
       description: 'Business partnership opportunities',
@@ -171,6 +153,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
       route: '/franchise',
       hoverClass: 'hover:from-orange-50 hover:to-orange-100'
     }
+  ];
+
+  headerTabs = [
+    { title: 'FAQ', route: '/faq', icon: 'help_outline' },
+    { title: 'Blogs', route: '/blogs', icon: 'article' },
+    { title: 'Vlogs', route: '/vlogs', icon: 'video_library' },
+    { title: 'Updates', route: '/updates', icon: 'notifications_active' }
   ];
 
   constructor(

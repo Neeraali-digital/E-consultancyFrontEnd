@@ -28,20 +28,20 @@
         </div>
       </div>
 
-      <!-- Email -->
+      <!-- Preferred Course -->
       <div class="group">
-        <label for="email" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Email Address</label>
+        <label for="course" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Preferred Course</label>
         <div class="relative">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span class="material-icons text-gray-400 group-focus-within:text-blue-500 transition-colors text-lg">email</span>
+            <span class="material-icons text-gray-400 group-focus-within:text-blue-500 transition-colors text-lg">school</span>
           </div>
-          <input type="email" id="email" formControlName="email"
+          <input type="text" id="course" formControlName="course_of_interest"
                  class="block w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all shadow-sm"
-                 placeholder="your email"
-                 [class.border-red-500]="inquiryForm.get('email')?.invalid && inquiryForm.get('email')?.touched">
+                 placeholder="e.g. MBBS, B.Tech"
+                 [class.border-red-500]="inquiryForm.get('course_of_interest')?.invalid && inquiryForm.get('course_of_interest')?.touched">
         </div>
-        <div *ngIf="inquiryForm.get('email')?.invalid && inquiryForm.get('email')?.touched" class="text-xs text-red-500 mt-1 font-medium flex items-center gap-1">
-          <span class="material-icons text-xs">error</span> Valid email is required
+        <div *ngIf="inquiryForm.get('course_of_interest')?.invalid && inquiryForm.get('course_of_interest')?.touched" class="text-xs text-red-500 mt-1 font-medium flex items-center gap-1">
+          <span class="material-icons text-xs">error</span> Preferred Course is required
         </div>
       </div>
 
