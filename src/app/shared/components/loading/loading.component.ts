@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
           
           <!-- Inner logo -->
           <div class="absolute inset-2 bg-white rounded-full shadow-md flex items-center justify-center overflow-hidden p-3">
-             <img src="assets/images/logo.png" alt="Loading..." class="w-full h-full object-contain animate-pulse">
+             <img src="assets/images/logo1.png" alt="Loading..." class="w-full h-full object-contain animate-pulse">
           </div>
         </div>
         

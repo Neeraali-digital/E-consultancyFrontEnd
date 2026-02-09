@@ -21,7 +21,7 @@ export class VlogsComponent {
       category: "Student Life",
       views: "15K",
       author: "Wayzon Team",
-      authorImage: "assets/images/logo.png",
+      authorImage: "assets/images/logo1.png",
       date: "2 days ago"
     },
     {
@@ -32,7 +32,7 @@ export class VlogsComponent {
       category: "Campus Tours",
       views: "22K",
       author: "Rahul Sharma",
-      authorImage: "assets/images/logo.png",
+      authorImage: "assets/images/logo1.png",
       date: "1 week ago"
     },
     {
@@ -43,7 +43,7 @@ export class VlogsComponent {
       category: "Success Stories",
       views: "10K",
       author: "Wayzon Team",
-      authorImage: "assets/images/logo.png",
+      authorImage: "assets/images/logo1.png",
       date: "2 weeks ago"
     },
     {
@@ -54,7 +54,7 @@ export class VlogsComponent {
       category: "Campus Tours",
       views: "35K",
       author: "Wayzon Team",
-      authorImage: "assets/images/logo.png",
+      authorImage: "assets/images/logo1.png",
       date: "3 weeks ago"
     },
     {
@@ -65,7 +65,7 @@ export class VlogsComponent {
       category: "Events",
       views: "50K",
       author: "Wayzon Team",
-      authorImage: "assets/images/logo.png",
+      authorImage: "assets/images/logo1.png",
       date: "1 month ago"
     },
     {
@@ -76,7 +76,7 @@ export class VlogsComponent {
       category: "Student Life",
       views: "8.5K",
       author: "Dr. Anjali",
-      authorImage: "assets/images/logo.png",
+      authorImage: "assets/images/logo1.png",
       date: "1 month ago"
     }
   ];
