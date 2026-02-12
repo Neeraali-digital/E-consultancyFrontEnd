@@ -4,6 +4,8 @@ import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 // Temporarily disabled services
 
 import { environment } from '../../../../../../environments/environment';
@@ -36,9 +38,15 @@ export interface College {
     <div class="mb-6">
       <div class="flex justify-between items-center">
         <h1 class="text-3xl font-bold text-gray-900">Colleges</h1>
-        <button (click)="addCollege()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-          Add College
-        </button>
+        <div class="flex gap-2">
+          <button (click)="exportPDF()" [disabled]="isExporting" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50 flex items-center gap-2">
+            <span class="material-icons text-sm">download</span>
+            {{ isExporting ? 'Exporting...' : 'Export PDF' }}
+          </button>
+          <button (click)="addCollege()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+            Add College
+          </button>
+        </div>
       </div>
     </div>
 
@@ -214,6 +222,7 @@ export class CollegeListComponent implements OnInit, OnDestroy {
   selectedLocation = '';
   currentPage = 1;
   itemsPerPage = 9;
+  isExporting = false;
   // showLoginModal = false;
 
   private subscription = new Subscription();
@@ -346,8 +355,62 @@ export class CollegeListComponent implements OnInit, OnDestroy {
     }
   }
 
-  // onLoginSuccess(): void {
-  //   this.showLoginModal = false;
-  //   this.loadColleges();
-  // }
+  async exportPDF() {
+    try {
+      this.isExporting = true;
+      const doc = new jsPDF();
+
+      // Title
+      doc.setFontSize(18);
+      doc.text('Colleges Backup Report', 14, 20);
+      doc.setFontSize(10);
+      doc.text(`Generated on: ${new Date().toLocaleString()}`, 14, 28);
+
+      const rows = this.colleges.map((college) => {
+        let coursesStr = '';
+        if (Array.isArray(college.courses)) {
+          coursesStr = college.courses.map((c: any) => c.name || c).join(', ');
+        }
+
+        return [
+          college.name,
+          college.location,
+          college.established,
+          college.type,
+          college.rating || 'N/A',
+          coursesStr
+        ];
+      });
+
+      const tableConfig: any = {
+        startY: 35,
+        head: [['Name', 'Location', 'Est.', 'Type', 'Rating', 'Courses']],
+        body: rows,
+        styles: { minCellHeight: 10, valign: 'middle' },
+        columnStyles: {
+          0: { cellWidth: 40 },
+          5: { cellWidth: 60 }
+        }
+      };
+
+      // Explicitly checking for autoTable
+      if (typeof autoTable !== 'function') {
+        console.warn('autoTable is not a function, treating as module default?');
+        if ((autoTable as any).default) {
+          (autoTable as any).default(doc, tableConfig);
+        } else {
+          throw new Error('jspdf-autotable library not correctly loaded.');
+        }
+      } else {
+        autoTable(doc, tableConfig);
+      }
+
+      doc.save('colleges_backup.pdf');
+    } catch (error: any) {
+      console.error('Error exporting PDF:', error);
+      alert(`An error occurred while exporting the PDF: ${error.message || error}`);
+    } finally {
+      this.isExporting = false;
+    }
+  }
 }
