@@ -42,7 +42,7 @@
             
             <ng-container *ngIf="social.isSvg; else materialIcon">
               <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24">
-                 <path d="M7.818 2H16.182C19.458 2 22 4.542 22 7.818V16.182C22 19.458 19.458 22 16.182 22H7.818C4.542 22 2 19.458 2 16.182V7.818C2 4.542 4.542 2 7.818 2ZM12 7.5C9.514 7.5 7.5 9.514 7.5 12C7.5 14.486 9.514 16.5 12 16.5C14.486 16.5 16.5 14.486 16.5 12C16.5 9.514 14.486 7.5 12 7.5ZM19 7C18.448 7 18 6.552 18 6C18 5.448 18.448 5 19 5C19.552 5 20 5.448 20 6C20 6.552 19.552 7 19 7ZM12 9C13.654 9 15 10.346 15 12C15 13.654 13.654 15 12 15C10.346 15 9 13.654 9 12C9 10.346 10.346 9 12 9Z" />
+                 <path [attr.d]="social.svgPath" />
               </svg>
             </ng-container>
             <ng-template #materialIcon>
@@ -174,7 +174,7 @@
                          text-white text-xs sm:text-sm font-medium hover:bg-white/30 transition-all duration-300
                          flex items-center gap-1.5 sm:gap-2 min-w-max">
             <span class="material-icons text-base sm:text-lg">flight_takeoff</span>
-            <span class="whitespace-nowrap">Abroad</span>
+            <span class="whitespace-nowrap">MBBS Abroad</span>
           </button>
           <button (click)="navigateToRoute('/contact')"
                   class="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3
@@ -299,41 +299,34 @@
                     [class.bg-blue-50]="isAbroadDropdownOpen"
                     [class.text-blue-600]="isAbroadDropdownOpen">
               <span class="material-icons text-[12px]">public</span>
-              <span>Abroad</span>
+              <span>MBBS Abroad</span>
               <span class="material-icons text-[10px] ml-0.5" [class.rotate-180]="isAbroadDropdownOpen">keyboard_arrow_down</span>
             </button>
   
             <div *ngIf="isAbroadDropdownOpen"
-                 class="absolute top-full left-0 mt-3 w-72 bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 z-[9999] p-5 animate-slide-down">
+                 class="absolute top-full left-0 mt-3 w-[450px] bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 z-[9999] p-5 animate-slide-down">
               <!-- Header with gradient background -->
               <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 -m-5 mb-4 p-4 rounded-t-2xl">
                 <h3 class="text-white font-bold flex items-center gap-2">
                   <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
                     <span class="material-icons text-white text-sm">public</span>
                   </div>
-                  Study Abroad
+                  MBBS Abroad
                   <div class="ml-auto w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 </h3>
                 <p class="text-blue-100 text-xs mt-1">Explore global education opportunities</p>
               </div>
               
-              <div class="space-y-2">
+              <div class="grid grid-cols-2 gap-2">
                 <button *ngFor="let country of abroadCountries; let i = index"
                         (click)="navigateToCountry(country.code); isAbroadDropdownOpen = false"
-                        class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:via-indigo-50 hover:to-purple-50 text-left transition-all duration-500 group border border-transparent hover:border-blue-200 hover:shadow-lg transform hover:-translate-y-1"
+                        class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:via-indigo-50 hover:to-purple-50 text-left transition-all duration-500 group border border-transparent hover:border-blue-200 hover:shadow-md transform hover:-translate-y-1"
                         [style.animation-delay]="i * 100 + 'ms'">
-                  <div class="relative">
-                    <img [src]="country.flag" [alt]="country.name + ' flag'" class="w-8 h-6 rounded-md shadow-md group-hover:scale-110 transition-transform duration-300">
-                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div class="relative flex-shrink-0">
+                    <img [src]="country.flag" [alt]="country.name + ' flag'" class="w-8 h-6 rounded-md shadow-sm group-hover:scale-110 transition-transform duration-300">
                   </div>
-                  <div class="flex-1">
-                    <span class="text-sm font-semibold text-gray-800 group-hover:text-blue-700 transition-colors duration-300">{{ country.name }}</span>
-                    <div class="text-xs text-gray-500 group-hover:text-blue-500">Study destination</div>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 bg-blue-100 group-hover:bg-blue-200 rounded-full flex items-center justify-center transition-all duration-300">
-                      <span class="material-icons text-blue-600 text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span>
-                    </div>
+                  <div class="flex-1 min-w-0">
+                    <span class="text-sm font-semibold text-gray-800 group-hover:text-blue-700 transition-colors duration-300 truncate block">{{ country.name }}</span>
                   </div>
                 </button>
               </div>
@@ -529,7 +522,7 @@
                                transform hover:scale-105 text-left group">
                   <div class="flex items-center gap-2">
                     <span class="material-icons text-blue-600 text-sm">public</span>
-                    <span class="text-xs font-medium text-gray-700 group-hover:text-gray-900">Study Abroad</span>
+                    <span class="text-xs font-medium text-gray-700 group-hover:text-gray-900">MBBS Abroad</span>
                   </div>
                 </button>
               </div>
@@ -648,7 +641,7 @@
                 <span class="material-icons text-white text-2xl">flight_takeoff</span>
               </div>
               <div class="text-left">
-                <h3 class="font-bold text-lg">Study Abroad</h3>
+                <h3 class="font-bold text-lg">MBBS Abroad</h3>
                 <p class="text-green-100 text-sm">Explore global opportunities</p>
               </div>
             </div>

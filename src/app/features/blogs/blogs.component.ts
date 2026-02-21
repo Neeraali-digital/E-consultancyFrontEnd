@@ -11,11 +11,11 @@ import { CommonModule } from '@angular/common';
 export class BlogsComponent {
 
   selectedCategory = 'all';
-  
+
   categories = [
     { id: 'all', name: 'All Posts', icon: 'dynamic_feed' },
     { id: 'career-guidance', name: 'Career Guidance', icon: 'trending_up' },
-    { id: 'study-abroad', name: 'Study Abroad', icon: 'public' },
+    { id: 'study-abroad', name: 'MBBS Abroad', icon: 'public' },
     { id: 'exam-tips', name: 'Exam Tips', icon: 'quiz' },
     { id: 'college-life', name: 'College Life', icon: 'school' }
   ];
@@ -38,7 +38,7 @@ export class BlogsComponent {
     {
       id: 2,
       title: 'Why Georgia is the Perfect Destination for Medical Studies',
-      excerpt: 'Discover why thousands of Indian students choose Georgia for their medical education and what makes it an ideal study destination.',
+      excerpt: 'Discover why thousands of Indian students choose Georgia for their medical education and what makes it an ideal MBBS destination.',
       content: 'Georgia has emerged as one of the most popular destinations for Indian students pursuing medical education abroad...',
       category: 'study-abroad',
       author: 'Rajesh Kumar',
@@ -46,7 +46,7 @@ export class BlogsComponent {
       date: '2025-01-12',
       readTime: '6 min read',
       image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=600',
-      tags: ['Georgia', 'MBBS', 'Study Abroad', 'Medical'],
+      tags: ['Georgia', 'MBBS', 'MBBS Abroad', 'Medical'],
       featured: false
     },
     {
@@ -94,7 +94,7 @@ export class BlogsComponent {
     {
       id: 6,
       title: 'Scholarship Opportunities for International Students',
-      excerpt: 'Comprehensive guide to scholarships available for Indian students planning to study abroad.',
+      excerpt: 'Comprehensive guide to scholarships available for Indian students planning to study MBBS abroad.',
       content: 'Studying abroad can be expensive, but numerous scholarship opportunities can help reduce the financial burden...',
       category: 'study-abroad',
       author: 'Meera Patel',
@@ -102,7 +102,7 @@ export class BlogsComponent {
       date: '2025-01-03',
       readTime: '10 min read',
       image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600',
-      tags: ['Scholarships', 'Study Abroad', 'Financial Aid', 'International'],
+      tags: ['Scholarships', 'MBBS Abroad', 'Financial Aid', 'International'],
       featured: true
     }
   ];
@@ -126,10 +126,10 @@ export class BlogsComponent {
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   }
 

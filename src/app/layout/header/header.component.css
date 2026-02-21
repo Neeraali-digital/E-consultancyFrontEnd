@@ -121,6 +121,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -136,6 +137,7 @@
     transform: translateY(-10px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -151,9 +153,11 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(0.95);
   }
+
   100% {
     transform: scale(1);
   }
@@ -165,10 +169,13 @@
 
 /* Notification pulse animation */
 @keyframes notification-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(1.1);
     opacity: 0.8;
@@ -181,9 +188,12 @@
 
 /* Status bar signal animation */
 @keyframes signal-bars {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.6;
   }
@@ -195,9 +205,12 @@
 
 /* Floating background elements */
 @keyframes float-bg {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(-10px) rotate(5deg);
   }
@@ -267,7 +280,7 @@ header {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s;
 }
 
@@ -297,7 +310,7 @@ header {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s;
 }
 
@@ -310,10 +323,11 @@ header {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  min-width: 0; /* Allow shrinking */
+  min-width: 0;
+  /* Allow shrinking */
 }
 
-.col-span-3.lg\\:col-span-2 > div {
+.col-span-3.lg\\:col-span-2>div {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
@@ -392,6 +406,7 @@ header {
     opacity: 0;
     transform: translateY(-5px);
   }
+
   100% {
     opacity: 1 !important;
     transform: translateY(0);
@@ -425,7 +440,7 @@ header {
 }
 
 /* CRITICAL FIX: Ensure all parent containers allow overflow */
-header > div {
+header>div {
   overflow: visible !important;
 }
 
@@ -505,8 +520,13 @@ header .col-span-7 {
 }
 
 @keyframes rotate-shine {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* 🎯 Modern Navigation Pills */
@@ -533,9 +553,19 @@ header .col-span-7 {
 
 /* 🌟 Floating Elements */
 @keyframes float-gentle {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-8px) rotate(1deg); }
-  66% { transform: translateY(-4px) rotate(-1deg); }
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+
+  66% {
+    transform: translateY(-4px) rotate(-1deg);
+  }
 }
 
 .float-element {
@@ -553,9 +583,17 @@ header .col-span-7 {
 }
 
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* 🎨 Button Magic */
@@ -585,9 +623,17 @@ header .col-span-7 {
 }
 
 @keyframes gradient-flow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* 📱 Mobile Menu Slide */
@@ -608,11 +654,25 @@ header .col-span-7 {
 }
 
 @keyframes color-wave {
-  0% { background-position: 0% 50%; }
-  25% { background-position: 100% 50%; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0% 100%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  25% {
+    background-position: 100% 50%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  75% {
+    background-position: 0% 100%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* ⚡ Lightning Fast Transitions */
@@ -627,10 +687,23 @@ header .col-span-7 {
 
 /* 🎪 Bounce Effect */
 @keyframes bounce-in {
-  0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
-  50% { transform: scale(1.05) rotate(5deg); }
-  70% { transform: scale(0.9) rotate(-2deg); }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  0% {
+    transform: scale(0.3) rotate(-10deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.05) rotate(5deg);
+  }
+
+  70% {
+    transform: scale(0.9) rotate(-2deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
 .bounce-in {
@@ -639,10 +712,23 @@ header .col-span-7 {
 
 /* 🌊 Wave Effect */
 @keyframes wave {
-  0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
-  25% { transform: translateX(5px) translateY(-5px) rotate(1deg); }
-  50% { transform: translateX(-5px) translateY(-10px) rotate(-1deg); }
-  75% { transform: translateX(-5px) translateY(-5px) rotate(1deg); }
+
+  0%,
+  100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateX(5px) translateY(-5px) rotate(1deg);
+  }
+
+  50% {
+    transform: translateX(-5px) translateY(-10px) rotate(-1deg);
+  }
+
+  75% {
+    transform: translateX(-5px) translateY(-5px) rotate(1deg);
+  }
 }
 
 .wave-effect {
@@ -715,8 +801,17 @@ header .col-span-7 {
 }
 
 @keyframes sparkle {
-  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
-  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
 }
 
 /* 🔔 Advanced Notification Styles */
@@ -729,6 +824,7 @@ header .col-span-7 {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -741,9 +837,12 @@ header .col-span-7 {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: .5;
   }
@@ -867,9 +966,12 @@ header .col-span-7 {
 }
 
 @keyframes gradient-x {
-  0%, 100% {
+
+  0%,
+  100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -883,6 +985,7 @@ header .col-span-7 {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -897,14 +1000,17 @@ header .col-span-7 {
     opacity: 0;
     transform: scale(0.3) translateY(-20px) rotate(-10deg);
   }
+
   50% {
     opacity: 0.8;
     transform: scale(1.05) translateY(-5px) rotate(5deg);
   }
+
   70% {
     opacity: 0.9;
     transform: scale(0.95) translateY(2px) rotate(-2deg);
   }
+
   100% {
     opacity: 1;
     transform: scale(1) translateY(0) rotate(0deg);
@@ -916,6 +1022,7 @@ header .col-span-7 {
     opacity: 0;
     transform: translateX(30px) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -959,18 +1066,23 @@ header .col-span-7 {
 }
 
 @keyframes float-particle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) translateX(0) scale(1);
     opacity: 0.6;
   }
+
   25% {
     transform: translateY(-10px) translateX(5px) scale(1.2);
     opacity: 1;
   }
+
   50% {
     transform: translateY(-20px) translateX(-5px) scale(0.8);
     opacity: 0.8;
   }
+
   75% {
     transform: translateY(-15px) translateX(8px) scale(1.1);
     opacity: 0.9;
@@ -1000,13 +1112,16 @@ header .col-span-7 {
 .navigation-container {
   max-width: 100%;
   overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
   white-space: nowrap;
 }
 
 .navigation-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
 
 /* Keep navigation in single row for laptop and desktop */
@@ -1177,7 +1292,9 @@ header .col-span-7 {
 
 /* Small screens (640px+) - Show text */
 @media (min-width: 640px) {
-  .call-now-btn, .apply-now-btn {
+
+  .call-now-btn,
+  .apply-now-btn {
     min-width: 80px;
     height: 38px;
     padding: 0.5rem 0.75rem;
@@ -1186,7 +1303,9 @@ header .col-span-7 {
 
 /* Medium screens (768px+) - Better spacing */
 @media (min-width: 768px) {
-  .call-now-btn, .apply-now-btn {
+
+  .call-now-btn,
+  .apply-now-btn {
     min-width: 90px;
     height: 40px;
     padding: 0.5rem 1rem;
@@ -1195,7 +1314,9 @@ header .col-span-7 {
 
 /* Large screens (1024px+) - Full size */
 @media (min-width: 1024px) {
-  .call-now-btn, .apply-now-btn {
+
+  .call-now-btn,
+  .apply-now-btn {
     min-width: 100px;
     height: 42px;
     padding: 0.5rem 1.25rem;
@@ -1204,7 +1325,9 @@ header .col-span-7 {
 
 /* Extra small screens (below 480px) - Icon only with tooltip */
 @media (max-width: 479px) {
-  .call-now-btn, .apply-now-btn {
+
+  .call-now-btn,
+  .apply-now-btn {
     min-width: 36px;
     height: 36px;
     padding: 0.375rem;
@@ -1284,6 +1407,7 @@ header .col-span-7 {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1335,17 +1459,24 @@ header .col-span-7 {
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 /* 📞 Call Now & Apply Now Button Styles */
-.call-now-btn, .apply-now-btn {
+.call-now-btn,
+.apply-now-btn {
   position: relative;
   overflow: hidden;
 }
 
-.call-now-btn::before, .apply-now-btn::before {
+.call-now-btn::before,
+.apply-now-btn::before {
   content: '';
   position: absolute;
   top: 0;
@@ -1356,22 +1487,26 @@ header .col-span-7 {
   transition: left 0.5s ease;
 }
 
-.call-now-btn:hover::before, .apply-now-btn:hover::before {
+.call-now-btn:hover::before,
+.apply-now-btn:hover::before {
   left: 100%;
 }
 
-.call-now-btn:hover, .apply-now-btn:hover {
+.call-now-btn:hover,
+.apply-now-btn:hover {
   transform: translateY(-2px);
 }
 
 /* Responsive action buttons */
 @media (max-width: 1280px) {
+
   .call-now-btn span:not(.material-icons),
   .apply-now-btn span:not(.material-icons) {
     display: none;
   }
 
-  .call-now-btn, .apply-now-btn {
+  .call-now-btn,
+  .apply-now-btn {
     width: 2.5rem;
     height: 2.5rem;
     padding: 0;
@@ -1382,16 +1517,19 @@ header .col-span-7 {
 /* Enhanced responsive navigation for better button handling */
 @media (max-width: 1024px) {
   .navigation-container {
-    max-width: calc(100vw - 200px); /* Leave space for action buttons */
+    max-width: calc(100vw - 200px);
+    /* Leave space for action buttons */
   }
 }
 
 @media (max-width: 768px) {
   .navigation-container {
-    max-width: calc(100vw - 150px); /* Adjust for smaller action buttons */
+    max-width: calc(100vw - 150px);
+    /* Adjust for smaller action buttons */
   }
 
-  .call-now-btn, .apply-now-btn {
+  .call-now-btn,
+  .apply-now-btn {
     width: 2rem;
     height: 2rem;
     padding: 0;
@@ -1438,10 +1576,12 @@ header .col-span-7 {
     opacity: 0;
     transform: translateY(-12px) scale(0.95);
   }
+
   50% {
     opacity: 0.8;
     transform: translateY(-4px) scale(0.98);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -1560,10 +1700,10 @@ header .col-span-7 {
 .nav-button {
   /* Smooth color transitions */
   transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              color 0.3s ease,
-              background-color 0.4s ease,
-              transform 0.3s ease,
-              box-shadow 0.3s ease;
+    color 0.3s ease,
+    background-color 0.4s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 /* Elegant hover state with light blue theme */
@@ -1637,7 +1777,7 @@ header {
   overflow: visible !important;
 }
 
-header > div {
+header>div {
   overflow: visible !important;
 }
 
@@ -1646,7 +1786,7 @@ nav {
 }
 
 /* Ensure dropdown content is visible */
-.dropdown-container > div {
+.dropdown-container>div {
   min-height: 100px;
   padding: 12px;
 }
@@ -1677,10 +1817,12 @@ nav {
     opacity: 0;
     transform: translateX(20px) scale(0.95);
   }
+
   50% {
     opacity: 0.7;
     transform: translateX(-2px) scale(0.98);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -1691,6 +1833,7 @@ nav {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -1733,10 +1876,21 @@ nav {
 }
 
 /* Staggered animation for dropdown items */
-.dropdown-item-1 { animation-delay: 0ms; }
-.dropdown-item-2 { animation-delay: 100ms; }
-.dropdown-item-3 { animation-delay: 200ms; }
-.dropdown-item-4 { animation-delay: 300ms; }
+.dropdown-item-1 {
+  animation-delay: 0ms;
+}
+
+.dropdown-item-2 {
+  animation-delay: 100ms;
+}
+
+.dropdown-item-3 {
+  animation-delay: 200ms;
+}
+
+.dropdown-item-4 {
+  animation-delay: 300ms;
+}
 
 /* 🔽 Enhanced Dropdown Arrow Animations */
 .nav-button .material-icons[class*="keyboard_arrow_down"] {
@@ -1760,8 +1914,15 @@ nav {
 
 /* Subtle bounce effect for arrows */
 @keyframes arrowBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-2px);
+  }
 }
 
 .nav-button:hover .material-icons[class*="keyboard_arrow_down"] {
@@ -1786,11 +1947,13 @@ nav {
     transform: translateY(-20px) scale(0.9);
     filter: blur(5px);
   }
+
   50% {
     opacity: 0.8;
     transform: translateY(-5px) scale(0.95);
     filter: blur(2px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -1799,25 +1962,33 @@ nav {
 }
 
 @keyframes iconJump {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) scale(1);
   }
+
   25% {
     transform: translateY(-8px) scale(1.1);
   }
+
   50% {
     transform: translateY(-4px) scale(1.05);
   }
+
   75% {
     transform: translateY(-2px) scale(1.02);
   }
 }
 
 @keyframes messageBadgePulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
   }
+
   50% {
     transform: scale(1.1);
     box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
@@ -1846,11 +2017,11 @@ nav {
 }
 
 /* Message content animations */
-.animate-message-popup .p-4 > div {
+.animate-message-popup .p-4>div {
   animation: slideInRight 0.5s ease-out forwards;
 }
 
-.animate-message-popup .grid > button {
+.animate-message-popup .grid>button {
   animation: slideInRight 0.6s ease-out forwards;
 }
 
@@ -1898,6 +2069,7 @@ nav {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -1908,6 +2080,7 @@ nav {
     transform: translateY(-100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -1927,6 +2100,7 @@ nav {
   0% {
     transform: translateX(100%);
   }
+
   100% {
     transform: translateX(-100%);
   }

@@ -111,37 +111,42 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Abroad countries data
   abroadCountries = [
-    {
-      name: 'Georgia',
-      code: 'georgia',
-      flag: 'https://flagcdn.com/w40/ge.png'
-    },
-    {
-      name: 'Russia',
-      code: 'russia',
-      flag: 'https://flagcdn.com/w40/ru.png'
-    },
-    {
-      name: 'Armenia',
-      code: 'armenia',
-      flag: 'https://flagcdn.com/w40/am.png'
-    },
-    {
-      name: 'Uzbekistan',
-      code: 'uzbekistan',
-      flag: 'https://flagcdn.com/w40/uz.png'
-    },
-    {
-      name: 'Kazakhstan',
-      code: 'kazakhstan',
-      flag: 'https://flagcdn.com/w40/kz.png'
-    }
+    { name: 'India', code: 'india', flag: 'https://flagcdn.com/w40/in.png' },
+    { name: 'Georgia', code: 'georgia', flag: 'https://flagcdn.com/w40/ge.png' },
+    { name: 'Russia', code: 'russia', flag: 'https://flagcdn.com/w40/ru.png' },
+    { name: 'Armenia', code: 'armenia', flag: 'https://flagcdn.com/w40/am.png' },
+    { name: 'Uzbekistan', code: 'uzbekistan', flag: 'https://flagcdn.com/w40/uz.png' },
+    { name: 'Kazakhstan', code: 'kazakhstan', flag: 'https://flagcdn.com/w40/kz.png' },
+    { name: 'Moldova', code: 'moldova', flag: 'https://flagcdn.com/w40/md.png' },
+    { name: 'Malaysia', code: 'malaysia', flag: 'https://flagcdn.com/w40/my.png' },
+    { name: 'Kyrgyzstan', code: 'kyrgyzstan', flag: 'https://flagcdn.com/w40/kg.png' },
+    { name: 'Tajikistan', code: 'tajikistan', flag: 'https://flagcdn.com/w40/tj.png' },
+    { name: 'Romania', code: 'romania', flag: 'https://flagcdn.com/w40/ro.png' },
+    { name: 'Mauritius', code: 'mauritius', flag: 'https://flagcdn.com/w40/mu.png' }
   ];
 
   // Social Media Links
   socialMedia = [
-    { name: 'Instagram', url: 'https://www.instagram.com/wayzon_education_pvt.ltd?igsh=ZGg2Z3JwbWZheGVk', isSvg: true, color: '#E4405F' },
-    { name: 'Facebook', url: 'https://www.facebook.com/share/1BpRrZ6Fe8/?mibextid=wwXIfr', icon: 'facebook', color: '#1877F2' }
+    {
+      name: 'Instagram',
+      url: 'https://www.instagram.com/wayzon_education_pvt.ltd?igsh=ZGg2Z3JwbWZheGVk',
+      isSvg: true,
+      color: '#E4405F',
+      svgPath: 'M7.818 2H16.182C19.458 2 22 4.542 22 7.818V16.182C22 19.458 19.458 22 16.182 22H7.818C4.542 22 2 19.458 2 16.182V7.818C2 4.542 4.542 2 7.818 2ZM12 7.5C9.514 7.5 7.5 9.514 7.5 12C7.5 14.486 9.514 16.5 12 16.5C14.486 16.5 16.5 14.486 16.5 12C16.5 9.514 14.486 7.5 12 7.5ZM19 7C18.448 7 18 6.552 18 6C18 5.448 18.448 5 19 5C19.552 5 20 5.448 20 6C20 6.552 19.552 7 19 7ZM12 9C13.654 9 15 10.346 15 12C15 13.654 13.654 15 12 15C10.346 15 9 13.654 9 12C9 10.346 10.346 9 12 9Z'
+    },
+    {
+      name: 'YouTube',
+      url: 'https://youtube.com/@wayzoneducation7294?si=sJZ_FBL87GpWRhVY',
+      isSvg: true,
+      color: '#FF0000',
+      svgPath: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'
+    },
+    {
+      name: 'Facebook',
+      url: 'https://www.facebook.com/share/1BpRrZ6Fe8/?mibextid=wwXIfr',
+      icon: 'facebook',
+      color: '#1877F2'
+    }
   ];
 
   moreOptions = [

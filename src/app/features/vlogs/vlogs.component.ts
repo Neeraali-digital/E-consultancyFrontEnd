@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 export class VlogsComponent {
   activeCategory = 'All';
   categories = ['All', 'Campus Tours', 'Student Life', 'Success Stories', 'Faculty Interviews', 'Events'];
+  youtubeChannelUrl = 'https://youtube.com/@wayzoneducation7294?si=sJZ_FBL87GpWRhVY';
 
   vlogs = [
     {
@@ -36,7 +37,7 @@ export class VlogsComponent {
       date: "1 week ago"
     },
     {
-      title: "From India to Russia: My Study Abroad Journey",
+      title: "From India to Russia: My MBBS Abroad Journey",
       description: "An inspiring interview with Priya sharing her experience of moving to Russia for MBBS.",
       thumbnail: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
       duration: "15:20",

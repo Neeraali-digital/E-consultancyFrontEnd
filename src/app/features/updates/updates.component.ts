@@ -16,7 +16,7 @@ export class UpdatesComponent {
     { id: 'all', name: 'All Updates', icon: 'dynamic_feed' },
     { id: 'admissions', name: 'Admissions', icon: 'school' },
     { id: 'exams', name: 'Exams', icon: 'quiz' },
-    { id: 'abroad', name: 'Study Abroad', icon: 'public' },
+    { id: 'abroad', name: 'MBBS Abroad', icon: 'public' },
     { id: 'scholarships', name: 'Scholarships', icon: 'card_giftcard' }
   ];
 
@@ -102,10 +102,10 @@ export class UpdatesComponent {
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   }
 
@@ -114,7 +114,7 @@ export class UpdatesComponent {
     const now = new Date();
     const diffTime = Math.abs(now.getTime() - date.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
+
     if (diffDays === 1) return '1 day ago';
     if (diffDays < 7) return `${diffDays} days ago`;
     if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;

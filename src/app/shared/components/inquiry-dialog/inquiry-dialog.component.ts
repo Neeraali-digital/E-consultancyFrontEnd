@@ -36,7 +36,7 @@ export class InquiryDialogComponent {
         'Medicine',
         'Management',
         'Arts & Science',
-        'Study Abroad',
+        'MBBS Abroad',
         'Law',
         'Architecture',
         'Pharmacy',
