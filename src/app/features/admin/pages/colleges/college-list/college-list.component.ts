@@ -194,12 +194,12 @@ export interface College {
           Previous
         </button>
         <div class="flex gap-1">
-          <button *ngFor="let page of [].constructor(getTotalPages()); let i = index"
-                  (click)="goToPage(i + 1)"
-                  [class.bg-blue-600]="currentPage === i + 1"
-                  [class.text-white]="currentPage === i + 1"
+          <button *ngFor="let page of getVisiblePages()"
+                  (click)="goToPage(page)"
+                  [class.bg-blue-600]="currentPage === page"
+                  [class.text-white]="currentPage === page"
                   class="px-3 py-1 border rounded hover:bg-gray-100">
-             {{ i + 1 }}
+             {{ page }}
           </button>
         </div>
         <button (click)="goToPage(currentPage + 1)" 
@@ -293,6 +293,26 @@ export class CollegeListComponent implements OnInit, OnDestroy {
 
   getTotalPages(): number {
     return Math.ceil(this.filteredColleges.length / this.itemsPerPage);
+  }
+
+  getVisiblePages(): number[] {
+    const totalPages = this.getTotalPages();
+    const current = this.currentPage;
+    const maxVisible = 5;
+
+    if (totalPages <= maxVisible) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    let startPage = Math.max(current - 2, 1);
+    let endPage = startPage + maxVisible - 1;
+
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(endPage - maxVisible + 1, 1);
+    }
+
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
   }
 
   goToPage(page: number): void {

@@ -216,13 +216,13 @@
     </button>
     
     <div class="flex items-center space-x-1">
-      <button *ngFor="let page of [].constructor(getTotalPages()); let i = index" 
-              (click)="goToPage(i + 1)"
-              [class.bg-blue-600]="currentPage === i + 1"
-              [class.text-white]="currentPage === i + 1"
-              [class.text-gray-700]="currentPage !== i + 1"
+      <button *ngFor="let page of getVisiblePages()" 
+              (click)="goToPage(page)"
+              [class.bg-blue-600]="currentPage === page"
+              [class.text-white]="currentPage === page"
+              [class.text-gray-700]="currentPage !== page"
               class="px-3 py-1 rounded-md hover:bg-gray-100 transition-colors">
-        {{ i + 1 }}
+        {{ page }}
       </button>
     </div>
     
